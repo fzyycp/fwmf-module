@@ -1,0 +1,1 @@
+provides: fwmf-module-user-role-spring-boot-configure,fwmf-module-user-role-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis,fdk-shiro-spring-boot-autoconfigure,spring-boot,spring-boot-starter-web,fdk-captcha-spring-boot-autoconfigure,fdk-captcha

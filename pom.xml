@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.faury.fwmf</groupId>
+    <artifactId>fwmf-module</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>fwmf-module</name>
+    <url>http://www.faury.cn/</url>
+
+    <modules>
+        <module>fwmf-module-user-role/fwmf-module-user-role-api</module>
+        <module>fwmf-module-user-role/fwmf-module-user-role-service</module>
+        <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-configure</module>
+        <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-starter</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.encoding>UTF-8</project.encoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!-- 设定除中央仓repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找 -->
+    <repositories>
+        <!-- Nexus私服 -->
+        <repository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
+        <!-- fdk私服 -->
+        <repository>
+            <id>fdk</id>
+            <name>FDK Repository</name>
+            <url>https://dl.bintray.com/faury/fdk</url>
+        </repository>
+        <!-- fwmf-module私服 -->
+        <repository>
+            <id>fwmf-module</id>
+            <name>fwmf module Repository</name>
+            <url>https://dl.bintray.com/faury/fwmf-module</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <!-- 插件仓库 Nexus私服 -->
+        <pluginRepository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <build>
+        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+            <plugins>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <!--<plugin>-->
+                    <!--<artifactId>maven-source-plugin</artifactId>-->
+                    <!--<version>3.0.0</version>-->
+                <!--</plugin>-->
+                <plugin>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <fork>true</fork>
+                        <verbose>true</verbose>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <distributionManagement>
+        <repository>
+            <id>bintray-faury-fwmf</id>
+            <name>faury-fwmf</name>
+            <url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module;publish=1</url>
+        </repository>
+    </distributionManagement>
+
+</project>

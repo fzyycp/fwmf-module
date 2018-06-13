@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fwmf-module</artifactId>
+        <groupId>cn.faury.fwmf</groupId>
+        <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.faury.fwmf.module</groupId>
+    <artifactId>fwmf-module-user-role-spring-boot-starter</artifactId>
+    <version>0.0.1</version>
+
+    <properties>
+        <fwmf.module.user.role.service.version>0.0.1</fwmf.module.user.role.service.version>
+        <fwmf.mybatis.spring.boot.starter.version>0.0.1</fwmf.mybatis.spring.boot.starter.version>
+        <fdk.shiro.spring.boot.starter.version>0.0.1</fdk.shiro.spring.boot.starter.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.faury.fwmf.module</groupId>
+            <artifactId>fwmf-module-user-role-spring-boot-configure</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fwmf.module</groupId>
+            <artifactId>fwmf-module-user-role-service</artifactId>
+            <version>${fwmf.module.user.role.service.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-mybatis-spring-boot-starter</artifactId>
+            <version>${fwmf.mybatis.spring.boot.starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-shiro-spring-boot-starter</artifactId>
+            <version>${fdk.shiro.spring.boot.starter.version}</version>
+        </dependency>
+
+        <!--测试工具-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>2.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.commons</groupId>-->
+        <!--<artifactId>commons-dbcp2</artifactId>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
+    </dependencies>
+
+</project>
