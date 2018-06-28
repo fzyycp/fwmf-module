@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fwmf-module</artifactId>
+        <groupId>cn.faury.fwmf</groupId>
+        <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.faury.fwmf.module</groupId>
+    <artifactId>fwmf-module-push-api</artifactId>
+    <version>0.0.1</version>
+
+    <properties>
+        <fdk.common.version>0.0.9</fdk.common.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-common</artifactId>
+            <version>${fdk.common.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

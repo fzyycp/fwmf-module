@@ -5,8 +5,6 @@ import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.role.bean.RoleInfoBean;
 import cn.faury.fwmf.module.api.role.service.RoleService;
 import cn.faury.fwmf.module.service.role.mapper.RoleInfoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;

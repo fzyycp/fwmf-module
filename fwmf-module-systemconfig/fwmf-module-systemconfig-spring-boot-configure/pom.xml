@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fwmf-module</artifactId>
+        <groupId>cn.faury.fwmf</groupId>
+        <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.faury.fwmf.module</groupId>
+    <artifactId>fwmf-module-systemconfig-spring-boot-configure</artifactId>
+    <version>0.0.1</version>
+
+
+    <properties>
+        <fwmf.module.systemconfig.service.version>0.0.1</fwmf.module.systemconfig.service.version>
+        <fwmf.mybatis.spring.boot.autoconfigure.version>0.0.1</fwmf.mybatis.spring.boot.autoconfigure.version>
+    </properties>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.faury.fwmf.module</groupId>
+            <artifactId>fwmf-module-systemconfig-service</artifactId>
+            <version>${fwmf.module.systemconfig.service.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-mybatis-spring-boot-autoconfigure</artifactId>
+            <version>${fwmf.mybatis.spring.boot.autoconfigure.version}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

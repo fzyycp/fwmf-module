@@ -20,16 +20,15 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <fdk.common.version>0.0.7</fdk.common.version>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
         <fdk.module.user.role.api.version>0.0.1</fdk.module.user.role.api.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>cn.faury.fdk</groupId>
-            <artifactId>fdk-common</artifactId>
-            <version>${fdk.common.version}</version>
+            <groupId>cn.faury.fwmf.module</groupId>
+            <artifactId>fwmf-module-user-role-api</artifactId>
+            <version>${fdk.module.user.role.api.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.faury.fdk</groupId>
@@ -37,9 +36,9 @@
             <version>${fdk.mybatis.version}</version>
         </dependency>
         <dependency>
-            <groupId>cn.faury.fwmf.module</groupId>
-            <artifactId>fwmf-module-user-role-api</artifactId>
-            <version>${fdk.module.user.role.api.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>4.3.14.RELEASE</version>
         </dependency>
     </dependencies>
 </project>

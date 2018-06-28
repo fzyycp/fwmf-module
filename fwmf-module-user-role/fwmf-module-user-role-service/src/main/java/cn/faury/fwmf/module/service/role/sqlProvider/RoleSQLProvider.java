@@ -1,6 +1,6 @@
 package cn.faury.fwmf.module.service.role.sqlProvider;
 
-import cn.faury.fwmf.module.service.constant.DBConstsOfUserRole;
+import cn.faury.fwmf.module.service.constant.DBConstOfUserRole;
 
 import java.util.Map;
 
@@ -24,9 +24,9 @@ public class RoleSQLProvider {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT R.ROLE_ID roleId,R.ROLE_CODE roleCode,R.ROLE_NAME roleName,R.IS_AVAILABLE isAvailable, ");
         sql.append("       R.SYSTEM_ID systemId,S.SYSTEM_CODE systemCode,S.SYSTEM_NAME systemName ");
-        sql.append("  FROM ").append(DBConstsOfUserRole.TN_ROLE_INFO).append(" R, ");
-        sql.append(DBConstsOfUserRole.TN_USER_R_ROLE).append(" UR, ");
-        sql.append(DBConstsOfUserRole.TN_SYSTEM_INFO).append(" S ");
+        sql.append("  FROM ").append(DBConstOfUserRole.TN_ROLE_INFO).append(" R, ");
+        sql.append(DBConstOfUserRole.TN_USER_R_ROLE).append(" UR, ");
+        sql.append(DBConstOfUserRole.TN_SYSTEM_INFO).append(" S ");
         sql.append(" WHERE R.SYSTEM_ID = S.SYSTEM_ID ");
         sql.append("   AND UR.ROLE_ID = R.ROLE_ID");
         sql.append("   AND UR.USER_ID = #{userId,jdbcType=BIGINT} ");
@@ -55,11 +55,11 @@ public class RoleSQLProvider {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT DISTINCT CONCAT(S.SYSTEM_CODE,':',M.MENU_CODE,IF(F.FUNCTION_CODE = '/', '', CONCAT(':',F.FUNCTION_CODE))) PERMS  ");
         sql.append("  FROM ");
-        sql.append(DBConstsOfUserRole.TN_FUNCTION_INFO).append(" F, ");
-        sql.append(DBConstsOfUserRole.TN_MENU_INFO).append(" M, ");
-        sql.append(DBConstsOfUserRole.TN_SYSTEM_INFO).append(" S, ");
-        sql.append(DBConstsOfUserRole.TN_ROLE_R_MENU).append(" RM, ");
-        sql.append(DBConstsOfUserRole.TN_ROLE_R_FUNCTION).append(" RF ");
+        sql.append(DBConstOfUserRole.TN_FUNCTION_INFO).append(" F, ");
+        sql.append(DBConstOfUserRole.TN_MENU_INFO).append(" M, ");
+        sql.append(DBConstOfUserRole.TN_SYSTEM_INFO).append(" S, ");
+        sql.append(DBConstOfUserRole.TN_ROLE_R_MENU).append(" RM, ");
+        sql.append(DBConstOfUserRole.TN_ROLE_R_FUNCTION).append(" RF ");
         sql.append("WHERE F.FUNCTION_ID = RF.FUNCTION_ID ");
         sql.append("  AND F.MENU_ID = RM.MENU_ID ");
         sql.append("  AND M.SYSTEM_ID = S.SYSTEM_ID ");

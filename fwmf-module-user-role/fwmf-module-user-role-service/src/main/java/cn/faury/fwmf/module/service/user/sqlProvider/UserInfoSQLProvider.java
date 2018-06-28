@@ -1,7 +1,7 @@
 package cn.faury.fwmf.module.service.user.sqlProvider;
 
 import cn.faury.fdk.common.utils.StringUtil;
-import cn.faury.fwmf.module.service.constant.DBConstsOfUserRole;
+import cn.faury.fwmf.module.service.constant.DBConstOfUserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,13 +23,11 @@ public class UserInfoSQLProvider {
         sql.append("SELECT DISTINCT t.USER_ID userId,LOGIN_NAME loginName,USER_NAME userName,`PASSWORD` `password`,EFCT_YMD efctYmd,");
         sql.append("       EXPR_YMD exprYmd,INS_TSTMP insTstmp,ORIGIN_OS_ID originOsId,IS_ENABLE isEnable," +
                 "          CREATE_PERSON createPerson,UPDATE_PERSON updatePerson,UPDATE_TIME updateTime ");
-        sql.append("  FROM " + DBConstsOfUserRole.TN_USER_INFO + " t ");
+        sql.append("  FROM " + DBConstOfUserRole.TN_USER_INFO + " t ");
         if(StringUtil.isNotEmpty((String)param.get("userRole"))) {
-            sql.append("  LEFT JOIN " + DBConstsOfUserRole.TN_USER_R_ROLE +" ur ON t.USER_ID=ur.USER_ID ");
-            sql.append("  LEFT JOIN " + DBConstsOfUserRole.TN_ROLE_INFO +" r");
+            sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_USER_R_ROLE +" ur ON t.USER_ID=ur.USER_ID ");
+            sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_ROLE_INFO +" r");
             sql.append(" ON ur.ROLE_ID = r.ROLE_ID WHERE  r.ROLE_CODE=#{userRole} AND IS_DELETE='0' ");
-            sql.append(" AND   not exists (SELECT 1 from "+DBConstsOfUserRole.TN_PARTNER_INFO+" p  where p.IS_DELETE=0 AND t.USER_ID=p.ACCOUNT_ID)  ");
-
         }else{
             sql.append(" WHERE IS_DELETE='0' ");
         }

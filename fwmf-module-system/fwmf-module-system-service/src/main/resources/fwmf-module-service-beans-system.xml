@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--商店授权业务系统服务 -->
+	<bean id="shopRSystemService" class="cn.faury.fwmf.module.service.system.service.ShopRSystemServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+	<!--业务系统服务 -->
+	<bean id="systemService" class="cn.faury.fwmf.module.service.system.service.SystemServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+	<!--用户授权业务系统服务 -->
+	<bean id="userRSystemService" class="cn.faury.fwmf.module.service.system.service.UserRSystemServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+		<constructor-arg name="systemService" ref="systemService" />
+	</bean>
+</beans>

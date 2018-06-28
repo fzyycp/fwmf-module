@@ -68,7 +68,32 @@ public interface UserService<T extends UserInfoBean, P extends UserPasswordBean>
      * @return 用户ID
      */
     @Write
-    Long insertUserInfo(@NonNull final T userInfoBean);
+    <U extends UserInfoBean> Long insertUserInfo(@NonNull  final  U userInfoBean);
+
+    /**
+     * 插入用户信息
+     *
+     * @param loginName
+     *            用户登录名
+     * @param userName
+     *            用户姓名
+     * @param password
+     *            用户登录密码
+     * @param systemId
+     *            所属系统ID
+     * @return 用户ID
+     */
+    @Write
+    default public Long insertUserInfo(final String loginName, final String userName, final String password,
+                               final  Long systemId){
+        UserInfoBean userInfo = new UserInfoBean();
+        userInfo.setLoginName(loginName);
+        userInfo.setUserName(userName);
+        userInfo.setEfctYmd(new Date());
+        userInfo.setPassword(password);
+        userInfo.setOriginOsId(systemId);
+        return insertUserInfo(userInfo);
+    }
 
     /**
      * 插入后台用户信息，并插入角色信息

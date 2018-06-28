@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--角色服务 -->
+	<bean id="roleService" class="cn.faury.fwmf.module.service.role.service.RoleServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--用户服务 -->
+	<bean id="userService" class="cn.faury.fwmf.module.service.user.service.UserServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+		<constructor-arg name="roleService" ref="roleService"/>
+	</bean>
+
+	<!--优惠用户组关联服务 -->
+	<bean id="discusRUserGroupsService" class="cn.faury.fwmf.module.service.user.service.DiscusRUserGroupsServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--推送用户群关联 -->
+	<bean id="pushRUserGroupsService" class="cn.faury.fwmf.module.service.user.service.PushRUserGroupsServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--推送用户关联 -->
+	<bean id="pushRUserService" class="cn.faury.fwmf.module.service.user.service.PushRUserServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--红包用户组关联 -->
+	<bean id="redRUserGroupsService" class="cn.faury.fwmf.module.service.user.service.RedRUserGroupsServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--角色用户服务 -->
+	<bean id="roleRUserService" class="cn.faury.fwmf.module.service.user.service.RoleRUserServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--商店用户服务 -->
+	<bean id="shopRUserService" class="cn.faury.fwmf.module.service.user.service.ShopRUserServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+		<constructor-arg name="userService" ref="userService"/>
+	</bean>
+
+	<!--系统用户服务 -->
+	<bean id="systemRUserService" class="cn.faury.fwmf.module.service.user.service.SystemRUserServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--用户代理人服务 -->
+	<bean id="userAgentService" class="cn.faury.fwmf.module.service.user.service.UserAgentServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--用户群服务 -->
+	<bean id="userGroupsService" class="cn.faury.fwmf.module.service.user.service.UserGroupsServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--用户OAuth服务 -->
+	<bean id="userOAuthService" class="cn.faury.fwmf.module.service.user.service.UserOAuthServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+</beans>

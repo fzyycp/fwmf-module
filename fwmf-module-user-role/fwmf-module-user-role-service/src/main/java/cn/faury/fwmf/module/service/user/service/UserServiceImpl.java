@@ -12,8 +12,6 @@ import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.bean.UserPasswordBean;
 import cn.faury.fwmf.module.api.user.service.UserService;
 import cn.faury.fwmf.module.service.user.mapper.UserInfoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;

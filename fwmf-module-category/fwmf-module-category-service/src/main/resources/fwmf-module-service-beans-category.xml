@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--分类服务 -->
+    <bean id="categoryService" class="cn.faury.fwmf.module.service.category.service.CategoryServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--分类标签服务 -->
+    <bean id="categoryTagService" class="cn.faury.fwmf.module.service.category.service.CategoryTagServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+        <constructor-arg name="categoryService" ref="categoryService"/>
+    </bean>
+    <!--优惠关联服务 -->
+    <bean id="discusRCategoryService" class="cn.faury.fwmf.module.service.category.service.DiscusRCategoryServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--红包关联服务 -->
+    <bean id="redRCategoryService" class="cn.faury.fwmf.module.service.category.service.RedRCategoryServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--系统分类授权服务 -->
+    <bean id="systemCategoryService" class="cn.faury.fwmf.module.service.category.service.SystemCategoryServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--系统标签授权服务 -->
+    <bean id="systemTagService" class="cn.faury.fwmf.module.service.category.service.SystemTagServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--标签服务 -->
+    <bean id="tagService" class="cn.faury.fwmf.module.service.category.service.TagServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+</beans>

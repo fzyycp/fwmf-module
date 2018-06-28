@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--用户菜单服务 -->
+	<bean id="userRMenuService" class="cn.faury.fwmf.module.service.menu.service.UserRMenuServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--菜单功能按钮服务 -->
+	<bean id="menuFuncService" class="cn.faury.fwmf.module.service.menu.service.MenuFuncServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--菜单服务 -->
+	<bean id="menuService" class="cn.faury.fwmf.module.service.menu.service.MenuServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+		<constructor-arg name="menuFuncService" ref="menuFuncService" />
+	</bean>
+
+	<!--角色关联功能按钮服务 -->
+	<bean id="roleRFuncService" class="cn.faury.fwmf.module.service.menu.service.RoleRFuncServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--角色关联菜单服务 -->
+	<bean id="roleRMenuService" class="cn.faury.fwmf.module.service.menu.service.RoleRMenuServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+        <constructor-arg name="roleRFuncService" ref="roleRFuncService" />
+	</bean>
+
+	<!--业务系统菜单服务 -->
+	<bean id="systemMenuService" class="cn.faury.fwmf.module.service.menu.service.SystemMenuServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+</beans>

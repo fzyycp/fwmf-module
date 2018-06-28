@@ -1,9 +1,13 @@
 package cn.faury.fwmf.module.service.role.mapper;
 
-import cn.faury.fwmf.module.service.constant.DBConstsOfUserRole;
+import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.role.bean.RoleInfoBean;
+import cn.faury.fwmf.module.service.constant.DBConstOfUserRole;
 import cn.faury.fwmf.module.service.role.sqlProvider.RoleSQLProvider;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +15,7 @@ import java.util.Map;
 /**
  * 角色信息Mapper
  */
-@Mapper
+@AutoScannedMapper
 public interface RoleInfoMapper {
 
     /**
@@ -53,7 +57,7 @@ public interface RoleInfoMapper {
      * @return 角色新
      */
     @Select("SELECT ROLE_ID roleId,ROLE_NAME roleName,ROLE_CODE roleCode,IS_AVAILABLE isAvailable,SYSTEM_ID systemId " +
-            "  FROM "+ DBConstsOfUserRole.TN_ROLE_INFO +
+            "  FROM "+ DBConstOfUserRole.TN_ROLE_INFO +
             " WHERE IS_AVAILABLE = '1' AND ROLE_CODE=#{roleCode,jdbcType=VARCHAR} ")
     @ResultType(RoleInfoBean.class)
     RoleInfoBean getRoleInfoByCode(final String roleCode);
@@ -70,7 +74,7 @@ public interface RoleInfoMapper {
      * @param parameters 查询参数
      * @return 成功插入条数
      */
-    @Insert("INSERT INTO "+ DBConstsOfUserRole.TN_USER_R_ROLE+"(`USER_ID`, `ROLE_ID`) " +
+    @Insert("INSERT INTO "+ DBConstOfUserRole.TN_USER_R_ROLE+"(`USER_ID`, `ROLE_ID`) " +
             "VALUES (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})")
     int insertUserRRole(Map<String, Object> parameters);
 
@@ -80,6 +84,6 @@ public interface RoleInfoMapper {
      * @param userId 用户ID
      * @return 成功删除条数
      */
-    @Insert("DELETE FROM "+DBConstsOfUserRole.TN_USER_R_ROLE + " WHERE USER_ID=#{userId,jdbcType=BIGINT}")
+    @Insert("DELETE FROM "+ DBConstOfUserRole.TN_USER_R_ROLE + " WHERE USER_ID=#{userId,jdbcType=BIGINT}")
     int deleteUserRRole(final Long userId);
 }
