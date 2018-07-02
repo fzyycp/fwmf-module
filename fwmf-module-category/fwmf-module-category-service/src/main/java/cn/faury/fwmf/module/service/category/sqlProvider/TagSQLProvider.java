@@ -65,7 +65,7 @@ public class TagSQLProvider {
         if (parameters.get("isDelte") != null) {
             Boolean isDelte = (Boolean) parameters.get("isDelte");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDelte.booleanValue() ? '1' : '0');
+            sql.append(isDelte.booleanValue() ? 'Y' : 'N');
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,TAG_PRODUCT_ID ASC");
@@ -100,7 +100,7 @@ public class TagSQLProvider {
         if (parameters.get("isDelte") != null) {
             Boolean isDelte = (Boolean) parameters.get("isDelte");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDelte.booleanValue() ? '1' : '0');
+            sql.append(isDelte.booleanValue() ? 'Y' : 'N');
             sql.append("' ");
         }
         sql.append("   AND PARENT_ID IN (");
@@ -143,7 +143,7 @@ public class TagSQLProvider {
         if (parameters.get("isDelte") != null) {
             Boolean isDelte = (Boolean) parameters.get("isDelte");
             sql.append(" AND PT.DEL_FLAG = '");
-            sql.append(isDelte.booleanValue() ? '1' : '0');
+            sql.append(isDelte.booleanValue() ? 'Y' : 'N');
             sql.append("' ");
         }
         return sql.toString();
@@ -178,7 +178,7 @@ public class TagSQLProvider {
         if (parameters.get("isDelte") != null) {
             Boolean isDelte = (Boolean) parameters.get("isDelte");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDelte.booleanValue() ? '1' : '0');
+            sql.append(isDelte.booleanValue() ? 'Y' : 'N');
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,TAG_PRODUCT_ID ASC");
@@ -219,7 +219,7 @@ public class TagSQLProvider {
         if (parameters.get("isDelte") != null) {
             Boolean isDelte = (Boolean) parameters.get("isDelte");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDelte.booleanValue() ? '1' : '0');
+            sql.append(isDelte.booleanValue() ? 'Y' : 'N');
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,TAG_PRODUCT_ID ASC");
@@ -262,7 +262,7 @@ public class TagSQLProvider {
         if (parameters.get("isDelte") != null) {
             Boolean isDelte = (Boolean) parameters.get("isDelte");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDelte.booleanValue() ? '1' : '0');
+            sql.append(isDelte.booleanValue() ? 'Y' : 'N');
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,TAG_PRODUCT_ID ASC");
@@ -344,7 +344,7 @@ public class TagSQLProvider {
         SqlBuilder.BEGIN();
         SqlBuilder.INSERT_INTO(DBConstOfCategory.TN_PRODUCT_TAG);
         SqlBuilder.VALUES("TAG_PRODUCT_NAME, TAG_PRODUCT_TYPE, PARENT_ID, XPATH,DEL_FLAG",
-                "#{tagProductName}, #{tagProductType}, #{parentId}, #{xpath},'0'");
+                "#{tagProductName}, #{tagProductType}, #{parentId}, #{xpath},'N'");
         return SqlBuilder.SQL();
     }
 
@@ -385,7 +385,7 @@ public class TagSQLProvider {
 
         SqlBuilder.BEGIN();
         SqlBuilder.UPDATE(DBConstOfCategory.TN_PRODUCT_TAG);
-        SqlBuilder.SET("DEL_FLAG = '1' ");
+        SqlBuilder.SET("DEL_FLAG = 'Y' ");
         SqlBuilder.WHERE(String.format("TAG_PRODUCT_ID IN (%s)", StringUtil.join(holders, ",")));
         return SqlBuilder.SQL();
     }
@@ -434,7 +434,7 @@ public class TagSQLProvider {
         if (parameter.get("isDelte") != null) {
             Boolean isDelte = (Boolean) parameter.get("isDelte");
             sql.append(" AND T.DEL_FLAG = '");
-            sql.append(isDelte.booleanValue() ? '1' : '0');
+            sql.append(isDelte.booleanValue() ? 'Y' : 'N');
             sql.append("' ");
         }
         sql.append(" ORDER BY T.PARENT_ID ASC,T.TAG_PRODUCT_ID ASC");

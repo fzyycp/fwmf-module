@@ -290,7 +290,7 @@ public class PushServiceImpl implements PushService {
         // 有效性认证
         PushInfoBean pushInfo = this.getPushMessageInfoById(messageId);
         AssertUtil.assertNotNull(pushInfo, RestResultCode.CODE500.getCode(), "要推送的消息不存在");
-        AssertUtil.assertFalse("1".equals(pushInfo.getDelFlag()), RestResultCode.CODE500.getCode(), "要推送的消息已被删除");
+        AssertUtil.assertFalse("Y".equals(pushInfo.getDelFlag()), RestResultCode.CODE500.getCode(), "要推送的消息已被删除");
         AssertUtil.assertFalse(pushInfo.getState() != PushMessageState.SUBMITTED.value(), RestResultCode.CODE500.getCode(), "要推送的消息状态不正确[必须为待审核]");
 
         PushResult result = PushResult.createFailed("未找到推送工具");
@@ -332,7 +332,7 @@ public class PushServiceImpl implements PushService {
         PushInfoBean pushInfo = this.getPushMessageInfoById(messageId);
         if (pushInfo == null) {
             result = PushResult.createFailed("要推送的消息不存在！");
-        } else if ("1".equals(pushInfo.getDelFlag())) {
+        } else if ("Y".equals(pushInfo.getDelFlag())) {
             result = PushResult.createFailed("要推送的消息已被删除！");
         } else {
             if ("3".equals(pushInfo.getPushType())) {
@@ -641,7 +641,7 @@ public class PushServiceImpl implements PushService {
             AssertUtil.assertTrue(bean.getSysId() != null && bean.getSysId() > 0, "系统id为空或不存在");
 
             bean.setIsRead("N");
-            bean.setDelFlag("0");
+            bean.setDelFlag("N");
         });
 
         return this.insertMessageRead(listBean);

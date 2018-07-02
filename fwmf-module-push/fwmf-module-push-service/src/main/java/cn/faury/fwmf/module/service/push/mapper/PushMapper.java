@@ -142,7 +142,7 @@ public interface PushMapper {
 	@Insert("INSERT INTO "
 	        + DBConstOfPush.TN_PUSH_MESSAGE_INFO
 	        + " ( MESSAGE_TITLE,MESSAGE_INTRODUCTION,PUSH_DATE,END_DATE,STATE,TYPE,CREATE_PERSON,CREATE_TIME,UPDATE_PERSON,UPDATE_TIME, DEL_FLAG,PUSH_TYPE,SYS_ID,IS_APNS_PRODUCTION,TIME_TO_LIVE) "
-	        + " VALUES(#{messageTitle},#{messageIntroduction},#{pushDate},#{endDate},#{state},#{type},#{createPerson},CURRENT_TIMESTAMP,#{updatePerson},CURRENT_TIMESTAMP,'0',#{pushType},#{sysId},#{isApnsProduction},#{timeToLive})")
+	        + " VALUES(#{messageTitle},#{messageIntroduction},#{pushDate},#{endDate},#{state},#{type},#{createPerson},CURRENT_TIMESTAMP,#{updatePerson},CURRENT_TIMESTAMP,'N',#{pushType},#{sysId},#{isApnsProduction},#{timeToLive})")
 	@Options(useGeneratedKeys = true, keyProperty = "messageId")
 	public Long insertPushMessageInfo(final PushInfoBean bean);
 
@@ -273,7 +273,7 @@ public interface PushMapper {
 	 */
 	@Update("UPDATE "
 	        + DBConstOfPush.TN_PUSH_MESSAGE_RECEIVE
-	        + " SET DEL_FLAG= '1' WHERE MESSAGE_ID = #{messageId} AND USER_ID=#{userId} AND APP_ID = (SELECT APP_ID FROM "
+	        + " SET DEL_FLAG= 'Y' WHERE MESSAGE_ID = #{messageId} AND USER_ID=#{userId} AND APP_ID = (SELECT APP_ID FROM "
 	        + DBConstOfPush.TN_APP_INFO + " WHERE APP_CODE = #{appCode} )")
 	public int delMessageReceive(final Map<String, Object> param);
 
@@ -285,7 +285,7 @@ public interface PushMapper {
 	 */
 	@Update("UPDATE "
 	        + DBConstOfPush.TN_PUSH_MESSAGE_READ
-	        + " SET DEL_FLAG= '1' WHERE MESSAGE_ID = #{messageId} AND USER_ID=#{userId} AND APP_ID = (SELECT APP_ID FROM "
+	        + " SET DEL_FLAG= 'Y' WHERE MESSAGE_ID = #{messageId} AND USER_ID=#{userId} AND APP_ID = (SELECT APP_ID FROM "
 	        + DBConstOfPush.TN_APP_INFO + " WHERE APP_CODE = #{appCode} )")
 	public int delMessageRead(final Map<String, Object> param);
 
@@ -297,7 +297,7 @@ public interface PushMapper {
 	 */
 	@Insert("INSERT INTO "
 	        + DBConstOfPush.TN_PUSH_MESSAGE_READ
-	        + " (MESSAGE_ID,SYS_ID,APP_ID,USER_ID,READ_TIME,DEL_FLAG) VALUES (#{messageId},#{sysId},#{appId},#{userId},now(),'1')")
+	        + " (MESSAGE_ID,SYS_ID,APP_ID,USER_ID,READ_TIME,DEL_FLAG) VALUES (#{messageId},#{sysId},#{appId},#{userId},now(),'Y')")
 	public int insertDelMessageRead(final PushInfoBean bean);
 
 	/**

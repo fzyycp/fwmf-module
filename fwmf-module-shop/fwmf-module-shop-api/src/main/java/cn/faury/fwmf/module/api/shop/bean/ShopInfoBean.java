@@ -72,7 +72,7 @@ public class ShopInfoBean implements Serializable {
 	private Timestamp updateTime;
 
 	/** 删除标志 */
-	private String delFlag = "0";
+	private String delFlag = "N";
 
 	/**
 	 * 商店授权系统IDS

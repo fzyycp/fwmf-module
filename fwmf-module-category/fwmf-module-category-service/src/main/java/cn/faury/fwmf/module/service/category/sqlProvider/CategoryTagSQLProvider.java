@@ -75,7 +75,7 @@ public class CategoryTagSQLProvider {
 		}
 		if (parameters.containsKey("isCategoryDelete") && parameters.get("isCategoryDelete") != null) {
 			Boolean isCategoryDelete = (Boolean) parameters.get("isCategoryDelete");
-			sql.append(" AND C.DEL_FLAG = '").append(isCategoryDelete.booleanValue() ? "1" : "0").append("' ");
+			sql.append(" AND C.DEL_FLAG = '").append(isCategoryDelete.booleanValue() ? "Y" : "N").append("' ");
 		}
 		sql.append(" ORDER BY R.PRODUCT_CATEGORY_ID,T.PARENT_ID ASC,T.TAG_PRODUCT_ID ASC");
 		return sql.toString();
@@ -124,7 +124,7 @@ public class CategoryTagSQLProvider {
 		if (parameters.containsKey("isCategoryDelete") && parameters.get("isCategoryDelete") != null) {
 			Boolean isCategoryDelete = (Boolean) parameters.get("isCategoryDelete");
 			sql.append("      AND C.DEL_FLAG = '");
-			sql.append(isCategoryDelete.booleanValue() ? "1" : "0");
+			sql.append(isCategoryDelete.booleanValue() ? "Y" : "N");
 			sql.append("' ");
 		}
 		sql.append(" ORDER BY R.PRODUCT_CATEGORY_ID,T.PARENT_ID ASC,T.TAG_PRODUCT_ID ASC");
@@ -214,7 +214,7 @@ public class CategoryTagSQLProvider {
 		if (parameter.containsKey("isCategoryDelete") && parameter.get("isCategoryDelete") != null) {
 			Boolean isCategoryDelete = (Boolean) parameter.get("isCategoryDelete");
 			sql.append("   AND C.DEL_FLAG = '");
-			sql.append(isCategoryDelete.booleanValue() ? "1" : "0");
+			sql.append(isCategoryDelete.booleanValue() ? "Y" : "N");
 			sql.append("' ");
 		}
 

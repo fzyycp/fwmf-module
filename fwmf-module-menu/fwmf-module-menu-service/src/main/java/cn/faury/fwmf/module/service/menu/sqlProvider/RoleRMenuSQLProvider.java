@@ -53,8 +53,8 @@ public class RoleRMenuSQLProvider {
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
 		sql.append("SELECT M.MENU_ID MENUID,M.MENU_PID MENUPID,M.MENU_NAME MENUNAME" +
-                ",M.MENU_CODE MENUCODE,M.MENU_ACTION_KEY MENUACTION, ");
-		sql.append("M.SORT `ORDER`,M.IS_LEAF ISLEAF,M.SYSTEM_ID SYSTEMID,M.IS_AVAILABLE ISAVAILABLE ");
+                ",M.MENU_CODE MENUCODE,M.MENU_ACTION_KEY menuActionKey, ");
+		sql.append("M.SORT,M.IS_LEAF isLeaf,M.SYSTEM_ID systemId,M.IS_AVAILABLE isAvailable ");
 		sql.append(" FROM " + DBConstOfMenu.TN_MENU_INFO + " M");
 		sql.append(" LEFT JOIN " + DBConstOfMenu.TN_ROLE_R_MENU + " RM ON M.MENU_ID = RM.MENU_ID");
 		sql.append(" WHERE ");
@@ -288,9 +288,9 @@ public class RoleRMenuSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT DISTINCT M.MENU_ID MENUID,M.MENU_PID MENUPID,M.MENU_NAME MENUNAME" +
-				",M.MENU_CODE MENUCODE,M.MENU_ACTION_KEY MENUACTION, ");
-		sql.append("M.SORT `ORDER`,M.IS_LEAF ISLEAF,M.SYSTEM_ID SYSTEMID,M.IS_AVAILABLE ISAVAILABLE ");
+		sql.append("SELECT DISTINCT M.MENU_ID menuId,M.MENU_PID menuPid,M.MENU_NAME menuName" +
+				",M.MENU_CODE menuCode,M.MENU_ACTION_KEY menuActionKey, ");
+		sql.append("M.SORT,M.IS_LEAF isLeaf,M.SYSTEM_ID systemId,M.IS_AVAILABLE isAvailable ");
 		sql.append(" FROM " + DBConstOfMenu.TN_MENU_INFO + " M");
 		sql.append(" LEFT JOIN " + DBConstOfMenu.TN_ROLE_R_MENU + " RM ON M.MENU_ID = RM.MENU_ID");
 		sql.append(" WHERE ");

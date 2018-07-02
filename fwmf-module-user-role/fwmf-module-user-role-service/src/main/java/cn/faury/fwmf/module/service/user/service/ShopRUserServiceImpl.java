@@ -265,11 +265,11 @@ public class ShopRUserServiceImpl implements ShopRUserService {
             // 数据不存在
             AssertUtil.assertNotNull(bean, "要删除的商店用户不存在或已被删除");
             // 传入的是否自建参数是否合法
-            if ("1".equals(bean.getIsSelfCreate()) != isSelfCreate) {
+            if ("Y".equals(bean.getIsSelfCreate()) != isSelfCreate) {
                 throw new TipsException(RestResultCode.CODE500.getCode(), "输入参数非法【是否自建参数与数据库不一致】");
             }
             // 店主用户不可以删除
-            if ("1".equals(bean.getIsAdmin())) {
+            if ("Y".equals(bean.getIsAdmin())) {
                 throw new TipsException(RestResultCode.CODE500.getCode(), "店主用户" + bean.getShopUserLoginName() + "不能被删除");
             }
             if (isSelfCreate) {
@@ -282,7 +282,7 @@ public class ShopRUserServiceImpl implements ShopRUserService {
     @Override
     public Integer updateShopRUser(ShopRUserBean bean) {
         AssertUtil.assertNotEmpty(bean.getIsSelfCreate(), "是否自建不能为空或不存在");
-        AssertUtil.assertTrue(bean.getIsSelfCreate().equals("0"), "非自建用户不能修改用户信息");
+        AssertUtil.assertTrue(bean.getIsSelfCreate().equals("N"), "非自建用户不能修改用户信息");
         AssertUtil.assertTrue(bean.getShopUserId() != null && bean.getShopUserId() > 0, "用户ID不能为空或不存在");
         AssertUtil.assertNotEmpty(bean.getShopUserLoginName(), "用户登录名为空或不存在");
         AssertUtil.assertNotEmpty(bean.getShopUserName(), "用户姓名为空或不存在");

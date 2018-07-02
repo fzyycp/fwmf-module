@@ -37,7 +37,7 @@ public class RedRUserGroupsSQLProvider {
 		StringBuffer sql = new StringBuffer(128);
 		sql.append("SELECT G.ID groupId,G.GROUP_NAME groupName,G.NUM ,G.ORIGIN_OS_ID systemId FROM "
 		        + DBConstOfUserRole.TN_CDA_GROUP + " G ");
-		sql.append(" WHERE G.DEL_FLAG = '0' AND  G.ORIGIN_OS_ID = #{systemId} ");
+		sql.append(" WHERE G.DEL_FLAG = 'N' AND  G.ORIGIN_OS_ID = #{systemId} ");
 		sql.append(" AND G.ID NOT IN (SELECT OBJECT_ID FROM " + DBConstOfUserRole.TN_DISCOUNT_RED_R_OBJECT);
 		sql.append(" WHERE RED_ENVELOPE_ID = #{redId} )");
 		if (parameter.containsKey("userGroupName")) {

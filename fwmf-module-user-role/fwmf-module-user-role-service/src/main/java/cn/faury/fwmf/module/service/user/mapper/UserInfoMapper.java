@@ -30,7 +30,7 @@ public interface UserInfoMapper {
             "       EXPR_YMD exprYmd,INS_TSTMP insTstmp,ORIGIN_OS_ID originOsId,IS_ENABLE isEnable," +
             "       CREATE_PERSON createPerson,UPDATE_PERSON updatePerson,UPDATE_TIME updateTime " +
             "  FROM " + DBConstOfUserRole.TN_USER_INFO
-            + " WHERE IS_DELETE='0' AND USER_ID = #{userId,jdbcType=BIGINT} ")
+            + " WHERE IS_DELETE='N' AND USER_ID = #{userId,jdbcType=BIGINT} ")
     @ResultType(UserInfoBean.class)
     UserInfoBean getUserInfoById(final Long userId);
 
@@ -44,7 +44,7 @@ public interface UserInfoMapper {
             "       EXPR_YMD exprYmd,INS_TSTMP insTstmp,ORIGIN_OS_ID originOsId,IS_ENABLE isEnable," +
             "       CREATE_PERSON createPerson,UPDATE_PERSON updatePerson,UPDATE_TIME updateTime " +
             "  FROM " + DBConstOfUserRole.TN_USER_INFO
-            + " WHERE IS_DELETE='0' AND LOGIN_NAME = #{loginName,jdbcType=VARCHAR} ")
+            + " WHERE IS_DELETE='N' AND LOGIN_NAME = #{loginName,jdbcType=VARCHAR} ")
     @ResultType(UserInfoBean.class)
     public UserInfoBean getUserInfoByLoginName(final String loginName);
 
@@ -56,7 +56,7 @@ public interface UserInfoMapper {
      */
     @Select("SELECT USER_ID userId,`PASSWORD` `password` "
             + "  FROM " + DBConstOfUserRole.TN_USER_INFO
-            + " WHERE IS_DELETE='0' AND USER_ID = #{userId,jdbcType=BIGINT} ")
+            + " WHERE IS_DELETE='N' AND USER_ID = #{userId,jdbcType=BIGINT} ")
     @ResultType(UserPasswordBean.class)
     UserPasswordBean getUserPasswordByUserId(final Long userId);
 
@@ -85,7 +85,7 @@ public interface UserInfoMapper {
     @Update("UPDATE " + DBConstOfUserRole.TN_USER_INFO + " SET USER_NAME=#{userName},EFCT_YMD=#{efctYmd},EXPR_YMD=#{exprYmd},UPDATE_PERSON=#{updatePerson},UPDATE_TIME=CURRENT_TIMESTAMP WHERE USER_ID=#{userId}")
     int updateUserInfoById(Map<String, Object> map);
 
-    @Update("UPDATE " + DBConstOfUserRole.TN_USER_INFO + " SET IS_DELETE='1',UPDATE_PERSON=#{updatePerson},UPDATE_TIME=CURRENT_TIMESTAMP WHERE USER_ID=#{userId}")
+    @Update("UPDATE " + DBConstOfUserRole.TN_USER_INFO + " SET IS_DELETE='Y',UPDATE_PERSON=#{updatePerson},UPDATE_TIME=CURRENT_TIMESTAMP WHERE USER_ID=#{userId}")
     int deleteUserInfoById(Map<String, Object> map);
 
     @Update("UPDATE " + DBConstOfUserRole.TN_USER_INFO + " SET IS_ENABLE=#{isEnable},UPDATE_PERSON=#{updatePerson},UPDATE_TIME=CURRENT_TIMESTAMP WHERE USER_ID=#{userId}")

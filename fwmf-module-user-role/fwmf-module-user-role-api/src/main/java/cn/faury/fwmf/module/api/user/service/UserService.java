@@ -7,6 +7,7 @@ import cn.faury.fdk.common.anotation.permission.Write;
 import cn.faury.fdk.common.db.PageInfo;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.bean.UserPasswordBean;
+import cn.faury.fwmf.module.api.user.config.UserType;
 
 import java.util.Date;
 import java.util.Map;
@@ -68,24 +69,21 @@ public interface UserService<T extends UserInfoBean, P extends UserPasswordBean>
      * @return 用户ID
      */
     @Write
-    <U extends UserInfoBean> Long insertUserInfo(@NonNull  final  U userInfoBean);
+    <U extends UserInfoBean> Long insertUserInfo(@NonNull final U userInfoBean);
 
     /**
      * 插入用户信息
      *
-     * @param loginName
-     *            用户登录名
-     * @param userName
-     *            用户姓名
-     * @param password
-     *            用户登录密码
-     * @param systemId
-     *            所属系统ID
+     * @param loginName 用户登录名
+     * @param userName  用户姓名
+     * @param password  用户登录密码
+     * @param systemId  所属系统ID
+     * @param userType  用户类型
      * @return 用户ID
      */
     @Write
     default public Long insertUserInfo(final String loginName, final String userName, final String password,
-                               final  Long systemId){
+                                       final Long systemId, final UserType userType) {
         UserInfoBean userInfo = new UserInfoBean();
         userInfo.setLoginName(loginName);
         userInfo.setUserName(userName);

@@ -50,7 +50,7 @@ public class CategorySQLProvider {
         if (parameters.containsKey("isDeleteFlag") && parameters.get("isDeleteFlag") != null) {
             Boolean isDeleteFlag = (Boolean) parameters.get("isDeleteFlag");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDeleteFlag.booleanValue() ? "1" : "0");
+            sql.append(isDeleteFlag.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,DISPLAY_ORDER ASC,UPDATE_TIME DESC");
@@ -88,7 +88,7 @@ public class CategorySQLProvider {
         if (parameters.containsKey("isDeleteFlag") && parameters.get("isDeleteFlag") != null) {
             Boolean isDeleteFlag = (Boolean) parameters.get("isDeleteFlag");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDeleteFlag.booleanValue() ? "1" : "0");
+            sql.append(isDeleteFlag.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,DISPLAY_ORDER ASC,UPDATE_TIME DESC");
@@ -129,7 +129,7 @@ public class CategorySQLProvider {
         if (parameters.containsKey("isDeleteFlag") && parameters.get("isDeleteFlag") != null) {
             Boolean isDeleteFlag = (Boolean) parameters.get("isDeleteFlag");
             sql.append(" AND DEL_FLAG = '");
-            sql.append(isDeleteFlag.booleanValue() ? "1" : "0");
+            sql.append(isDeleteFlag.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,DISPLAY_ORDER ASC,UPDATE_TIME DESC");
@@ -179,7 +179,7 @@ public class CategorySQLProvider {
             } else {
                 sql.append(" WHERE DEL_FLAG = '");
             }
-            sql.append(isDeleteFlag.booleanValue() ? "1" : "0");
+            sql.append(isDeleteFlag.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         sql.append(" ORDER BY PARENT_ID ASC,DISPLAY_ORDER ASC,UPDATE_TIME DESC");
@@ -279,7 +279,7 @@ public class CategorySQLProvider {
         SqlBuilder.WHERE("PRODUCT_CATEGORY_NAME = #{productCategoryName}");
         SqlBuilder.WHERE("PRODUCT_CATEGORY_ID <> #{productCategoryId}");
         SqlBuilder.WHERE("PARENT_ID = #{parentId}");
-        SqlBuilder.WHERE("DEL_FLAG = '0'");
+        SqlBuilder.WHERE("DEL_FLAG = 'N'");
         return SqlBuilder.SQL();
     }
 
@@ -295,7 +295,7 @@ public class CategorySQLProvider {
         }
         return "SELECT COUNT(0) " +
                 "  FROM " + DBConstOfCategory.TN_PRODUCT_CATEGORY_INFO +
-                " WHERE DEL_FLAG = '0' AND " + String.format("PARENT_ID IN (%s)", joiner.toString());
+                " WHERE DEL_FLAG = 'N' AND " + String.format("PARENT_ID IN (%s)", joiner.toString());
     }
 
     /**
@@ -309,7 +309,7 @@ public class CategorySQLProvider {
         SqlBuilder.FROM(DBConstOfCategory.TN_PRODUCT_CATEGORY_INFO);
         SqlBuilder.WHERE("PARENT_ID = #{parentId}");
         SqlBuilder.WHERE("PRODUCT_CATEGORY_ID <> #{categoryId}");
-        SqlBuilder.WHERE("DEL_FLAG = '0'");
+        SqlBuilder.WHERE("DEL_FLAG = 'N'");
         return SqlBuilder.SQL();
     }
 
@@ -324,7 +324,7 @@ public class CategorySQLProvider {
         SqlBuilder.VALUES("PRODUCT_CATEGORY_NAME, DISPLAY_ORDER, PARENT_ID, TEMPLATE_ID, CREATE_PERSON_NAME, "
                         + "CREATE_TIME, UPDATE_PERSON_NAME, UPDATE_TIME, DEL_FLAG, XPATH",
                 "#{productCategoryName}, #{displayOrder}, #{parentId}, #{templateId}, #{createPersonName}, "
-                        + "#{createTime}, #{updatePersonName}, #{updateTime}, '0', #{xpath}");
+                        + "#{createTime}, #{updatePersonName}, #{updateTime}, 'N', #{xpath}");
         return SqlBuilder.SQL();
     }
 
@@ -364,7 +364,7 @@ public class CategorySQLProvider {
 
         SqlBuilder.BEGIN();
         SqlBuilder.UPDATE(DBConstOfCategory.TN_PRODUCT_CATEGORY_INFO);
-        SqlBuilder.SET("DEL_FLAG = '1'");
+        SqlBuilder.SET("DEL_FLAG = 'Y'");
         SqlBuilder.WHERE(String.format("PRODUCT_CATEGORY_ID IN (%s)", joiner.toString()));
 
         return SqlBuilder.SQL();
@@ -383,7 +383,7 @@ public class CategorySQLProvider {
         if (parameter.containsKey("isDeleteFlag") && parameter.get("isDeleteFlag") != null) {
             Boolean isDeleteFlag = (Boolean) parameter.get("isDeleteFlag");
             sql.append(" AND C.DEL_FLAG = '");
-            sql.append(isDeleteFlag.booleanValue() ? "1" : "0");
+            sql.append(isDeleteFlag.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         if (parameter.containsKey("templateId")) {
@@ -424,7 +424,7 @@ public class CategorySQLProvider {
         if (parameter.containsKey("isDeleteFlag") && parameter.get("isDeleteFlag") != null) {
             Boolean isDeleteFlag = (Boolean) parameter.get("isDeleteFlag");
             sql.append(" AND C.DEL_FLAG = '");
-            sql.append(isDeleteFlag.booleanValue() ? "1" : "0");
+            sql.append(isDeleteFlag.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
 
@@ -476,7 +476,7 @@ public class CategorySQLProvider {
             } else {
                 sql.append(" WHERE DEL_FLAG = '");
             }
-            sql.append(isDeleteFlag.booleanValue() ? "1" : "0");
+            sql.append(isDeleteFlag.booleanValue() ? "Y" : "N");
             sql.append("' ");
             hasWhere = true;
         }

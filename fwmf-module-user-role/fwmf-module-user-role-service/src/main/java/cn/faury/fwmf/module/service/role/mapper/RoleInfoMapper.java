@@ -58,7 +58,7 @@ public interface RoleInfoMapper {
      */
     @Select("SELECT ROLE_ID roleId,ROLE_NAME roleName,ROLE_CODE roleCode,IS_AVAILABLE isAvailable,SYSTEM_ID systemId " +
             "  FROM "+ DBConstOfUserRole.TN_ROLE_INFO +
-            " WHERE IS_AVAILABLE = '1' AND ROLE_CODE=#{roleCode,jdbcType=VARCHAR} ")
+            " WHERE IS_AVAILABLE = 'Y' AND ROLE_CODE=#{roleCode,jdbcType=VARCHAR} ")
     @ResultType(RoleInfoBean.class)
     RoleInfoBean getRoleInfoByCode(final String roleCode);
 

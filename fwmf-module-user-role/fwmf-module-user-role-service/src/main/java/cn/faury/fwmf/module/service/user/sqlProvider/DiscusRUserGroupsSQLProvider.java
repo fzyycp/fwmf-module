@@ -38,7 +38,7 @@ public class DiscusRUserGroupsSQLProvider {
 		StringBuffer sql = new StringBuffer(128);
 		sql.append("SELECT G.ID groupId,G.GROUP_NAME groupName,G.NUM ,G.ORIGIN_OS_ID systemId FROM "
 		        + DBConstOfUserRole.TN_CDA_GROUP + " G ");
-		sql.append(" WHERE G.DEL_FLAG = '0' AND G.ORIGIN_OS_ID = #{systemId} ");
+		sql.append(" WHERE G.DEL_FLAG = 'N' AND G.ORIGIN_OS_ID = #{systemId} ");
 		sql.append(" AND G.ID NOT IN (SELECT OBJECT_ID FROM " + DBConstOfUserRole.TN_DISCOUNT_DISCUS_R_OBJECT);
 		sql.append(" WHERE DISCUS_ID = #{discusId} )");
 		if (parameter.containsKey("userGroupName")) {

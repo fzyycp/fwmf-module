@@ -27,9 +27,9 @@ public class UserInfoSQLProvider {
         if(StringUtil.isNotEmpty((String)param.get("userRole"))) {
             sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_USER_R_ROLE +" ur ON t.USER_ID=ur.USER_ID ");
             sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_ROLE_INFO +" r");
-            sql.append(" ON ur.ROLE_ID = r.ROLE_ID WHERE  r.ROLE_CODE=#{userRole} AND IS_DELETE='0' ");
+            sql.append(" ON ur.ROLE_ID = r.ROLE_ID WHERE  r.ROLE_CODE=#{userRole} AND IS_DELETE='N' ");
         }else{
-            sql.append(" WHERE IS_DELETE='0' ");
+            sql.append(" WHERE IS_DELETE='N' ");
         }
         if (StringUtil.isNotEmpty((String)param.get("loginName"))) {
             sql.append(" AND LOGIN_NAME LIKE CONCAT('%',#{loginName},'%') ");

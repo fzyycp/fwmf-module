@@ -29,7 +29,7 @@ public class UserRMenuSQLProvider {
         sql.append(DBConstOfMenu.TN_ROLE_R_MENU).append(" rm, ");
         sql.append(DBConstOfMenu.TN_USER_R_ROLE).append(" ur ");
         sql.append(" WHERE m.MENU_ID = rm.MENU_ID AND m.SYSTEM_ID = s.SYSTEM_ID ");
-        sql.append("   AND m.IS_AVAILABLE = '1' AND s.IS_AVAILABLE = '1' ");
+        sql.append("   AND m.IS_AVAILABLE = 'Y' AND s.IS_AVAILABLE = 'Y' ");
         sql.append("   AND rm.ROLE_ID = ur.ROLE_ID AND ur.USER_ID = #{userId,jdbcType=BIGINT} ");
         // 【可选】String systemCode 业务系统编码
         if (parameters.get("systemCode") != null) {

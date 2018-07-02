@@ -34,8 +34,8 @@ public class RoleSQLProvider {
         if (parameters.get("systemCode") != null) {
             sql.append("   AND S.SYSTEM_CODE = #{systemCode,jdbcType=VARCHAR} ");
         }
-        sql.append(" AND R.IS_AVAILABLE = '1' ");
-        sql.append(" AND S.IS_AVAILABLE = '1' ");
+        sql.append(" AND R.IS_AVAILABLE = 'Y' ");
+        sql.append(" AND S.IS_AVAILABLE = 'Y' ");
         return sql.toString();
     }
 
@@ -65,9 +65,9 @@ public class RoleSQLProvider {
         sql.append("  AND M.SYSTEM_ID = S.SYSTEM_ID ");
         sql.append("  AND RM.MENU_ID = M.MENU_ID ");
         sql.append("  AND RM.ROLE_ID = RF.ROLE_ID ");
-        sql.append(" AND F.IS_AVAILABLE = '1' ");
-        sql.append(" AND M.IS_AVAILABLE = '1' ");
-        sql.append(" AND S.IS_AVAILABLE = '1' ");
+        sql.append(" AND F.IS_AVAILABLE = 'Y' ");
+        sql.append(" AND M.IS_AVAILABLE = 'Y' ");
+        sql.append(" AND S.IS_AVAILABLE = 'Y' ");
 
         sql.append("  AND RM.ROLE_ID IN ( ");
         // 获取用户所有的角色列表SQL

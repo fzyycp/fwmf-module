@@ -161,8 +161,8 @@ public class AppInfoServiceImpl implements AppInfoService {
         String appName = (String) parameter.get("appName");
         String errorMsg = null;
 
-        Map<String, Object> param1 = new HashMap<String, Object>();
-        Map<String, Object> param2 = new HashMap<String, Object>();
+        Map<String, Object> param1 = new HashMap<>();
+        Map<String, Object> param2 = new HashMap<>();
         param1.put("appCode", parameter.get("appCode"));
         param2.put("appName", parameter.get("appName"));
         if (parameter.containsKey("appId")) {

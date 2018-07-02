@@ -64,7 +64,7 @@ public class PushSqlProvider {
 		sql.append(" LEFT JOIN " + DBConstOfPush.TN_SYSTEM_INFO + " S ON PMR.SYS_ID=S.SYSTEM_ID ");
 		sql.append(" LEFT JOIN " + DBConstOfPush.TN_APP_INFO + " A ON PMR.APP_ID=A.APP_ID ");
 		sql.append(" LEFT JOIN " + DBConstOfPush.TN_USER_INFO + " U ON PMR.USER_ID = U.ID");
-		sql.append(" WHERE PMR.DEL_FLAG != 1 AND PMI.STATE = '4' AND PMR.DEL_FLAG = '0' ");
+		sql.append(" WHERE PMR.DEL_FLAG != 1 AND PMI.STATE = '4' AND PMR.DEL_FLAG = 'N' ");
 		sql.append(" AND PMI.CREATE_TIME >= U.INS_TSTMP AND CONCAT(PMI.END_DATE,' 23:59:59') >= NOW() ");
 		if (parameter.containsKey("userId")) {
 			sql.append(" AND PMR.USER_ID = #{userId} ");
@@ -330,7 +330,7 @@ public class PushSqlProvider {
 			if (StringUtil.isNotEmpty(list.get(i).getDelFlag())) {
 				sql.append("#{list[" + i + "].delFlag},");
 			} else {
-				sql.append("'0',");
+				sql.append("'N',");
 			}
 			sql.deleteCharAt(sql.length() - 1);
 			sql.append("),");
@@ -381,7 +381,7 @@ public class PushSqlProvider {
 	public static String delMessageReceiveByUserId(Map<String, Object> param) {
 		StringBuffer sql = new StringBuffer(128);
 		sql.append(" UPDATE " + DBConstOfPush.TN_PUSH_MESSAGE_RECEIVE);
-		sql.append(" SET DEL_FLAG = '1' WHERE USER_ID = #{userId}");
+		sql.append(" SET DEL_FLAG = 'Y' WHERE USER_ID = #{userId}");
 		List<Long> list = (List<Long>) param.get("list");
 		sql.append(" AND MESSAGE_ID IN ( ");
 		for (int i = 0; i < list.size(); i++) {
@@ -396,7 +396,7 @@ public class PushSqlProvider {
 	public static String delMessageReadByUserId(Map<String, Object> param) {
 		StringBuffer sql = new StringBuffer(128);
 		sql.append(" UPDATE " + DBConstOfPush.TN_PUSH_MESSAGE_READ);
-		sql.append(" SET DEL_FLAG = '1' WHERE USER_ID = #{userId}");
+		sql.append(" SET DEL_FLAG = 'Y' WHERE USER_ID = #{userId}");
 		List<Long> list = (List<Long>) param.get("list");
 		sql.append(" AND MESSAGE_ID IN ( ");
 		for (int i = 0; i < list.size(); i++) {

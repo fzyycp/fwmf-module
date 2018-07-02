@@ -294,7 +294,7 @@ public class UserGroupsSQLProvider {
         sql.append(" , " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ");
         sql.append(" WHERE ");
         sql.append(" G.ORIGIN_OS_ID=S.SYSTEM_ID ");
-        sql.append(" AND G.DEL_FLAG='0' ");
+        sql.append(" AND G.DEL_FLAG='N' ");
         if (parameter.get("groupId") != null) {
             sql.append(" AND G.ID = #{groupId,jdbcType=BIGINT} ");
         }

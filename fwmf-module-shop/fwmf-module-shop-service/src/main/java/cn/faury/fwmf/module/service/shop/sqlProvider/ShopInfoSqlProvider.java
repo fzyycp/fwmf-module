@@ -31,7 +31,7 @@ public class ShopInfoSqlProvider {
             sql.append(" left join " + DBConstOfShop.TN_USER_INFO + " U ON S.SHOPKEEPER_ID = U.ID ");
         }
         sql.append(" WHERE ");
-        sql.append(" DEL_FLAG = '0' ");
+        sql.append(" DEL_FLAG = 'N' ");
 
         if (parameter.containsKey("shopName")) {
             sql.append(" AND S.SHOP_NAME LIKE CONCAT('%',#{shopName},'%') ");
@@ -198,7 +198,7 @@ public class ShopInfoSqlProvider {
         StringBuffer sql = new StringBuffer(128);
         sql.append(" UPDATE " + DBConstOfShop.TN_PLATFORM_SHOP_INFO);
         sql.append(" SET ");
-        sql.append(" DEL_FLAG = '1' ");
+        sql.append(" DEL_FLAG = 'Y' ");
         sql.append(" WHERE SHOP_ID IN (");
         List<Long> shopIds = (List<Long>) parameter.get("shopIds");
         if (shopIds != null) {
@@ -277,7 +277,7 @@ public class ShopInfoSqlProvider {
         sql.append(" S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState,S.`ORIGIN_SYSTEM` originSystem,S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime,S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime,S.`DEL_FLAG` delFlag");
         sql.append(" FROM " + DBConstOfShop.TN_PLATFORM_SHOP_INFO + " S");
         sql.append(" WHERE ");
-        sql.append(" DEL_FLAG = '0' ");
+        sql.append(" DEL_FLAG = 'N' ");
         sql.append(" AND SHOP_ID not in ( ");
         sql.append(" SELECT DISTINCT SHOP_ID FROM " + DBConstOfShop.TN_PLATFORM_SHOP_R_SYSTEM);
         sql.append(" )");

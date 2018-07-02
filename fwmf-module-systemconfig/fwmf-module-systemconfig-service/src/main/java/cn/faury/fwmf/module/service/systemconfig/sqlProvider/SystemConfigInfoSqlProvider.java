@@ -67,7 +67,7 @@ public class SystemConfigInfoSqlProvider {
     public static String getGlobalSystemConfigInfoList(final Map<String, Object> parameters) {
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append("SELECT c.SYSTEM_ID as systemConfigId,SYSTEM_CONFIG_KEY as systemConfigKey,"
+        sql.append("SELECT c.SYSTEM_CONFIG_ID as systemConfigId,SYSTEM_CONFIG_KEY as systemConfigKey,"
                 + "SYSTEM_CONFIG_VALUE as systemConfigValue,"
                 + "SYSTEM_CONFIG_SYSTEM as systemConfigSystemId,"
                 + "SYSTEM_CONFIG_TIME as systemConfigTime,SYSTEM_CONFIG_DESC as systemConfigDesc,"
@@ -95,7 +95,7 @@ public class SystemConfigInfoSqlProvider {
     public static String getSystemConfigInfoList(final Map<String, Object> parameter) {
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append("SELECT c.SYSTEM_ID as systemConfigId,SYSTEM_CONFIG_KEY as systemConfigKey,"
+        sql.append("SELECT c.SYSTEM_CONFIG_ID as systemConfigId,SYSTEM_CONFIG_KEY as systemConfigKey,"
                 + "SYSTEM_CONFIG_VALUE as systemConfigValue,"
                 + "SYSTEM_CONFIG_SYSTEM as systemConfigSystemId,"
                 + "SYSTEM_CONFIG_TIME as systemConfigTime,SYSTEM_CONFIG_DESC as systemConfigDesc,"

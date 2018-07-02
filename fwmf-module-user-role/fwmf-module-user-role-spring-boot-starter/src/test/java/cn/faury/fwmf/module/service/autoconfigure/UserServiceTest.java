@@ -113,7 +113,7 @@ public class UserServiceTest {
 
     @Test
     public void changeEnable() throws Exception {
-        int changed = userService.changeEnable(11L, "0", "junit-updater");
+        int changed = userService.changeEnable(11L, "N", "junit-updater");
         Assert.assertTrue(changed == 1);
     }
 

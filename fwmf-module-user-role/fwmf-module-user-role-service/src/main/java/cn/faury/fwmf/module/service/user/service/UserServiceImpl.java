@@ -267,8 +267,8 @@ public class UserServiceImpl implements UserService<UserInfoBean,UserPasswordBea
         AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
         AssertUtil.assertNotEmpty(updatePerson, "更新人不可以为空");
 
-        if (!"0".equals(isEnable) && !"1".equals(isEnable)) {
-            isEnable = "0";
+        if (!"N".equals(isEnable) && !"Y".equals(isEnable)) {
+            isEnable = "N";
         }
         String state = UserInfoMapper.class.getName() + ".changeEnable";
         Map<String, Object> parameter = new HashMap<>();

@@ -301,7 +301,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryInfoBean> getAllCategory(final Boolean isDeleteFlag) {
         String categoryState = null;
         if (isDeleteFlag != null) {
-            categoryState = isDeleteFlag ? "1" : "0";
+            categoryState = isDeleteFlag ? "Y" : "N";
         }
         String state = CategoryMapper.class.getName() + ".getAllCategory";
         return this.commonDao.selectList(state, categoryState);

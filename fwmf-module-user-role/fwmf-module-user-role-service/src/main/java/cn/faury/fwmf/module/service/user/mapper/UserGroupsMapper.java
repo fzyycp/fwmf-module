@@ -96,7 +96,7 @@ public interface UserGroupsMapper {
 	 */
 	@Insert("INSERT INTO "
 	        + DBConstOfUserRole.TN_CDA_GROUP
-	        + " (`GROUP_NAME`, `ORIGIN_OS_ID`, `NUM`,`CREATE_PERSON`,`CREATE_TIME`,`UPDATE_PERSON`,`UPDATE_TIME`,`DEL_FLAG`) VALUES (#{groupName}, #{systemId}, #{num},#{createPerson},now(),#{createPerson},now(),'0')")
+	        + " (`GROUP_NAME`, `ORIGIN_OS_ID`, `NUM`,`CREATE_PERSON`,`CREATE_TIME`,`UPDATE_PERSON`,`UPDATE_TIME`,`DEL_FLAG`) VALUES (#{groupName}, #{systemId}, #{num},#{createPerson},now(),#{createPerson},now(),'N')")
 	@Options(keyProperty = "groupId", useGeneratedKeys = true)
 	public Long insertGroupsInfo(final UserGroupsInfoBean userGroupsInfo);
 
@@ -107,7 +107,7 @@ public interface UserGroupsMapper {
 	@SelectProvider(type = UserGroupsSQLProvider.class, method = "updateUserGroupsInfo")
 	public Integer updateUserGroupsInfo(UserGroupsInfoBean userGroupsInfo);
 
-	@Update(" UPDATE " + DBConstOfUserRole.TN_CDA_GROUP + " SET DEL_FLAG = '1' WHERE ID = #{groupId}")
+	@Update(" UPDATE " + DBConstOfUserRole.TN_CDA_GROUP + " SET DEL_FLAG = 'Y' WHERE ID = #{groupId}")
 	public Integer deleteUserGroupsInfoById(Long groupId);
 
 	/**
