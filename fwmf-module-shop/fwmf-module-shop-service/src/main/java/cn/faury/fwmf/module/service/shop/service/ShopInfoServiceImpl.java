@@ -126,7 +126,7 @@ public class ShopInfoServiceImpl implements ShopInfoService {
 
     @Override
     public boolean isExistShopInfo(String shopName, String shortName, Long shopId) {
-        AssertUtil.assertFalse(StringUtil.isEmpty(shopName, shortName), "商店简称/名称为空或不存在");
+        AssertUtil.assertFalse(StringUtil.isEmpty(shopName) && StringUtil.isEmpty(shortName), "商店简称/名称为空或不存在");
 
         Map<String, Object> param = new HashMap<>();
         if (StringUtil.isNotEmpty(shortName)) {
@@ -213,12 +213,12 @@ public class ShopInfoServiceImpl implements ShopInfoService {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("shopId", bean.getShopId());
         if (StringUtil.isNotEmpty(bean.getShopName())) {
-            boolean exist = isExistShopInfo(bean.getShopName(), null, null);
+            boolean exist = isExistShopInfo(bean.getShopName(), null, bean.getShopId());
             AssertUtil.assertFalse(exist, "商店名称已存在");
             param.put("shopName", bean.getShopName());
         }
         if (StringUtil.isNotEmpty(bean.getShortName())) {
-            boolean exist = isExistShopInfo(null, bean.getShortName(), null);
+            boolean exist = isExistShopInfo(null, bean.getShortName(), bean.getShopId());
             AssertUtil.assertFalse(exist, "商店简称已存在");
             param.put("shortName", bean.getShortName());
         }
@@ -253,16 +253,16 @@ public class ShopInfoServiceImpl implements ShopInfoService {
 
     @Override
     public int deleteShopInfo(List<Long> shopIds) {
-        AssertUtil.assertNotEmpty(shopIds,"商店id为空或不存在");
-        shopIds.forEach(id->{
+        AssertUtil.assertNotEmpty(shopIds, "商店id为空或不存在");
+        shopIds.forEach(id -> {
             boolean exist = isShopRSystem(id);
-            AssertUtil.assertFalse(exist,"商店存在授权系统，删除授权系统后再删除商店数据");
+            AssertUtil.assertFalse(exist, "商店存在授权系统，删除授权系统后再删除商店数据");
 
             exist = isShopRApp(id);
-            AssertUtil.assertFalse(exist,"商店存在授权App，删除授权App后再删除商店数据");
+            AssertUtil.assertFalse(exist, "商店存在授权App，删除授权App后再删除商店数据");
 
             exist = isShopRUserSelfCreate(id);
-            AssertUtil.assertFalse(exist,"商店存在商店管理员以外的自建用户，删除自建用户后再删除商店数据");
+            AssertUtil.assertFalse(exist, "商店存在商店管理员以外的自建用户，删除自建用户后再删除商店数据");
         });
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("shopIds", shopIds);
@@ -272,7 +272,7 @@ public class ShopInfoServiceImpl implements ShopInfoService {
 
     @Override
     public int updateShopState(List<Long> shopIds, final String shopState) {
-        AssertUtil.assertNotEmpty(shopIds,"商店id为空或不存在");
+        AssertUtil.assertNotEmpty(shopIds, "商店id为空或不存在");
 
         Map<String, Object> param = new HashMap<>();
         param.put("shopIds", shopIds);

@@ -84,10 +84,10 @@ public class ShopInfoSqlProvider {
     public static String getShopInfoById(Long shopId) {
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName,U.`ACC_NAME` shopKeeperName,U.`USER_NAME` shopKeeperUserName,S.`SHOPKEEPER_ID` shopKeeperId,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle,");
+        sql.append(" SELECT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName,U.`LOGIN_NAME` shopKeeperName,U.`USER_NAME` shopKeeperUserName,S.`SHOPKEEPER_ID` shopKeeperId,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle,");
         sql.append(" S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState,S.`ORIGIN_SYSTEM` originSystem,S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime,S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime,S.`DEL_FLAG` delFlag");
         sql.append(" FROM " + DBConstOfShop.TN_PLATFORM_SHOP_INFO + " S ");
-        sql.append(" left join " + DBConstOfShop.TN_USER_INFO + " U ON S.SHOPKEEPER_ID = U.ID ");
+        sql.append(" left join " + DBConstOfShop.TN_USER_INFO + " U ON S.SHOPKEEPER_ID = U.USER_ID ");
         sql.append(" WHERE ");
         sql.append(" SHOP_ID = #{shopId} ");
 

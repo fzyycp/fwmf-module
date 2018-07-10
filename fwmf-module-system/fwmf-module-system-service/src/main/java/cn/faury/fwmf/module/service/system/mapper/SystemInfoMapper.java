@@ -59,8 +59,9 @@ public interface SystemInfoMapper {
 	 * @return 查询结果
 	 */
 	@SelectProvider(method = "querySystemInfo", type = SystemInfoSqlProvider.class)
-	@Results({ @Result(property = "systemId", column = "ID", javaType = Long.class),
-	        @Result(property = "systemName", column = "NAME"), @Result(property = "systemCode", column = "CODE"),
+	@Results({ @Result(property = "systemId", column = "SYSTEM_ID", javaType = Long.class),
+	        @Result(property = "systemName", column = "SYSTEM_NAME"),
+			@Result(property = "systemCode", column = "SYSTEM_CODE"),
 	        @Result(property = "isAvailable", column = "IS_AVAILABLE") })
 	public List<SystemInfoBean> querySystemInfo(final Map<String, Object> parameter);
 
@@ -96,9 +97,7 @@ public interface SystemInfoMapper {
 	 *            业务系统ID
 	 * @return 更新条数
 	 */
-	@Update("UPDATE " + DBConstOfSystem.TN_SYSTEM_INFO
-	        + " SET `SYSTEM_NAME`=#{systemName}, `SYSTEM_CODE`=#{systemCode}, `IS_AVAILABLE`=#{isAvailable} "
-	        + " WHERE `SYSTEM_ID`=#{systemId,jdbcType=BIGINT}")
+	@UpdateProvider(type = SystemInfoSqlProvider.class,method = "updateSystemInfoById")
 	public Integer updateSystemInfoById(String systemName, String systemCode, String isAvailable, Long systemId);
 
 	/**

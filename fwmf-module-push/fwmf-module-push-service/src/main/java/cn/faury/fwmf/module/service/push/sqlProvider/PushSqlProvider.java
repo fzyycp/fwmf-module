@@ -103,10 +103,10 @@ public class PushSqlProvider {
 		sql.append(" LEFT JOIN " + DBConstOfPush.TN_APP_INFO + " T ON PRA.APP_ID = T.APP_ID");
 		sql.append(" LEFT JOIN " + DBConstOfPush.TN_PUSH_MESSAGE_READ
 		        + " PMR ON PMR.MESSAGE_ID = PMI.MESSAGE_ID AND PMR.USER_ID = #{userId} ");
-		sql.append(" LEFT JOIN " + DBConstOfPush.TN_USER_INFO + " U ON U.ID = #{userId} ");
+		sql.append(" LEFT JOIN " + DBConstOfPush.TN_USER_INFO + " U ON U.USER_ID = #{userId} ");
 		sql.append(" WHERE (PMR.DEL_FLAG IS NULL OR PMR.DEL_FLAG != 1) AND (PMI.STATE = '4' ");
 		sql.append(" AND PMI.PUSH_TYPE = '1' OR (PMI.PUSH_TYPE = '3' AND EXISTS (SELECT * FROM "
-		        + DBConstOfPush.TN_USER_INFO + " WHERE ACC_NAME LIKE 'YK%' AND ID = #{userId} )) )");
+		        + DBConstOfPush.TN_USER_INFO + " WHERE LOGIN_NAME LIKE 'YK%' AND USER_ID = #{userId} )) )");
 		sql.append(" AND PMI.CREATE_TIME >= U.INS_TSTMP AND CONCAT(PMI.END_DATE,' 23:59:59') >= NOW() ");
 		if (parameter.containsKey("systemCode")) {
 			sql.append(" AND S.SYSTEM_CODE = #{systemCode}  ");

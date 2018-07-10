@@ -82,7 +82,7 @@ public interface UserInfoMapper {
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     Long insertUserInfo(UserInfoBean bean);
 
-    @Update("UPDATE " + DBConstOfUserRole.TN_USER_INFO + " SET USER_NAME=#{userName},EFCT_YMD=#{efctYmd},EXPR_YMD=#{exprYmd},UPDATE_PERSON=#{updatePerson},UPDATE_TIME=CURRENT_TIMESTAMP WHERE USER_ID=#{userId}")
+    @UpdateProvider(type = UserInfoSQLProvider.class,method = "updateUserInfoById")
     int updateUserInfoById(Map<String, Object> map);
 
     @Update("UPDATE " + DBConstOfUserRole.TN_USER_INFO + " SET IS_DELETE='Y',UPDATE_PERSON=#{updatePerson},UPDATE_TIME=CURRENT_TIMESTAMP WHERE USER_ID=#{userId}")

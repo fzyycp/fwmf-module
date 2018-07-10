@@ -5,7 +5,7 @@ import cn.faury.fdk.common.db.PageParam;
 import cn.faury.fdk.common.utils.AssertUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.menu.bean.MenuInfoBean;
-import cn.faury.fwmf.module.api.menu.service.SystemMenuService;
+import cn.faury.fwmf.module.api.menu.service.SystemRMenuService;
 import cn.faury.fwmf.module.service.menu.mapper.SystemMenuMapper;
 
 import java.util.HashMap;
@@ -15,14 +15,14 @@ import java.util.Map;
 /**
  * 菜单服务提供者:从业务系统的角度
  */
-public class SystemMenuServiceImpl implements SystemMenuService {
+public class SystemRMenuServiceImpl implements SystemRMenuService {
 
 	/**
 	 * 数据库操作器
 	 */
 	protected CommonDao commonDao;
 
-    public SystemMenuServiceImpl(CommonDao commonDao) {
+    public SystemRMenuServiceImpl(CommonDao commonDao) {
         this.commonDao = commonDao;
     }
 

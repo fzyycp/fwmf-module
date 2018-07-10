@@ -31,7 +31,7 @@
 	</bean>
 
 	<!--业务系统菜单服务 -->
-	<bean id="systemMenuService" class="cn.faury.fwmf.module.service.menu.service.SystemMenuServiceImpl">
+	<bean id="systemMenuService" class="cn.faury.fwmf.module.service.menu.service.SystemRMenuServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
 	</bean>
 </beans>

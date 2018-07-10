@@ -26,8 +26,8 @@ public class SystemRUserSQLProvider {
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
         Boolean flag = false;
-        sql.append("SELECT U.ID userId,U.ACC_NAME loginName,U.USER_NAME userName,U.ORIGIN_OS_ID originOsId" +
-                ",U.RESV_FLG resvFlg,U.INS_TSTMP insTstmp,U.IS_ENABLE isEnable" +
+        sql.append("SELECT U.USER_ID userId,U.LOGIN_NAME loginName,U.USER_NAME userName,U.ORIGIN_OS_ID originOsId" +
+                ",U.INS_TSTMP insTstmp,U.IS_ENABLE isEnable" +
                 ",S.`SYSTEM_NAME` originOsName FROM "
                 + DBConstOfUserRole.TN_USER_INFO + " U ");
         sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON U.ORIGIN_OS_ID = S.SYSTEM_ID");
@@ -38,7 +38,7 @@ public class SystemRUserSQLProvider {
             } else {
                 sql.append(" WHERE ");
             }
-            sql.append(" U.ACC_NAME LIKE CONCAT('%',#{loginName,jdbcType=VARCHAR},'%')");
+            sql.append(" U.LOGIN_NAME LIKE CONCAT('%',#{loginName,jdbcType=VARCHAR},'%')");
             flag = true;
         }
         if (parameter.containsKey("systemCode")) {

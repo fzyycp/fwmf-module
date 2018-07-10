@@ -21,7 +21,7 @@ public class FwmfMenuAutoConfiguration {
      * 菜单服务
      */
     @Bean
-    public UserRMenuService roleService(CommonDao commonDao) {
+    public UserRMenuService userRMenuService(CommonDao commonDao) {
         return new UserRMenuServiceImpl(commonDao);
     }
 
@@ -61,7 +61,7 @@ public class FwmfMenuAutoConfiguration {
      * 业务系统菜单服务
      */
     @Bean
-    public SystemMenuService systemMenuService(CommonDao commonDao) {
-        return new SystemMenuServiceImpl(commonDao);
+    public SystemRMenuService systemRMenuService(CommonDao commonDao) {
+        return new SystemRMenuServiceImpl(commonDao);
     }
 }

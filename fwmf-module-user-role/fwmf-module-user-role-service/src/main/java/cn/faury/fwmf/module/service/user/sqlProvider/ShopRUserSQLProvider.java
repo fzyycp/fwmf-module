@@ -20,11 +20,11 @@ public class ShopRUserSQLProvider {
 
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT SU.SHOP_USER_ID shopUserId,U.ACC_NAME shopUserLoginName" +
+        sql.append(" SELECT SU.SHOP_USER_ID shopUserId,U.LOGIN_NAME shopUserLoginName" +
                 ",U.USER_NAME shopUserName,SU.SHOP_ID shopId,U.ORIGIN_OS_ID systemId" +
                 ",S.`SYSTEM_NAME` systemName,SU.IS_SELF_CREATE isSelfCreate,SU.IS_ADMIN isAdmin");
         sql.append(" FROM " + DBConstOfUserRole.TN_SHOP_USER_INFO + " SU ");
-        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " U ON SU.SHOP_USER_ID = U.ID");
+        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " U ON SU.SHOP_USER_ID = U.USER_ID");
         sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON U.ORIGIN_OS_ID = S.SYSTEM_ID");
         sql.append(" WHERE ");
         sql.append(" SU.SHOP_ID =#{shopId} ");
@@ -32,13 +32,13 @@ public class ShopRUserSQLProvider {
             sql.append(" AND U.ORIGIN_OS_ID =#{systemId} ");
         }
         if (parameters.containsKey("shopUserLoginName")) {
-            sql.append(" AND U.ACC_NAME LIKE CONCAT('%',#{shopUserLoginName},'%')");
+            sql.append(" AND U.LOGIN_NAME LIKE CONCAT('%',#{shopUserLoginName},'%')");
         }
         if (parameters.containsKey("shopUserName")) {
             sql.append(" AND U.USER_NAME LIKE CONCAT('%',#{shopUserName},'%')");
         }
 
-        sql.append(" ORDER BY U.ACC_NAME ");
+        sql.append(" ORDER BY U.LOGIN_NAME ");
         log.debug("SQL ==> " + sql.toString());
         return sql.toString();
 
@@ -49,9 +49,9 @@ public class ShopRUserSQLProvider {
         log.debug("Parameters ==> " + parameters.toString());
 
         StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT DISTINCT SU.SHOP_USER_ID shopUserId,U.ACC_NAME shopUserLoginName,U.USER_NAME shopUserName,SU.IS_SELF_CREATE isSelfCreate,U.ORIGIN_OS_ID systemId,SU.IS_ADMIN isAdmin");
+        sql.append(" SELECT DISTINCT SU.SHOP_USER_ID shopUserId,U.LOGIN_NAME shopUserLoginName,U.USER_NAME shopUserName,SU.IS_SELF_CREATE isSelfCreate,U.ORIGIN_OS_ID systemId,SU.IS_ADMIN isAdmin");
         sql.append(" FROM " + DBConstOfUserRole.TN_SHOP_USER_INFO + " SU ");
-        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " U ON SU.SHOP_USER_ID = U.ID");
+        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " U ON SU.SHOP_USER_ID = U.USER_ID");
         sql.append(" WHERE ");
         sql.append(" su.SHOP_USER_ID =#{shopUserId} ");
         sql.append(" AND SU.SHOP_ID =#{shopId} ");
@@ -67,10 +67,10 @@ public class ShopRUserSQLProvider {
 
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT DISTINCT SU.SHOP_USER_ID shopUserId,U.ACC_NAME shopUserLoginName,U.USER_NAME shopUserName,U.ORIGIN_OS_ID systemId,"
-                + "S.`NAME` systemName,SU.IS_SELF_CREATE isSelfCreate,SU.IS_ADMIN isAdmin,PS.SHOP_ID shopId");
+        sql.append(" SELECT DISTINCT SU.SHOP_USER_ID shopUserId,U.LOGIN_NAME shopUserLoginName,U.USER_NAME shopUserName,U.ORIGIN_OS_ID systemId,"
+                + "S.`SYSTEM_NAME` systemName,SU.IS_SELF_CREATE isSelfCreate,SU.IS_ADMIN isAdmin,PS.SHOP_ID shopId");
         sql.append(" FROM " + DBConstOfUserRole.TN_SHOP_USER_INFO + " SU ");
-        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " U ON SU.SHOP_USER_ID = U.ID");
+        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " U ON SU.SHOP_USER_ID = U.USER_ID");
         sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SHOP_INFO + " PS ON PS.SHOP_ID = SU.SHOP_ID");
         sql.append(" LEFT JOIN  " + DBConstOfUserRole.TN_SHOP_R_SYSTEM + " RS ON PS.SHOP_ID = RS.SHOP_ID");
         sql.append(" LEFT JOIN  " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON S.SYSTEM_ID = RS.SYSTEM_ID");
@@ -109,7 +109,7 @@ public class ShopRUserSQLProvider {
                 if (flag) {
                     sql.append(" AND ");
                 }
-                sql.append(" U.ACC_NAME LIKE CONCAT('%',#{shopUserLoginName},'%')");
+                sql.append(" U.LOGIN_NAME LIKE CONCAT('%',#{shopUserLoginName},'%')");
                 flag = true;
             }
             if (parameters.containsKey("shopUserName")) {
@@ -139,7 +139,7 @@ public class ShopRUserSQLProvider {
 
         }
 
-        sql.append(" ORDER BY U.ACC_NAME ");
+        sql.append(" ORDER BY U.LOGIN_NAME ");
         log.debug("SQL ==> " + sql.toString());
         return sql.toString();
 
@@ -172,23 +172,23 @@ public class ShopRUserSQLProvider {
         log.debug("Parameters ==> " + parameters.toString());
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT u.ID shopUserId,U.ACC_NAME shopUserLoginName,U.USER_NAME shopUserName" +
+        sql.append(" SELECT u.ID shopUserId,U.LOGIN_NAME shopUserLoginName,U.USER_NAME shopUserName" +
                 ",U.ORIGIN_OS_ID systemId,S.`SYSTEM_NAME` systemName");
         sql.append(" FROM " + DBConstOfUserRole.TN_USER_INFO + " U ");
         sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON U.ORIGIN_OS_ID = S.SYSTEM_ID");
         sql.append(" WHERE ");
         sql.append(" U.ORIGIN_OS_ID =#{systemId} ");
-        sql.append(" AND u.ID NOT in (select SHOP_USER_ID from " + DBConstOfUserRole.TN_SHOP_USER_INFO
+        sql.append(" AND U.USER_ID NOT in (select SHOP_USER_ID from " + DBConstOfUserRole.TN_SHOP_USER_INFO
                 + " where SHOP_ID = #{shopId})");
 
         if (parameters.containsKey("shopUserLoginName")) {
-            sql.append(" AND U.ACC_NAME LIKE CONCAT('%',#{shopUserLoginName},'%')");
+            sql.append(" AND U.LOGIN_NAME LIKE CONCAT('%',#{shopUserLoginName},'%')");
         }
         if (parameters.containsKey("shopUserName")) {
             sql.append(" AND U.USER_NAME LIKE CONCAT('%',#{shopUserName},'%')");
         }
 
-        sql.append(" ORDER BY U.ACC_NAME ");
+        sql.append(" ORDER BY U.LOGIN_NAME ");
         log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }

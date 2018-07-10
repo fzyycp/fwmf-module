@@ -5,6 +5,7 @@ import cn.faury.fdk.common.anotation.Nullable;
 import cn.faury.fdk.common.anotation.permission.Read;
 import cn.faury.fdk.common.anotation.permission.Write;
 import cn.faury.fdk.common.db.PageInfo;
+import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.bean.UserPasswordBean;
 import cn.faury.fwmf.module.api.user.config.UserType;
@@ -83,13 +84,15 @@ public interface UserService<T extends UserInfoBean, P extends UserPasswordBean>
      */
     @Write
     default public Long insertUserInfo(final String loginName, final String userName, final String password,
-                                       final Long systemId, final UserType userType) {
+                                       final Long systemId, final UserType userType, final String createPerson, final String updatePerson) {
         UserInfoBean userInfo = new UserInfoBean();
         userInfo.setLoginName(loginName);
         userInfo.setUserName(userName);
         userInfo.setEfctYmd(new Date());
         userInfo.setPassword(password);
         userInfo.setOriginOsId(systemId);
+        userInfo.setCreatePerson(createPerson);
+        userInfo.setUpdatePerson(StringUtil.emptyDefault(createPerson, updatePerson));
         return insertUserInfo(userInfo);
     }
 

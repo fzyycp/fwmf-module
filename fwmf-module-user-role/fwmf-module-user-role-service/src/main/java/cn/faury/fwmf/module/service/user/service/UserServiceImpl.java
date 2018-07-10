@@ -195,16 +195,22 @@ public class UserServiceImpl implements UserService<UserInfoBean,UserPasswordBea
     public int updateUserInfoById(String userName, Date efctYmd, Date exprYmd, String updatePerson, Long userId) {
         //参数有效性验证
         AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
-        AssertUtil.assertNotEmpty(userName, "用户姓名不可以为空");
-        AssertUtil.assertNotNull(efctYmd, "生效日期不可以为空");
-        AssertUtil.assertNotNull(exprYmd, "失效日期不可以为空");
+//        AssertUtil.assertNotEmpty(userName, "用户姓名不可以为空");
+//        AssertUtil.assertNotNull(efctYmd, "生效日期不可以为空");
+//        AssertUtil.assertNotNull(exprYmd, "失效日期不可以为空");
         AssertUtil.assertNotEmpty(updatePerson, "更新人不可以为空");
 
         String state = UserInfoMapper.class.getName() + ".updateUserInfoById";
         Map<String, Object> parameter = new HashMap<>();
-        parameter.put("userName", userName);
-        parameter.put("efctYmd", DateUtil.formatDate(efctYmd));
-        parameter.put("exprYmd", DateUtil.formatDate(exprYmd));
+        if (StringUtil.isNotEmpty(userName)){
+            parameter.put("userName", userName);
+        }
+        if (efctYmd!=null){
+            parameter.put("efctYmd", DateUtil.formatDate(efctYmd));
+        }
+        if(exprYmd!=null){
+            parameter.put("exprYmd", DateUtil.formatDate(exprYmd));
+        }
         parameter.put("userId", userId);
         parameter.put("updatePerson", updatePerson);
         return this.commonDao.update(state, parameter);

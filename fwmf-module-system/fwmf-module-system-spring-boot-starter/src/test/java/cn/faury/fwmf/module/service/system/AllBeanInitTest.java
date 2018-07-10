@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AllBeanInitTest {
@@ -19,7 +21,6 @@ public class AllBeanInitTest {
         Assert.assertNotNull(shopRSystemService);
         Assert.assertNotNull(systemService);
         Assert.assertNotNull(userRSystemService);
-        System.out.println(systemService.getSystemInfoByCode("fwmf-web"));
     }
 
     @Autowired

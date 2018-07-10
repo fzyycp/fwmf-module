@@ -39,10 +39,10 @@ public class UserAgentSQLProvider {
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
         if (!parameters.containsKey("osType")) { // osType:不选
-            sql.append("SELECT A.ID,A.USER_ID userId,UA.ACC_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.ACC_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,AF.APP_NAME osName,AF.APP_CODE osCode,A.IS_AVAILABLE isAvailable ");
+            sql.append("SELECT A.ID,A.USER_ID userId,UA.LOGIN_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.LOGIN_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,AF.APP_NAME osName,AF.APP_CODE osCode,A.IS_AVAILABLE isAvailable ");
             sql.append(" FROM " + DBConstOfUserRole.TN_USER_AGENT + " A ");
-            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.ID ");
-            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.ID ");
+            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.USER_ID ");
+            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.USER_ID ");
             sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_APP_INFO + " AF ON A.OS_ID = AF.APP_ID ");
             if (parameters != null && parameters.size() > 0) {
                 sql.append(" WHERE ");
@@ -64,10 +64,10 @@ public class UserAgentSQLProvider {
                 }
             }
             sql.append(" UNION ");
-            sql.append("SELECT A.ID,A.USER_ID userId,UA.ACC_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.ACC_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,S.NAME osName,S.CODE osCode,A.IS_AVAILABLE isAvailable ");
+            sql.append("SELECT A.ID,A.USER_ID userId,UA.LOGIN_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.LOGIN_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,S.SYSTEM_NAME osName,S.SYSTEM_CODE osCode,A.IS_AVAILABLE isAvailable ");
             sql.append(" FROM " + DBConstOfUserRole.TN_USER_AGENT + " A ");
-            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.ID ");
-            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.ID ");
+            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.USER_ID ");
+            sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.USER_ID ");
             sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON A.OS_ID = S.SYSTEM_ID ");
             if (parameters != null && parameters.size() > 0) {
                 sql.append(" WHERE ");
@@ -92,18 +92,18 @@ public class UserAgentSQLProvider {
         } else if (parameters.containsKey("osType")) {
             String osType = (String) parameters.get("osType");
             if (osType.equals("1")) {// osType:1 app
-                sql.append("SELECT A.ID,A.USER_ID userId,UA.ACC_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.ACC_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,AF.APP_NAME osName,AF.APP_CODE osCode,A.IS_AVAILABLE isAvailable ");
+                sql.append("SELECT A.ID,A.USER_ID userId,UA.LOGIN_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.LOGIN_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,AF.APP_NAME osName,AF.APP_CODE osCode,A.IS_AVAILABLE isAvailable ");
                 sql.append(" FROM " + DBConstOfUserRole.TN_USER_AGENT + " A ");
-                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.ID ");
-                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.ID ");
+                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.USER_ID ");
+                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.USER_ID ");
                 sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_APP_INFO + " AF ON A.OS_ID = AF.APP_ID ");
                 sql.append(" WHERE ");
                 sql.append(" A.OS_TYPE = '1'");
             } else { // osType: 0 业务系统
-                sql.append("SELECT A.ID,A.USER_ID userId,UA.ACC_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.ACC_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,S.NAME osName,S.CODE osCode,A.IS_AVAILABLE isAvailable ");
+                sql.append("SELECT A.ID,A.USER_ID userId,UA.LOGIN_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.LOGIN_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,S.SYSTEM_NAME osName,S.SYSTEM_CODE osCode,A.IS_AVAILABLE isAvailable ");
                 sql.append(" FROM " + DBConstOfUserRole.TN_USER_AGENT + " A ");
-                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.ID ");
-                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.ID ");
+                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.USER_ID ");
+                sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.USER_ID ");
                 sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON A.OS_ID = S.SYSTEM_ID ");
                 sql.append(" WHERE ");
                 sql.append(" A.OS_TYPE = '0'");
@@ -145,22 +145,22 @@ public class UserAgentSQLProvider {
         }
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append("SELECT U.ID userId,U.ACC_NAME loginName,U.USER_NAME userName,S.`SYSTEM_NAME` osName");
+        sql.append("SELECT U.ID userId,U.LOGIN_NAME loginName,U.USER_NAME userName,S.`SYSTEM_NAME` osName");
         sql.append(" FROM " + DBConstOfUserRole.TN_USER_INFO + " U , " + DBConstOfUserRole.TN_SYSTEM_INFO + " S");
         sql.append(" WHERE ");
         sql.append(" U.ORIGIN_OS_ID = S.SYSTEM_ID ");
         sql.append(" AND ");
         // Long userId = (Long) parameters.get("userId");
         sql.append(" U.ORIGIN_OS_ID = (SELECT ORIGIN_OS_ID FROM  " + DBConstOfUserRole.TN_USER_INFO
-                + "  WHERE ID=#{userId})  ");
+                + "  WHERE USER_ID=#{userId})  ");
         sql.append(" AND ");
         // Long osId = (Long) parameters.get("osId");
-        sql.append(" U.ID NOT IN (SELECT AGENT_USER_ID FROM " + DBConstOfUserRole.TN_USER_AGENT
-                + " WHERE USER_ID=#{userId} AND OS_ID=#{osId}) AND U.ID != #{userId} ");
+        sql.append(" U.USER_ID NOT IN (SELECT AGENT_USER_ID FROM " + DBConstOfUserRole.TN_USER_AGENT
+                + " WHERE USER_ID=#{userId} AND OS_ID=#{osId}) AND U.USER_ID != #{userId} ");
         if (parameters.containsKey("userName")) {
-            sql.append(" AND U.ACC_NAME LIKE CONCAT('%',#{userName},'%')");
+            sql.append(" AND U.LOGIN_NAME LIKE CONCAT('%',#{userName},'%')");
         }
-        sql.append(" ORDER BY U.ID DESC");
+        sql.append(" ORDER BY U.USER_ID DESC");
 
         log.debug("SQL ==> " + sql.toString());
         return sql.toString();
@@ -182,18 +182,18 @@ public class UserAgentSQLProvider {
 
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append("SELECT A.ID id,A.USER_ID userId,UA.ACC_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.ACC_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,AF.APP_NAME osName,AF.APP_CODE osCode,A.IS_AVAILABLE isAvailable ");
+        sql.append("SELECT A.ID id,A.USER_ID userId,UA.LOGIN_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.LOGIN_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,AF.APP_NAME osName,AF.APP_CODE osCode,A.IS_AVAILABLE isAvailable ");
         sql.append(" FROM " + DBConstOfUserRole.TN_USER_AGENT + " A ");
-        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.ID ");
-        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.ID ");
+        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.USER_ID ");
+        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.USER_ID ");
         sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_APP_INFO + " AF ON A.OS_ID = AF.APP_ID ");
         sql.append(" WHERE ");
         sql.append(" A.id = #{id} AND A.OS_TYPE='0'");
         sql.append(" UNION ");
-        sql.append("SELECT A.ID id,A.USER_ID userId,UA.ACC_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.ACC_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,S.NAME osName,S.CODE osCode,A.IS_AVAILABLE isAvailable  ");
+        sql.append("SELECT A.ID id,A.USER_ID userId,UA.LOGIN_NAME loginName,UA.USER_NAME userName,A.AGENT_USER_ID agentUserId,UB.LOGIN_NAME agentLoginName,UA.USER_NAME agentUserName,A.OS_TYPE osType,A.OS_ID osId,S.SYSTEM_NAME osName,S.SYSTEM_CODE osCode,A.IS_AVAILABLE isAvailable  ");
         sql.append(" FROM " + DBConstOfUserRole.TN_USER_AGENT + " A ");
-        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.ID ");
-        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.ID ");
+        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UA ON A.USER_ID = UA.USER_ID ");
+        sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_INFO + " UB ON A.AGENT_USER_ID = UB.USER_ID ");
         sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON A.OS_ID = S.SYSTEM_ID ");
         sql.append(" WHERE ");
         sql.append(" A.id = #{id} AND A.OS_TYPE='1'");

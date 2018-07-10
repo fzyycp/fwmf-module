@@ -24,17 +24,17 @@ public class UserInfoSQLProvider {
         sql.append("       EXPR_YMD exprYmd,INS_TSTMP insTstmp,ORIGIN_OS_ID originOsId,IS_ENABLE isEnable," +
                 "          CREATE_PERSON createPerson,UPDATE_PERSON updatePerson,UPDATE_TIME updateTime ");
         sql.append("  FROM " + DBConstOfUserRole.TN_USER_INFO + " t ");
-        if(StringUtil.isNotEmpty((String)param.get("userRole"))) {
-            sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_USER_R_ROLE +" ur ON t.USER_ID=ur.USER_ID ");
-            sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_ROLE_INFO +" r");
+        if (StringUtil.isNotEmpty((String) param.get("userRole"))) {
+            sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_USER_R_ROLE + " ur ON t.USER_ID=ur.USER_ID ");
+            sql.append("  LEFT JOIN " + DBConstOfUserRole.TN_ROLE_INFO + " r");
             sql.append(" ON ur.ROLE_ID = r.ROLE_ID WHERE  r.ROLE_CODE=#{userRole} AND IS_DELETE='N' ");
-        }else{
+        } else {
             sql.append(" WHERE IS_DELETE='N' ");
         }
-        if (StringUtil.isNotEmpty((String)param.get("loginName"))) {
+        if (StringUtil.isNotEmpty((String) param.get("loginName"))) {
             sql.append(" AND LOGIN_NAME LIKE CONCAT('%',#{loginName},'%') ");
         }
-        if (StringUtil.isNotEmpty((String)param.get("userName"))) {
+        if (StringUtil.isNotEmpty((String) param.get("userName"))) {
             sql.append(" AND USER_NAME LIKE CONCAT('%',#{userName},'%') ");
         }
 
@@ -44,4 +44,26 @@ public class UserInfoSQLProvider {
         return sql.toString();
     }
 
+    public String updateUserInfoById(Map<String, Object> param) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE "+ DBConstOfUserRole.TN_USER_INFO);
+        sql.append("   SET ");
+        if (param!=null){
+            if (param.containsKey("userName")){
+                sql.append("USER_NAME=#{userName},");
+            }
+            if (param.containsKey("efctYmd")){
+                sql.append("EFCT_YMD=#{efctYmd},");
+            }
+            if (param.containsKey("exprYmd")){
+                sql.append("EXPR_YMD=#{exprYmd},");
+            }
+            if (param.containsKey("updatePerson")){
+                sql.append("UPDATE_PERSON=#{updatePerson},");
+            }
+        }
+        sql.append("       UPDATE_TIME=CURRENT_TIMESTAMP ");
+        sql.append(" WHERE USER_ID=#{userId} ");
+        return sql.toString();
+    }
 }

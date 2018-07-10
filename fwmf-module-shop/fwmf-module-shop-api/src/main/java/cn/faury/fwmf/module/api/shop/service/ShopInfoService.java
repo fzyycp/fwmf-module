@@ -5,6 +5,7 @@ import cn.faury.fdk.common.anotation.permission.Write;
 import cn.faury.fdk.common.db.PageInfo;
 import cn.faury.fdk.common.db.PageParam;
 import cn.faury.fdk.common.utils.AssertUtil;
+import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fwmf.module.api.shop.bean.ShopInfoBean;
 
 import java.util.HashMap;
@@ -182,7 +183,8 @@ public interface ShopInfoService {
 	 * @return
 	 */
 	default public boolean isExistShopName(final String shopName){
-        return isExistShopInfo(shopName, null, null);
+		AssertUtil.assertNotEmpty(shopName, "商店名称为空或不存在");
+		return isExistShopInfo(shopName, null, null);
     }
 
 	/**
@@ -192,7 +194,8 @@ public interface ShopInfoService {
 	 * @return
 	 */
 	default public boolean isExistShortName(final String shortName){
-        return isExistShopInfo(null, shortName, null);
+		AssertUtil.assertNotEmpty(shortName, "商店简称为空或不存在");
+		return isExistShopInfo(null, shortName, null);
     }
 
 	/**

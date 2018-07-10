@@ -282,7 +282,7 @@ public class ShopRUserServiceImpl implements ShopRUserService {
     @Override
     public Integer updateShopRUser(ShopRUserBean bean) {
         AssertUtil.assertNotEmpty(bean.getIsSelfCreate(), "是否自建不能为空或不存在");
-        AssertUtil.assertTrue(bean.getIsSelfCreate().equals("N"), "非自建用户不能修改用户信息");
+        AssertUtil.assertTrue(bean.getIsSelfCreate().equals("Y"), "非自建用户不能修改用户信息");
         AssertUtil.assertTrue(bean.getShopUserId() != null && bean.getShopUserId() > 0, "用户ID不能为空或不存在");
         AssertUtil.assertNotEmpty(bean.getShopUserLoginName(), "用户登录名为空或不存在");
         AssertUtil.assertNotEmpty(bean.getShopUserName(), "用户姓名为空或不存在");

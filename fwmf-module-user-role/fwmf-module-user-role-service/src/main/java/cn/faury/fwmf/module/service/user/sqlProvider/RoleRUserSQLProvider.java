@@ -73,7 +73,7 @@ public class RoleRUserSQLProvider {
 		if (parameters.containsKey("isRoleAvailable") && parameters.get("isRoleAvailable") != null) {
 			Boolean isAvailable = (Boolean) parameters.get("isRoleAvailable");
 			sql.append(" AND R.IS_AVAILABLE = '");
-			sql.append(isAvailable.booleanValue() ? "'Y'" : "'N'");
+			sql.append(isAvailable ? "'Y'" : "'N'");
 			sql.append("' ");
 		}
 		// 【二选一】Long systemId 业务系统ID / String systemCode 业务系统编码
@@ -89,16 +89,16 @@ public class RoleRUserSQLProvider {
 			if (parameters.containsKey("isSystemAvailable") && parameters.get("isSystemAvailable") != null) {
 				Boolean isAvailable = (Boolean) parameters.get("isSystemAvailable");
 				sql.append(" AND S.IS_AVAILABLE = '");
-				sql.append(isAvailable.booleanValue() ? "'Y'" : "'N'");
+				sql.append(isAvailable ? "'Y'" : "'N'");
 				sql.append("' ");
 			}
 			sql.append(" ) ");
 		}
 		sql.append(" ) ");
 		if (parameters.containsKey("loginName")) {
-			sql.append(" AND U.ACC_NAME like CONCAT('%',#{loginName},'%')");
+			sql.append(" AND U.LOGIN_NAME like CONCAT('%',#{loginName},'%')");
 		}
-		sql.append(" ORDER BY U.ACC_NAME,U.ID ");
+		sql.append(" ORDER BY U.LOGIN_NAME,U.USER_ID ");
 		log.debug("SQL ==> " + sql.toString());
 		return sql.toString();
 
@@ -137,15 +137,15 @@ public class RoleRUserSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT AU.ACC_NAME accName,AU.USER_NAME userName,AU.ID,AU.RESV_FLG resvFlg" +
+		sql.append("SELECT AU.LOGIN_NAME loginName,AU.USER_NAME userName,AU.USER_ID " +
                 ",TS.SYSTEM_NAME systemName  ");
 		sql.append(" FROM " + DBConstOfUserRole.TN_USER_INFO + " AU ");
 		sql.append(" ," + DBConstOfUserRole.TN_SYSTEM_INFO + " TS ");
 		sql.append(" WHERE  TS.SYSTEM_ID=AU.ORIGIN_OS_ID ");
-		sql.append(" AND  AU.ID  NOT IN (");
-		sql.append("SELECT U.ID ");
+		sql.append(" AND  AU.USER_ID  NOT IN (");
+		sql.append("SELECT U.USER_ID ");
 		sql.append(" FROM " + DBConstOfUserRole.TN_USER_INFO + " U ");
-		sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_R_ROLE + " UO ON U.ID = UO.USER_ID");
+		sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_USER_R_ROLE + " UO ON U.USER_ID = UO.USER_ID");
 		sql.append(" WHERE ");
 		// 【二选一】 Long roleId 角色ID / String roleCode 角色CODE编码
 		sql.append(" UO.ROLE_ID IN (");
@@ -193,10 +193,10 @@ public class RoleRUserSQLProvider {
 		}
 		sql.append("  )");
 		if (parameters.containsKey("userName")) {
-			sql.append(" AND AU.ACC_NAME like CONCAT('%',#{userName},'%')");
+			sql.append(" AND AU.LOGIN_NAME like CONCAT('%',#{userName},'%')");
 		}
 
-		sql.append(" ORDER BY AU.ACC_NAME,AU.ID ");
+		sql.append(" ORDER BY AU.LOGIN_NAME,AU.USER_ID ");
 		log.debug("SQL ==> " + sql.toString());
 		return sql.toString();
 
@@ -270,14 +270,14 @@ public class RoleRUserSQLProvider {
 		if (parameters.containsKey("isRoleAvailable") && parameters.get("isRoleAvailable") != null) {
 			Boolean isAvailable = (Boolean) parameters.get("isRoleAvailable");
 			sql.append(" AND IS_AVAILABLE = '");
-			sql.append(isAvailable.booleanValue() ? "Y" : "N");
+			sql.append(isAvailable ? "Y" : "N");
 			sql.append("' ");
 		}
 		sql.append(" ) ) ");
 		if (parameters.containsKey("userName")) {
-			sql.append(" AND AU.ACC_NAME like CONCAT('%',#{userName},'%')");
+			sql.append(" AND AU.LOGIN_NAME like CONCAT('%',#{userName},'%')");
 		}
-		sql.append(" ORDER BY AU.ACC_NAME,AU.ID ");
+		sql.append(" ORDER BY AU.LOGIN_NAME,AU.USER_ID ");
 		log.debug("SQL ==> " + sql.toString());
 		return sql.toString();
 	}
@@ -308,9 +308,9 @@ public class RoleRUserSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT AU.ACC_NAME accName,AU.USER_NAME userName,AU.ID,AU.RESV_FLG resvFlg   ");
+		sql.append("SELECT AU.LOGIN_NAME loginName,AU.USER_NAME userName,AU.USER_ID  ");
 		sql.append(" FROM " + DBConstOfUserRole.TN_USER_INFO + " AU ");
-		sql.append(" WHERE ID IN (");
+		sql.append(" WHERE USER_ID IN (");
 		sql.append(" SELECT USER_ID FROM " + DBConstOfUserRole.TN_USER_R_SYSTEM);
 		sql.append(" WHERE");
 		sql.append(" SYSTEM_ID = ( SELECT SYSTEM_ID FROM " + DBConstOfUserRole.TN_SYSTEM_INFO);
@@ -337,7 +337,7 @@ public class RoleRUserSQLProvider {
 			sql.append("' ");
 		}
 		sql.append("  )");
-		sql.append(" ORDER BY AU.ACC_NAME,AU.ID ");
+		sql.append(" ORDER BY AU.LOGIN_NAME,AU.USER_ID ");
 		log.debug("SQL ==> " + sql.toString());
 		return sql.toString();
 	}

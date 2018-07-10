@@ -89,7 +89,7 @@ public class RoleRMenuSQLProvider {
 		if (parameters.containsKey("isRoleAvailable") && parameters.get("isRoleAvailable") != null) {
 			Boolean isAvailable = (Boolean) parameters.get("isRoleAvailable");
 			sql.append(" AND R.IS_AVAILABLE = '");
-			sql.append(isAvailable.booleanValue() ? "Y" : "N");
+			sql.append(isAvailable ? "Y" : "N");
 			sql.append("' ");
 		}
 		sql.append(" ) ");
@@ -98,7 +98,7 @@ public class RoleRMenuSQLProvider {
 		if (parameters.containsKey("isMenuAvailable") && parameters.get("isMenuAvailable") != null) {
 			Boolean isAvailable = (Boolean) parameters.get("isMenuAvailable");
 			sql.append(" AND M.IS_AVAILABLE = '");
-			sql.append(isAvailable.booleanValue() ? "Y" : "N");
+			sql.append(isAvailable ? "Y" : "N");
 			sql.append("' ");
 		}
 		sql.append(" ORDER BY M.SYSTEM_ID,M.MENU_PID,M.SORT,M.MENU_ID,M.MENU_NAME ");

@@ -34,6 +34,15 @@ public interface CodeInfoMapper {
     @ResultType(value = CodeInfoBean.class)
     public List<CodeInfoBean> getCodeInfoByType(Map<String, Object> map);
 
+    /**
+     * 根据系统code、 公共代码code 获取公共代码配置
+     *
+     * @param parameter
+     * @return
+     */
+    @SelectProvider(method = "getCodeInfoListByCode", type = CodeInfoSQLProvider.class)
+    @ResultType(CodeInfoBean.class)
+    public List<CodeInfoBean> getCodeInfoListByCode(final Map<String, Object> parameter);
 
     @Insert("insert into " + DBConstOfCode.TN_CODE_INFO
             + " (code_code,code_name,code_type,code_order)"

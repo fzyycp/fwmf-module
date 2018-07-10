@@ -65,7 +65,7 @@ public class SystemServiceImpl implements SystemService {
         PageParam pageParam = PageParam.buildDefaultIns(parameters);
 
         Map<String, Object> param = new HashMap<>();
-        SystemInfoBean systemInfo = (SystemInfoBean) parameters.get("systemInfoBean");
+        SystemInfoBean systemInfo = (parameters != null) ? ((SystemInfoBean) parameters.get("systemInfoBean")) : null;
         if (systemInfo != null) {
             if (systemInfo.getSystemId() != null) {
                 param.put("systemId", systemInfo.getSystemId());
@@ -107,10 +107,10 @@ public class SystemServiceImpl implements SystemService {
         // 输入参数验证
         // 验证业务系统code是否存在
         boolean exist = this.isSystemInfoExist(systemCode, null);
-        AssertUtil.assertFalse(exist, "业务系统编码[%s]已存在(包含未启用状态)");
+        AssertUtil.assertFalse(exist, String.format("业务系统编码[%s]已存在(包含未启用状态)",systemCode));
         // 验证业务系统名称是否存在
         exist = this.isSystemInfoExistByName(systemName, null);
-        AssertUtil.assertFalse(exist, "业务系统名称[%s]已存在(包含未启用状态)");
+        AssertUtil.assertFalse(exist, String.format("业务系统名称[%s]已存在(包含未启用状态)",systemName));
 
         SystemInfoBean systemInfo = new SystemInfoBean();
         systemInfo.setSystemName(systemName);

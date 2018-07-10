@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * 菜单服务接口：根据业务系统来获取
  */
-public interface SystemMenuService {
+public interface SystemRMenuService {
 
 	/**
 	 * 根据业务系统编码获取<b><i>所有可用</i></b>的菜单列表

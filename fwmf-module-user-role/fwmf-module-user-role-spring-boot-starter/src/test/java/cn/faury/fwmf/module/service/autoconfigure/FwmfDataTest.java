@@ -5,6 +5,8 @@ import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;
 import org.junit.Test;
 
 public class FwmfDataTest {
+    public static final String algorithm = "PBEWithMD5AndDES";
+    public static final String salt = "OC5pSswBN";
 
     @Test
     public void jasyptPBEStringEncryptionTest(){
@@ -18,7 +20,7 @@ public class FwmfDataTest {
     @Test
     public void jasyptPBEStringDecryptionTest(){
         // 输入原文密码
-        String password = "4YUtqMernWOp419ALppM8w==";
+        String password = "JZkH5bu2/qQpVokeEyZbsmZ0bFuuBzlUnm7e54uKRJxbx2Ue9dW0kYvdY3y1JOXiWUqJGDNRiNfpUj8QzVl1KWMtXYmR8uAlUV0FB0hZ7sY=";
         //解密
         System.out.println(password + " : " + decrypt(password));
     }
@@ -26,16 +28,16 @@ public class FwmfDataTest {
     private String  encrypt(String password){
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         EnvironmentStringPBEConfig config = new EnvironmentStringPBEConfig();
-        config.setAlgorithm("PBEWithMD5AndDES");
-        config.setPassword("OC5pSswBN");
+        config.setAlgorithm(algorithm);
+        config.setPassword(salt);
         encryptor.setConfig(config);
         return encryptor.encrypt(password);
     }
     private String decrypt(String encPassword){
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         EnvironmentStringPBEConfig config = new EnvironmentStringPBEConfig();
-        config.setAlgorithm("PBEWithMD5AndDES");
-        config.setPassword("OC5pSswBN");
+        config.setAlgorithm(algorithm);
+        config.setPassword(salt);
         encryptor.setConfig(config);
         return encryptor.decrypt(encPassword);
     }

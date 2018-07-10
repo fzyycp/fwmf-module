@@ -79,15 +79,15 @@ public class UserGroupsSQLProvider {
         }
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append("SELECT U.ID userId,U.ACC_NAME loginName,U.USER_NAME userName" +
+        sql.append("SELECT U.ID userId,U.LOGIN_NAME loginName,U.USER_NAME userName" +
                 ",S.`SYSTEM_NAME` originOsName FROM "
                 + DBConstOfUserRole.TN_USER_INFO + " U ");
-        sql.append(" JOIN " + DBConstOfUserRole.TN_CDA_GROUP_USER + " GU ON U.ID=GU.USER_ID ");
+        sql.append(" JOIN " + DBConstOfUserRole.TN_CDA_GROUP_USER + " GU ON U.USER_ID=GU.USER_ID ");
         sql.append(" LEFT JOIN " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ON U.ORIGIN_OS_ID = S.SYSTEM_ID");
         sql.append(" WHERE ");
         sql.append(" GU.GROUP_ID = #{groupId,jdbcType=BIGINT} ");
 
-        sql.append(" ORDER BY U.ORIGIN_OS_ID,U.ID DESC");
+        sql.append(" ORDER BY U.ORIGIN_OS_ID,U.USER_ID DESC");
 
         log.debug("SQL ==> " + sql.toString());
         return sql.toString();
@@ -161,16 +161,16 @@ public class UserGroupsSQLProvider {
         }
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
-        sql.append("SELECT U.ID userId,U.ACC_NAME loginName,U.USER_NAME userName" +
+        sql.append("SELECT U.USER_ID userId,U.LOGIN_NAME loginName,U.USER_NAME userName" +
                 ",S.SYSTEM_ID originOsId ,S.SYSTEM_NAME originOsName FROM "
                 + DBConstOfUserRole.TN_USER_INFO + " U ");
         sql.append(" , " + DBConstOfUserRole.TN_SYSTEM_INFO + " S ");
         sql.append(" WHERE ");
         sql.append(" U.ORIGIN_OS_ID=S.SYSTEM_ID ");
         if (parameter.containsKey("loginName")) {
-            sql.append(" AND U.ACC_NAME LIKE CONCAT('%',#{loginName},'%')");
+            sql.append(" AND U.LOGIN_NAME LIKE CONCAT('%',#{loginName},'%')");
         }
-        sql.append(" AND ( U.ID IN ( ");
+        sql.append(" AND ( U.USER_ID IN ( ");
         sql.append(" SELECT US.USER_ID FROM " + DBConstOfUserRole.TN_USER_R_SYSTEM + " US WHERE US.SYSTEM_ID =(");
         sql.append(" SELECT TS.SYSTEM_ID FROM " + DBConstOfUserRole.TN_SYSTEM_INFO + " TS ");
         sql.append(" WHERE ");
@@ -195,12 +195,12 @@ public class UserGroupsSQLProvider {
         sql.append(" ) ");
         sql.append(" ) OR U.RESV_FLG = 3 )");
         if (parameter.get("groupId") != null) {
-            sql.append(" AND U.ID NOT IN ( ");
+            sql.append(" AND U.USER_ID NOT IN ( ");
             sql.append(" SELECT GU.USER_ID FROM " + DBConstOfUserRole.TN_CDA_GROUP_USER + " GU ");
             sql.append(" WHERE GU.GROUP_ID = #{groupId,jdbcType=BIGINT} ");
             sql.append(" )");
         }
-        sql.append(" ORDER BY U.ORIGIN_OS_ID,U.ID DESC");
+        sql.append(" ORDER BY U.ORIGIN_OS_ID,U.USER_ID DESC");
 
         log.debug("SQL ==> " + sql.toString());
         return sql.toString();
