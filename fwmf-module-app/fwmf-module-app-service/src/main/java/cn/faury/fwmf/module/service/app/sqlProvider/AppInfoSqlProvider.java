@@ -126,7 +126,7 @@ public class AppInfoSqlProvider {
 	 */
 	public static String getAppInfoList(Map<String, Object> parameters) {
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT APP_ID AS appId,APP_CODE AS appCode,APP_NAME AS appName,APP_OS AS appOS,SYSTEM_ID AS systemId,"
+		sql.append("SELECT APP_ID AS appId,APP_CODE AS appCode,APP_NAME AS appName,APP_OS AS appOS,s.SYSTEM_ID AS systemId,"
 		        + "app.IS_AVAILABLE AS isAvailable,s.`SYSTEM_CODE` AS systemCode,s.`SYSTEM_NAME` AS systemName,"
 		        + "REJECT_GUEST_USER rejectGuestUser ,REJECT_SHOPPING_USER rejectShoppingUser,ALLOW_BACKGROUND_USER allowBackgroundUser,TRACK_ID trackId,SERVER_DOMAIN serverDomain"
 		        + "  FROM "
@@ -164,7 +164,7 @@ public class AppInfoSqlProvider {
 				sql.append(AND).append("app.`IS_AVAILABLE` = '").append(isAppAvailable.booleanValue() ? "Y" : "N")
 				        .append("'");
 			}
-			sql.append(ORDER_BY).append("APP_NAME, APP_CODE ASC,IS_AVAILABLE DESC");
+			sql.append(ORDER_BY).append("APP_NAME, APP_CODE ASC,app.IS_AVAILABLE DESC");
 		}
 
 		return sql.toString();

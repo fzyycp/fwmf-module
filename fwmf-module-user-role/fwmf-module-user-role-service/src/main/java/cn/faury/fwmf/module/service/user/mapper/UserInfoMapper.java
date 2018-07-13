@@ -77,8 +77,8 @@ public interface UserInfoMapper {
      * @return 用户ID
      */
     @Insert("INSERT INTO " + DBConstOfUserRole.TN_USER_INFO
-            + " (LOGIN_NAME,USER_NAME,PASSWORD,EFCT_YMD,EXPR_YMD,ORIGIN_OS_ID,CREATE_PERSON,UPDATE_PERSON)"
-            + "  VALUES(#{loginName},#{userName},#{password},#{efctYmd},#{exprYmd},#{originOsId},#{createPerson},#{createPerson}) ")
+            + " (LOGIN_NAME,USER_NAME,PASSWORD,EFCT_YMD,EXPR_YMD,ORIGIN_OS_ID,USER_TYPE,CREATE_PERSON,UPDATE_PERSON)"
+            + "  VALUES(#{loginName},#{userName},#{password},#{efctYmd},#{exprYmd},#{originOsId},#{userType},#{createPerson},#{createPerson}) ")
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     Long insertUserInfo(UserInfoBean bean);
 

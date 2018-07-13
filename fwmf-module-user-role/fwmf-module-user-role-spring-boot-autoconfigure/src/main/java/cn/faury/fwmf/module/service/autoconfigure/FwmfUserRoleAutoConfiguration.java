@@ -2,7 +2,6 @@ package cn.faury.fwmf.module.service.autoconfigure;
 
 import cn.faury.fdk.mybatis.autoconfigure.FdkMybatisAutoConfiguration;
 import cn.faury.fdk.mybatis.dao.CommonDao;
-import cn.faury.fdk.shiro.autoconfigure.FdkShiroAutoConfiguration;
 import cn.faury.fwmf.module.api.role.service.RoleService;
 import cn.faury.fwmf.module.api.user.service.*;
 import cn.faury.fwmf.module.service.role.service.RoleServiceImpl;
@@ -18,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureAfter(FdkMybatisAutoConfiguration.class)
-@AutoConfigureBefore(FdkShiroAutoConfiguration.class)
+@AutoConfigureBefore(name ="cn.faury.fdk.shiro.autoconfigure.FdkShiroAutoConfiguration")
 public class FwmfUserRoleAutoConfiguration {
 
     /**

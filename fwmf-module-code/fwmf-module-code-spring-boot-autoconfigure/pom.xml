@@ -11,13 +11,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.faury.fwmf.module</groupId>
-    <artifactId>fwmf-module-app-spring-boot-configure</artifactId>
+    <artifactId>fwmf-module-code-spring-boot-autoconfigure</artifactId>
     <version>0.0.1</version>
 
     <properties>
-        <fwmf.module.app.service.version>0.0.1</fwmf.module.app.service.version>
+        <fwmf.module.code.service.version>0.0.1</fwmf.module.code.service.version>
         <fwmf.mybatis.spring.boot.autoconfigure.version>0.0.1</fwmf.mybatis.spring.boot.autoconfigure.version>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -25,10 +26,11 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>cn.faury.fwmf.module</groupId>
-            <artifactId>fwmf-module-app-service</artifactId>
-            <version>${fwmf.module.app.service.version}</version>
+            <artifactId>fwmf-module-code-service</artifactId>
+            <version>${fwmf.module.code.service.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -38,5 +40,4 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-
 </project>

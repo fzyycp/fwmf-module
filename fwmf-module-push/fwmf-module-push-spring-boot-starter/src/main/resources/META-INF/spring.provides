@@ -1,1 +1,1 @@
-provides: fwmf-module-push-spring-boot-configure,fwmf-module-push-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis
+provides: fwmf-module-push-spring-boot-autoconfigure,fwmf-module-push-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis

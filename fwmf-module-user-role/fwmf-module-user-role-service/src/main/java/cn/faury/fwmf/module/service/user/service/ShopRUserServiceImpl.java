@@ -10,6 +10,7 @@ import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.user.bean.ShopRUserBean;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
+import cn.faury.fwmf.module.api.user.config.UserType;
 import cn.faury.fwmf.module.api.user.service.ShopRUserService;
 import cn.faury.fwmf.module.api.user.service.UserService;
 import cn.faury.fwmf.module.service.user.mapper.ShopRUserMapper;
@@ -217,6 +218,7 @@ public class ShopRUserServiceImpl implements ShopRUserService {
         userInfoBean.setExprYmd(DateUtil.parse("2049-12-31"));
         userInfoBean.setOriginOsId(bean.getSystemId());
         userInfoBean.setCreatePerson(bean.getCreatePerson());
+        userInfoBean.setUserType(UserType.SYSTEM.getValue());
         userInfoBean.setUpdatePerson(StringUtil.emptyDefault(bean.getUpdatePerson(), bean.getCreatePerson()));
 
 

@@ -91,6 +91,7 @@ public interface UserService<T extends UserInfoBean, P extends UserPasswordBean>
         userInfo.setEfctYmd(new Date());
         userInfo.setPassword(password);
         userInfo.setOriginOsId(systemId);
+        userInfo.setUserType(userType.getValue());
         userInfo.setCreatePerson(createPerson);
         userInfo.setUpdatePerson(StringUtil.emptyDefault(createPerson, updatePerson));
         return insertUserInfo(userInfo);

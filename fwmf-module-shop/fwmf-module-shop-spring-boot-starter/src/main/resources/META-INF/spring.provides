@@ -1,1 +1,1 @@
-provides: fwmf-module-shop-spring-boot-configure,fwmf-module-shop-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis
+provides: fwmf-module-shop-spring-boot-autoconfigure,fwmf-module-shop-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis

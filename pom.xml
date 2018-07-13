@@ -14,52 +14,52 @@
     <modules>
         <module>fwmf-module-app/fwmf-module-app-api</module>
         <module>fwmf-module-app/fwmf-module-app-service</module>
-        <module>fwmf-module-app/fwmf-module-app-spring-boot-configure</module>
+        <module>fwmf-module-app/fwmf-module-app-spring-boot-autoconfigure</module>
         <module>fwmf-module-app/fwmf-module-app-spring-boot-starter</module>
 
         <module>fwmf-module-area/fwmf-module-area-api</module>
         <module>fwmf-module-area/fwmf-module-area-service</module>
-        <module>fwmf-module-area/fwmf-module-area-spring-boot-configure</module>
+        <module>fwmf-module-area/fwmf-module-area-spring-boot-autoconfigure</module>
         <module>fwmf-module-area/fwmf-module-area-spring-boot-starter</module>
 
         <module>fwmf-module-category/fwmf-module-category-api</module>
         <module>fwmf-module-category/fwmf-module-category-service</module>
-        <module>fwmf-module-category/fwmf-module-category-spring-boot-configure</module>
+        <module>fwmf-module-category/fwmf-module-category-spring-boot-autoconfigure</module>
         <module>fwmf-module-category/fwmf-module-category-spring-boot-starter</module>
 
         <module>fwmf-module-code/fwmf-module-code-api</module>
         <module>fwmf-module-code/fwmf-module-code-service</module>
-        <module>fwmf-module-code/fwmf-module-code-spring-boot-configure</module>
+        <module>fwmf-module-code/fwmf-module-code-spring-boot-autoconfigure</module>
         <module>fwmf-module-code/fwmf-module-code-spring-boot-starter</module>
 
         <module>fwmf-module-menu/fwmf-module-menu-api</module>
         <module>fwmf-module-menu/fwmf-module-menu-service</module>
-        <module>fwmf-module-menu/fwmf-module-menu-spring-boot-configure</module>
+        <module>fwmf-module-menu/fwmf-module-menu-spring-boot-autoconfigure</module>
         <module>fwmf-module-menu/fwmf-module-menu-spring-boot-starter</module>
 
         <module>fwmf-module-push/fwmf-module-push-api</module>
         <module>fwmf-module-push/fwmf-module-push-service</module>
-        <module>fwmf-module-push/fwmf-module-push-spring-boot-configure</module>
+        <module>fwmf-module-push/fwmf-module-push-spring-boot-autoconfigure</module>
         <module>fwmf-module-push/fwmf-module-push-spring-boot-starter</module>
 
         <module>fwmf-module-shop/fwmf-module-shop-api</module>
         <module>fwmf-module-shop/fwmf-module-shop-service</module>
-        <module>fwmf-module-shop/fwmf-module-shop-spring-boot-configure</module>
+        <module>fwmf-module-shop/fwmf-module-shop-spring-boot-autoconfigure</module>
         <module>fwmf-module-shop/fwmf-module-shop-spring-boot-starter</module>
 
         <module>fwmf-module-system/fwmf-module-system-api</module>
         <module>fwmf-module-system/fwmf-module-system-service</module>
-        <module>fwmf-module-system/fwmf-module-system-spring-boot-configure</module>
+        <module>fwmf-module-system/fwmf-module-system-spring-boot-autoconfigure</module>
         <module>fwmf-module-system/fwmf-module-system-spring-boot-starter</module>
 
         <module>fwmf-module-systemconfig/fwmf-module-systemconfig-api</module>
         <module>fwmf-module-systemconfig/fwmf-module-systemconfig-service</module>
-        <module>fwmf-module-systemconfig/fwmf-module-systemconfig-spring-boot-configure</module>
+        <module>fwmf-module-systemconfig/fwmf-module-systemconfig-spring-boot-autoconfigure</module>
         <module>fwmf-module-systemconfig/fwmf-module-systemconfig-spring-boot-starter</module>
 
         <module>fwmf-module-user-role/fwmf-module-user-role-api</module>
         <module>fwmf-module-user-role/fwmf-module-user-role-service</module>
-        <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-configure</module>
+        <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-autoconfigure</module>
         <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-starter</module>
     </modules>
 

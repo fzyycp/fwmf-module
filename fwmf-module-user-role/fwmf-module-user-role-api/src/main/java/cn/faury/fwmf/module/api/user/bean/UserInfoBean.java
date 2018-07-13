@@ -1,6 +1,7 @@
 package cn.faury.fwmf.module.api.user.bean;
 
 import cn.faury.fdk.common.utils.JsonUtil;
+import cn.faury.fwmf.module.api.user.config.UserType;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -50,6 +51,11 @@ public class UserInfoBean implements Serializable {
      * 所属系统ID
      */
     private Long originOsId;
+
+    /**
+     * 用户类型
+     */
+    private String userType;
 
     /**
      * 是否启用：1启用，0禁用
@@ -134,6 +140,24 @@ public class UserInfoBean implements Serializable {
     public UserInfoBean setOriginOsId(Long originOsId) {
         this.originOsId = originOsId;
         return this;
+    }
+
+    /**
+     * 获取userType
+     *
+     * @return userType
+     */
+    public String getUserType() {
+        return userType;
+    }
+
+    /**
+     * 设置userType
+     *
+     * @param userType 值
+     */
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getPassword() {

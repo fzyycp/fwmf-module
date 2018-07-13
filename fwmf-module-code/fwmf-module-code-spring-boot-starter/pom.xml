@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>cn.faury.fwmf.module</groupId>
-            <artifactId>fwmf-module-code-spring-boot-configure</artifactId>
+            <artifactId>fwmf-module-code-spring-boot-autoconfigure</artifactId>
             <version>${fwmf.module.code.spring.boot.autoconfigure.version}</version>
         </dependency>
         <dependency>

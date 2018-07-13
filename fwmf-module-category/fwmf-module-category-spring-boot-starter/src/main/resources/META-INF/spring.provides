@@ -1,1 +1,1 @@
-provides: fwmf-module-category-spring-boot-configure,fwmf-module-category-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis
+provides: fwmf-module-category-spring-boot-autoconfigure,fwmf-module-category-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis

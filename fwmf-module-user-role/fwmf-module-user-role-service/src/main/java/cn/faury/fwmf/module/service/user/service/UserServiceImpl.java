@@ -10,6 +10,7 @@ import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.role.service.RoleService;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.bean.UserPasswordBean;
+import cn.faury.fwmf.module.api.user.config.UserType;
 import cn.faury.fwmf.module.api.user.service.UserService;
 import cn.faury.fwmf.module.service.user.mapper.UserInfoMapper;
 import org.springframework.transaction.annotation.Transactional;
@@ -112,6 +113,8 @@ public class UserServiceImpl implements UserService<UserInfoBean,UserPasswordBea
         AssertUtil.assertNotEmpty(userInfoBean.getLoginName(), "用户姓名不可以为空");
         AssertUtil.assertNotEmpty(userInfoBean.getUserName(), "用户姓名不可以为空");
         AssertUtil.assertNotNull(userInfoBean.getEfctYmd(), "启用日期不可以为空");
+        AssertUtil.assertNotNull(userInfoBean.getUserType(), "用户类型不可以为空");
+        AssertUtil.assertNotNull(UserType.parse(userInfoBean.getUserType()),"用户类型不正确");
         if (userInfoBean.getExprYmd() == null) {
             userInfoBean.setExprYmd(DateUtil.parse("2049-12-31"));
         }
