@@ -11,7 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.faury.fwmf.module</groupId>
-    <artifactId>fwmf-module-system-spring-boot-web</artifactId>
+    <artifactId>fwmf-module-system-web</artifactId>
     <version>0.0.1</version>
 
     <properties>
@@ -20,19 +20,21 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <optional>true</optional>
+            <groupId>cn.faury.fwmf.module</groupId>
+            <artifactId>fwmf-module-system-api</artifactId>
+            <version>${fwmf.module.system.api.version}</version>
         </dependency>
+        <!--Web依赖-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.0.7.RELEASE</version>
+        </dependency>
+        <!--swagger接口文档依赖-->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.14</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.faury.fwmf.module</groupId>
-            <artifactId>fwmf-module-system-api</artifactId>
-            <version>${fwmf.module.system.api.version}</version>
         </dependency>
     </dependencies>
 

@@ -12,7 +12,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +23,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/web/system")
 @Api(value = "系统信息", tags = {"系统信息接口"})
-@ConditionalOnClass({RestController.class, RequestMapping.class})
 public class SystemController {
 
     @Autowired(required = false)

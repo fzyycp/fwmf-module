@@ -52,7 +52,7 @@
         <module>fwmf-module-system/fwmf-module-system-service</module>
         <module>fwmf-module-system/fwmf-module-system-spring-boot-autoconfigure</module>
         <module>fwmf-module-system/fwmf-module-system-spring-boot-starter</module>
-        <module>fwmf-module-system/fwmf-module-system-spring-boot-web</module>
+        <module>fwmf-module-system/fwmf-module-system-web</module>
 
         <module>fwmf-module-systemconfig/fwmf-module-systemconfig-api</module>
         <module>fwmf-module-systemconfig/fwmf-module-systemconfig-service</module>
@@ -63,7 +63,7 @@
         <module>fwmf-module-user-role/fwmf-module-user-role-service</module>
         <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-autoconfigure</module>
         <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-starter</module>
-        <module>fwmf-module-menu/fwmf-module-menu-spring-boot-web</module>
+        <module>fwmf-module-menu/fwmf-module-menu-web</module>
     </modules>
 
     <parent>
