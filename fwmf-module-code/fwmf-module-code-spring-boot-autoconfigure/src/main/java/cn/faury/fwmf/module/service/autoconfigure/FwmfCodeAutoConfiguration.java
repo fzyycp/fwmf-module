@@ -21,7 +21,7 @@ public class FwmfCodeAutoConfiguration {
      * 字典服务
      */
     @Bean
-    public CodeInfoService roleService(CommonDao commonDao) {
+    public CodeInfoService codeInfoService(CommonDao commonDao) {
         return new CodeInfoServiceImpl(commonDao);
     }
 }

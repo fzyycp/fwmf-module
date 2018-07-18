@@ -21,7 +21,7 @@ public class FwmfPushAutoConfiguration {
      * 菜单服务
      */
     @Bean
-    public PushService roleService(CommonDao commonDao) {
+    public PushService pushService(CommonDao commonDao) {
         return new PushServiceImpl(commonDao);
     }
 }

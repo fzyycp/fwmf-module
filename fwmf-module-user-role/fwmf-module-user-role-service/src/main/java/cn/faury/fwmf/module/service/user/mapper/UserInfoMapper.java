@@ -41,8 +41,8 @@ public interface UserInfoMapper {
      * @return 用户信息
      */
     @Select("SELECT USER_ID userId,LOGIN_NAME loginName,USER_NAME userName,`PASSWORD` `password`,EFCT_YMD efctYmd," +
-            "       EXPR_YMD exprYmd,INS_TSTMP insTstmp,ORIGIN_OS_ID originOsId,IS_ENABLE isEnable," +
-            "       CREATE_PERSON createPerson,UPDATE_PERSON updatePerson,UPDATE_TIME updateTime " +
+            "       EXPR_YMD exprYmd,INS_TSTMP insTstmp,ORIGIN_OS_ID originOsId,USER_TYPE userType,IS_ENABLE isEnable," +
+            "       IS_DELETE isDelete,CREATE_PERSON createPerson,UPDATE_PERSON updatePerson,UPDATE_TIME updateTime " +
             "  FROM " + DBConstOfUserRole.TN_USER_INFO
             + " WHERE IS_DELETE='N' AND LOGIN_NAME = #{loginName,jdbcType=VARCHAR} ")
     @ResultType(UserInfoBean.class)

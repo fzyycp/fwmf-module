@@ -21,7 +21,7 @@ public class FwmfAreaAutoConfiguration {
      * 字典服务
      */
     @Bean
-    public AreaService roleService(CommonDao commonDao) {
+    public AreaService areaService(CommonDao commonDao) {
         return new AreaServiceImpl(commonDao);
     }
 }

@@ -58,9 +58,14 @@ public class UserInfoBean implements Serializable {
     private String userType;
 
     /**
-     * 是否启用：1启用，0禁用
+     * 是否启用：Y启用，N禁用
      */
     private String isEnable;
+
+    /**
+     * 是否删除：Y 是，N 否
+     */
+    private String isDelete;
 
     /**
      * 创建人姓名
@@ -176,6 +181,24 @@ public class UserInfoBean implements Serializable {
     public UserInfoBean setIsEnable(String isEnable) {
         this.isEnable = isEnable;
         return this;
+    }
+
+    /**
+     * 获取isDelete
+     *
+     * @return isDelete
+     */
+    public String getIsDelete() {
+        return isDelete;
+    }
+
+    /**
+     * 设置isDelete
+     *
+     * @param isDelete 值
+     */
+    public void setIsDelete(String isDelete) {
+        this.isDelete = isDelete;
     }
 
     public String getCreatePerson() {
