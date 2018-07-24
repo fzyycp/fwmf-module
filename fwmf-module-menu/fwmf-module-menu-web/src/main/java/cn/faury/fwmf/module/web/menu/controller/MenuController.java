@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/web/menu")
+@RequestMapping("/fwmf/config/menu")
 @Api(value = "菜单", tags = {"菜单信息接口"})
 public class MenuController {
 

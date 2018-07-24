@@ -12,69 +12,63 @@ import java.util.Map;
 public class ShopInfoSqlProvider {
 
     /**
-     * 日志记录器
-     */
-    private static Logger log = LoggerFactory.getLogger(ShopInfoSqlProvider.class);
-
-    /**
      * 通过条件查询商店信息
      */
     public static String queryShopInfo(Map<String, Object> parameter) {
         // SQL拼装
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT DISTINCT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName,S.`SHOPKEEPER_ID` shopKeeperId,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle,");
-        sql.append(" S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState,S.`ORIGIN_SYSTEM` originSystem,"
-                + "S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime,S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime,S.`DEL_FLAG` delFlag");
-        sql.append(" FROM " + DBConstOfShop.TN_PLATFORM_SHOP_INFO + " S");
-        sql.append(" left join " + DBConstOfShop.TN_PLATFORM_SHOP_R_SYSTEM + " M ON S.SHOP_ID = M.SHOP_ID ");
-        if (parameter.containsKey("shopKeeperName")) {
-            sql.append(" left join " + DBConstOfShop.TN_USER_INFO + " U ON S.SHOPKEEPER_ID = U.ID ");
-        }
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" SELECT DISTINCT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName,S.`SHOPKEEPER_ID` shopKeeperId" +
+                ",U.LOGIN_NAME shopKeeperName,U.USER_NAME shopKeeperUserName,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle" +
+                ",S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState,S.`ORIGIN_SYSTEM` originSystem" +
+                ",S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime,S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime" +
+                ",S.`DEL_FLAG` delFlag");
+        sql.append(" FROM " + DBConstOfShop.TN_SHOP_INFO + " S");
+        sql.append(" left join " + DBConstOfShop.TN_SHOP_R_SYSTEM + " M ON S.SHOP_ID = M.SHOP_ID ");
+        sql.append(" left join " + DBConstOfShop.TN_USER_INFO + " U ON S.SHOPKEEPER_ID = U.USER_ID ");
         sql.append(" WHERE ");
         sql.append(" DEL_FLAG = 'N' ");
 
-        if (parameter.containsKey("shopName")) {
+        if (parameter.get("shopName") != null && StringUtil.isNotEmpty((String) parameter.get("shopName"))) {
             sql.append(" AND S.SHOP_NAME LIKE CONCAT('%',#{shopName},'%') ");
         }
-        if (parameter.containsKey("shopState")) {
+        if (parameter.get("shopState") != null && StringUtil.isNotEmpty((String) parameter.get("shopState"))) {
             sql.append(" AND S.SHOP_STATE = #{shopState}");
         }
 
-        if (parameter.containsKey("systemId")) {
+        if (parameter.get("systemId") != null) {
             sql.append(" AND M.SYSTEM_ID = #{systemId}");
         }
-        if (parameter.containsKey("systemCode")) {
+        if (parameter.get("systemCode") != null && StringUtil.isNotEmpty((String) parameter.get("systemCode"))) {
             sql.append(" AND M.SYSTEM_ID = (SELECT SYSTEM_ID FROM " + DBConstOfShop.TN_SYSTEM_INFO
                     + " WHERE `SYSTEM_CODE` = #{systemCode}) AND S.SHOP_STATE = '1' ");
         }
-        if (parameter.containsKey("shopKeeperName")) {
+        if (parameter.get("shopKeeperName") != null && StringUtil.isNotEmpty((String) parameter.get("shopKeeperName"))) {
             sql.append(" AND U.USER_NAME LIKE CONCAT('%',#{shopKeeperName},'%')  ");
         }
-        if (parameter.containsKey("startTime")) {
+        if (parameter.get("startTime") != null && StringUtil.isNotEmpty((String) parameter.get("startTime"))) {
             sql.append(" AND S.CREATE_TIME >= #{startTime}");
         }
-        if (parameter.containsKey("endTime")) {
+        if (parameter.get("endTime") != null && StringUtil.isNotEmpty((String) parameter.get("endTime"))) {
             sql.append(" AND S.CREATE_TIME <= #{endTime}");
         }
-        if (parameter.containsKey("shopIds")) {
+        if (parameter.get("shopIds") != null) {
             sql.append(" AND S.SHOP_ID IN (");
             List<Long> shopIds = (List<Long>) parameter.get("shopIds");
             if (shopIds != null) {
                 if (shopIds.size() > 0) {
                     for (int i = 0; i < shopIds.size(); i++) {
-                        sql.append(" #{shopIds[" + i + "]},");
+                        sql.append(" #{shopIds[").append(i).append("]},");
                     }
                 }
             }
             sql.deleteCharAt(sql.length() - 1);
             sql.append(" )");
         }
-        if (parameter.containsKey("shopId")) {
+        if (parameter.get("shopId") != null) {
             sql.append(" AND S.SHOP_ID = #{shopId}");
         }
 
-        sql.append(" ORDER BY S.SHOP_STATE ASC,S.`SHOP_NAME` ASC");
-        log.debug("SQL ==> " + sql.toString());
+        sql.append(" ORDER BY S.SHOP_STATE DESC,S.`SHOP_NAME` ASC");
         return sql.toString();
     }
 
@@ -83,21 +77,24 @@ public class ShopInfoSqlProvider {
      */
     public static String getShopInfoById(Long shopId) {
         // SQL拼装
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName,U.`LOGIN_NAME` shopKeeperName,U.`USER_NAME` shopKeeperUserName,S.`SHOPKEEPER_ID` shopKeeperId,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle,");
-        sql.append(" S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState,S.`ORIGIN_SYSTEM` originSystem,S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime,S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime,S.`DEL_FLAG` delFlag");
-        sql.append(" FROM " + DBConstOfShop.TN_PLATFORM_SHOP_INFO + " S ");
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" SELECT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName" +
+                ",U.`LOGIN_NAME` shopKeeperName,U.`USER_NAME` shopKeeperUserName" +
+                ",S.`SHOPKEEPER_ID` shopKeeperId,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle" +
+                ",S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState" +
+                ",S.`ORIGIN_SYSTEM` originSystem,S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime" +
+                ",S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime,S.`DEL_FLAG` delFlag");
+        sql.append(" FROM " + DBConstOfShop.TN_SHOP_INFO + " S ");
         sql.append(" left join " + DBConstOfShop.TN_USER_INFO + " U ON S.SHOPKEEPER_ID = U.USER_ID ");
         sql.append(" WHERE ");
         sql.append(" SHOP_ID = #{shopId} ");
 
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
     public static String getShopInfoByName(Map<String, Object> parameter) {
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT COUNT(SHOP_ID) FROM " + DBConstOfShop.TN_PLATFORM_SHOP_INFO);
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" SELECT COUNT(SHOP_ID) FROM " + DBConstOfShop.TN_SHOP_INFO);
         sql.append(" WHERE ");
         if (parameter.containsKey("shopName")) {
             sql.append(" SHOP_NAME = #{shopName} ");
@@ -108,7 +105,6 @@ public class ShopInfoSqlProvider {
         if (parameter.containsKey("shopId")) {
             sql.append(" AND SHOP_ID != #{shopId} ");
         }
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
@@ -116,9 +112,12 @@ public class ShopInfoSqlProvider {
      * 插入保存商店信息
      */
     public static String insertShopInfo(ShopInfoBean bean) {
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" INSERT INTO " + DBConstOfShop.TN_PLATFORM_SHOP_INFO);
-        sql.append(" (`SHOP_NAME`, `SHORT_NAME`, `SHOPKEEPER_ID`, `ALLOCAT_RATIO`, `PAY_STYLE`, `SHOP_STATE`, `DEL_FLAG`,`CREATE_PERSON`,`CREATE_TIME`,`ORIGIN_SYSTEM`,UPDATE_TIME");
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" INSERT INTO " + DBConstOfShop.TN_SHOP_INFO);
+        sql.append(" (`SHOP_NAME`, `SHORT_NAME`, `SHOPKEEPER_ID`, `ALLOCAT_RATIO`, `PAY_STYLE`,`CREATE_PERSON`,`ORIGIN_SYSTEM`");
+        if (StringUtil.isNotEmpty(bean.getShopState())) {
+            sql.append(", `SHOP_STATE`");
+        }
         if (StringUtil.isNotEmpty(bean.getAreaCode())) {
             sql.append(", `AREA_CODE`");
         }
@@ -128,10 +127,22 @@ public class ShopInfoSqlProvider {
         if (StringUtil.isNotEmpty(bean.getRemark())) {
             sql.append(", `REMARK`");
         }
+        if (bean.getCreateTime() != null) {
+            sql.append(", `CREATE_TIME`");
+        }
+        if (bean.getUpdateTime() != null) {
+            sql.append(", `UPDATE_TIME`");
+        }
+        if (StringUtil.isNotEmpty(bean.getDelFlag())) {
+            sql.append(", `DEL_FLAG`");
+        }
 
         sql.append(" )");
         sql.append(" VALUES ");
-        sql.append("( #{shopName},#{shortName},#{shopKeeperId},#{allocatRatio},#{payStyle},#{shopState},#{delFlag},#{createPerson},now(),#{originSystem},now()");
+        sql.append("( #{shopName},#{shortName},#{shopKeeperId},#{allocatRatio},#{payStyle},#{createPerson},#{originSystem}");
+        if (StringUtil.isNotEmpty(bean.getShopState())) {
+            sql.append(", #{shopState}");
+        }
         if (StringUtil.isNotEmpty(bean.getAreaCode())) {
             sql.append(", #{areaCode}");
         }
@@ -141,8 +152,16 @@ public class ShopInfoSqlProvider {
         if (StringUtil.isNotEmpty(bean.getRemark())) {
             sql.append(", #{remark}");
         }
+        if (bean.getCreateTime() != null) {
+            sql.append(", #{createTime}");
+        }
+        if (bean.getUpdateTime() != null) {
+            sql.append(", #{updateTime}");
+        }
+        if (StringUtil.isNotEmpty(bean.getDelFlag())) {
+            sql.append(", #{delFlag}");
+        }
         sql.append(" )");
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
@@ -150,8 +169,8 @@ public class ShopInfoSqlProvider {
      * 更新商店信息
      */
     public static String updateShopInfo(Map<String, Object> parameter) {
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" UPDATE " + DBConstOfShop.TN_PLATFORM_SHOP_INFO);
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" UPDATE " + DBConstOfShop.TN_SHOP_INFO);
         sql.append(" SET ");
         sql.append(" UPDATE_TIME = now() ,");
         if (parameter.containsKey("updatePerson")) {
@@ -186,7 +205,6 @@ public class ShopInfoSqlProvider {
         if (parameter.containsKey("shopId")) {
             sql.append(" SHOP_ID = #{shopId} ");
         }
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
@@ -195,8 +213,8 @@ public class ShopInfoSqlProvider {
      */
     @SuppressWarnings("unchecked")
     public static String deleteShopInfo(Map<String, Object> parameter) {
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" UPDATE " + DBConstOfShop.TN_PLATFORM_SHOP_INFO);
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" UPDATE " + DBConstOfShop.TN_SHOP_INFO);
         sql.append(" SET ");
         sql.append(" DEL_FLAG = 'Y' ");
         sql.append(" WHERE SHOP_ID IN (");
@@ -210,14 +228,13 @@ public class ShopInfoSqlProvider {
         }
         sql.deleteCharAt(sql.length() - 1);
         sql.append(" )");
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
     @SuppressWarnings("unchecked")
     public static String updateShopState(Map<String, Object> parameter) {
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" UPDATE " + DBConstOfShop.TN_PLATFORM_SHOP_INFO);
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" UPDATE " + DBConstOfShop.TN_SHOP_INFO);
         sql.append(" SET ");
         sql.append(" SHOP_STATE = #{shopState} ");
         sql.append(" WHERE SHOP_ID IN (");
@@ -231,7 +248,6 @@ public class ShopInfoSqlProvider {
         }
         sql.deleteCharAt(sql.length() - 1);
         sql.append(" )");
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
@@ -239,10 +255,9 @@ public class ShopInfoSqlProvider {
      * 查询商店授权系统数量
      */
     public static String getShopRSystemCounts(Map<String, Object> parameter) {
-        StringBuffer sql = new StringBuffer(128);
-        sql.append("SELECT COUNT(SYSTEM_ID) FROM " + DBConstOfShop.TN_PLATFORM_SHOP_R_SYSTEM
+        StringBuilder sql = new StringBuilder(128);
+        sql.append("SELECT COUNT(SYSTEM_ID) FROM " + DBConstOfShop.TN_SHOP_R_SYSTEM
                 + " where SHOP_ID = #{shopId}");
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
@@ -250,10 +265,9 @@ public class ShopInfoSqlProvider {
      * 查询商店授权App数量
      */
     public static String getShopRAppCounts(Map<String, Object> parameter) {
-        StringBuffer sql = new StringBuffer(128);
+        StringBuilder sql = new StringBuilder(128);
         sql.append("SELECT COUNT(APP_ID) FROM " + DBConstOfShop.TN_SHOP_R_APP
                 + " where SHOP_ID = #{shopId}");
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
@@ -261,28 +275,26 @@ public class ShopInfoSqlProvider {
      * 查询商店自建用户数量
      */
     public static String getShopRUserSelfCreateCounts(Map<String, Object> parameter) {
-        StringBuffer sql = new StringBuffer(128);
-        sql.append(" SELECT COUNT(SHOP_USER_ID) FROM " + DBConstOfShop.TN_PLATFORM_SHOP_USER_INFO);
+        StringBuilder sql = new StringBuilder(128);
+        sql.append(" SELECT COUNT(SHOP_USER_ID) FROM " + DBConstOfShop.TN_SHOP_USER_INFO);
         sql.append(" WHERE SHOP_ID = #{shopId}");
         sql.append(" AND SHOP_USER_ID NOT IN (");
-        sql.append(" select SHOPKEEPER_ID from " + DBConstOfShop.TN_PLATFORM_SHOP_INFO);
+        sql.append(" select SHOPKEEPER_ID from " + DBConstOfShop.TN_SHOP_INFO);
         sql.append(" WHERE SHOP_ID = #{shopId})");
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 
     public static String getShopInfoUnRSystem() {
-        StringBuffer sql = new StringBuffer(128);
+        StringBuilder sql = new StringBuilder(128);
         sql.append(" SELECT DISTINCT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName,S.`SHOPKEEPER_ID` shopKeeperId,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle,");
         sql.append(" S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState,S.`ORIGIN_SYSTEM` originSystem,S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime,S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime,S.`DEL_FLAG` delFlag");
-        sql.append(" FROM " + DBConstOfShop.TN_PLATFORM_SHOP_INFO + " S");
+        sql.append(" FROM " + DBConstOfShop.TN_SHOP_INFO + " S");
         sql.append(" WHERE ");
         sql.append(" DEL_FLAG = 'N' ");
         sql.append(" AND SHOP_ID not in ( ");
-        sql.append(" SELECT DISTINCT SHOP_ID FROM " + DBConstOfShop.TN_PLATFORM_SHOP_R_SYSTEM);
+        sql.append(" SELECT DISTINCT SHOP_ID FROM " + DBConstOfShop.TN_SHOP_R_SYSTEM);
         sql.append(" )");
         sql.append(" ORDER BY S.SHOP_STATE ASC,S.`SHOP_NAME` ASC");
-        log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
 

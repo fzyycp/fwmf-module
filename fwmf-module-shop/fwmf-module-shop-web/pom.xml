@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fwmf-module</artifactId>
+        <groupId>cn.faury.fwmf</groupId>
+        <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.faury.fwmf.module</groupId>
+    <artifactId>fwmf-module-shop-web</artifactId>
+    <version>0.0.1</version>
+    <properties>
+        <fwmf.module.shop.api.version>0.0.1</fwmf.module.shop.api.version>
+        <fwmf.module.system.api.version>0.0.1</fwmf.module.system.api.version>
+        <fdk.shiro.version>0.0.1</fdk.shiro.version>
+        <fdk.shiro.spring.boot.autoconfigure.version>0.0.1</fdk.shiro.spring.boot.autoconfigure.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>cn.faury.fwmf.module</groupId>
+            <artifactId>fwmf-module-shop-api</artifactId>
+            <version>${fwmf.module.shop.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fwmf.module</groupId>
+            <artifactId>fwmf-module-system-api</artifactId>
+            <version>${fwmf.module.system.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-shiro</artifactId>
+            <version>${fdk.shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-shiro-spring-boot-autoconfigure</artifactId>
+            <version>${fdk.shiro.spring.boot.autoconfigure.version}</version>
+        </dependency>
+        <!--Web依赖-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.0.7.RELEASE</version>
+        </dependency>
+        <!--swagger接口文档依赖-->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.14</version>
+        </dependency>
+    </dependencies>
+</project>

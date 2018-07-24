@@ -39,12 +39,6 @@
             <version>${fwmf.mybatis.spring.boot.autoconfigure.version}</version>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>cn.faury.fdk</groupId>
-            <artifactId>fdk-shiro-spring-boot-autoconfigure</artifactId>
-            <version>${fdk.shiro.spring.boot.autoconfigure.version}</version>
-            <optional>true</optional>
-        </dependency>
 
     </dependencies>
 </project>

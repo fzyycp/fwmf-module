@@ -60,19 +60,19 @@ public class ShopInfoBean implements Serializable {
 	private Long originSystem;
 
 	/** 创建者 */
-	private Long createPerson;
+	private String createPerson;
 
 	/** 创建时间 */
 	private Timestamp createTime;
 
 	/** 更新者 */
-	private Long updatePerson;
+	private String updatePerson;
 
 	/** 更新时间 */
 	private Timestamp updateTime;
 
 	/** 删除标志 */
-	private String delFlag = "N";
+	private String delFlag;
 
 	/**
 	 * 商店授权系统IDS
@@ -277,7 +277,7 @@ public class ShopInfoBean implements Serializable {
 	/**
 	 * @return the createPerson
 	 */
-	public Long getCreatePerson() {
+	public String getCreatePerson() {
 		return createPerson;
 	}
 
@@ -285,14 +285,14 @@ public class ShopInfoBean implements Serializable {
 	 * @param createPerson
 	 *            the createPerson to set
 	 */
-	public void setCreatePerson(Long createPerson) {
+	public void setCreatePerson(String createPerson) {
 		this.createPerson = createPerson;
 	}
 
 	/**
 	 * @return the updatePerson
 	 */
-	public Long getUpdatePerson() {
+	public String getUpdatePerson() {
 		return updatePerson;
 	}
 
@@ -300,7 +300,7 @@ public class ShopInfoBean implements Serializable {
 	 * @param updatePerson
 	 *            the updatePerson to set
 	 */
-	public void setUpdatePerson(Long updatePerson) {
+	public void setUpdatePerson(String updatePerson) {
 		this.updatePerson = updatePerson;
 	}
 

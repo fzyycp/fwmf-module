@@ -21,16 +21,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/web/system")
+@RequestMapping("/fwmf/config/system")
 @Api(value = "系统信息", tags = {"系统信息接口"})
 public class SystemController {
 
     @Autowired(required = false)
     SystemService systemService;
 
-    @RequestMapping(value = "/querySystem", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/querySystemInfo", method = {RequestMethod.GET, RequestMethod.POST})
     @ApiOperation(value = "系统信息查询", notes = "系统信息查询")
-    public RestResultEntry querySystem(@ApiParam(name = "是否可用") String isAvailable, @ApiParam(name = "页码") String pageNo, @ApiParam(name = "分页大小") String pageSize) {
+    public RestResultEntry querySystemInfo(@ApiParam(name = "是否可用") String isAvailable, @ApiParam(name = "页码") String pageNo, @ApiParam(name = "分页大小") String pageSize) {
         AssertUtil.assertNotNull(systemService, "系统服务未启用");
 
         Map<String, Object> paramters = new HashMap<>();
@@ -49,9 +49,9 @@ public class SystemController {
         return RestResultEntry.createSuccessResult(Collections.singletonList(systems));
     }
 
-    @RequestMapping(value = "/addSystem", method = {RequestMethod.POST})
+    @RequestMapping(value = "/addSystemInfo", method = {RequestMethod.POST})
     @ApiOperation(value = "新增系统", notes = "添加系统信息")
-    public RestResultEntry addSystem(@ApiParam(name = "系统信息对象") SystemInfoBean bean) {
+    public RestResultEntry addSystemInfo(@ApiParam(name = "系统信息对象") SystemInfoBean bean) {
         AssertUtil.assertNotNull(systemService, "系统服务未启用");
         AssertUtil.assertNotNull(bean, "系统信息不可以为空");
 
@@ -60,9 +60,9 @@ public class SystemController {
         return count > 0 ? RestResultEntry.createSuccessResult(null) : RestResultEntry.createErrorResult(RestResultCode.CODE500);
     }
 
-    @RequestMapping(value = "/editSystem", method = {RequestMethod.POST})
+    @RequestMapping(value = "/updateSystemInfo", method = {RequestMethod.POST})
     @ApiOperation(value = "修改系统信息", notes = "修改系统信息")
-    public RestResultEntry editSystem(@ApiParam(name = "系统信息对象") SystemInfoBean bean) {
+    public RestResultEntry updateSystemInfo(@ApiParam(name = "系统信息对象") SystemInfoBean bean) {
         AssertUtil.assertNotNull(systemService, "系统服务未启用");
         AssertUtil.assertNotNull(bean, "系统信息不可以为空");
 
@@ -71,9 +71,9 @@ public class SystemController {
         return count ? RestResultEntry.createSuccessResult(null) : RestResultEntry.createErrorResult(RestResultCode.CODE500);
     }
 
-    @RequestMapping(value = "/changeSystemAvailable", method = {RequestMethod.POST})
+    @RequestMapping(value = "/changeSystemAvailableById", method = {RequestMethod.POST})
     @ApiOperation(value = "启禁用系统", notes = "修改系统的启用/禁用状态")
-    public RestResultEntry changeSystemAvailable(@ApiParam(name = "是否可用", required = true) String isAvailable, @ApiParam(name = "系统ID", required = true) String systemId) {
+    public RestResultEntry changeSystemAvailableById(@ApiParam(name = "是否可用", required = true) String isAvailable, @ApiParam(name = "系统ID", required = true) String systemId) {
         AssertUtil.assertNotEmpty(isAvailable, "系统状态不可以为空");
         AssertUtil.assertNotEmpty(systemId, "系统ID不可以为空");
         AssertUtil.assertTrue("Y".equals(isAvailable) || "N".equals(isAvailable), "系统状态参数错误");

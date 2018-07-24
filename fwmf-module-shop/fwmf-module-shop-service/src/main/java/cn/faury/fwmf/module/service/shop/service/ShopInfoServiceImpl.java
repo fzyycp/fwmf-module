@@ -191,10 +191,11 @@ public class ShopInfoServiceImpl implements ShopInfoService {
         AssertUtil.assertNotNull(bean, "商店信息不可以为空");
         AssertUtil.assertNotEmpty(bean.getShopName(), "商店名称为空或不存在");
         AssertUtil.assertNotEmpty(bean.getShortName(), "商店简称为空或不存在");
+        AssertUtil.assertTrue(bean.getShopKeeperId()!=null&&bean.getShopKeeperId()>0, "商店店主ID为空或不存在");
+        AssertUtil.assertNotEmpty(bean.getShopKeeperName(), "商店店主登录名为空为空或不存在");
+        AssertUtil.assertNotEmpty(bean.getShopKeeperUserName(), "商店店主名称为空为空或不存在");
         AssertUtil.assertNotEmpty(bean.getAllocatRatio(), "分配比例为空为空或不存在");
-        AssertUtil.assertNotEmpty(bean.getShopState(), "商店状态为空或不存在");
         AssertUtil.assertNotEmpty(bean.getPayStyle(), "支付方式为空或不存在");
-        AssertUtil.assertNotEmpty(bean.getDelFlag(), "删除标志为空或不存在");
 
         boolean exist = isExistShopInfo(bean.getShopName(), null, null);
         AssertUtil.assertFalse(exist, "商店名称已存在");

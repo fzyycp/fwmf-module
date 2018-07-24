@@ -25,8 +25,8 @@ public class UserRShopSqlProvider {
 		sql.append(" SELECT DISTINCT S.`SHOP_ID` shopId,S.`SHOP_NAME` shopName,S.`SHORT_NAME` shortName,S.`SHOPKEEPER_ID` shopKeeperId,S.`ALLOCAT_RATIO` allocatRatio,S.`PAY_STYLE` payStyle,");
 		sql.append(" S.`AREA_CODE` areaCode,S.`ADDRESS` address,S.`REMARK` remark,S.`SHOP_STATE` shopState,S.`ORIGIN_SYSTEM` originSystem,"
 		        + "S.`CREATE_PERSON` createPerson,S.`CREATE_TIME` createTime,S.`UPDATE_PERSON` updatePerson,S.`UPDATE_TIME` updateTime,S.`DEL_FLAG` delFlag");
-		sql.append(" FROM " + DBConstOfShop.TN_PLATFORM_SHOP_INFO + " S");
-		sql.append(" left join " + DBConstOfShop.TN_PLATFORM_SHOP_USER_INFO + " U ON S.SHOP_ID = U.SHOP_ID ");
+		sql.append(" FROM " + DBConstOfShop.TN_SHOP_INFO + " S");
+		sql.append(" left join " + DBConstOfShop.TN_SHOP_USER_INFO + " U ON S.SHOP_ID = U.SHOP_ID ");
 		sql.append(" WHERE ");
 		sql.append(" U.SHOP_USER_ID = #{userId} ");
 
