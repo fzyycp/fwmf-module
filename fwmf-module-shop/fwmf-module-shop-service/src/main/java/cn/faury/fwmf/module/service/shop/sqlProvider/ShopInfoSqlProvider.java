@@ -34,13 +34,16 @@ public class ShopInfoSqlProvider {
         if (parameter.get("shopState") != null && StringUtil.isNotEmpty((String) parameter.get("shopState"))) {
             sql.append(" AND S.SHOP_STATE = #{shopState}");
         }
+        if (parameter.get("areaCode") != null && StringUtil.isNotEmpty((String) parameter.get("areaCode"))) {
+            sql.append(" AND S.AREA_CODE LIKE #{areaCode} ");
+        }
 
         if (parameter.get("systemId") != null) {
             sql.append(" AND M.SYSTEM_ID = #{systemId}");
         }
         if (parameter.get("systemCode") != null && StringUtil.isNotEmpty((String) parameter.get("systemCode"))) {
             sql.append(" AND M.SYSTEM_ID = (SELECT SYSTEM_ID FROM " + DBConstOfShop.TN_SYSTEM_INFO
-                    + " WHERE `SYSTEM_CODE` = #{systemCode}) AND S.SHOP_STATE = '1' ");
+                    + " WHERE `SYSTEM_CODE` = #{systemCode})");
         }
         if (parameter.get("shopKeeperName") != null && StringUtil.isNotEmpty((String) parameter.get("shopKeeperName"))) {
             sql.append(" AND U.USER_NAME LIKE CONCAT('%',#{shopKeeperName},'%')  ");

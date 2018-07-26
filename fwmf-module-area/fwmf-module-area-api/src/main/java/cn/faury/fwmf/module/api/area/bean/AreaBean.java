@@ -29,11 +29,6 @@ public class AreaBean implements Serializable {
 	private String admareaName;
 
 	/**
-	 * 下辖地区
-	 */
-	private List<AreaBean> subAreas;
-
-	/**
 	 * 上级地区编码
 	 */
 	private String supAreaCode;
@@ -74,25 +69,6 @@ public class AreaBean implements Serializable {
 	 */
 	public void setAdmareaName(String admareaName) {
 		this.admareaName = admareaName;
-	}
-
-	/**
-	 * Gets sub areas.
-	 *
-	 * @return the sub areas
-	 */
-	public List<AreaBean> getSubAreas() {
-		return subAreas;
-	}
-
-	/**
-	 * Sets sub areas.
-	 *
-	 * @param subAreas
-	 *            the sub areas
-	 */
-	public void setSubAreas(List<AreaBean> subAreas) {
-		this.subAreas = subAreas;
 	}
 
 	/**

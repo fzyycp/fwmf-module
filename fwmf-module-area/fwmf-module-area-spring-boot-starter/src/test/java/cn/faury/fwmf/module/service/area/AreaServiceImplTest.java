@@ -12,12 +12,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class AreaServiceImplTest {
     @Test
     public void getAreaOneTreeByCode() throws Exception {
-        System.out.println(areaService.getAreaOneTreeByCode("110100"));
+        System.out.println(areaService.getAreaOneTreeByCode("000000"));
     }
 
     @Test
     public void getAreaAllTreeByCode() throws Exception {
-        System.out.println(areaService.getAreaAllTreeByCode("110100"));
+        System.out.println(areaService.getAreaAllTreeByCode("110000"));
     }
 
     @Autowired
