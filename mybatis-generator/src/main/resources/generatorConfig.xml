@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2006-2018 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="reflectTables" targetRuntime="MyBatis3">
+        <!--文件编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--自定义插件-->
+        <plugin type="cn.faury.fwmf.generator.plugins.ModifiableMvcPlugin">
+            <property name="targetProject" value=".\src\generator\java" />
+            <property name="targetBasePackage" value="cn.faury.fwmf.module" />
+            <property name="modelKeyName" value="school"/>
+        </plugin>
+        <commentGenerator type="cn.faury.fwmf.generator.extend.FwmfCommentGenerator">
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <!--添加数据库中注释-->
+            <property name="addRemarkComments" value="true"/>
+            <!--注释中日期格式-->
+            <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://128.0.9.252:3306/eb" userId="root" password="888888">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL和NUMERIC类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置，重要！！ -->
+        <javaModelGenerator targetPackage="cn.faury.fwmf.module.api.school.generate.bean"
+                            targetProject=".\src\generator\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+            <!--父类-->
+            <!--<property name="rootClass" value="cn.faury.fdk.common.db.PrimaryKeyEnableBean" />-->
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置，重要！！ -->
+        <sqlMapGenerator targetPackage="cn.faury.fwmf.module.service.school.generate.mapper"
+                         targetProject=".\src\generator\java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置，重要！！ -->
+        <javaClientGenerator type="ANNOTATEDMAPPER"
+                             targetPackage="cn.faury.fwmf.module.service.school.generate.mapper"
+                             targetProject=".\src\generator\java">
+            <property name="enableSubPackages" value="false"/>
+            <!--<property name="rootInterface" value="cn.faury.abcdefInteface" />-->
+        </javaClientGenerator>
+        <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
+        <table tableName="sys_t_school_info"
+               domainObjectName="SchoolInfoGenerateBean"
+               mapperName="SchoolInfoGenerateMapper"
+               sqlProviderName="SchoolInfoGenerateSqlProvider"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="SCHOOL_ID" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="sys_t_school_r_grade"
+               domainObjectName="SchoolRGradeInfoGenerateBean"
+               mapperName="SchoolRGradeInfoGenerateMapper"
+               sqlProviderName="SchoolRGradeGenerateSqlProvider"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="GRADE_ID" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="sys_t_school_r_grade_r_class"
+               domainObjectName="SchoolRGradeRClassInfoGenerateBean"
+               mapperName="SchoolRGradeRClassInfoGenerateMapper"
+               sqlProviderName="SchoolRGradeRClassInfoGenerateSqlProvider"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="CLASS_ID" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>

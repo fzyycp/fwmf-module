@@ -16,7 +16,7 @@
 
     <properties>
         <fwmf.module.push.service.version>0.0.1</fwmf.module.push.service.version>
-        <fwmf.mybatis.spring.boot.autoconfigure.version>0.0.1</fwmf.mybatis.spring.boot.autoconfigure.version>
+        <fdk.mybatis.spring.boot.autoconfigure.version>0.0.1</fdk.mybatis.spring.boot.autoconfigure.version>
     </properties>
 
     <dependencies>
@@ -35,9 +35,16 @@
         <dependency>
             <groupId>cn.faury.fdk</groupId>
             <artifactId>fdk-mybatis-spring-boot-autoconfigure</artifactId>
-            <version>${fwmf.mybatis.spring.boot.autoconfigure.version}</version>
+            <version>${fdk.mybatis.spring.boot.autoconfigure.version}</version>
             <optional>true</optional>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>bintray-faury-fwmf</id>
+            <name>faury-fwmf</name>
+            <url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-push-spring-boot-autoconfigure/;publish=1</url>
+        </repository>
+    </distributionManagement>
 
 </project>

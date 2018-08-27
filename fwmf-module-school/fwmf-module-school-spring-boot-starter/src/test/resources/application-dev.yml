@@ -1,0 +1,29 @@
+# 数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://128.0.9.252:3306/eb
+    driver-class-name: com.mysql.jdbc.Driver
+    username: ENC(fNVB4sFePUSvMLgoF2P8bQ==)
+    password: ENC(iSxhtM9PGNOOpPmxPw2h8Q==)
+#    type: org.apache.commons.dbcp2.BasicDataSource     #连接池配置
+    type: com.zaxxer.hikari.HikariDataSource  #连接池配置
+
+#加密盐
+jasypt:
+  encryptor:
+    password: RzE4Bp1q5I
+
+#mybatis
+#entity扫描的包名
+mybatis:
+#  type-aliases-package: cn.faury
+  mapper-locations: classpath*:/mybaits/*Mapper.xml  #Mapper.xml所在的位置
+  configuration:
+    map-underscore-to-camel-case: true #驼峰命名自动转换
+
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

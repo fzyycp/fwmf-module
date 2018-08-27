@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class FwmfAreaAutoConfiguration {
 
     /**
-     * 字典服务
+     * 区域服务
      */
     @Bean
     public AreaService areaService(CommonDao commonDao) {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!--学校服务 -->
+	<bean id="schoolInfoService" class="cn.faury.fwmf.module.service.school.service.SchoolInfoServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--学校年级服务 -->
+	<bean id="schoolRGradeInfoService" class="cn.faury.fwmf.module.service.school.service.SchoolRGradeInfoServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
+	<!--学校年级班级服务 -->
+	<bean id="schoolRGradeRClassInfoService" class="cn.faury.fwmf.module.service.school.service.SchoolRGradeRClassInfoServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+</beans>

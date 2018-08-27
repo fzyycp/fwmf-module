@@ -7,11 +7,9 @@ import cn.faury.fwmf.module.api.area.bean.AreaBean;
 import cn.faury.fwmf.module.api.area.service.AreaService;
 import cn.faury.fwmf.module.service.area.mapper.AreaMapper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 区域服务实现
@@ -47,9 +45,7 @@ public class AreaServiceImpl implements AreaService {
 
         String state = AreaMapper.class.getName() + ".getAreaByCode";
         List<AreaBean> result = commonDao.selectList(state, params);
-        for (AreaBean areaBean : result) {
-            areaBean.setSupAreaCode(areaCode);
-        }
+        result.forEach(areaBean -> areaBean.setSupAreaCode(areaCode));
         return result;
     }
 

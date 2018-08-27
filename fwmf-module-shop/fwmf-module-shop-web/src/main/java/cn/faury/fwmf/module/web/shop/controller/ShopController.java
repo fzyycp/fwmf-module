@@ -11,10 +11,13 @@ import cn.faury.fdk.shiro.autoconfigure.FdkShiroProperties;
 import cn.faury.fdk.shiro.utils.SessionUtil;
 import cn.faury.fwmf.module.api.shop.bean.ShopInfoBean;
 import cn.faury.fwmf.module.api.shop.service.ShopInfoService;
+import cn.faury.fwmf.module.api.system.bean.ShopRSystemInfoBean;
 import cn.faury.fwmf.module.api.system.bean.SystemInfoBean;
+import cn.faury.fwmf.module.api.system.service.ShopRSystemService;
 import cn.faury.fwmf.module.api.system.service.SystemService;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.config.UserType;
+import cn.faury.fwmf.module.api.user.service.ShopRUserService;
 import cn.faury.fwmf.module.api.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -46,6 +49,12 @@ public class ShopController {
 
     @Autowired(required = false)
     SystemService systemService;
+
+    @Autowired(required = false)
+    ShopRSystemService shopRSystemService;
+
+    @Autowired(required = false)
+    ShopRUserService shopRUserService;
 
     @Autowired(required = false)
     FdkShiroProperties fdkShiroProperties;
@@ -87,10 +96,12 @@ public class ShopController {
     @PostMapping("addShopInfo")
     @ApiOperation(value = "新增商店信息", notes = "新增商店信息")
     public RestResultEntry addShopInfo(ShopInfoBean shopInfoBean) {
-        AssertUtil.assertNotNull(shopInfoService, "商店服务shopInfoService未启用");
-        AssertUtil.assertNotNull(userService, "用户服务userService未启用");
-        AssertUtil.assertNotNull(systemService, "系统服务userService未启用");
-        AssertUtil.assertNotNull(fdkShiroProperties, "框架属性fdkShiroProperties服务未启用");
+        AssertUtil.assertNotNull(shopInfoService, "商店服务未启用");
+        AssertUtil.assertNotNull(userService, "用户服务未启用");
+        AssertUtil.assertNotNull(systemService, "系统服务未启用");
+        AssertUtil.assertNotNull(shopRSystemService, "商店授权系统服务未启用");
+        AssertUtil.assertNotNull(shopRUserService, "商店用户服务未启用");
+        AssertUtil.assertNotNull(fdkShiroProperties, "框架属性服务未启用");
 
         AssertUtil.assertNotNull(shopInfoBean, "商店信息不可以为空");
 
@@ -101,18 +112,34 @@ public class ShopController {
         // 1，检查店主信息是否存在
         UserInfoBean userInfoBean = userService.getUserInfoByLoginName(shopInfoBean.getShopKeeperName());
         AssertUtil.assertNull(userInfoBean, "店主账户已存在");
-        if (userInfoBean == null) {// 店主信息不存在，插入店主信息
+        String isSelfCreate = StringUtil.WHETHER_NO;//是否自建
+        // 2，店主信息不存在，插入店主信息
+        if (userInfoBean == null) {
             Long userId = userService.insertUserInfo(shopInfoBean.getShopKeeperName(), shopInfoBean.getShopKeeperUserName()
                     , null, systemInfoBean.getSystemId(), UserType.ORGANIZATION, SessionUtil.getCurrentLoginName(), "");
             shopInfoBean.setShopKeeperId(userId);
-//        } else {
-//            shopInfoBean.setShopKeeperId(userInfoBean.getUserId());
+            isSelfCreate = StringUtil.WHETHER_YES;
         }
         shopInfoBean.setOriginSystem(systemInfoBean.getSystemId());
         shopInfoBean.setCreatePerson(SessionUtil.getCurrentLoginName());
 
-        Long id = shopInfoService.insertShopInfo(shopInfoBean);
-        return id != null && id > 0 ? RestResultEntry.createSuccessResult(null) : RestResultEntry.createErrorResult("商店信息保存失败：返回shopId=" + id, "商店信息保存失败");
+        boolean noError;
+        // 3，插入商店信息
+        Long shopId = shopInfoService.insertShopInfo(shopInfoBean);
+        noError = (shopId != null && shopId > 0);
+        // 4，插入商店授权系统信息
+        if (noError) {
+            ShopRSystemInfoBean shopRSystemInfoBean = new ShopRSystemInfoBean();
+            shopRSystemInfoBean.setShopId(shopId);
+            shopRSystemInfoBean.setSystemId(systemInfoBean.getSystemId());
+            noError = shopRSystemService.insertShopRSystem(Collections.singletonList(shopRSystemInfoBean)) > 0;
+        }
+        // 5，插入商店用户信息
+        if (noError) {
+            noError = shopRUserService.insertShopRUserById(shopId, userInfoBean.getUserId(), isSelfCreate, StringUtil.WHETHER_YES) > 0;
+        }
+
+        return noError ? RestResultEntry.createSuccessResult(null) : RestResultEntry.createErrorResult("商店信息保存失败：返回shopId=" + shopId, "商店信息保存失败");
     }
 
     @PostMapping("updateShopInfoById")
@@ -126,10 +153,11 @@ public class ShopController {
         return count > 0 ? RestResultEntry.createSuccessResult(null) : RestResultEntry.createErrorResult("商店信息保存失败", "商店信息保存失败");
     }
 
-    @PostMapping("deleteShopInfoByid")
+    @PostMapping("deleteShopInfoById")
     @ApiOperation(value = "删除商店信息", notes = "通过商店Id来删除商店信息")
-    public RestResultEntry deleteShopInfoByid(Long shopId) {
-        AssertUtil.assertNotNull(shopInfoService, "商店服务shopInfoService未启用");
+    public RestResultEntry deleteShopInfoById(Long shopId) {
+        AssertUtil.assertNotNull(shopInfoService, "商店服务未启用");
+        AssertUtil.assertTrue(shopId != null && shopId > 0, "要删除商店ID不可以为空");
 
         shopInfoService.deleteShopInfo(Collections.singletonList(shopId));
         return RestResultEntry.createSuccessResult(null);

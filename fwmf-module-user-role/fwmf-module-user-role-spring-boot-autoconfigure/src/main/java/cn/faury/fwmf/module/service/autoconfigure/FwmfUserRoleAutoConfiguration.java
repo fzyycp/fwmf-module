@@ -17,7 +17,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureAfter(FdkMybatisAutoConfiguration.class)
-@AutoConfigureBefore(name ="cn.faury.fdk.shiro.autoconfigure.FdkShiroAutoConfiguration")
+@AutoConfigureBefore(name = {"cn.faury.fdk.shiro.autoconfigure.FdkShiroAutoConfiguration"
+        , "cn.faury.fdk.mobile.autoconfigure.FdkMobileAutoConfiguration"})
 public class FwmfUserRoleAutoConfiguration {
 
     /**
@@ -87,9 +88,9 @@ public class FwmfUserRoleAutoConfiguration {
      * 商店用户服务
      */
     @Bean
-    @ConditionalOnClass({ShopRUserService.class, ShopRUserServiceImpl.class,UserService.class})
-    public ShopRUserService shopRUserService(CommonDao commonDao,UserService userService) {
-        return new ShopRUserServiceImpl(commonDao,userService);
+    @ConditionalOnClass({ShopRUserService.class, ShopRUserServiceImpl.class, UserService.class})
+    public ShopRUserService shopRUserService(CommonDao commonDao, UserService userService) {
+        return new ShopRUserServiceImpl(commonDao, userService);
     }
 
     /**

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="reflectTables" targetRuntime="MyBatis3">
+        <!--文件编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false"/>
+            <!--添加数据库中注释-->
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://128.0.9.252:3306/eb" userId="root" password="888888">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL和NUMERIC类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置，重要！！ -->
+        <javaModelGenerator targetPackage="cn.faury.eb.module.api.order.generate.bean"
+                            targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+            <!--父类-->
+            <!--<property name="rootClass" value="cn.faury.fdk.common.db.PrimaryKeyEnableBean" />-->
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置，重要！！ -->
+        <sqlMapGenerator targetPackage="cn.faury.eb.module.service.order.generate.mapper"
+                         targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置，重要！！ -->
+        <javaClientGenerator type="ANNOTATEDMAPPER"
+                             targetPackage="cn.faury.eb.module.service.order.generate.mapper"
+                             targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
+        <!--<table tableName="order_t_postage_info"-->
+               <!--domainObjectName="PostageInfoGenerateBean"-->
+               <!--mapperName="PostageInfoGenerateMapper"-->
+               <!--sqlProviderName="PostageInfoGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="POSTAGE_ID" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+        <!--<table tableName="order_t_postage_r_area"-->
+               <!--domainObjectName="PostageRAreaGenerateBean"-->
+               <!--mapperName="PostageRAreaGenerateMapper"-->
+               <!--sqlProviderName="PostageRAreaGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="POSTAGE_R_AREA_ID" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+        <!--<table tableName="order_t_promotion_info"-->
+               <!--domainObjectName="PromotionInfoGenerateBean"-->
+               <!--mapperName="PromotionInfoGenerateMapper"-->
+               <!--sqlProviderName="PromotionInfoGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="PROMOTION_ID" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+        <!--<table tableName="order_t_order_r_goods"-->
+               <!--domainObjectName="OrderRGoodsGenerateBean"-->
+               <!--mapperName="OrderRGoodsGenerateMapper"-->
+               <!--sqlProviderName="OrderRGoodsGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<generatedKey column="ORDER_R_GOODS_ID" sqlStatement="JDBC"/>&ndash;&gt;-->
+        <!--</table>-->
+        <!--<table tableName="order_t_order_info"-->
+               <!--domainObjectName="OrderInfoGenerateBean"-->
+               <!--mapperName="OrderInfoGenerateMapper"-->
+               <!--sqlProviderName="OrderInfoGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="ORDER_ID" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+        <!--<table tableName="order_t_goods_stock_info"-->
+               <!--domainObjectName="GoodsStockGenerateBean"-->
+               <!--mapperName="GoodsStockGenerateMapper"-->
+               <!--sqlProviderName="GoodsStockGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<generatedKey column="ID" sqlStatement="JDBC"/>&ndash;&gt;-->
+        <!--</table>-->
+       <!--<table tableName="order_t_order_operate_info"-->
+               <!--domainObjectName="OrderOperateInfoGenerateBean"-->
+               <!--mapperName="OrderOperateInfoGenerateMapper"-->
+               <!--sqlProviderName="OrderOperateInfoGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<generatedKey column="ID" sqlStatement="JDBC"/>&ndash;&gt;-->
+        <!--</table>-->
+       <!--<table tableName="order_t_order_pay_info"-->
+               <!--domainObjectName="OrderPayInfoGenerateBean"-->
+               <!--mapperName="OrderPayInfoGenerateMapper"-->
+               <!--sqlProviderName="OrderPayInfoGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--&lt;!&ndash;<generatedKey column="ID" sqlStatement="JDBC"/>&ndash;&gt;-->
+        <!--</table>-->
+      <!--<table tableName="order_t_package_info"-->
+               <!--domainObjectName="PackageInfoGenerateBean"-->
+               <!--mapperName="PackageInfoGenerateMapper"-->
+               <!--sqlProviderName="PackageInfoGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="PACKAGE_ID" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+      <!--<table tableName="order_t_package_r_goods"-->
+               <!--domainObjectName="PackageRGoodsGenerateBean"-->
+               <!--mapperName="PackageRGoodsGenerateMapper"-->
+               <!--sqlProviderName="PackageRGoodsGenerateSqlProvider"-->
+               <!--enableCountByExample="false"-->
+               <!--enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false">-->
+            <!--<generatedKey column="ID" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+      <table tableName="order_t_order_r_logistics"
+               domainObjectName="OrderRLogisticsGenerateBean"
+               mapperName="OrderRLogisticsGenerateMapper"
+               sqlProviderName="OrderRLogisticsGenerateSqlProvider"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </table>
+    </context>
+</generatorConfiguration>

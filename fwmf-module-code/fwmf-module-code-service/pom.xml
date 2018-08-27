@@ -15,14 +15,14 @@
     <version>0.0.1</version>
 
     <properties>
+        <fwmf.module.user.code.api.version>0.0.1</fwmf.module.user.code.api.version>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
-        <fdk.module.user.code.api.version>0.0.1</fdk.module.user.code.api.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>cn.faury.fwmf.module</groupId>
             <artifactId>fwmf-module-code-api</artifactId>
-            <version>${fdk.module.user.code.api.version}</version>
+            <version>${fwmf.module.user.code.api.version}</version>
         </dependency>
         <dependency>
             <groupId>cn.faury.fdk</groupId>
@@ -30,4 +30,11 @@
             <version>${fdk.mybatis.version}</version>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>bintray-faury-fwmf</id>
+            <name>faury-fwmf</name>
+            <url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-code-service/;publish=1</url>
+        </repository>
+    </distributionManagement>
 </project>

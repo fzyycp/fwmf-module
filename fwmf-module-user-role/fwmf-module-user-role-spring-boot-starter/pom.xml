@@ -18,9 +18,6 @@
         <fwmf.module.user.role.spring.boot.configure.version>0.0.1</fwmf.module.user.role.spring.boot.configure.version>
         <fwmf.module.user.role.service.version>0.0.1</fwmf.module.user.role.service.version>
         <fwmf.mybatis.spring.boot.starter.version>0.0.1</fwmf.mybatis.spring.boot.starter.version>
-        <fdk.shiro.spring.boot.starter.version>0.0.1</fdk.shiro.spring.boot.starter.version>
-        <fdk.mobile.spring.boot.starter.version>0.0.1</fdk.mobile.spring.boot.starter.version>
-        <fdk.shiro.repository.mongodb.spring.boot.starter.version>0.0.1</fdk.shiro.repository.mongodb.spring.boot.starter.version>
     </properties>
 
     <dependencies>
@@ -72,5 +69,12 @@
         <!--<scope>test</scope>-->
         <!--</dependency>-->
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>bintray-faury-fwmf</id>
+            <name>faury-fwmf</name>
+            <url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-user-role-spring-boot-starter/;publish=1</url>
+        </repository>
+    </distributionManagement>
 
 </project>

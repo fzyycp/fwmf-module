@@ -7,6 +7,7 @@ import cn.faury.fwmf.module.api.shop.service.UserRShopService;
 import cn.faury.fwmf.module.service.shop.service.ShopInfoServiceImpl;
 import cn.faury.fwmf.module.service.shop.service.UserRShopServiceImpl;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @AutoConfigureAfter(FdkMybatisAutoConfiguration.class)
+@AutoConfigureBefore(name = {"cn.faury.fdk.mobile.autoconfigure.FdkMobileAutoConfiguration"})
 public class FwmfShopAutoConfiguration {
 
     /**

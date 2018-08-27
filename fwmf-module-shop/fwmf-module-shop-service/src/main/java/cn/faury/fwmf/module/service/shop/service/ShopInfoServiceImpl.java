@@ -256,16 +256,18 @@ public class ShopInfoServiceImpl implements ShopInfoService {
     public int deleteShopInfo(List<Long> shopIds) {
         AssertUtil.assertNotEmpty(shopIds, "商店id为空或不存在");
         shopIds.forEach(id -> {
-            boolean exist = isShopRSystem(id);
-            AssertUtil.assertFalse(exist, "商店存在授权系统，删除授权系统后再删除商店数据");
-
-            exist = isShopRApp(id);
-            AssertUtil.assertFalse(exist, "商店存在授权App，删除授权App后再删除商店数据");
-
-            exist = isShopRUserSelfCreate(id);
-            AssertUtil.assertFalse(exist, "商店存在商店管理员以外的自建用户，删除自建用户后再删除商店数据");
+            AssertUtil.assertTrue(id!=null && id>0,"商店ID不合法");
+            // 逻辑删除没必要清理关联关系，否则难以恢复
+//            boolean exist = isShopRSystem(id);
+//            AssertUtil.assertFalse(exist, "商店存在授权系统，删除授权系统后再删除商店数据");
+//
+//            exist = isShopRApp(id);
+//            AssertUtil.assertFalse(exist, "商店存在授权App，删除授权App后再删除商店数据");
+//
+//            exist = isShopRUserSelfCreate(id);
+//            AssertUtil.assertFalse(exist, "商店存在商店管理员以外的自建用户，删除自建用户后再删除商店数据");
         });
-        Map<String, Object> param = new HashMap<String, Object>();
+        Map<String, Object> param = new HashMap<>();
         param.put("shopIds", shopIds);
         String state = ShopInfoMapper.class.getName() + ".deleteShopInfo";
         return this.commonDao.update(state, param);
