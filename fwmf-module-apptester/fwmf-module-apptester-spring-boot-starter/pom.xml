@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>cn.faury.fwmf.module</groupId>
-            <artifactId>fwmf-module-apptester-spring-boot-configure</artifactId>
+            <artifactId>fwmf-module-apptester-spring-boot-autoconfigure</artifactId>
             <version>${fwmf.module.apptester.spring.boot.autoconfigure.version}</version>
         </dependency>
         <dependency>

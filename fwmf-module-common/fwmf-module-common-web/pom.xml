@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fwmf-module</artifactId>
+        <groupId>cn.faury.fwmf</groupId>
+        <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.faury.fwmf.module</groupId>
+    <artifactId>fwmf-module-common-web</artifactId>
+    <version>0.0.3</version>
+
+    <properties>
+        <fdk.common>0.0.9</fdk.common>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-common</artifactId>
+            <version>${fdk.common}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.0.7.RELEASE</version>
+        </dependency>
+    </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>bintray-faury-fwmf</id>
+            <name>faury-fwmf</name>
+            <url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-common-web/;publish=1</url>
+        </repository>
+    </distributionManagement>
+
+</project>

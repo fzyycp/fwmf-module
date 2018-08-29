@@ -85,6 +85,7 @@
         <module>fwmf-module-common/fwmf-module-common-service</module>
 
         <module>mybatis-generator</module>
+        <module>fwmf-module-common/fwmf-module-common-web</module>
     </modules>
 
     <parent>
