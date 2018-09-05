@@ -66,6 +66,11 @@
         <module>fwmf-module-shop/fwmf-module-shop-spring-boot-starter</module>
         <module>fwmf-module-shop/fwmf-module-shop-web</module>
 
+        <module>fwmf-module-sms/fwmf-module-sms-api</module>
+        <module>fwmf-module-sms/fwmf-module-sms-service</module>
+        <module>fwmf-module-sms/fwmf-module-sms-spring-boot-autoconfigure</module>
+        <module>fwmf-module-sms/fwmf-module-sms-spring-boot-starter</module>
+
         <module>fwmf-module-system/fwmf-module-system-api</module>
         <module>fwmf-module-system/fwmf-module-system-service</module>
         <module>fwmf-module-system/fwmf-module-system-spring-boot-autoconfigure</module>

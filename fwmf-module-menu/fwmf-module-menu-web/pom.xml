@@ -12,10 +12,10 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-menu-web</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <properties>
-        <fwmf.module.menu.api.version>0.0.1</fwmf.module.menu.api.version>
+        <fwmf.module.menu.api.version>0.0.2</fwmf.module.menu.api.version>
         <fwmf.module.system.api.version>0.0.1</fwmf.module.system.api.version>
     </properties>
 

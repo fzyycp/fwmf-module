@@ -1,0 +1,1 @@
+provides: fwmf-module-sms-spring-boot-configure,fwmf-module-sms-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis,fdk-http-client-spring-boot-autoconfigure,fdk-http-client

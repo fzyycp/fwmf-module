@@ -47,7 +47,7 @@ public class MenuSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT MENU_ID MENUID,MENU_PID MENUPID,MENU_NAME MENUNAME,MENU_CODE MENUCODE,MENU_ACTION_KEY MENUACTION ");
+		sql.append("SELECT MENU_ID MENUID,MENU_PID MENUPID,MENU_NAME MENUNAME,MENU_CODE MENUCODE,MENU_ACTION_KEY MENUACTIONKEY ");
 		sql.append("       ,SORT 'ORDER',IS_LEAF ISLEAF,SYSTEM_ID SYSTEMID,IS_AVAILABLE ISAVAILABLE ");
 		sql.append("  FROM " + DBConstOfMenu.TN_MENU_INFO);
 		sql.append(" WHERE ");
@@ -114,7 +114,7 @@ public class MenuSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT MENU_ID MENUID,MENU_PID MENUPID,MENU_NAME MENUNAME,MENU_CODE MENUCODE,MENU_ACTION_KEY MENUACTION ");
+		sql.append("SELECT MENU_ID MENUID,MENU_PID MENUPID,MENU_NAME MENUNAME,MENU_CODE MENUCODE,MENU_ACTION_KEY MENUACTIONKEY ");
 		sql.append("       ,SORT `ORDER`,IS_LEAF ISLEAF,SYSTEM_ID SYSTEMID,IS_AVAILABLE ISAVAILABLE ");
 		sql.append("  FROM " + DBConstOfMenu.TN_MENU_INFO);
 		sql.append(" WHERE MENU_PID = (");
@@ -201,8 +201,8 @@ public class MenuSQLProvider {
 		sql.append("  FROM " + DBConstOfMenu.TN_MENU_INFO);
 		sql.append(" WHERE ");
 		sql.append(" SYSTEM_ID = #{systemId}");
-		if (parameters.containsKey("menuAction")) {
-			sql.append(" AND MENU_ACTION_KEY = #{menuAction}");
+		if (parameters.containsKey("menuActionKey")) {
+			sql.append(" AND MENU_ACTION_KEY = #{menuActionKey}");
 		}
 		if (parameters.containsKey("menuCode")) {
 			sql.append(" AND `MENU_CODE` = #{menuCode}");
@@ -298,7 +298,7 @@ public class MenuSQLProvider {
 
 		// 【可选】menuAction：菜单Action
 		if (StringUtil.isNotEmpty(menuInfo.getMenuActionKey())) {
-			sql.append("MENU_ACTION_KEY= #{menuAction,jdbcType=VARCHAR},");
+			sql.append("MENU_ACTION_KEY= #{menuActionKey,jdbcType=VARCHAR},");
 		}
 
 		// 【可选】order：排序
@@ -435,7 +435,7 @@ public class MenuSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT MENU_ID MENUID,MENU_PID MENUPID,MENU_NAME MENUNAME,MENU_CODE MENUCODE,MENU_ACTION_KEY MENUACTION ");
+		sql.append("SELECT MENU_ID MENUID,MENU_PID MENUPID,MENU_NAME MENUNAME,MENU_CODE MENUCODE,MENU_ACTION_KEY MENUACTIONKey ");
 		sql.append("       ,SORT `ORDER`,IS_LEAF ISLEAF,SYSTEM_ID SYSTEMID,IS_AVAILABLE ISAVAILABLE ");
 		sql.append("  FROM " + DBConstOfMenu.TN_MENU_INFO);
 		sql.append(" WHERE (MENU_PID = (");

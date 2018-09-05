@@ -1,5 +1,6 @@
 package cn.faury.fwmf.module.service.menu;
 
+import cn.faury.fwmf.module.api.menu.bean.MenuInfoBean;
 import cn.faury.fwmf.module.api.menu.bean.MenuTreeNodeBean;
 import cn.faury.fwmf.module.api.menu.service.RoleRMenuService;
 import org.junit.After;
@@ -29,6 +30,12 @@ public class RoleRMenuServiceTest {
     @Test
     public void getMenuTreeByUserSystem() throws Exception{
         List<MenuTreeNodeBean> result = roleRMenuService.getMenuTreeByUserSystem(usreId,systemCode, Boolean.FALSE);
+        System.out.println(result);
+    }
+
+    @Test
+    public void getRoleRMenuInfosByRoleCode() throws Exception{
+        List<MenuInfoBean> result = roleRMenuService.getRoleRMenuInfosByRoleCode(usreId,systemCode, Boolean.FALSE);
         System.out.println(result);
     }
 

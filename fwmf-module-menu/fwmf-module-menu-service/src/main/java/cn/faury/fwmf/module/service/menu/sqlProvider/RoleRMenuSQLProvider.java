@@ -77,12 +77,12 @@ public class RoleRMenuSQLProvider {
 		}
 		sql.append(" ) ");
 		sql.append(" AND RM.ROLE_ID = (");
-		sql.append(" SELECT R.ID FROM " + DBConstOfMenu.TN_ROLE_INFO + " R");
+		sql.append(" SELECT R.ROLE_ID FROM " + DBConstOfMenu.TN_ROLE_INFO + " R");
 		sql.append(" WHERE ");
 		if (parameters.containsKey("roleId")) {
-			sql.append(" R.ID = #{roleId,jdbcType=BIGINT} ");
+			sql.append(" R.ROLE_ID = #{roleId,jdbcType=BIGINT} ");
 		} else {
-			sql.append(" R.CODE = #{roleCode,jdbcType=VARCHAR} ");
+			sql.append(" R.ROLE_CODE = #{roleCode,jdbcType=VARCHAR} ");
 		}
 		// 【可选】isRoleAvailable 角色是否可用
 		// 【Boolean.TRUE：仅可用； Boolean.FALSE:仅不可用；null:都包含】

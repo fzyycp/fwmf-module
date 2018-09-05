@@ -34,7 +34,7 @@ public class SystemMenuSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT MENU_ID, MENU_PID, MENU_NAME, MENU_CODE,MENU_ACTION_KEY MENU_ACTION ");
+		sql.append("SELECT MENU_ID, MENU_PID, MENU_NAME, MENU_CODE,MENU_ACTION_KEY ");
 		sql.append("       ,SORT `ORDER`, IS_LEAF, SYSTEM_ID, IS_AVAILABLE ");
 		sql.append("  FROM " + DBConstOfMenu.TN_MENU_INFO);
 		sql.append(" WHERE (MENU_PID = 0 OR MENU_PID IN(");
@@ -96,7 +96,7 @@ public class SystemMenuSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT MENU_ID, MENU_PID, MENU_NAME, MENU_CODE,MENU_ACTION_KEY MENU_ACTION ");
+		sql.append("SELECT MENU_ID, MENU_PID, MENU_NAME, MENU_CODE,MENU_ACTION_KEY ");
 		sql.append("       ,SORT `ORDER`,IS_LEAF IS_LEAF,SYSTEM_ID, IS_AVAILABLE ");
 		sql.append("  FROM " + DBConstOfMenu.TN_MENU_INFO);
 		sql.append(" WHERE SYSTEM_ID =(");
@@ -153,7 +153,7 @@ public class SystemMenuSQLProvider {
 		}
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT MENU_ID, MENU_PID, MENU_NAME, MENU_CODE,MENU_ACTION_KEY MENU_ACTION ");
+		sql.append("SELECT MENU_ID, MENU_PID, MENU_NAME, MENU_CODE,MENU_ACTION_KEY ");
 		sql.append("       ,SORT `ORDER`,IS_LEAF,SYSTEM_ID,IS_AVAILABLE ");
 		sql.append("  FROM " + DBConstOfMenu.TN_MENU_INFO);
 		sql.append(" WHERE (MENU_PID = 0 ");
