@@ -44,11 +44,19 @@
         <module>fwmf-module-code/fwmf-module-code-spring-boot-starter</module>
         <module>fwmf-module-code/fwmf-module-code-web</module>
 
+        <module>fwmf-module-common/fwmf-module-common-service</module>
+        <module>fwmf-module-common/fwmf-module-common-web</module>
+
         <module>fwmf-module-menu/fwmf-module-menu-api</module>
         <module>fwmf-module-menu/fwmf-module-menu-service</module>
         <module>fwmf-module-menu/fwmf-module-menu-spring-boot-autoconfigure</module>
         <module>fwmf-module-menu/fwmf-module-menu-spring-boot-starter</module>
         <module>fwmf-module-menu/fwmf-module-menu-web</module>
+
+        <module>fwmf-module-operation/fwmf-module-operation-api</module>
+        <module>fwmf-module-operation/fwmf-module-operation-service</module>
+        <module>fwmf-module-operation/fwmf-module-operation-spring-boot-autoconfigure</module>
+        <module>fwmf-module-operation/fwmf-module-operation-spring-boot-starter</module>
 
         <module>fwmf-module-push/fwmf-module-push-api</module>
         <module>fwmf-module-push/fwmf-module-push-service</module>
@@ -87,10 +95,8 @@
         <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-autoconfigure</module>
         <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-starter</module>
 
-        <module>fwmf-module-common/fwmf-module-common-service</module>
 
         <module>mybatis-generator</module>
-        <module>fwmf-module-common/fwmf-module-common-web</module>
     </modules>
 
     <parent>

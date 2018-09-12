@@ -1,0 +1,1 @@
+provides: fwmf-module-operation-spring-boot-configure,fwmf-module-operation-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis
