@@ -19,7 +19,7 @@
         <fwmf.module.sms.spring.boot.autoconfigure.version>0.0.1</fwmf.module.sms.spring.boot.autoconfigure.version>
         <fwmf.module.sms.service.version>0.0.1</fwmf.module.sms.service.version>
         <fdk.mybatis.spring.boot.starter.version>0.0.1</fdk.mybatis.spring.boot.starter.version>
-        <fdk.http.client.spring.boot.starter.version>0.0.2</fdk.http.client.spring.boot.starter.version>
+        <fdk.http.client.spring.boot.starter.version>0.0.3</fdk.http.client.spring.boot.starter.version>
     </properties>
 
     <dependencies>
