@@ -1,0 +1,1 @@
+provides: fwmf-module-payment-spring-boot-configure,fwmf-module-payment-service,fdk-mybatis-spring-boot-autoconfigure,fdk-mybatis

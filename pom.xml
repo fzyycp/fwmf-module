@@ -58,6 +58,16 @@
         <module>fwmf-module-operation/fwmf-module-operation-spring-boot-autoconfigure</module>
         <module>fwmf-module-operation/fwmf-module-operation-spring-boot-starter</module>
 
+        <module>fwmf-module-order/fwmf-module-order-api</module>
+        <module>fwmf-module-order/fwmf-module-order-service</module>
+        <module>fwmf-module-order/fwmf-module-order-spring-boot-autoconfigure</module>
+        <module>fwmf-module-order/fwmf-module-order-spring-boot-starter</module>
+
+        <module>fwmf-module-payment/fwmf-module-payment-api</module>
+        <module>fwmf-module-payment/fwmf-module-payment-service</module>
+        <module>fwmf-module-payment/fwmf-module-payment-spring-boot-autoconfigure</module>
+        <module>fwmf-module-payment/fwmf-module-payment-spring-boot-starter</module>
+
         <module>fwmf-module-push/fwmf-module-push-api</module>
         <module>fwmf-module-push/fwmf-module-push-service</module>
         <module>fwmf-module-push/fwmf-module-push-spring-boot-autoconfigure</module>

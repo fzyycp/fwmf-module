@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--商品库存服务 -->
+    <bean id="goodsStockService" class="cn.faury.fwmf.module.service.order.service.GoodsStockServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--订单服务 -->
+    <bean id="oderInfoService" class="cn.faury.fwmf.module.service.order.service.OrderInfoServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--订单操作日志 -->
+    <bean id="orderOperateInfoService" class="cn.faury.fwmf.module.service.order.service.OrderOperateInfoServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--订单支付日志 -->
+    <bean id="orderPayInfoService" class="cn.faury.fwmf.module.service.order.service.OrderPayInfoServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--订单商品服务 -->
+    <bean id="orderRGoodsService" class="cn.faury.fwmf.module.service.order.service.OrderRGoodsServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--订单物流服务 -->
+    <bean id="orderRLogisticsService" class="cn.faury.fwmf.module.service.order.service.OrderRLogisticsServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--商品套餐信息服务 -->
+    <bean id="packageInfoService" class="cn.faury.fwmf.module.service.order.service.PackageInfoServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--商品套餐关联商品服务 -->
+    <bean id="packageRGoodsService" class="cn.faury.fwmf.module.service.order.service.PackageRGoodsServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--邮费服务 -->
+    <bean id="postageInfoService" class="cn.faury.fwmf.module.service.order.service.PostageInfoServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--邮费关联区域服务 -->
+    <bean id="postageRAreaService" class="cn.faury.fwmf.module.service.order.service.PostageRAreaServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--促销活动服务 -->
+    <bean id="promotionInfoService" class="cn.faury.fwmf.module.service.order.service.PromotionInfoServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+</beans>
