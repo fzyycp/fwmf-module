@@ -12,10 +12,9 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-order-api</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <properties>
-        <fwmf.module.payment.api.version>0.0.2</fwmf.module.payment.api.version>
         <fdk.common.version>0.0.9</fdk.common.version>
     </properties>
 
@@ -24,11 +23,6 @@
             <groupId>cn.faury.fdk</groupId>
             <artifactId>fdk-common</artifactId>
             <version>${fdk.common.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.faury.fwmf.module</groupId>
-            <artifactId>fwmf-module-payment-api</artifactId>
-            <version>${fwmf.module.payment.api.version}</version>
         </dependency>
     </dependencies>
     <distributionManagement>

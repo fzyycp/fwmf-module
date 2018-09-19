@@ -4,8 +4,8 @@ package cn.faury.fwmf.module.api.order.service;
 import cn.faury.fwmf.module.api.order.bean.OrderInfoBean;
 import cn.faury.fwmf.module.api.order.bean.OrderRGoodsBeanEnable;
 import cn.faury.fwmf.module.api.order.bean.OrderStateStatistics;
-import cn.faury.fwmf.module.api.payment.bean.AlipayCallbackRecordsBean;
-import cn.faury.fwmf.module.api.payment.bean.WeixinCallbackRecordsBean;
+import cn.faury.fwmf.module.api.order.bean.AlipayCallbackRecordsBean;
+import cn.faury.fwmf.module.api.order.bean.WeixinCallbackRecordsBean;
 import cn.faury.fdk.common.anotation.NonNull;
 import cn.faury.fdk.common.db.CrudBaseService;
 

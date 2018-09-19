@@ -2,12 +2,12 @@ package cn.faury.fwmf.module.service.order.service;
 
 import cn.faury.fwmf.module.api.order.bean.*;
 import cn.faury.fwmf.module.api.order.service.*;
-import cn.faury.fwmf.module.api.payment.bean.AlipayCallbackRecordsBean;
-import cn.faury.fwmf.module.api.payment.bean.AlipayRecordsBean;
-import cn.faury.fwmf.module.api.payment.bean.WeixinCallbackRecordsBean;
-import cn.faury.fwmf.module.api.payment.bean.WeixinPayRecordsBean;
-import cn.faury.fwmf.module.api.payment.service.AlipayRecordsService;
-import cn.faury.fwmf.module.api.payment.service.WeixinPayRecordsService;
+import cn.faury.fwmf.module.api.order.bean.AlipayCallbackRecordsBean;
+import cn.faury.fwmf.module.api.order.bean.AlipayRecordsBean;
+import cn.faury.fwmf.module.api.order.bean.WeixinCallbackRecordsBean;
+import cn.faury.fwmf.module.api.order.bean.WeixinPayRecordsBean;
+import cn.faury.fwmf.module.api.order.service.AlipayRecordsService;
+import cn.faury.fwmf.module.api.order.service.WeixinPayRecordsService;
 import cn.faury.fwmf.module.service.order.mapper.OrderInfoMapper;
 import cn.faury.fdk.common.anotation.NonNull;
 import cn.faury.fdk.common.entry.RestResultCode;

@@ -47,4 +47,23 @@
     <bean id="promotionInfoService" class="cn.faury.fwmf.module.service.order.service.PromotionInfoServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
+
+
+    <!--微信支付请求就来 -->
+    <bean id="weixinPayRecordsService" class="cn.faury.fwmf.module.service.order.service.WeixinPayRecordsServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--微信支付回调记录 -->
+    <bean id="weixinCallbackRecordsService" class="cn.faury.fwmf.module.service.order.service.WeixinCallbackRecordsServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+
+    <!--支付宝支付请求就来 -->
+    <bean id="alipayRecordsService" class="cn.faury.fwmf.module.service.order.service.AlipayRecordsServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+    <!--支付宝支付回调记录 -->
+    <bean id="alipayCallbackRecordsService" class="cn.faury.fwmf.module.service.order.service.AlipayCallbackRecordsServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
 </beans>
