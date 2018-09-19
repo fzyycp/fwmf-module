@@ -1,9 +1,7 @@
 package cn.faury.fwmf.module.service.app.mapper;
 
 import cn.faury.fdk.mybatis.AutoScannedMapper;
-import cn.faury.fwmf.module.api.app.bean.ShopRAppInfoBean;
 import cn.faury.fwmf.module.api.app.bean.UserRAppInfoBean;
-import cn.faury.fwmf.module.service.app.sqlProvider.ShopRAppInfoSqlProvider;
 import cn.faury.fwmf.module.service.app.sqlProvider.UserRAppInfoSqlProvider;
 import org.apache.ibatis.annotations.*;
 

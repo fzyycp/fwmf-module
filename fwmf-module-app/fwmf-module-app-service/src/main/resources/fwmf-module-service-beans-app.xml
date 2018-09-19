@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--APP服务 -->
     <bean id="appInfoService" class="cn.faury.fwmf.module.service.app.service.AppInfoServiceImpl">
@@ -15,6 +15,16 @@
 
     <!--用户授权APP服务 -->
     <bean id="userRAppInfoService" class="cn.faury.fwmf.module.service.app.service.UserRAppInfoServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+
+    <!--app测试用户-服务-->
+    <bean id="appTesterService" class="cn.faury.fwmf.module.service.app.service.AppTesterServiceImpl">
+        <constructor-arg name="commonDao" ref="commonDao"/>
+    </bean>
+
+    <!--app版本更新服务-->
+    <bean id="appVersionService" class="cn.faury.fwmf.module.service.app.service.AppVersionServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
 </beans>

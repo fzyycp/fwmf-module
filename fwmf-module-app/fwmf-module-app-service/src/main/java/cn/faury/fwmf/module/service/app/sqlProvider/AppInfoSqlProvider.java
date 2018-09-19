@@ -2,16 +2,22 @@ package cn.faury.fwmf.module.service.app.sqlProvider;
 
 import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fwmf.module.api.app.bean.AppInfoBean;
+import cn.faury.fwmf.module.service.app.generate.sqlProvider.AppInfoGenerateSqlProvider;
 import cn.faury.fwmf.module.service.constant.DBConstOfApp;
 
 import java.util.List;
 import java.util.Map;
 
 /**
+ * SQL Provider：APP信息
  *
- * 手机APP注册信息SQL提供
+ * <pre>
+ *     AppInfoGenerateSqlProvider为数据库通用增删改查操作，不可修改
+ *     当前SQL Provider继承自AppInfoGenerateSqlProvider，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public class AppInfoSqlProvider {
+public class AppInfoSqlProvider extends AppInfoGenerateSqlProvider {
 
 	/**
 	 * SQL拼接字符串:WHERE
@@ -239,7 +245,7 @@ public class AppInfoSqlProvider {
 			if (StringUtil.isNotEmpty(app.getAppName())) {
 				sql.append("`APP_NAME`=#{appName},");
 			}
-			if (StringUtil.isNotEmpty(app.getAppOS())) {
+			if (StringUtil.isNotEmpty(app.getAppOs())) {
 				sql.append("`APP_OS`=#{appOS},");
 			}
 			if (null != app.getSystemId()) {

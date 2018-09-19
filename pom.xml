@@ -17,15 +17,16 @@
         <module>fwmf-module-app/fwmf-module-app-spring-boot-autoconfigure</module>
         <module>fwmf-module-app/fwmf-module-app-spring-boot-starter</module>
 
-        <module>fwmf-module-apptester/fwmf-module-apptester-api</module>
-        <module>fwmf-module-apptester/fwmf-module-apptester-service</module>
-        <module>fwmf-module-apptester/fwmf-module-apptester-spring-boot-autoconfigure</module>
-        <module>fwmf-module-apptester/fwmf-module-apptester-spring-boot-starter</module>
-
-        <module>fwmf-module-appversion/fwmf-module-appversion-api</module>
-        <module>fwmf-module-appversion/fwmf-module-appversion-service</module>
-        <module>fwmf-module-appversion/fwmf-module-appversion-spring-boot-autoconfigure</module>
-        <module>fwmf-module-appversion/fwmf-module-appversion-spring-boot-starter</module>
+        <!--合并到app模块中-->
+        <!--<module>fwmf-module-apptester/fwmf-module-apptester-api</module>-->
+        <!--<module>fwmf-module-apptester/fwmf-module-apptester-service</module>-->
+        <!--<module>fwmf-module-apptester/fwmf-module-apptester-spring-boot-autoconfigure</module>-->
+        <!--<module>fwmf-module-apptester/fwmf-module-apptester-spring-boot-starter</module>-->
+        <!--合并到app模块中-->
+        <!--<module>fwmf-module-appversion/fwmf-module-appversion-api</module>-->
+        <!--<module>fwmf-module-appversion/fwmf-module-appversion-service</module>-->
+        <!--<module>fwmf-module-appversion/fwmf-module-appversion-spring-boot-autoconfigure</module>-->
+        <!--<module>fwmf-module-appversion/fwmf-module-appversion-spring-boot-starter</module>-->
 
         <module>fwmf-module-area/fwmf-module-area-api</module>
         <module>fwmf-module-area/fwmf-module-area-service</module>

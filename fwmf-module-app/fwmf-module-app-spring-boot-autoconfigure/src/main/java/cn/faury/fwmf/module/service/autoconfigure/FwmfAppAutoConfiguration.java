@@ -2,12 +2,8 @@ package cn.faury.fwmf.module.service.autoconfigure;
 
 import cn.faury.fdk.mybatis.autoconfigure.FdkMybatisAutoConfiguration;
 import cn.faury.fdk.mybatis.dao.CommonDao;
-import cn.faury.fwmf.module.api.app.service.AppInfoService;
-import cn.faury.fwmf.module.api.app.service.ShopRAppInfoService;
-import cn.faury.fwmf.module.api.app.service.UserRAppInfoService;
-import cn.faury.fwmf.module.service.app.service.AppInfoServiceImpl;
-import cn.faury.fwmf.module.service.app.service.ShopRAppInfoServiceImpl;
-import cn.faury.fwmf.module.service.app.service.UserRAppInfoServiceImpl;
+import cn.faury.fwmf.module.api.app.service.*;
+import cn.faury.fwmf.module.service.app.service.*;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -29,6 +25,24 @@ public class FwmfAppAutoConfiguration {
     @ConditionalOnClass({AppInfoService.class, AppInfoServiceImpl.class})
     public AppInfoService appInfoService(CommonDao commonDao) {
         return new AppInfoServiceImpl(commonDao);
+    }
+
+    /**
+     * APP测试人员服务
+     */
+    @Bean
+    @ConditionalOnClass({AppTesterService.class, AppTesterServiceImpl.class})
+    public AppTesterService appTesterService(CommonDao commonDao) {
+        return new AppTesterServiceImpl(commonDao);
+    }
+
+    /**
+     * APP版本服务
+     */
+    @Bean
+    @ConditionalOnClass({AppVersionService.class, AppVersionServiceImpl.class})
+    public AppVersionService appVersionService(CommonDao commonDao) {
+        return new AppVersionServiceImpl(commonDao);
     }
 
     /**

@@ -10,7 +10,7 @@
         <!--fwmf generator配置-->
         <fwmfGenerator targetPackage="cn.faury.fwmf.module"
                        targetProject=".\src\generator\java"
-                       modelName="operation"
+                       modelName="app"
                        enableGeneratorModifiableMvc="true"
         />
         <!--生成gateway用controller-->
@@ -26,19 +26,25 @@
         <plugin type="cn.faury.fwmf.generator.plugins.ModifiableMvcPlugin">
             <property name="targetProject" value=".\src\generator\java"/>
             <property name="targetBasePackage" value="cn.faury.fwmf.module"/>
-            <property name="modelKeyName" value="operation"/>
+            <property name="modelKeyName" value="app"/>
         </plugin>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://128.0.9.252:3306/xsn"
+                        connectionURL="jdbc:mysql://128.0.9.252:3306/ftpl"
                         userId="root" password="888888">
             <property name="remarks" value="true"/>
             <property name="useInformationSchema" value="true"/>
         </jdbcConnection>
 
         <!-- 指定数据库表，对应的表生成的Controller、Service、Mapper、SQLProvider模块名,table的简化，与下面的配置等效 -->
-        <fwmfTable tableName="sys_t_operation_record" modelKey="OperationRecord">
-            <generatedKey column="OPERATION_RECORD_ID" sqlStatement="JDBC"/>
+        <fwmfTable tableName="sys_t_app_info" modelKey="AppInfo">
+            <generatedKey column="APP_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="sys_t_app_tester" modelKey="AppTester">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="sys_t_app_version" modelKey="AppVersion">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
         </fwmfTable>
         <!--<fwmfTable tableName="sys_t_code_info" modelKey="FwmfCodeInfo" actionKey="/system/code">-->
             <!--<generatedKey column="CODE_ID" sqlStatement="JDBC"/>-->

@@ -2,6 +2,7 @@ package cn.faury.fwmf.module.api.app.service;
 
 import cn.faury.fdk.common.anotation.permission.Read;
 import cn.faury.fdk.common.anotation.permission.Write;
+import cn.faury.fdk.common.db.CrudBaseService;
 import cn.faury.fdk.common.db.PageInfo;
 import cn.faury.fdk.common.entry.RestResultCode;
 import cn.faury.fdk.common.utils.AssertUtil;
@@ -15,7 +16,7 @@ import java.util.Map;
 /**
  * APP注册服务协议
  */
-public interface AppInfoService {
+public interface AppInfoService extends CrudBaseService<AppInfoBean, Long> {
 
 	/**
 	 * 根据appCode获取APP注册信息
@@ -393,7 +394,7 @@ public interface AppInfoService {
         AppInfoBean app = new AppInfoBean();
         app.setAppCode(appCode);
         app.setAppName(appName);
-        app.setAppOS(appOS);
+        app.setAppOs(appOS);
         app.setSystemId(systemId);
         return updateAppInfo(app);
     }

@@ -2,6 +2,7 @@ package cn.faury.fwmf.module.service.app.mapper;
 
 import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.app.bean.AppInfoBean;
+import cn.faury.fwmf.module.service.app.generate.mapper.AppInfoGenerateMapper;
 import cn.faury.fwmf.module.service.app.sqlProvider.AppInfoSqlProvider;
 import cn.faury.fwmf.module.service.constant.DBConstOfApp;
 import org.apache.ibatis.annotations.*;
@@ -10,11 +11,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Mybatis Mapper：APP信息
  *
- * APP注册服务 Mapper
+ * <pre>
+ *     AppInfoGenerateMapper为数据库通用增删改查操作，不可修改
+ *     当前Mapper继承自AppInfoGenerateMapper，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
 @AutoScannedMapper
-public interface AppInfoMapper {
+public interface AppInfoMapper  extends AppInfoGenerateMapper {
 
 	/**
 	 * check APPCode信息
