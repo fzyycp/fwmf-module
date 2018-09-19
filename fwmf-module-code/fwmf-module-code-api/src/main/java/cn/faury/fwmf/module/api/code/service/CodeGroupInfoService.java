@@ -1,12 +1,10 @@
 package cn.faury.fwmf.module.api.code.service;
 
 import cn.faury.fdk.common.db.CrudBaseService;
-import cn.faury.fwmf.module.api.code.bean.CodeInfoBean;
-
-import java.util.List;
+import cn.faury.fwmf.module.api.code.bean.CodeGroupInfoBean;
 
 /**
- * 服务接口：数据字典表
+ * 服务接口：数据字典分组表
  * <p>
  * <pre>
  *     CrudBaseService为数据库通用增删改查操作，不可修改
@@ -14,13 +12,5 @@ import java.util.List;
  *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
  * </pre>
  */
-public interface CodeInfoService extends CrudBaseService<CodeInfoBean, Long> {
-
-    /**
-     * 根据分组编码获取该组列表
-     *
-     * @param codeGroupCode 分组编码
-     * @return 该组列表
-     */
-    public List<CodeInfoBean> getCodeListByGroupCode(String codeGroupCode);
+public interface CodeGroupInfoService extends CrudBaseService<CodeGroupInfoBean, Long> {
 }

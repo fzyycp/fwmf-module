@@ -7,4 +7,9 @@
 	<bean id="codeInfoService" class="cn.faury.fwmf.module.service.code.service.CodeInfoServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
 	</bean>
+
+	<!--字典分组服务 -->
+	<bean id="codeGroupInfoService" class="cn.faury.fwmf.module.service.code.service.CodeGroupInfoServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
 </beans>

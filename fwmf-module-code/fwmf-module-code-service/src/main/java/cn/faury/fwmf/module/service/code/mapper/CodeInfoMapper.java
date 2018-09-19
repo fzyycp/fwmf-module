@@ -2,57 +2,29 @@ package cn.faury.fwmf.module.service.code.mapper;
 
 import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.code.bean.CodeInfoBean;
-import cn.faury.fwmf.module.service.code.sqlProvider.CodeInfoSQLProvider;
+import cn.faury.fwmf.module.service.code.generate.mapper.CodeInfoGenerateMapper;
 import cn.faury.fwmf.module.service.constant.DBConstOfCode;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * 字典信息管理mapper类
+ * Mybatis Mapper：数据字典表
+ * <p>
+ * <pre>
+ *     CodeInfoGenerateMapper为数据库通用增删改查操作，不可修改
+ *     当前Mapper继承自CodeInfoGenerateMapper，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
 @AutoScannedMapper
-public interface CodeInfoMapper {
-    /**
-     * 查询字典
-     *
-     * @param map 查询参数
-     * @return 成功条数
-     */
-    @SelectProvider(method = "search", type = CodeInfoSQLProvider.class)
-    @ResultType(value = CodeInfoBean.class)
-    public List<CodeInfoBean> search(Map<String, Object> map);
+public interface CodeInfoMapper extends CodeInfoGenerateMapper {
 
-    /**
-     * 根据类型查找字典
-     */
-    @Select(" SELECT CODE_ID codeId,CODE_NAME codeName,CODE_CODE codeCode,CODE_TYPE codeType,CODE_ORDER codeOrder"
-            + " FROM " + DBConstOfCode.TN_CODE_INFO
-            + " WHERE CODE_TYPE = #{codeType} "
-            + " ORDER BY codeOrder ")
-    @ResultType(value = CodeInfoBean.class)
-    public List<CodeInfoBean> getCodeInfoByType(Map<String, Object> map);
-
-    /**
-     * 根据系统code、 公共代码code 获取公共代码配置
-     *
-     * @param parameter
-     * @return
-     */
-    @SelectProvider(method = "getCodeInfoListByCode", type = CodeInfoSQLProvider.class)
+    @Select({"SELECT c.CODE_ID, c.CODE_GROUP_ID, c.CODE_NAME, c.CODE_CODE, c.CODE_ORDER"
+            , " FROM " + DBConstOfCode.TN_CODE_INFO + " c," + DBConstOfCode.TN_CODE_GROUP_INFO + " g"
+            , "WHERE c.CODE_GROUP_ID = g.CODE_GROUP_ID"
+            , "  AND g.CODE_GROUP_CODE = #{codeGroupCode}"})
     @ResultType(CodeInfoBean.class)
-    public List<CodeInfoBean> getCodeInfoListByCode(final Map<String, Object> parameter);
-
-    @Insert("insert into " + DBConstOfCode.TN_CODE_INFO
-            + " (code_code,code_name,code_type,code_order)"
-            + "  values(#{codeCode},#{codeName},#{codeType},#{codeOrder}) ")
-    @Options(useGeneratedKeys = true, keyProperty = "codeId")
-    public Long insertCodeInfo(CodeInfoBean bean);
-
-    @UpdateProvider(type = CodeInfoSQLProvider.class, method = "update")
-    public int updateCodeInfoByCodeId(Map<String, Object> map);
-
-    @Delete("delete from " + DBConstOfCode.TN_CODE_INFO + " where code_id=#{_paramter} ")
-    public long delete(Long codeId);
+    List<CodeInfoBean> getCodeListByGroupCode(String codeGroupCode);
 }

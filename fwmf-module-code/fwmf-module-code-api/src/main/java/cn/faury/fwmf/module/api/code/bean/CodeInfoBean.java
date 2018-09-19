@@ -1,129 +1,36 @@
 package cn.faury.fwmf.module.api.code.bean;
 
+import cn.faury.fdk.common.db.PrimaryKeyEnableBean;
 import cn.faury.fdk.common.utils.JsonUtil;
-
+import cn.faury.fwmf.module.api.code.generate.bean.CodeInfoGenerateBean;
 import java.io.Serializable;
 
 /**
- * 字典信息实体类
+ * POJO对象：数据字典表
+ *
+ * <pre>
+ *     CodeInfoGenerateBean为数据库表自动生成POJO对象，不可修改
+ *     当前POJO继承自CodeInfoGenerateBean，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public class CodeInfoBean implements Serializable {
+public class CodeInfoBean extends CodeInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
 
     /**
-     * 字典ID
-     */
-    private Long codeId;
-
-    /**
-     * 字典名称
-     */
-    private String codeName;
-
-    /**
-     * 字典编码
-     */
-    private String codeCode;
-
-    /**
-     * 字典类型【0：分组，1：字典】
-     */
-    private String codeType;
-
-    /**
-     * 排序
-     */
-    private String codeOrder;
-
-    /**
-     * 获取codeId
+     * 获取表主键Key值(自动生成代码)
      *
-     * @return codeId
+     * @return 主键值
      */
-    public Long getCodeId() {
-        return codeId;
+    @Override
+    public Long getPrimaryKey() {
+        return this.getCodeId();
     }
 
     /**
-     * 设置codeId
+     * JSON序列化对象(自动生成代码)
      *
-     * @param codeId 值
+     * @return JSON化对象
      */
-    public void setCodeId(Long codeId) {
-        this.codeId = codeId;
-    }
-
-    /**
-     * 获取codeName
-     *
-     * @return codeName
-     */
-    public String getCodeName() {
-        return codeName;
-    }
-
-    /**
-     * 设置codeName
-     *
-     * @param codeName 值
-     */
-    public void setCodeName(String codeName) {
-        this.codeName = codeName;
-    }
-
-    /**
-     * 获取codeCode
-     *
-     * @return codeCode
-     */
-    public String getCodeCode() {
-        return codeCode;
-    }
-
-    /**
-     * 设置codeCode
-     *
-     * @param codeCode 值
-     */
-    public void setCodeCode(String codeCode) {
-        this.codeCode = codeCode;
-    }
-
-    /**
-     * 获取codeType
-     *
-     * @return codeType
-     */
-    public String getCodeType() {
-        return codeType;
-    }
-
-    /**
-     * 设置codeType
-     *
-     * @param codeType 值
-     */
-    public void setCodeType(String codeType) {
-        this.codeType = codeType;
-    }
-
-    /**
-     * 获取codeOrder
-     *
-     * @return codeOrder
-     */
-    public String getCodeOrder() {
-        return codeOrder;
-    }
-
-    /**
-     * 设置codeOrder
-     *
-     * @param codeOrder 值
-     */
-    public void setCodeOrder(String codeOrder) {
-        this.codeOrder = codeOrder;
-    }
-
     @Override
     public String toString() {
         return JsonUtil.objectToJson(this);

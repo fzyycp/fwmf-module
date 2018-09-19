@@ -43,7 +43,7 @@
         <module>fwmf-module-code/fwmf-module-code-service</module>
         <module>fwmf-module-code/fwmf-module-code-spring-boot-autoconfigure</module>
         <module>fwmf-module-code/fwmf-module-code-spring-boot-starter</module>
-        <module>fwmf-module-code/fwmf-module-code-web</module>
+        <!--<module>fwmf-module-code/fwmf-module-code-web</module>-->
 
         <module>fwmf-module-common/fwmf-module-common-service</module>
         <module>fwmf-module-common/fwmf-module-common-web</module>

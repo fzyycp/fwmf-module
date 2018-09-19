@@ -16,8 +16,9 @@ jasypt:
 #mybatis
 #entity扫描的包名
 mybatis:
-  type-aliases-package: cn.faury
-  mapper-locations: classpath*:/mybaits/*Mapper.xml  #Mapper.xml所在的位置
+  mapper-locations: classpath*:/mybaits/*Mapper.xml #Mapper.xml所在的位置
+  configuration:
+    map-underscore-to-camel-case: true
 
 #pagehelper分页插件配置
 pagehelper:
