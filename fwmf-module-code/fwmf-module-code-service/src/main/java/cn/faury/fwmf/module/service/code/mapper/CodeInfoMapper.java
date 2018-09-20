@@ -4,6 +4,7 @@ import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.code.bean.CodeInfoBean;
 import cn.faury.fwmf.module.service.code.generate.mapper.CodeInfoGenerateMapper;
 import cn.faury.fwmf.module.service.constant.DBConstOfCode;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 
@@ -22,9 +23,20 @@ import java.util.List;
 public interface CodeInfoMapper extends CodeInfoGenerateMapper {
 
     @Select({"SELECT c.CODE_ID, c.CODE_GROUP_ID, c.CODE_NAME, c.CODE_CODE, c.CODE_ORDER"
-            , " FROM " + DBConstOfCode.TN_CODE_INFO + " c," + DBConstOfCode.TN_CODE_GROUP_INFO + " g"
+            , " FROM ", DBConstOfCode.TN_CODE_INFO, " c,", DBConstOfCode.TN_CODE_GROUP_INFO, " g"
             , "WHERE c.CODE_GROUP_ID = g.CODE_GROUP_ID"
             , "  AND g.CODE_GROUP_CODE = #{codeGroupCode}"})
     @ResultType(CodeInfoBean.class)
     List<CodeInfoBean> getCodeListByGroupCode(String codeGroupCode);
+
+    @Delete({"DELETE FROM ", DBConstOfCode.TN_CODE_INFO
+            , "WHERE CODE_GROUP_ID IN("
+            , "       SELECT CODE_GROUP_ID FROM " + DBConstOfCode.TN_CODE_GROUP_INFO
+            , "        WHERE CODE_GROUP_CODE = #{codeGroupCode}"
+            , ")"})
+    int deleteByGroupCode(String codeGroupCode);
+
+    @Delete({"DELETE FROM " + DBConstOfCode.TN_CODE_INFO
+            , "WHERE CODE_GROUP_ID = #{codeGroupId}"})
+    int deleteByGroupId(Long codeGroupId);
 }

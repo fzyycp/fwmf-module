@@ -37,7 +37,31 @@ public class CodeInfoServiceImpl extends CrudBaseServiceImpl<CodeInfoBean, Long>
      */
     @Override
     public List<CodeInfoBean> getCodeListByGroupCode(String codeGroupCode) {
-        String state = this.mapper + ".getCodeListByGroupCode";
+        String state = this.mapper.getName() + ".getCodeListByGroupCode";
         return this.commonDao.selectList(state, codeGroupCode);
+    }
+
+    /**
+     * 根据分组编码删除该组列表
+     *
+     * @param codeGroupCode 分组编码
+     * @return 该组列表
+     */
+    @Override
+    public int deleteByGroupCode(String codeGroupCode) {
+        String state = this.mapper.getName() + ".deleteByGroupCode";
+        return this.commonDao.delete(state, codeGroupCode);
+    }
+
+    /**
+     * 根据分组ID删除该组列表
+     *
+     * @param codeGroupId 分组ID
+     * @return 成功删除条数
+     */
+    @Override
+    public int deleteByGroupId(Long codeGroupId) {
+        String state = this.mapper.getName() + ".deleteByGroupId";
+        return this.commonDao.delete(state, codeGroupId);
     }
 }

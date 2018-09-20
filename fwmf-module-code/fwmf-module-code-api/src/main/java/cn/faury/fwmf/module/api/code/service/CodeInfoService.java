@@ -23,4 +23,20 @@ public interface CodeInfoService extends CrudBaseService<CodeInfoBean, Long> {
      * @return 该组列表
      */
     public List<CodeInfoBean> getCodeListByGroupCode(String codeGroupCode);
+
+    /**
+     * 根据分组编码删除该组列表
+     *
+     * @param codeGroupCode 分组编码
+     * @return 成功删除条数
+     */
+    public int deleteByGroupCode(String codeGroupCode);
+
+    /**
+     * 根据分组ID删除该组列表
+     *
+     * @param codeGroupId 分组ID
+     * @return 成功删除条数
+     */
+    public int deleteByGroupId(Long codeGroupId);
 }

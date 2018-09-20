@@ -19,6 +19,7 @@ mybatis:
   mapper-locations: classpath*:/mybaits/*Mapper.xml #Mapper.xml所在的位置
   configuration:
     map-underscore-to-camel-case: true
+  type-aliases-package: cn.faury
 
 #pagehelper分页插件配置
 pagehelper:

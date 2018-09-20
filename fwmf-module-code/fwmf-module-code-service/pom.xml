@@ -12,10 +12,10 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-code-service</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <properties>
-        <fwmf.module.user.code.api.version>0.0.2</fwmf.module.user.code.api.version>
+        <fwmf.module.user.code.api.version>0.0.3</fwmf.module.user.code.api.version>
         <fwmf.module.common.service.version>0.0.1</fwmf.module.common.service.version>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
     </properties>
@@ -34,6 +34,11 @@
             <groupId>cn.faury.fdk</groupId>
             <artifactId>fdk-mybatis</artifactId>
             <version>${fdk.mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.0.7.RELEASE</version>
         </dependency>
     </dependencies>
     <distributionManagement>
