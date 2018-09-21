@@ -40,6 +40,7 @@ public class OperationRecordBean extends OperationRecordGenerateBean implements 
 
     /**
      * 设置操作记录配置
+     *
      * @param operation 操作记录配置
      */
     public void setOperation(Operation operation) {
@@ -47,6 +48,25 @@ public class OperationRecordBean extends OperationRecordGenerateBean implements 
             this.setMenu(operation.menu());
             this.setFunction(operation.function());
             this.setOptLevel(operation.type().getLevel());
+            this.setOptCode(operation.type().getCode());
+            this.setOptDesc(operation.type().getDesc());
+        }
+    }
+
+    /**
+     * 设置操作记录配置
+     *
+     * @param menu     菜单名称
+     * @param function 功能按钮名称
+     * @param type     操作类型
+     */
+    public void setOperation(String menu, String function, Operation.Type type) {
+        this.setMenu(menu);
+        this.setFunction(function);
+        if (type != null) {
+            this.setOptLevel(type.getLevel());
+            this.setOptCode(type.getCode());
+            this.setOptDesc(type.getDesc());
         }
     }
 }
