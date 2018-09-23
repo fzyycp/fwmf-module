@@ -12,10 +12,10 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-order-spring-boot-autoconfigure</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <properties>
-        <fwmf.module.order.service.version>0.0.3</fwmf.module.order.service.version>
+        <fwmf.module.order.service.version>0.0.4</fwmf.module.order.service.version>
         <fdk.mybatis.spring.boot.autoconfigure.version>0.0.1</fdk.mybatis.spring.boot.autoconfigure.version>
     </properties>
 

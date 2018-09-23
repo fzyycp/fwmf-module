@@ -8,17 +8,24 @@ import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.bean.UserPasswordBean;
 import cn.faury.fwmf.module.service.constant.DBConstOfUserRole;
-import cn.faury.fwmf.module.service.user.sqlProvider.UserInfoSQLProvider;
+import cn.faury.fwmf.module.service.user.generate.mapper.UserInfoGenerateMapper;
+import cn.faury.fwmf.module.service.user.sqlProvider.UserInfoSqlProvider;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * 用户信息表Mapper
+ * Mybatis Mapper：后台用户管理
+ *
+ * <pre>
+ *     UserInfoGenerateMapper为数据库通用增删改查操作，不可修改
+ *     当前Mapper继承自UserInfoGenerateMapper，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
 @AutoScannedMapper
-public interface UserInfoMapper {
+public interface UserInfoMapper extends UserInfoGenerateMapper {
 
     /**
      * 根据用户ID获取用户信息
@@ -66,7 +73,7 @@ public interface UserInfoMapper {
      * @param map 查询参数
      * @return 成功条数
      */
-    @SelectProvider(method = "search", type = UserInfoSQLProvider.class)
+    @SelectProvider(method = "search", type = UserInfoSqlProvider.class)
     @ResultType(value = UserInfoBean.class)
     List<UserInfoBean> search(Map<String, Object> map);
 
@@ -82,7 +89,7 @@ public interface UserInfoMapper {
     @Options(useGeneratedKeys = true, keyProperty = "userId")
     Long insertUserInfo(UserInfoBean bean);
 
-    @UpdateProvider(type = UserInfoSQLProvider.class,method = "updateUserInfoById")
+    @UpdateProvider(type = UserInfoSqlProvider.class,method = "updateUserInfoById")
     int updateUserInfoById(Map<String, Object> map);
 
     @Update("UPDATE " + DBConstOfUserRole.TN_USER_INFO + " SET IS_DELETE='Y',UPDATE_PERSON=#{updatePerson},UPDATE_TIME=CURRENT_TIMESTAMP WHERE USER_ID=#{userId}")

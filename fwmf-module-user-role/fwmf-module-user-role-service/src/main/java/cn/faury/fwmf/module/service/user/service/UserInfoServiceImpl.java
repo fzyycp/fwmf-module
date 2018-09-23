@@ -7,11 +7,12 @@ import cn.faury.fdk.common.utils.DateUtil;
 import cn.faury.fdk.common.utils.SigAESUtil;
 import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
-import cn.faury.fwmf.module.api.role.service.RoleService;
+import cn.faury.fwmf.module.api.role.service.RoleInfoService;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.bean.UserPasswordBean;
 import cn.faury.fwmf.module.api.user.config.UserType;
-import cn.faury.fwmf.module.api.user.service.UserService;
+import cn.faury.fwmf.module.api.user.service.UserInfoService;
+import cn.faury.fwmf.module.service.common.service.CrudBaseServiceImpl;
 import cn.faury.fwmf.module.service.user.mapper.UserInfoMapper;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,24 +21,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 后台用户服务提供者
+ * 服务实现：后台用户管理
+ *
+ * <pre>
+ *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
+ *     当前服务实现了UserInfoService服务接口，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public class UserServiceImpl implements UserService<UserInfoBean,UserPasswordBean> {
-
-    /**
-     * 数据库操作器
-     */
-    protected CommonDao commonDao;
+public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long> implements UserInfoService<UserInfoBean,UserPasswordBean> {
 
     /**
      * 角色服务
      */
-    protected RoleService roleService;
+    protected RoleInfoService roleInfoService;
 
-    public UserServiceImpl(CommonDao commonDao, RoleService roleService) {
-        this.commonDao = commonDao;
-        this.roleService = roleService;
+    /**
+     * 构造函数(自动生成代码)
+     *
+     * @param commonDao 数据库操作器
+     */
+    public UserInfoServiceImpl(CommonDao commonDao, RoleInfoService roleInfoService) {
+        super(commonDao, UserInfoMapper.class);
+        this.roleInfoService = roleInfoService;
     }
+
 
     /**
      * 加密密码
@@ -151,7 +159,7 @@ public class UserServiceImpl implements UserService<UserInfoBean,UserPasswordBea
         AssertUtil.assertTrue((userId != null && userId > 0), "插入用户信息失败");
 
         // 插入用户角色信息
-        roleService.insertUserRRole(userId, roleCode);
+        roleInfoService.insertUserRRole(userId, roleCode);
         return userId;
     }
 
@@ -238,9 +246,9 @@ public class UserServiceImpl implements UserService<UserInfoBean,UserPasswordBea
         // 更新用户信息
         int update1 = this.updateUserInfoById(userName, efctYmd, exprYmd, updatePerson, userId);
         // 删除已有角色信息
-        roleService.deleteUserRRole(userId);
+        roleInfoService.deleteUserRRole(userId);
         // 插入新的角色信息
-        roleService.insertUserRRole(userId, roleCode);
+        roleInfoService.insertUserRRole(userId, roleCode);
         return update1;
     }
 
@@ -333,4 +341,5 @@ public class UserServiceImpl implements UserService<UserInfoBean,UserPasswordBea
         parameter.put("updatePerson", updatePerson);
         return this.commonDao.update(state, parameter);
     }
+
 }

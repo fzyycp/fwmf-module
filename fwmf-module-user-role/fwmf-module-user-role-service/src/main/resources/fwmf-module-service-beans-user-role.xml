@@ -4,14 +4,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!--角色服务 -->
-	<bean id="roleService" class="cn.faury.fwmf.module.service.role.service.RoleServiceImpl">
+	<bean id="roleInfoService" class="cn.faury.fwmf.module.service.role.service.RoleInfoServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
 	</bean>
 
 	<!--用户服务 -->
-	<bean id="userService" class="cn.faury.fwmf.module.service.user.service.UserServiceImpl">
+	<bean id="userInfoService" class="cn.faury.fwmf.module.service.user.service.UserInfoServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
-		<constructor-arg name="roleService" ref="roleService"/>
+		<constructor-arg name="roleInfoService" ref="roleInfoService"/>
 	</bean>
 
 	<!--优惠用户组关联服务 -->
@@ -42,7 +42,7 @@
 	<!--商店用户服务 -->
 	<bean id="shopRUserService" class="cn.faury.fwmf.module.service.user.service.ShopRUserServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
-		<constructor-arg name="userService" ref="userService"/>
+		<constructor-arg name="userInfoService" ref="userInfoService"/>
 	</bean>
 
 	<!--系统用户服务 -->

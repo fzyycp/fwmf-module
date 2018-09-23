@@ -2,9 +2,9 @@ package cn.faury.fwmf.module.service.autoconfigure;
 
 import cn.faury.fdk.mybatis.autoconfigure.FdkMybatisAutoConfiguration;
 import cn.faury.fdk.mybatis.dao.CommonDao;
-import cn.faury.fwmf.module.api.role.service.RoleService;
+import cn.faury.fwmf.module.api.role.service.RoleInfoService;
 import cn.faury.fwmf.module.api.user.service.*;
-import cn.faury.fwmf.module.service.role.service.RoleServiceImpl;
+import cn.faury.fwmf.module.service.role.service.RoleInfoServiceImpl;
 import cn.faury.fwmf.module.service.user.service.*;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -25,18 +25,18 @@ public class FwmfUserRoleAutoConfiguration {
      * 角色服务
      */
     @Bean
-    @ConditionalOnClass({RoleService.class, RoleServiceImpl.class})
-    public RoleService roleService(CommonDao commonDao) {
-        return new RoleServiceImpl(commonDao);
+    @ConditionalOnClass({RoleInfoService.class, RoleInfoServiceImpl.class})
+    public RoleInfoService roleInfoService(CommonDao commonDao) {
+        return new RoleInfoServiceImpl(commonDao);
     }
 
     /**
      * 用户服务
      */
     @Bean
-    @ConditionalOnClass({UserService.class, UserServiceImpl.class})
-    public UserService userService(CommonDao commonDao, RoleService roleService) {
-        return new UserServiceImpl(commonDao, roleService);
+    @ConditionalOnClass({UserInfoService.class, UserInfoServiceImpl.class})
+    public UserInfoService userInfoService(CommonDao commonDao, RoleInfoService roleInfoService) {
+        return new UserInfoServiceImpl(commonDao, roleInfoService);
     }
 
     /**
@@ -88,9 +88,9 @@ public class FwmfUserRoleAutoConfiguration {
      * 商店用户服务
      */
     @Bean
-    @ConditionalOnClass({ShopRUserService.class, ShopRUserServiceImpl.class, UserService.class})
-    public ShopRUserService shopRUserService(CommonDao commonDao, UserService userService) {
-        return new ShopRUserServiceImpl(commonDao, userService);
+    @ConditionalOnClass({ShopRUserService.class, ShopRUserServiceImpl.class, UserInfoService.class})
+    public ShopRUserService shopRUserService(CommonDao commonDao, UserInfoService userInfoService) {
+        return new ShopRUserServiceImpl(commonDao, userInfoService);
     }
 
     /**

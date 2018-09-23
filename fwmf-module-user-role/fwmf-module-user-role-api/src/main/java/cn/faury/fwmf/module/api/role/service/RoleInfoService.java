@@ -1,19 +1,22 @@
-/*
- * Copyright (c)
- */
-
 package cn.faury.fwmf.module.api.role.service;
 
 import cn.faury.fdk.common.anotation.permission.Read;
 import cn.faury.fdk.common.anotation.permission.Write;
+import cn.faury.fdk.common.db.CrudBaseService;
 import cn.faury.fwmf.module.api.role.bean.RoleInfoBean;
 
 import java.util.List;
 
 /**
- * 角色服务协议
+ * 服务接口：角色信息表
+ *
+ * <pre>
+ *     CrudBaseService为数据库通用增删改查操作，不可修改
+ *     当前服务接口继承自CrudBaseService，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public interface RoleService<T extends RoleInfoBean> {
+public interface RoleInfoService<T extends RoleInfoBean> extends CrudBaseService<T, Long> {
 
     /**
      * 根据用户ID获取指定系统下的角色信息，只查询启用状态的角色和业务系统
@@ -78,4 +81,5 @@ public interface RoleService<T extends RoleInfoBean> {
      */
     @Write
     int updateUserRRole(final Long userId, final String roleCode);
+
 }

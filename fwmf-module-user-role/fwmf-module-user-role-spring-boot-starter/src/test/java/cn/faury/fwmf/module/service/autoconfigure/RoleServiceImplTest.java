@@ -1,7 +1,7 @@
 package cn.faury.fwmf.module.service.autoconfigure;
 
 import cn.faury.fwmf.module.api.role.bean.RoleInfoBean;
-import cn.faury.fwmf.module.api.role.service.RoleService;
+import cn.faury.fwmf.module.api.role.service.RoleInfoService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,11 +16,11 @@ import java.util.List;
 public class RoleServiceImplTest {
 
     @Autowired
-    RoleService roleService;
+    RoleInfoService roleInfoService;
 
     @Test
     public void getUserRolesByUserId() throws Exception {
-        List<RoleInfoBean> roleInfoBeans = roleService.getUserRolesByUserId("fwmf-web", 2L);
+        List<RoleInfoBean> roleInfoBeans = roleInfoService.getUserRolesByUserId("fwmf-web", 2L);
         System.out.println(roleInfoBeans);
         Assert.assertNotNull(roleInfoBeans);
         Assert.assertTrue(roleInfoBeans.size() == 1);
@@ -29,7 +29,7 @@ public class RoleServiceImplTest {
 
     @Test
     public void getUserRolePermsByUserId() throws Exception {
-        List<String> perms = roleService.getUserRolePermsByUserId("fwmf-web", 2L);
+        List<String> perms = roleInfoService.getUserRolePermsByUserId("fwmf-web", 2L);
         System.out.println(perms);
         Assert.assertNotNull(perms);
         Assert.assertTrue(perms.size() == 0);
@@ -37,7 +37,7 @@ public class RoleServiceImplTest {
 
     @Test
     public void getRoleInfoByCode() throws Exception {
-        RoleInfoBean roleInfoBean = roleService.getRoleInfoByCode("SYSTEM");
+        RoleInfoBean roleInfoBean = roleInfoService.getRoleInfoByCode("SYSTEM");
         System.out.println(roleInfoBean);
         Assert.assertNotNull(roleInfoBean);
         Assert.assertTrue(roleInfoBean.getRoleId() == 2L);
@@ -45,19 +45,19 @@ public class RoleServiceImplTest {
 
     @Test
     public void insertUserRRole() throws Exception {
-        int add = roleService.insertUserRRole(100L, "SYSTEM");
+        int add = roleInfoService.insertUserRRole(100L, "SYSTEM");
         Assert.assertTrue(add == 1);
     }
 
     @Test
     public void deleteUserRRole() throws Exception {
-        int deleted = roleService.deleteUserRRole(100L);
+        int deleted = roleInfoService.deleteUserRRole(100L);
         Assert.assertTrue(deleted >= 1);
     }
 
     @Test
     public void updateUserRRole() throws Exception {
-        int updated = roleService.updateUserRRole(100L, "SUPER");
+        int updated = roleInfoService.updateUserRRole(100L, "SUPER");
         Assert.assertTrue(updated == 1);
     }
 

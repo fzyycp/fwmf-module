@@ -12,7 +12,7 @@ import cn.faury.fwmf.module.api.user.bean.ShopRUserBean;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.config.UserType;
 import cn.faury.fwmf.module.api.user.service.ShopRUserService;
-import cn.faury.fwmf.module.api.user.service.UserService;
+import cn.faury.fwmf.module.api.user.service.UserInfoService;
 import cn.faury.fwmf.module.service.user.mapper.ShopRUserMapper;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,11 +31,11 @@ public class ShopRUserServiceImpl implements ShopRUserService {
      */
     protected CommonDao commonDao;
 
-    protected UserService userService;
+    protected UserInfoService userInfoService;
 
-    public ShopRUserServiceImpl(CommonDao commonDao, UserService userService) {
+    public ShopRUserServiceImpl(CommonDao commonDao, UserInfoService userInfoService) {
         this.commonDao = commonDao;
-        this.userService = userService;
+        this.userInfoService = userInfoService;
     }
 
     @Override
@@ -217,12 +217,12 @@ public class ShopRUserServiceImpl implements ShopRUserService {
         userInfoBean.setEfctYmd(new Date());
         userInfoBean.setExprYmd(DateUtil.parse("2049-12-31"));
         userInfoBean.setOriginOsId(bean.getSystemId());
-        userInfoBean.setCreatePerson(bean.getCreatePerson());
+        userInfoBean.setCreatePersonName(bean.getCreatePerson());
         userInfoBean.setUserType(UserType.SYSTEM.getValue());
-        userInfoBean.setUpdatePerson(StringUtil.emptyDefault(bean.getUpdatePerson(), bean.getCreatePerson()));
+        userInfoBean.setUpdatePersonName(StringUtil.emptyDefault(bean.getUpdatePerson(), bean.getCreatePerson()));
 
 
-        Long userId = userService.insertUserInfo(userInfoBean);
+        Long userId = userInfoService.insertUserInfo(userInfoBean);
         this.insertShopRUserById(bean.getShopId(), userId, bean.getIsSelfCreate(), bean.getIsAdmin());
         return userId;
 
@@ -289,7 +289,7 @@ public class ShopRUserServiceImpl implements ShopRUserService {
         AssertUtil.assertNotEmpty(bean.getShopUserLoginName(), "用户登录名为空或不存在");
         AssertUtil.assertNotEmpty(bean.getShopUserName(), "用户姓名为空或不存在");
 
-        return userService.updateUserInfoById(bean.getShopUserName(), null, null, bean.getUpdatePerson(),
+        return userInfoService.updateUserInfoById(bean.getShopUserName(), null, null, bean.getUpdatePerson(),
                 bean.getShopUserId());
     }
 }

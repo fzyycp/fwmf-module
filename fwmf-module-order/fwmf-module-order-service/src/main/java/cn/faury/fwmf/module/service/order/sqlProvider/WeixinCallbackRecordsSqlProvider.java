@@ -5,9 +5,14 @@ import cn.faury.fwmf.module.service.order.generate.sqlProvider.WeixinCallbackRec
 
 import java.util.Map;
 
+/**
+ * SQL Provider：微信支付回调记录
+ *
+ * <pre>
+ *     WeixinCallbackRecordsGenerateSqlProvider为数据库通用增删改查操作，不可修改
+ *     当前SQL Provider继承自WeixinCallbackRecordsGenerateSqlProvider，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
+ */
 public class WeixinCallbackRecordsSqlProvider extends WeixinCallbackRecordsGenerateSqlProvider {
-    public String search(Map<String, Object> params) {
-        return "SELECT * FROM " + DBConstOfOrder.PAYMENT_T_WEIXIN_CALLBACK_RECORDS;
-    }
-
 }

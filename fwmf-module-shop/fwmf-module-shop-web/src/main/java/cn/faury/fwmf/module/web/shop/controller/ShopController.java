@@ -18,7 +18,7 @@ import cn.faury.fwmf.module.api.system.service.SystemService;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
 import cn.faury.fwmf.module.api.user.config.UserType;
 import cn.faury.fwmf.module.api.user.service.ShopRUserService;
-import cn.faury.fwmf.module.api.user.service.UserService;
+import cn.faury.fwmf.module.api.user.service.UserInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -45,7 +45,7 @@ public class ShopController {
     ShopInfoService shopInfoService;
 
     @Autowired(required = false)
-    UserService userService;
+    UserInfoService userInfoService;
 
     @Autowired(required = false)
     SystemService systemService;
@@ -97,7 +97,7 @@ public class ShopController {
     @ApiOperation(value = "新增商店信息", notes = "新增商店信息")
     public RestResultEntry addShopInfo(ShopInfoBean shopInfoBean) {
         AssertUtil.assertNotNull(shopInfoService, "商店服务未启用");
-        AssertUtil.assertNotNull(userService, "用户服务未启用");
+        AssertUtil.assertNotNull(userInfoService, "用户服务未启用");
         AssertUtil.assertNotNull(systemService, "系统服务未启用");
         AssertUtil.assertNotNull(shopRSystemService, "商店授权系统服务未启用");
         AssertUtil.assertNotNull(shopRUserService, "商店用户服务未启用");
@@ -110,12 +110,12 @@ public class ShopController {
         AssertUtil.assertNotNull(systemInfoBean, "系统信息[" + fdkShiroProperties.getSaCode() + "]不存在");
 
         // 1，检查店主信息是否存在
-        UserInfoBean userInfoBean = userService.getUserInfoByLoginName(shopInfoBean.getShopKeeperName());
+        UserInfoBean userInfoBean = userInfoService.getUserInfoByLoginName(shopInfoBean.getShopKeeperName());
         AssertUtil.assertNull(userInfoBean, "店主账户已存在");
         String isSelfCreate = StringUtil.WHETHER_NO;//是否自建
         // 2，店主信息不存在，插入店主信息
         if (userInfoBean == null) {
-            Long userId = userService.insertUserInfo(shopInfoBean.getShopKeeperName(), shopInfoBean.getShopKeeperUserName()
+            Long userId = userInfoService.insertUserInfo(shopInfoBean.getShopKeeperName(), shopInfoBean.getShopKeeperUserName()
                     , null, systemInfoBean.getSystemId(), UserType.ORGANIZATION, SessionUtil.getCurrentLoginName(), "");
             shopInfoBean.setShopKeeperId(userId);
             isSelfCreate = StringUtil.WHETHER_YES;

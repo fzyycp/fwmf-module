@@ -4,6 +4,7 @@ import cn.faury.fdk.common.anotation.NonNull;
 import cn.faury.fdk.common.anotation.Nullable;
 import cn.faury.fdk.common.anotation.permission.Read;
 import cn.faury.fdk.common.anotation.permission.Write;
+import cn.faury.fdk.common.db.CrudBaseService;
 import cn.faury.fdk.common.db.PageInfo;
 import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
@@ -14,9 +15,16 @@ import java.util.Date;
 import java.util.Map;
 
 /**
- * 后台用户管理服务协议
+ * 服务接口：后台用户管理
+ *
+ * <pre>
+ *     CrudBaseService为数据库通用增删改查操作，不可修改
+ *     当前服务接口继承自CrudBaseService，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public interface UserService<T extends UserInfoBean, P extends UserPasswordBean> {
+public interface UserInfoService<T extends UserInfoBean, P extends UserPasswordBean> extends CrudBaseService<T, Long> {
+
 
     /**
      * 加密密码
@@ -92,8 +100,8 @@ public interface UserService<T extends UserInfoBean, P extends UserPasswordBean>
         userInfo.setPassword(password);
         userInfo.setOriginOsId(systemId);
         userInfo.setUserType(userType.getValue());
-        userInfo.setCreatePerson(createPerson);
-        userInfo.setUpdatePerson(StringUtil.emptyDefault(createPerson, updatePerson));
+        userInfo.setCreatePersonName(createPerson);
+        userInfo.setUpdatePersonName(StringUtil.emptyDefault(createPerson, updatePerson));
         return insertUserInfo(userInfo);
     }
 

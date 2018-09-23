@@ -12,12 +12,12 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-user-role-spring-boot-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <properties>
-        <fwmf.module.user.role.spring.boot.configure.version>0.0.1</fwmf.module.user.role.spring.boot.configure.version>
-        <fwmf.module.user.role.service.version>0.0.1</fwmf.module.user.role.service.version>
-        <fwmf.mybatis.spring.boot.starter.version>0.0.1</fwmf.mybatis.spring.boot.starter.version>
+        <fwmf.module.user.role.spring.boot.configure.version>0.0.2</fwmf.module.user.role.spring.boot.configure.version>
+        <fwmf.module.user.role.service.version>0.0.2</fwmf.module.user.role.service.version>
+        <fdk.mybatis.spring.boot.starter.version>0.0.1</fdk.mybatis.spring.boot.starter.version>
     </properties>
 
     <dependencies>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>cn.faury.fdk</groupId>
             <artifactId>fdk-mybatis-spring-boot-starter</artifactId>
-            <version>${fwmf.mybatis.spring.boot.starter.version}</version>
+            <version>${fdk.mybatis.spring.boot.starter.version}</version>
         </dependency>
 
         <!--测试工具-->

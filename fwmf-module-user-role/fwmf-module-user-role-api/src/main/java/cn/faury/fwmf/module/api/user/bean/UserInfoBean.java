@@ -1,230 +1,36 @@
 package cn.faury.fwmf.module.api.user.bean;
 
+import cn.faury.fdk.common.db.PrimaryKeyEnableBean;
 import cn.faury.fdk.common.utils.JsonUtil;
-import cn.faury.fwmf.module.api.user.config.UserType;
-
+import cn.faury.fwmf.module.api.user.generate.bean.UserInfoGenerateBean;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Date;
 
 /**
- * 后台用户信息
+ * POJO对象：后台用户管理
+ *
+ * <pre>
+ *     UserInfoGenerateBean为数据库表自动生成POJO对象，不可修改
+ *     当前POJO继承自UserInfoGenerateBean，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public class UserInfoBean implements Serializable {
+public class UserInfoBean extends UserInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
 
     /**
-     * 用户ID
-     */
-    private Long userId;
-
-    /**
-     * 用户登录名
-     */
-    private String loginName;
-
-    /**
-     * 用户姓名
-     */
-    private String userName;
-
-    /**
-     * 用户登录密码
-     */
-    private String password;
-
-    /**
-     * 用户起用日
-     */
-    private Date efctYmd;
-
-    /**
-     * 用户失效日
-     */
-    private Date exprYmd;
-
-    /**
-     * 时间戳
-     */
-    private Timestamp insTstmp;
-
-    /**
-     * 所属系统ID
-     */
-    private Long originOsId;
-
-    /**
-     * 用户类型
-     */
-    private String userType;
-
-    /**
-     * 是否启用：Y启用，N禁用
-     */
-    private String isEnable;
-
-    /**
-     * 是否删除：Y 是，N 否
-     */
-    private String isDelete;
-
-    /**
-     * 创建人姓名
-     */
-    private String createPerson;
-
-    /**
-     * 修改人姓名
-     */
-    private String updatePerson;
-
-    /**
-     * 修改时间
-     */
-    private Timestamp updateTime;
-
-    /****************后加 显示***************/
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public UserInfoBean setUserId(Long userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public UserInfoBean setLoginName(String loginName) {
-        this.loginName = loginName;
-        return this;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public UserInfoBean setUserName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    public Date getEfctYmd() {
-        return efctYmd;
-    }
-
-    public UserInfoBean setEfctYmd(Date efctYmd) {
-        this.efctYmd = efctYmd;
-        return this;
-    }
-
-    public Date getExprYmd() {
-        return exprYmd;
-    }
-
-    public UserInfoBean setExprYmd(Date exprYmd) {
-        this.exprYmd = exprYmd;
-        return this;
-    }
-
-    public Timestamp getInsTstmp() {
-        return insTstmp;
-    }
-
-    public UserInfoBean setInsTstmp(Timestamp insTstmp) {
-        this.insTstmp = insTstmp;
-        return this;
-    }
-
-    public Long getOriginOsId() {
-        return originOsId;
-    }
-
-    public UserInfoBean setOriginOsId(Long originOsId) {
-        this.originOsId = originOsId;
-        return this;
-    }
-
-    /**
-     * 获取userType
+     * 获取表主键Key值(自动生成代码)
      *
-     * @return userType
+     * @return 主键值
      */
-    public String getUserType() {
-        return userType;
+    @Override
+    public Long getPrimaryKey() {
+        return this.getUserId();
     }
 
     /**
-     * 设置userType
+     * JSON序列化对象(自动生成代码)
      *
-     * @param userType 值
+     * @return JSON化对象
      */
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public UserInfoBean setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public String getIsEnable() {
-        return isEnable;
-    }
-
-    public UserInfoBean setIsEnable(String isEnable) {
-        this.isEnable = isEnable;
-        return this;
-    }
-
-    /**
-     * 获取isDelete
-     *
-     * @return isDelete
-     */
-    public String getIsDelete() {
-        return isDelete;
-    }
-
-    /**
-     * 设置isDelete
-     *
-     * @param isDelete 值
-     */
-    public void setIsDelete(String isDelete) {
-        this.isDelete = isDelete;
-    }
-
-    public String getCreatePerson() {
-        return createPerson;
-    }
-
-    public void setCreatePerson(String createPerson) {
-        this.createPerson = createPerson;
-    }
-
-    public String getUpdatePerson() {
-        return updatePerson;
-    }
-
-    public void setUpdatePerson(String updatePerson) {
-        this.updatePerson = updatePerson;
-    }
-
-    public Timestamp getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Timestamp updateTime) {
-        this.updateTime = updateTime;
-    }
-
     @Override
     public String toString() {
         return JsonUtil.objectToJson(this);

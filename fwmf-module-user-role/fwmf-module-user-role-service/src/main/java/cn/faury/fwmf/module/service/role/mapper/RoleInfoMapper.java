@@ -3,6 +3,7 @@ package cn.faury.fwmf.module.service.role.mapper;
 import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.role.bean.RoleInfoBean;
 import cn.faury.fwmf.module.service.constant.DBConstOfUserRole;
+import cn.faury.fwmf.module.service.role.generate.mapper.RoleInfoGenerateMapper;
 import cn.faury.fwmf.module.service.role.sqlProvider.RoleSQLProvider;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultType;
@@ -13,10 +14,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 角色信息Mapper
+ * Mybatis Mapper：角色信息表
+ *
+ * <pre>
+ *     RoleInfoGenerateMapper为数据库通用增删改查操作，不可修改
+ *     当前Mapper继承自RoleInfoGenerateMapper，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
 @AutoScannedMapper
-public interface RoleInfoMapper {
+public interface RoleInfoMapper extends RoleInfoGenerateMapper {
 
     /**
      * 根据用户ID获取指定系统下的角色信息
