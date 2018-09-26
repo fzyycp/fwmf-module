@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="reflectTables" targetRuntime="MyBatis3">
+        <!--文件编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--fwmf generator配置-->
+        <fwmfGenerator targetPackage="cn.faury.fwmf.module"
+                       targetProject=".\src\generator\java"
+                       modelName="menu"
+                       enableGeneratorModifiableMvc="true"
+        />
+        <!--自定义插件-->
+        <plugin type="cn.faury.fwmf.generator.plugins.ModifiableMvcPlugin">
+            <property name="targetProject" value=".\src\generator\java"/>
+            <property name="targetBasePackage" value="cn.faury.fwmf.module"/>
+            <property name="modelKeyName" value="menu"/>
+        </plugin>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://128.0.9.252:3306/xsn"
+                        userId="root" password="888888">
+            <property name="remarks" value="true"/>
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- 指定数据库表，对应的表生成的Controller、Service、Mapper、SQLProvider模块名,table的简化，与下面的配置等效 -->
+        <fwmfTable tableName="sys_t_menu_info" modelKey="MenuInfo">
+            <generatedKey column="MENU_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="sys_t_function_info" modelKey="FunctionInfo">
+            <generatedKey column="FUNCTION_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+    </context>
+</generatorConfiguration>

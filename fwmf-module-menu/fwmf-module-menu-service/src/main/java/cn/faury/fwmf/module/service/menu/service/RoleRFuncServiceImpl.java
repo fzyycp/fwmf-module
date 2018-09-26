@@ -3,7 +3,7 @@ package cn.faury.fwmf.module.service.menu.service;
 import cn.faury.fdk.common.utils.AssertUtil;
 import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 import cn.faury.fwmf.module.api.menu.service.RoleRFuncService;
 import cn.faury.fwmf.module.service.menu.mapper.RoleRFuncMapper;
 
@@ -26,7 +26,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(Long systemId, Long roleId, Long menuId,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(Long systemId, Long roleId, Long menuId,
                                                             Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertTrue(roleId != null && roleId > 0, "角色ID不能为空或不存在");
         AssertUtil.assertTrue(systemId != null && systemId > 0, "业务系统ID不能为空或不存在");
@@ -45,7 +45,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(String systemCode, Long roleId, Long menuId,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(String systemCode, Long roleId, Long menuId,
                                                             Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertNotEmpty(systemCode, "业务系统编码不能为空或不存在");
         AssertUtil.assertTrue(roleId != null && roleId > 0, "角色ID不能为空或不存在");
@@ -64,7 +64,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(Long systemId, Long roleId, String menuCode,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(Long systemId, Long roleId, String menuCode,
                                                             Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertTrue(roleId != null && roleId > 0, "角色ID不能为空或不存在");
         AssertUtil.assertTrue(systemId != null && systemId > 0, "业务系统ID不能为空或不存在");
@@ -83,7 +83,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(String systemCode, Long roleId, String menuCode,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(String systemCode, Long roleId, String menuCode,
                                                             Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertNotEmpty(systemCode, "业务系统编码不能为空或不存在");
         AssertUtil.assertTrue(roleId != null && roleId > 0, "角色ID不能为空或不存在");
@@ -102,7 +102,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(Long systemId, String roleCode, Long menuId,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(Long systemId, String roleCode, Long menuId,
                                                               Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertTrue(systemId != null && systemId > 0, "业务系统ID不能为空或不存在");
         AssertUtil.assertNotEmpty(roleCode, "角色Code不能为空或不存在");
@@ -121,7 +121,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(String systemCode, String roleCode, Long menuId,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(String systemCode, String roleCode, Long menuId,
                                                               Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertNotEmpty(systemCode, "业务系统编码不能为空或不存在");
         AssertUtil.assertNotEmpty(roleCode, "角色Code不能为空或不存在");
@@ -140,7 +140,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(Long systemId, String roleCode, String menuCode,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(Long systemId, String roleCode, String menuCode,
                                                               Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertTrue(systemId != null && systemId > 0, "业务系统ID不能为空或不存在");
         AssertUtil.assertNotEmpty(roleCode, "角色Code不能为空或不存在");
@@ -159,7 +159,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(String systemCode, String roleCode, String menuCode,
+    public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(String systemCode, String roleCode, String menuCode,
                                                               Boolean isSystemAvailable, Boolean isRoleAvailable, Boolean isMenuAvailable, Boolean isFuncAvailable) {
         AssertUtil.assertNotEmpty(systemCode, "业务系统编码不能为空或不存在");
         AssertUtil.assertNotEmpty(roleCode, "角色Code不能为空或不存在");
@@ -178,7 +178,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleIds(final Long userId, final Long systemId,
+    public List<FunctionInfoBean> getFuncByUserSystemAndRoleIds(final Long userId, final Long systemId,
                                                                 final List<Long> roleIds, final Boolean isRoleAvailable,
                                                                 final Boolean isMenuAvailable, final Boolean isFuncAvailable) {
         AssertUtil.assertTrue(systemId != null && systemId > 0, "业务系统ID不能为空或不存在");
@@ -195,7 +195,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleIds(final Long userId, final String systemCode,
+    public List<FunctionInfoBean> getFuncByUserSystemAndRoleIds(final Long userId, final String systemCode,
                                                                 final List<Long> roleIds, final Boolean isRoleAvailable,
                                                                 final Boolean isMenuAvailable, final Boolean isFuncAvailable) {
         AssertUtil.assertTrue(userId != null && userId > 0, "用户ID不能为空或不存在");
@@ -212,7 +212,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId, final Long systemId,
+    public List<FunctionInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId, final Long systemId,
                                                                   final List<String> roleCodes, final Boolean isRoleAvailable,
                                                                   final Boolean isMenuAvailable, final Boolean isFuncAvailable) {
         AssertUtil.assertTrue(userId != null && userId > 0, "用户ID不能为空或不存在");
@@ -229,7 +229,7 @@ public class RoleRFuncServiceImpl implements RoleRFuncService {
     }
 
     @Override
-    public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId, final String systemCode,
+    public List<FunctionInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId, final String systemCode,
                                                                   final List<String> roleCodes, final Boolean isRoleAvailable,
                                                                   final Boolean isMenuAvailable, final Boolean isFuncAvailable) {
         AssertUtil.assertTrue(userId != null && userId > 0, "用户ID不能为空或不存在");

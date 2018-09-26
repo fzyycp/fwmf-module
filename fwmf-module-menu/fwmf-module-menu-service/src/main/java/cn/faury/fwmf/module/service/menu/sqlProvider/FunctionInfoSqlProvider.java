@@ -1,8 +1,9 @@
 package cn.faury.fwmf.module.service.menu.sqlProvider;
 
 import cn.faury.fdk.common.utils.StringUtil;
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 import cn.faury.fwmf.module.service.constant.DBConstOfMenu;
+import cn.faury.fwmf.module.service.menu.generate.sqlProvider.FunctionInfoGenerateSqlProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,14 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 功能按钮Mapper的SQL工厂
+ * SQL Provider：功能按钮信息表
+ *
+ * <pre>
+ *     FunctionInfoGenerateSqlProvider为数据库通用增删改查操作，不可修改
+ *     当前SQL Provider继承自FunctionInfoGenerateSqlProvider，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public class MenuFuncSQLProvider {
+public class FunctionInfoSqlProvider extends FunctionInfoGenerateSqlProvider {
 
     /**
      * 日志记录器
      */
-    private static Logger log = LoggerFactory.getLogger(MenuFuncSQLProvider.class);
+    private static Logger log = LoggerFactory.getLogger(FunctionInfoSqlProvider.class);
 
     /**
      * 根据功能按钮ID获取功能按钮信息
@@ -346,14 +353,14 @@ public class MenuFuncSQLProvider {
      * @param menuFuncInfo 菜单功能按钮对象
      * @return SQL语句
      */
-    public static String updateMenuFuncInfo(final MenuFuncInfoBean menuFuncInfo) {
+    public static String updateMenuFuncInfo(final FunctionInfoBean menuFuncInfo) {
         log.debug("menuFuncInfo ==> " + menuFuncInfo.toString());
         // SQL拼装
         StringBuffer sql = new StringBuffer(128);
 
         // if (menuFuncInfo.getFuncId().equals("") || menuFuncInfo.getFuncId()
         // == null) {notNull
-        if (menuFuncInfo.getFuncId() != null) {
+        if (menuFuncInfo.getFunctionId() != null) {
             log.debug("SQL ==> null");
             return null;
         }
@@ -361,20 +368,16 @@ public class MenuFuncSQLProvider {
         sql.append("UPDATE " + DBConstOfMenu.TN_FUNCTION_INFO);
         sql.append(" SET ");
         // 【可选】funcName：功能菜单名称
-        if (StringUtil.isNotEmpty(menuFuncInfo.getFuncName())) {
+        if (StringUtil.isNotEmpty(menuFuncInfo.getFunctionName())) {
             sql.append("FUNCTION_NAME= #{funcName,jdbcType=VARCHAR} ,");
         }
         // 【可选】funcCode：功能编码
-        if (StringUtil.isNotEmpty(menuFuncInfo.getFuncCode())) {
+        if (StringUtil.isNotEmpty(menuFuncInfo.getFunctionCode())) {
             sql.append("FUNCTION_CODE= #{funcCode,jdbcType=VARCHAR},");
         }
         // 【可选】menuId：菜单ID
         if (menuFuncInfo.getMenuId() != null) {
             sql.append("MENU_ID= #{menuId,jdbcType=VARCHAR},");
-        }
-        // 【可选】systemId：业务系统ID
-        if (menuFuncInfo.getSystemId() != null) {
-            sql.append("SYSTEM_ID= #{systemId,jdbcType=BIGINT},");
         }
         // 【可选】isAvailable：是否可用【Y:是 N:否】
         if (StringUtil.isNotEmpty(menuFuncInfo.getIsAvailable())) {
@@ -494,5 +497,4 @@ public class MenuFuncSQLProvider {
         log.debug("SQL ==> " + sql.toString());
         return sql.toString();
     }
-
 }

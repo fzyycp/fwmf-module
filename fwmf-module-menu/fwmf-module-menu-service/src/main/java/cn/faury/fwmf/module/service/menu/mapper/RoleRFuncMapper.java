@@ -1,10 +1,13 @@
 package cn.faury.fwmf.module.service.menu.mapper;
 
 import cn.faury.fdk.mybatis.AutoScannedMapper;
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 import cn.faury.fwmf.module.service.constant.DBConstOfMenu;
 import cn.faury.fwmf.module.service.menu.sqlProvider.RoleRFuncSQLProvider;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.SelectProvider;
 
 import java.util.List;
 import java.util.Map;
@@ -32,8 +35,8 @@ public interface RoleRFuncMapper {
 	 * @return 查询结果
 	 */
 	@SelectProvider(type = RoleRFuncSQLProvider.class, method = "getRoleRFuncInfosByRole")
-	@ResultType(MenuFuncInfoBean.class)
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRole();
+	@ResultType(FunctionInfoBean.class)
+	public List<FunctionInfoBean> getRoleRFuncInfosByRole();
 
 	/**
 	 * 插入角色功能按钮关联关系
@@ -83,7 +86,7 @@ public interface RoleRFuncMapper {
 	 * @return 菜单功能列表
 	 */
 	@SelectProvider(type = RoleRFuncSQLProvider.class, method = "getFuncByUserSystemAndRoleIds")
-	@ResultType(MenuFuncInfoBean.class)
-	public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleIds(Map<String, Object> parameter);
+	@ResultType(FunctionInfoBean.class)
+	public List<FunctionInfoBean> getFuncByUserSystemAndRoleIds(Map<String, Object> parameter);
 	 
 }

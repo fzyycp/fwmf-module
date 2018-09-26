@@ -9,14 +9,14 @@
 	</bean>
 
 	<!--菜单功能按钮服务 -->
-	<bean id="menuFuncService" class="cn.faury.fwmf.module.service.menu.service.MenuFuncServiceImpl">
+	<bean id="functionInfoService" class="cn.faury.fwmf.module.service.menu.service.FunctionInfoServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
 	</bean>
 
 	<!--菜单服务 -->
-	<bean id="menuService" class="cn.faury.fwmf.module.service.menu.service.MenuServiceImpl">
+	<bean id="menuInfoService" class="cn.faury.fwmf.module.service.menu.service.MenuInfoServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
-		<constructor-arg name="menuFuncService" ref="menuFuncService" />
+		<constructor-arg name="functionInfoService" ref="functionInfoService" />
 	</bean>
 
 	<!--角色关联功能按钮服务 -->

@@ -5,12 +5,14 @@ import cn.faury.fdk.common.db.PageParam;
 import cn.faury.fdk.common.utils.AssertUtil;
 import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 import cn.faury.fwmf.module.api.menu.bean.MenuInfoBean;
-import cn.faury.fwmf.module.api.menu.service.MenuFuncService;
-import cn.faury.fwmf.module.api.menu.service.MenuService;
+import cn.faury.fwmf.module.api.menu.service.FunctionInfoService;
+import cn.faury.fwmf.module.api.menu.service.MenuInfoService;
 import cn.faury.fwmf.module.api.menu.util.MenuFuncUtil;
-import cn.faury.fwmf.module.service.menu.mapper.MenuMapper;
+import cn.faury.fwmf.module.service.common.service.CrudBaseServiceImpl;
+import cn.faury.fwmf.module.service.menu.mapper.MenuInfoMapper;
+import cn.faury.fwmf.module.service.menu.mapper.MenuInfoMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
@@ -18,23 +20,24 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 菜单服务提供者
+ * 服务实现：菜单信息表
+ * <p>
+ * <pre>
+ *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
+ *     当前服务实现了MenuInfoService服务接口，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public class MenuServiceImpl implements MenuService {
-
-    /**
-     * 数据库操作器
-     */
-    protected CommonDao commonDao;
+public class MenuInfoServiceImpl extends CrudBaseServiceImpl<MenuInfoBean, Long> implements MenuInfoService {
 
     /**
      * 菜单功能按钮服务
      */
-    protected MenuFuncService menuFuncService;
+    protected FunctionInfoService menuFuncService;
 
-    public MenuServiceImpl(CommonDao commonDao, MenuFuncService menuFuncService) {
-        this.commonDao = commonDao;
-        this.menuFuncService = menuFuncService;
+    public MenuInfoServiceImpl(CommonDao commonDao, FunctionInfoService functionInfoService) {
+        super(commonDao, MenuInfoMapper.class);
+        this.menuFuncService = functionInfoService;
     }
 
     @Override
@@ -51,14 +54,14 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuInfoByMenu";
         MenuInfoBean menuInfo = this.commonDao.selectOne(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getMenuFuncListByMenuId(systemId, menuId,
+            List<FunctionInfoBean> funcs = menuFuncService.getMenuFuncListByMenuId(systemId, menuId,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
-            menuInfo.setFuncs(funcs);
+            menuInfo.setFunctionInfoBeans(funcs);
         }
 
         return menuInfo;
@@ -70,21 +73,21 @@ public class MenuServiceImpl implements MenuService {
         AssertUtil.assertNotEmpty(systemCode, "业务系统编码不能为空或不存在");
         AssertUtil.assertTrue(menuId != null && menuId > 0, "菜单ID不能为空或不存在");
         // 获取功能菜单
-        Map<String, Object> parameter = new HashMap<String, Object>();
+        Map<String, Object> parameter = new HashMap<>();
         parameter.put("systemCode", systemCode);
         parameter.put("menuId", menuId);
         parameter.put("isWithFunc", isWithFunc);
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuInfoByMenu";
         MenuInfoBean menuInfo = this.commonDao.selectOne(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getMenuFuncListByMenuId(systemCode, menuId,
+            List<FunctionInfoBean> funcs = menuFuncService.getMenuFuncListByMenuId(systemCode, menuId,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
-            menuInfo.setFuncs(funcs);
+            menuInfo.setFunctionInfoBeans(funcs);
         }
 
         return menuInfo;
@@ -103,14 +106,14 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuInfoByMenu";
         MenuInfoBean menuInfo = this.commonDao.selectOne(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getMenuFuncListByMenuCode(systemId, menuCode,
+            List<FunctionInfoBean> funcs = menuFuncService.getMenuFuncListByMenuCode(systemId, menuCode,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
-            menuInfo.setFuncs(funcs);
+            menuInfo.setFunctionInfoBeans(funcs);
         }
 
         return menuInfo;
@@ -129,14 +132,14 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuInfoByMenu";
         MenuInfoBean menuInfo = this.commonDao.selectOne(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getMenuFuncListByMenuCode(systemCode, menuCode,
+            List<FunctionInfoBean> funcs = menuFuncService.getMenuFuncListByMenuCode(systemCode, menuCode,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
-            menuInfo.setFuncs(funcs);
+            menuInfo.setFunctionInfoBeans(funcs);
         }
 
         return menuInfo;
@@ -156,12 +159,12 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuChildInfoByMenu";
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuId(systemId, menuId,
+            List<FunctionInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuId(systemId, menuId,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -183,12 +186,12 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuChildInfoByMenu";
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc.booleanValue()) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuId(systemCode, menuId,
+            List<FunctionInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuId(systemCode, menuId,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -210,12 +213,12 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuChildInfoByMenu";
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc.booleanValue()) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuCode(systemId, menuCode,
+            List<FunctionInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuCode(systemId, menuCode,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -237,12 +240,12 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuChildInfoByMenu";
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
 
         // 获取功能按钮
         if (menuInfo != null && isWithFunc != null && isWithFunc.booleanValue()) {
-            List<MenuFuncInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuCode(systemCode, menuCode,
+            List<FunctionInfoBean> funcs = menuFuncService.getChildMenuFuncListByMenuCode(systemCode, menuCode,
                     isSystemAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -262,7 +265,7 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
         parameter.put("isFuncAvailable", isFuncAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuChildInfoByMenu";
 
         return commonDao.selectPage(state, parameter, PageParam.buildDefaultIns(param));
     }
@@ -271,7 +274,7 @@ public class MenuServiceImpl implements MenuService {
     public List<MenuInfoBean> getMenuInfoByMenuBean(Map<String, Object> parameter) {
         AssertUtil.assertFalse(StringUtil.isEmpty((String) parameter.get("menuAction"), (String) parameter.get("menuCode")), "（menuAction 菜单功能编码、menuCode 菜单编码） 二选一");
         AssertUtil.assertNotNull(parameter.get("systemId"), "业务系统ID不能为空或不存在");
-        final String state = MenuMapper.class.getName() + ".getMenuInfoByMenuBean";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuInfoByMenuBean";
 
         return this.commonDao.selectList(state, parameter);
     }
@@ -279,7 +282,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Boolean isExistRoleRMenu(final List<Long> menuIds) {
         AssertUtil.assertNotEmpty(menuIds, "菜单ID错误");
-        String state = MenuMapper.class.getName() + ".getMenuCountById";
+        String state = MenuInfoMapper.class.getName() + ".getMenuCountById";
         Map<String, Object> parameter = new HashMap<String, Object>();
         parameter.put("menuIds", menuIds);
 
@@ -300,7 +303,7 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("menuId", menuId);
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuTowChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuTowChildInfoByMenu";
 
         return this.commonDao.selectList(state, parameter);
     }
@@ -316,7 +319,7 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("menuId", menuId);
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuTowChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuTowChildInfoByMenu";
 
         return this.commonDao.selectList(state, parameter);
     }
@@ -332,7 +335,7 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("menuCode", menuCode);
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuTowChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuTowChildInfoByMenu";
 
         return this.commonDao.selectList(state, parameter);
     }
@@ -348,7 +351,7 @@ public class MenuServiceImpl implements MenuService {
         parameter.put("menuCode", menuCode);
         parameter.put("isSystemAvailable", isSystemAvailable);
         parameter.put("isMenuAvailable", isMenuAvailable);
-        final String state = MenuMapper.class.getName() + ".getMenuTowChildInfoByMenu";
+        final String state = MenuInfoMapper.class.getName() + ".getMenuTowChildInfoByMenu";
 
         return this.commonDao.selectList(state, parameter);
     }
@@ -363,8 +366,8 @@ public class MenuServiceImpl implements MenuService {
         AssertUtil.assertNotEmpty(menuInfo.getIsLeaf(), "是否末级为空或不存在");
         AssertUtil.assertNotEmpty(menuInfo.getIsAvailable(), "是否可用为空或不存在");
         AssertUtil.assertTrue(menuInfo.getMenuPid() != null && menuInfo.getMenuPid() > 0, "父菜单ID为空或不存在");
-        AssertUtil.assertNotEmpty(menuInfo.getSystemId(), "业务系统ID不能为空或不存在");
-        AssertUtil.assertNotEmpty(menuInfo.getSort(), "排序为空或不存在");
+        AssertUtil.assertNotNull(menuInfo.getSystemId(), "业务系统ID不能为空或不存在");
+        AssertUtil.assertNotNull(menuInfo.getSort(), "排序为空或不存在");
 
         Map<String, Object> parameter = new HashMap<String, Object>();
         Map<String, Object> param = new HashMap<String, Object>();
@@ -384,7 +387,7 @@ public class MenuServiceImpl implements MenuService {
         AssertUtil.assertEmpty(info, "当前系统存在相同功能编码");
         AssertUtil.assertEmpty(mif, "当前系统存在相同菜单编码");
 
-        String state = MenuMapper.class.getName() + ".insertMenuInfo";
+        String state = MenuInfoMapper.class.getName() + ".insertMenuInfo";
         int res = this.commonDao.insert(state, menuInfo);
 
         return res > 0 ? menuInfo.getMenuId() : -1L;
@@ -401,7 +404,7 @@ public class MenuServiceImpl implements MenuService {
         if (StringUtil.isNotEmpty(menuInfo.getMenuCode())) {
             param.put("menuCode", menuInfo.getMenuCode());
         }
-        if (StringUtil.isNotEmpty(menuInfo.getSystemId()) && !menuInfo.getSystemId().equals(0L)) {
+        if (menuInfo.getSystemId() != null && menuInfo.getSystemId() > 0) {
             parameter.put("systemId", menuInfo.getSystemId());
             param.put("systemId", menuInfo.getSystemId());
         }
@@ -416,7 +419,7 @@ public class MenuServiceImpl implements MenuService {
         AssertUtil.assertEmpty(info, "当前系统存在相同功能编码");
         AssertUtil.assertEmpty(mif, "当前系统存在相同菜单编码");
 
-        String state = MenuMapper.class.getName() + ".updateMenuInfoById";
+        String state = MenuInfoMapper.class.getName() + ".updateMenuInfoById";
 
         return this.commonDao.update(state, menuInfo);
     }
@@ -424,10 +427,10 @@ public class MenuServiceImpl implements MenuService {
     @Transactional
     @Override
     public Integer deleteMenuInfoById(List<Long> menuIds) {
-        AssertUtil.assertNotEmpty(menuIds,"菜单ID错误");
-        AssertUtil.assertFalse (isExistRoleRMenu(menuIds),"存在角色关联菜单，不能删除");
-        String state = MenuMapper.class.getName() + ".deleteMenuInfoById";
-        String stateFunc = MenuMapper.class.getName() + ".deleteMenuFuncInfoById";
+        AssertUtil.assertNotEmpty(menuIds, "菜单ID错误");
+        AssertUtil.assertFalse(isExistRoleRMenu(menuIds), "存在角色关联菜单，不能删除");
+        String state = MenuInfoMapper.class.getName() + ".deleteMenuInfoById";
+        String stateFunc = MenuInfoMapper.class.getName() + ".deleteMenuFuncInfoById";
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("menuIds", menuIds);
         this.commonDao.delete(stateFunc, parameter);
@@ -436,13 +439,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Integer deleteMenuInfoById(Long menuId, Long systemId) {
-        AssertUtil.assertTrue(systemId!=null&&systemId>0,"业务系统ID不能为空或不存在");
-        AssertUtil.assertTrue(menuId!=null&&menuId>0,"菜单ID不能为空或不存在");
+        AssertUtil.assertTrue(systemId != null && systemId > 0, "业务系统ID不能为空或不存在");
+        AssertUtil.assertTrue(menuId != null && menuId > 0, "菜单ID不能为空或不存在");
         List<MenuInfoBean> list = getMenuChildInfoByMenuId(systemId, menuId, null);
-        AssertUtil.assertEmpty(list,"菜单下有子菜单，请先删除子菜单");
-        List<MenuFuncInfoBean> funcList = menuFuncService.getMenuFuncListByMenuId(systemId, menuId);
-        AssertUtil.assertEmpty(funcList,"菜单下有功能按钮，请先删除功能按钮");
+        AssertUtil.assertEmpty(list, "菜单下有子菜单，请先删除子菜单");
+        List<FunctionInfoBean> funcList = menuFuncService.getMenuFuncListByMenuId(systemId, menuId);
+        AssertUtil.assertEmpty(funcList, "菜单下有功能按钮，请先删除功能按钮");
         return deleteMenuInfoById(menuId);
     }
-
 }

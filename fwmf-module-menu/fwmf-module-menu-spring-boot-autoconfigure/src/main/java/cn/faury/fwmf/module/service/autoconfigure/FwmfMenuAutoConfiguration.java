@@ -29,16 +29,16 @@ public class FwmfMenuAutoConfiguration {
      * 菜单功能按钮服务
      */
     @Bean
-    public MenuFuncService menuFuncService(CommonDao commonDao) {
-        return new MenuFuncServiceImpl(commonDao);
+    public FunctionInfoService functionInfoService(CommonDao commonDao) {
+        return new FunctionInfoServiceImpl(commonDao);
     }
 
     /**
      * 菜单服务
      */
     @Bean
-    public MenuService menuService(CommonDao commonDao, MenuFuncService menuFuncService) {
-        return new MenuServiceImpl(commonDao, menuFuncService);
+    public MenuInfoService menuInfoService(CommonDao commonDao, FunctionInfoService functionInfoService) {
+        return new MenuInfoServiceImpl(commonDao, functionInfoService);
     }
 
     /**

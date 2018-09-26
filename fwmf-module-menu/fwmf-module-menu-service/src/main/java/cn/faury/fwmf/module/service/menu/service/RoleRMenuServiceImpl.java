@@ -2,7 +2,7 @@ package cn.faury.fwmf.module.service.menu.service;
 
 import cn.faury.fdk.common.utils.AssertUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 import cn.faury.fwmf.module.api.menu.bean.MenuInfoBean;
 import cn.faury.fwmf.module.api.menu.service.RoleRFuncService;
 import cn.faury.fwmf.module.api.menu.service.RoleRMenuService;
@@ -54,7 +54,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
 
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleId(systemId, roleId,
+            List<FunctionInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleId(systemId, roleId,
                     (Long) null, isSystemAvailable, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -80,7 +80,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
 
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleId(systemCode, roleId,
+            List<FunctionInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleId(systemCode, roleId,
                     (Long) null, isSystemAvailable, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -106,7 +106,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
 
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleCode(systemId, roleCode,
+            List<FunctionInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleCode(systemId, roleCode,
                     (Long) null, isSystemAvailable, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -132,7 +132,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
 
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleCode(systemCode, roleCode,
+            List<FunctionInfoBean> funcs = roleRFuncService.getRoleRFuncInfosByRoleCode(systemCode, roleCode,
                     (Long) null, isSystemAvailable, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -157,7 +157,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleIds(userId, systemId,
+            List<FunctionInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleIds(userId, systemId,
                     roleIds, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -182,7 +182,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleCodes(userId, systemId,
+            List<FunctionInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleCodes(userId, systemId,
                     roleCodes, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -207,7 +207,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleCodes(userId, systemCode,
+            List<FunctionInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleCodes(userId, systemCode,
                     roleCodes, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }
@@ -232,7 +232,7 @@ public class RoleRMenuServiceImpl implements RoleRMenuService {
         List<MenuInfoBean> menuInfo = this.commonDao.selectList(state, parameter);
         // 获取角色授权的功能按钮列表
         if (isWithFunc != null && isWithFunc && menuInfo != null && menuInfo.size() > 0) {
-            List<MenuFuncInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleIds(userId, systemCode,
+            List<FunctionInfoBean> funcs = roleRFuncService.getFuncByUserSystemAndRoleIds(userId, systemCode,
                     roleIds, isRoleAvailable, isMenuAvailable, isFuncAvailable);
             MenuFuncUtil.attachMenuFuncs(funcs, menuInfo);
         }

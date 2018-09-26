@@ -1,6 +1,6 @@
 package cn.faury.fwmf.module.api.menu.util;
 
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 import cn.faury.fwmf.module.api.menu.bean.MenuInfoBean;
 import cn.faury.fwmf.module.api.menu.bean.MenuTreeNodeBean;
 
@@ -28,7 +28,7 @@ public class MenuFuncUtil {
 			// 获取所有子节点
 			List<MenuInfoBean> childrens = menuMap.get(menuNode.getMenuId());
 			if (childrens != null) {
-				List<MenuTreeNodeBean> nodeLst = new ArrayList<MenuTreeNodeBean>();
+				List<MenuTreeNodeBean> nodeLst = new ArrayList<>();
 				for (MenuInfoBean menuBean : childrens) {
 					MenuTreeNodeBean node = new MenuTreeNodeBean(menuBean);
 					attachChildrens(node, menuMap);
@@ -48,17 +48,13 @@ public class MenuFuncUtil {
 	 */
 	public static List<MenuTreeNodeBean> convertMenuList2Tree(final List<MenuInfoBean> menuLst) {
 		// 菜单树
-		List<MenuTreeNodeBean> menuTree = new ArrayList<MenuTreeNodeBean>();
+		List<MenuTreeNodeBean> menuTree = new ArrayList<>();
 		// 将以PID进行分组
-		Map<Long, List<MenuInfoBean>> menuMap = new HashMap<Long, List<MenuInfoBean>>();
-		Map<Long, Long> menuIds = new HashMap<Long, Long>();
+		Map<Long, List<MenuInfoBean>> menuMap = new HashMap<>();
+		Map<Long, Long> menuIds = new HashMap<>();
 		for (MenuInfoBean menuBean : menuLst) {
 			menuIds.put(menuBean.getMenuId(), menuBean.getMenuId());
-			List<MenuInfoBean> tmp = menuMap.get(menuBean.getMenuPid());
-			if (tmp == null) {
-				tmp = new ArrayList<MenuInfoBean>();
-				menuMap.put(menuBean.getMenuPid(), tmp);
-			}
+			List<MenuInfoBean> tmp = menuMap.computeIfAbsent(menuBean.getMenuPid(), k -> new ArrayList<>());
 			tmp.add(menuBean);
 		}
 		// 找到最上层为跟节点
@@ -84,23 +80,19 @@ public class MenuFuncUtil {
 	 * @param menuInfo
 	 *            所有的菜单
 	 */
-	public static void attachMenuFuncs(List<MenuFuncInfoBean> funcs, List<MenuInfoBean> menuInfo) {
+	public static void attachMenuFuncs(List<FunctionInfoBean> funcs, List<MenuInfoBean> menuInfo) {
 		if (funcs != null && funcs.size() > 0) {
 			// 将功能按钮按照菜单ID进行分组
-			Map<Long, List<MenuFuncInfoBean>> menuFuncs = new HashMap<Long, List<MenuFuncInfoBean>>();
-			for (MenuFuncInfoBean bean : funcs) {
-				List<MenuFuncInfoBean> tmpFuncs = menuFuncs.get(bean.getMenuId());
-				if (tmpFuncs == null) {
-					tmpFuncs = new ArrayList<MenuFuncInfoBean>();
-					menuFuncs.put(bean.getMenuId(), tmpFuncs);
-				}
+			Map<Long, List<FunctionInfoBean>> menuFuncs = new HashMap<>();
+			for (FunctionInfoBean bean : funcs) {
+				List<FunctionInfoBean> tmpFuncs = menuFuncs.computeIfAbsent(bean.getMenuId(), k -> new ArrayList<>());
 				tmpFuncs.add(bean);
 			}
 			// 设置各个菜单的功能按钮清单
 			for (MenuInfoBean bean : menuInfo) {
-				List<MenuFuncInfoBean> tmpFuncs = menuFuncs.get(bean.getMenuId());
+				List<FunctionInfoBean> tmpFuncs = menuFuncs.get(bean.getMenuId());
 				if (tmpFuncs != null) {
-					bean.setFuncs(tmpFuncs);
+					bean.setFunctionInfoBeans(tmpFuncs);
 				}
 			}
 		}

@@ -3,7 +3,6 @@ package cn.faury.fwmf.module.service.menu.mapper;
 import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.menu.bean.MenuInfoBean;
 import cn.faury.fwmf.module.service.menu.sqlProvider.UserRMenuSQLProvider;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.SelectProvider;
 

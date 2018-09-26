@@ -2,7 +2,7 @@ package cn.faury.fwmf.module.api.menu.service;
 
 import cn.faury.fdk.common.anotation.permission.Read;
 import cn.faury.fdk.common.anotation.permission.Write;
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId,
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId,
 															final Long menuId){
         return getRoleRFuncInfosByRoleId(systemCode, roleId, menuId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
@@ -57,7 +57,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId,
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId,
                                                             final String menuCode){
         return getRoleRFuncInfosByRoleId(systemCode, roleId, menuCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
@@ -83,7 +83,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
                                                               final Long menuId){
         return getRoleRFuncInfosByRoleCode(systemCode, roleCode, menuId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
@@ -109,7 +109,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
                                                               final String menuCode){
         return getRoleRFuncInfosByRoleCode(systemCode, roleCode, menuCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
@@ -136,7 +136,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId, final Long menuId,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId, final Long menuId,
 															final Boolean isSystemAvailable, final Boolean isRoleAvailable, final Boolean isMenuAvailable,
 															final Boolean isFuncAvailable);
 
@@ -160,7 +160,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId, final Long menuId,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId, final Long menuId,
 															final Boolean isSystemAvailable, final Boolean isRoleAvailable, final Boolean isMenuAvailable,
 															final Boolean isFuncAvailable);
 
@@ -184,7 +184,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId,
 															final String menuCode,
 															final Boolean isSystemAvailable, final Boolean isRoleAvailable, final Boolean isMenuAvailable,
 															final Boolean isFuncAvailable);
@@ -209,7 +209,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final String systemCode, final Long roleId,
 															final String menuCode, final Boolean isSystemAvailable, final Boolean isRoleAvailable,
 															final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -233,7 +233,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
 															  final Long menuId,
 															  final Boolean isSystemAvailable, final Boolean isRoleAvailable, final Boolean isMenuAvailable,
 															  final Boolean isFuncAvailable);
@@ -258,7 +258,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
 															  final Long menuId, final Boolean isSystemAvailable, final Boolean isRoleAvailable,
 															  final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -282,7 +282,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
 															  final String menuCode, final Boolean isSystemAvailable, final Boolean isRoleAvailable,
 															  final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -306,7 +306,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
+	public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final String systemCode, final String roleCode,
 															  final String menuCode, final Boolean isSystemAvailable, final Boolean isRoleAvailable,
 															  final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -355,7 +355,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleIds(final Long userId,final Long systemId,
+	public List<FunctionInfoBean> getFuncByUserSystemAndRoleIds(final Long userId,final Long systemId,
 																final List<Long> roleIds,final Boolean isRoleAvailable,
 																final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -370,7 +370,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleIds(final Long userId,final String systemCode,
+	public List<FunctionInfoBean> getFuncByUserSystemAndRoleIds(final Long userId,final String systemCode,
 																final List<Long> roleIds,final Boolean isRoleAvailable,
 																final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -385,7 +385,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId,final Long systemId,
+	public List<FunctionInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId,final Long systemId,
 																  final List<String> roleCodes,final Boolean isRoleAvailable,
 																  final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -400,7 +400,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	public List<MenuFuncInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId,final String systemCode,
+	public List<FunctionInfoBean> getFuncByUserSystemAndRoleCodes(final Long userId,final String systemCode,
 																  final List<String> roleCodes,final Boolean isRoleAvailable,
 																  final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
@@ -426,7 +426,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId, final Long menuId){
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId, final Long menuId){
         return getRoleRFuncInfosByRoleId(systemId, roleId, menuId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
     }
@@ -451,7 +451,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId,
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleId(final Long systemId, final Long roleId,
 															final String menuCode){
         return getRoleRFuncInfosByRoleId(systemId, roleId, menuCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
@@ -477,7 +477,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
 															  final Long menuId){
         return getRoleRFuncInfosByRoleCode(systemId, roleCode, menuId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
@@ -503,7 +503,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
+	default public List<FunctionInfoBean> getRoleRFuncInfosByRoleCode(final Long systemId, final String roleCode,
 															  final String menuCode){
         return getRoleRFuncInfosByRoleCode(systemId, roleCode, menuCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
                 Boolean.TRUE);
@@ -519,7 +519,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getFuncByUserSystem(final Long userId,final Long systemId,
+	default public List<FunctionInfoBean> getFuncByUserSystem(final Long userId,final Long systemId,
 													  final Boolean isRoleAvailable,
 													  final Boolean isMenuAvailable, final Boolean isFuncAvailable){
         return getFuncByUserSystemAndRoleIds(userId, systemId, null, isRoleAvailable, isMenuAvailable,
@@ -536,7 +536,7 @@ public interface RoleRFuncService {
 	 * @return 菜单功能按钮列表
 	 */
 	@Read
-	default public List<MenuFuncInfoBean> getFuncByUserSystem(final Long userId,final String systemCode,
+	default public List<FunctionInfoBean> getFuncByUserSystem(final Long userId,final String systemCode,
 													  final Boolean isRoleAvailable,
 													  final Boolean isMenuAvailable, final Boolean isFuncAvailable){
         return getFuncByUserSystemAndRoleIds(userId, systemCode, null, isRoleAvailable, isMenuAvailable,

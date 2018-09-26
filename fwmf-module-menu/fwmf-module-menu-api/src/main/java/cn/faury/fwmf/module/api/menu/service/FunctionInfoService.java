@@ -1,17 +1,23 @@
 package cn.faury.fwmf.module.api.menu.service;
 
-
 import cn.faury.fdk.common.anotation.permission.Read;
+import cn.faury.fdk.common.db.CrudBaseService;
 import cn.faury.fdk.common.db.PageInfo;
-import cn.faury.fwmf.module.api.menu.bean.MenuFuncInfoBean;
+import cn.faury.fwmf.module.api.menu.bean.FunctionInfoBean;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * 根据菜单功能按钮来获取
+ * 服务接口：功能按钮信息表
+ *
+ * <pre>
+ *     CrudBaseService为数据库通用增删改查操作，不可修改
+ *     当前服务接口继承自CrudBaseService，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public interface MenuFuncService {
+public interface FunctionInfoService extends CrudBaseService<FunctionInfoBean, Long> {
 
     /**
      * 根据功能按钮ID获取功能按钮信息
@@ -31,7 +37,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncId(final Long systemId, final Long menuId, final Long funcId,
+    public FunctionInfoBean getMenuFuncInfoByFuncId(final Long systemId, final Long menuId, final Long funcId,
                                                     final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -52,7 +58,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncId(final Long systemId, final String menuCode, final Long funcId,
+    public FunctionInfoBean getMenuFuncInfoByFuncId(final Long systemId, final String menuCode, final Long funcId,
                                                     final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -73,7 +79,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncId(final String systemCode, final Long menuId, final Long funcId,
+    public FunctionInfoBean getMenuFuncInfoByFuncId(final String systemCode, final Long menuId, final Long funcId,
                                                     final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -94,7 +100,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncId(final String systemCode, final String menuCode, final Long funcId,
+    public FunctionInfoBean getMenuFuncInfoByFuncId(final String systemCode, final String menuCode, final Long funcId,
                                                     final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -115,7 +121,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final Long menuId, final String funcCode,
+    public FunctionInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final Long menuId, final String funcCode,
                                                       final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -136,7 +142,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final String menuCode,
+    public FunctionInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final String menuCode,
                                                       final String funcCode, final Boolean isSystemAvailable, final Boolean isMenuAvailable,
                                                       final Boolean isFuncAvailable);
 
@@ -158,7 +164,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final Long menuId,
+    public FunctionInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final Long menuId,
                                                       final String funcCode, final Boolean isSystemAvailable, final Boolean isMenuAvailable,
                                                       final Boolean isFuncAvailable);
 
@@ -180,7 +186,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final String menuCode,
+    public FunctionInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final String menuCode,
                                                       final String funcCode, final Boolean isSystemAvailable, final Boolean isMenuAvailable,
                                                       final Boolean isFuncAvailable);
 
@@ -200,7 +206,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getMenuFuncListByMenuId(final Long systemId, final Long menuId,
+    public List<FunctionInfoBean> getMenuFuncListByMenuId(final Long systemId, final Long menuId,
                                                           final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -219,7 +225,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getMenuFuncListByMenuId(final String systemCode, final Long menuId,
+    public List<FunctionInfoBean> getMenuFuncListByMenuId(final String systemCode, final Long menuId,
                                                           final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -239,7 +245,7 @@ public interface MenuFuncService {
      *            功能按钮是否可用【Boolean.TRUE：仅可用； Boolean.FALSE:仅不可用； null:都包含】
      * @return 菜单的功能按钮分页列表
      */
-    public PageInfo<MenuFuncInfoBean> getMenuFuncPageListByMenuId(Map<String, String> param, final Long systemId,
+    public PageInfo<FunctionInfoBean> getMenuFuncPageListByMenuId(Map<String, String> param, final Long systemId,
                                                                   final Long menuId, final Boolean isSystemAvailable, final Boolean isMenuAvailable,
                                                                   final Boolean isFuncAvailable);
 
@@ -259,7 +265,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getMenuFuncListByMenuCode(final Long systemId, final String menuCode,
+    public List<FunctionInfoBean> getMenuFuncListByMenuCode(final Long systemId, final String menuCode,
                                                             final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -278,7 +284,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getMenuFuncListByMenuCode(final String systemCode, final String menuCode,
+    public List<FunctionInfoBean> getMenuFuncListByMenuCode(final String systemCode, final String menuCode,
                                                             final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -297,7 +303,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getChildMenuFuncListByMenuId(final Long systemId, final Long menuPId,
+    public List<FunctionInfoBean> getChildMenuFuncListByMenuId(final Long systemId, final Long menuPId,
                                                                final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -316,7 +322,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getChildMenuFuncListByMenuId(final String systemCode, final Long menuPId,
+    public List<FunctionInfoBean> getChildMenuFuncListByMenuId(final String systemCode, final Long menuPId,
                                                                final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -335,7 +341,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getChildMenuFuncListByMenuCode(final Long systemId, final String menuPCode,
+    public List<FunctionInfoBean> getChildMenuFuncListByMenuCode(final Long systemId, final String menuPCode,
                                                                  final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -354,7 +360,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    public List<MenuFuncInfoBean> getChildMenuFuncListByMenuCode(final String systemCode, final String menuPCode,
+    public List<FunctionInfoBean> getChildMenuFuncListByMenuCode(final String systemCode, final String menuPCode,
                                                                  final Boolean isSystemAvailable, final Boolean isMenuAvailable, final Boolean isFuncAvailable);
 
     /**
@@ -374,7 +380,7 @@ public interface MenuFuncService {
      *            菜单功能按钮对象
      * @return 保存成功后业务系统对象ID，失败则返回-1
      */
-    public Long insertMenuFuncInfo(final MenuFuncInfoBean menuFuncInfo);
+    public Long insertMenuFuncInfo(final FunctionInfoBean menuFuncInfo);
 
     /**
      * 更新菜单的功能按钮信息
@@ -394,7 +400,7 @@ public interface MenuFuncService {
      *            输入参数
      * @return 成功更新条数
      */
-    public Integer updateMenuFuncInfo(final MenuFuncInfoBean menuFuncInfo);
+    public Integer updateMenuFuncInfo(final FunctionInfoBean menuFuncInfo);
 
     /**
      * 根据功能按钮ID删除功能按钮信息
@@ -445,7 +451,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncId(final Long systemId, final Long menuId, final Long funcId){
+    default public FunctionInfoBean getMenuFuncInfoByFuncId(final Long systemId, final Long menuId, final Long funcId){
         return getMenuFuncInfoByFuncId(systemId, menuId, funcId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -469,7 +475,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncId(final Long systemId, final String menuCode, final Long funcId){
+    default public FunctionInfoBean getMenuFuncInfoByFuncId(final Long systemId, final String menuCode, final Long funcId){
         return getMenuFuncInfoByFuncId(systemId, menuCode, funcId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -492,7 +498,7 @@ public interface MenuFuncService {
      *            功能按钮ID
      * @return 功能按钮信息
      */
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncId(final String systemCode, final Long menuId, final Long funcId){
+    default public FunctionInfoBean getMenuFuncInfoByFuncId(final String systemCode, final Long menuId, final Long funcId){
         return getMenuFuncInfoByFuncId(systemCode, menuId, funcId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -516,7 +522,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncId(final String systemCode, final String menuCode, final Long funcId){
+    default public FunctionInfoBean getMenuFuncInfoByFuncId(final String systemCode, final String menuCode, final Long funcId){
         return getMenuFuncInfoByFuncId(systemCode, menuCode, funcId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -540,7 +546,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final Long menuId, final String funcCode){
+    default public FunctionInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final Long menuId, final String funcCode){
         return getMenuFuncInfoByFuncCode(systemId, menuId, funcCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -564,7 +570,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final String menuCode, final String funcCode){
+    default public FunctionInfoBean getMenuFuncInfoByFuncCode(final Long systemId, final String menuCode, final String funcCode){
         return getMenuFuncInfoByFuncCode(systemId, menuCode, funcCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -588,7 +594,7 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final Long menuId, final String funcCode){
+    default public FunctionInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final Long menuId, final String funcCode){
         return getMenuFuncInfoByFuncCode(systemCode, menuId, funcCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -612,8 +618,8 @@ public interface MenuFuncService {
      * @return 功能按钮信息
      */
     @Read
-    default public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final String menuCode,
-                                                      final String funcCode){
+    default public FunctionInfoBean getMenuFuncInfoByFuncCode(final String systemCode, final String menuCode,
+                                                              final String funcCode){
         return getMenuFuncInfoByFuncCode(systemCode, menuCode, funcCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -635,7 +641,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-    default public List<MenuFuncInfoBean> getMenuFuncListByMenuId(final Long systemId, final Long menuId){
+    default public List<FunctionInfoBean> getMenuFuncListByMenuId(final Long systemId, final Long menuId){
         return getMenuFuncListByMenuId(systemId, menuId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
 
     }
@@ -658,7 +664,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-    default public List<MenuFuncInfoBean> getMenuFuncListByMenuId(final String systemCode, final Long menuId){
+    default public List<FunctionInfoBean> getMenuFuncListByMenuId(final String systemCode, final Long menuId){
         return getMenuFuncListByMenuId(systemCode, menuId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -680,7 +686,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    default public List<MenuFuncInfoBean> getMenuFuncListByMenuCode(final Long systemId, final String menuCode){
+    default public List<FunctionInfoBean> getMenuFuncListByMenuCode(final Long systemId, final String menuCode){
         return getMenuFuncListByMenuCode(systemId, menuCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -702,7 +708,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    default public List<MenuFuncInfoBean> getMenuFuncListByMenuCode(final String systemCode, final String menuCode){
+    default public List<FunctionInfoBean> getMenuFuncListByMenuCode(final String systemCode, final String menuCode){
         return getMenuFuncListByMenuCode(systemCode, menuCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -724,7 +730,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-   default public List<MenuFuncInfoBean> getChildMenuFuncListByMenuId(final Long systemId, final Long menuPId){
+    default public List<FunctionInfoBean> getChildMenuFuncListByMenuId(final Long systemId, final Long menuPId){
         return getChildMenuFuncListByMenuId(systemId, menuPId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -746,7 +752,7 @@ public interface MenuFuncService {
      * @return 菜单的功能按钮列表
      */
     @Read
-   default public List<MenuFuncInfoBean> getChildMenuFuncListByMenuId(final String systemCode, final Long menuPId){
+    default public List<FunctionInfoBean> getChildMenuFuncListByMenuId(final String systemCode, final Long menuPId){
         return getChildMenuFuncListByMenuId(systemCode, menuPId, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -768,7 +774,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    default public List<MenuFuncInfoBean> getChildMenuFuncListByMenuCode(final Long systemId, final String menuPCode){
+    default public List<FunctionInfoBean> getChildMenuFuncListByMenuCode(final Long systemId, final String menuPCode){
         return getChildMenuFuncListByMenuCode(systemId, menuPCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -790,7 +796,7 @@ public interface MenuFuncService {
      * @return 菜单功能按钮列表
      */
     @Read
-    default public List<MenuFuncInfoBean> getChildMenuFuncListByMenuCode(final String systemCode, final String menuPCode){
+    default public List<FunctionInfoBean> getChildMenuFuncListByMenuCode(final String systemCode, final String menuPCode){
         return getChildMenuFuncListByMenuCode(systemCode, menuPCode, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
     }
 
@@ -802,6 +808,6 @@ public interface MenuFuncService {
      * @return
      */
     @Read
-    public MenuFuncInfoBean getMenuFuncInfoByFuncCode(final MenuFuncInfoBean menuFuncInfoBean);
+    public FunctionInfoBean getMenuFuncInfoByFuncCode(final FunctionInfoBean menuFuncInfoBean);
 
 }

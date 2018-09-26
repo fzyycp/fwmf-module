@@ -1,14 +1,12 @@
 package cn.faury.fwmf.module.api.menu.bean;
 
 
-import cn.faury.fdk.common.utils.JsonUtil;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 业务平台菜单TreeNodeBean
+ * 菜单TreeNodeBean
  */
 public class MenuTreeNodeBean extends MenuInfoBean implements Serializable {
 
@@ -45,7 +43,7 @@ public class MenuTreeNodeBean extends MenuInfoBean implements Serializable {
 			this.setIsLeaf(menuInofBean.getIsLeaf());
 			this.setSystemId(menuInofBean.getSystemId());
 			this.setIsAvailable(menuInofBean.getIsAvailable());
-			this.setFuncs(menuInofBean.getFuncs());
+			this.setFunctionInfoBeans(menuInofBean.getFunctionInfoBeans());
 			this.setChildrens(new ArrayList<>());
 		}
 	}
@@ -64,13 +62,4 @@ public class MenuTreeNodeBean extends MenuInfoBean implements Serializable {
 	public void setChildrens(final List<MenuTreeNodeBean> childrens) {
 		this.childrens = childrens;
 	}
-
-	/* (non-Javadoc)
-     * @see cn.wassk.platform.inteface.menu.bean.MenuInfoBean#toString()
-     */
-    @Override
-    public String toString() {
-		return JsonUtil.objectToJson(this);
-	}
-
 }

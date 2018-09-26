@@ -1,249 +1,60 @@
 package cn.faury.fwmf.module.api.menu.bean;
 
+import cn.faury.fdk.common.db.PrimaryKeyEnableBean;
 import cn.faury.fdk.common.utils.JsonUtil;
+import cn.faury.fwmf.module.api.menu.generate.bean.MenuInfoGenerateBean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * 菜单信息对象
+ * POJO对象：菜单信息表
+ * <p>
+ * <pre>
+ *     MenuInfoGenerateBean为数据库表自动生成POJO对象，不可修改
+ *     当前POJO继承自MenuInfoGenerateBean，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
-public class MenuInfoBean implements Serializable {
+public class MenuInfoBean extends MenuInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+
+    private List<FunctionInfoBean> functionInfoBeans;
 
     /**
-     * 菜单ID
-     */
-    private Long menuId;
-
-    /**
-     * 上级菜单ID
-     */
-    private Long menuPid;
-
-    /**
-     * 菜单名称
-     */
-    private String menuName;
-
-    /**
-     * 菜单所对应的ActionKey
-     */
-    private String menuActionKey;
-
-    /**
-     * 菜单编码
-     */
-    private String menuCode;
-
-    /**
-     * 菜单是否可用【0:不可用  1:可用】
-     */
-    private String isAvailable;
-
-    /**
-     * 是否末级【0:不是  1:是】
-     */
-    private String isLeaf;
-
-    /**
-     * 系统ID
-     */
-    private String systemId;
-
-    /**
-     * 排序
-     */
-    private String sort;
-
-    /**
-     * 功能按钮
-     */
-    private List<MenuFuncInfoBean> funcs = new ArrayList<>();
-
-    /**
-     * 获取menuId
+     * 获取表主键Key值(自动生成代码)
      *
-     * @return menuId
+     * @return 主键值
      */
-    public Long getMenuId() {
-        return menuId;
+    @Override
+    public Long getPrimaryKey() {
+        return this.getMenuId();
     }
 
     /**
-     * 设置menuId
+     * JSON序列化对象(自动生成代码)
      *
-     * @param menuId 值
+     * @return JSON化对象
      */
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
-    }
-
-    /**
-     * 获取menuPid
-     *
-     * @return menuPid
-     */
-    public Long getMenuPid() {
-        return menuPid;
-    }
-
-    /**
-     * 设置menuPid
-     *
-     * @param menuPid 值
-     */
-    public void setMenuPid(Long menuPid) {
-        this.menuPid = menuPid;
-    }
-
-    /**
-     * 获取menuName
-     *
-     * @return menuName
-     */
-    public String getMenuName() {
-        return menuName;
-    }
-
-    /**
-     * 设置menuName
-     *
-     * @param menuName 值
-     */
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-
-    /**
-     * 获取menuActionKey
-     *
-     * @return menuActionKey
-     */
-    public String getMenuActionKey() {
-        return menuActionKey;
-    }
-
-    /**
-     * 设置menuActionKey
-     *
-     * @param menuActionKey 值
-     */
-    public void setMenuActionKey(String menuActionKey) {
-        this.menuActionKey = menuActionKey;
-    }
-
-    /**
-     * 获取menuCode
-     *
-     * @return menuCode
-     */
-    public String getMenuCode() {
-        return menuCode;
-    }
-
-    /**
-     * 设置menuCode
-     *
-     * @param menuCode 值
-     */
-    public void setMenuCode(String menuCode) {
-        this.menuCode = menuCode;
-    }
-
-    /**
-     * 获取isAvailable
-     *
-     * @return isAvailable
-     */
-    public String getIsAvailable() {
-        return isAvailable;
-    }
-
-    /**
-     * 设置isAvailable
-     *
-     * @param isAvailable 值
-     */
-    public void setIsAvailable(String isAvailable) {
-        this.isAvailable = isAvailable;
-    }
-
-    /**
-     * 获取isLeaf
-     *
-     * @return isLeaf
-     */
-    public String getIsLeaf() {
-        return isLeaf;
-    }
-
-    /**
-     * 设置isLeaf
-     *
-     * @param isLeaf 值
-     */
-    public void setIsLeaf(String isLeaf) {
-        this.isLeaf = isLeaf;
-    }
-
-    /**
-     * 获取systemId
-     *
-     * @return systemId
-     */
-    public String getSystemId() {
-        return systemId;
-    }
-
-    /**
-     * 设置systemId
-     *
-     * @param systemId 值
-     */
-    public void setSystemId(String systemId) {
-        this.systemId = systemId;
-    }
-
-    /**
-     * 获取sort
-     *
-     * @return sort
-     */
-    public String getSort() {
-        return sort;
-    }
-
-    /**
-     * 设置sort
-     *
-     * @param sort 值
-     */
-    public void setSort(String sort) {
-        this.sort = sort;
-    }
-
-    /**
-     * 获取funcs
-     *
-     * @return funcs
-     */
-    public List<MenuFuncInfoBean> getFuncs() {
-        return funcs;
-    }
-
-    /**
-     * 设置funcs
-     *
-     * @param funcs 值
-     */
-    public void setFuncs(List<MenuFuncInfoBean> funcs) {
-        this.funcs = funcs;
-    }
-
     @Override
     public String toString() {
         return JsonUtil.objectToJson(this);
+    }
+
+    /**
+     * 获取functionInfoBeans
+     *
+     * @return functionInfoBeans
+     */
+    public List<FunctionInfoBean> getFunctionInfoBeans() {
+        return functionInfoBeans;
+    }
+
+    /**
+     * 设置functionInfoBeans
+     *
+     * @param functionInfoBeans 值
+     */
+    public void setFunctionInfoBeans(List<FunctionInfoBean> functionInfoBeans) {
+        this.functionInfoBeans = functionInfoBeans;
     }
 }
