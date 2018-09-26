@@ -1,10 +1,6 @@
 package cn.faury.fwmf.module.service.user.service;
 
-import cn.faury.fdk.common.db.PageInfo;
-import cn.faury.fdk.common.db.PageParam;
 import cn.faury.fdk.common.utils.AssertUtil;
-import cn.faury.fdk.common.utils.DateUtil;
-import cn.faury.fdk.common.utils.SigAESUtil;
 import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.role.service.RoleInfoService;
@@ -46,19 +42,6 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
         this.roleInfoService = roleInfoService;
     }
 
-
-    /**
-     * 加密密码
-     *
-     * @param password 明文密码
-     * @return 密文密码
-     */
-    @Override
-    public String encryptPassWord(String password) {
-        AssertUtil.assertNotEmpty(password, "密码不可以为空");
-        return SigAESUtil.encryptPassWord(password);
-    }
-
     /**
      * 根据用户登录名获取用户信息
      *
@@ -88,51 +71,32 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
     }
 
     /**
-     * 验证用户登录名是否存在
+     * 插入用户信息
      *
-     * @param loginName 用户登录名
-     * @return 是否存在
+     * @param loginName        用户登录名
+     * @param userName         用户姓名
+     * @param password         用户登录密码
+     * @param systemId         所属系统ID
+     * @param userType         用户类型
+     * @param createPerson
+     * @param createPersonName
+     * @param updatePerson
+     * @param updatePersonName @return 用户ID
      */
     @Override
-    public Boolean isLoginNameExist(String loginName) {
-        return this.getUserInfoByLoginName(loginName) != null;
-    }
-
-    /**
-     * 插入后台用户信息
-     *
-     * @param userInfoBean 用户信息对象
-     *                     <p>
-     *                     支持以下变量：
-     *                     loginName 用户登录名
-     *                     userName  用户姓名
-     *                     password  用户登录密码(明文，插入数据库时后台加密）
-     *                     efctYmd   启用日期
-     *                     exprYmd   失效日期
-     *                     systemId  所属系统ID
-     *                     createPerson 创建人
-     *                     </p>
-     * @return 用户ID
-     */
-    @Override
-    public Long insertUserInfo(UserInfoBean userInfoBean) {
-        //参数有效性验证
-        AssertUtil.assertNotNull(userInfoBean, "用户信息不可以为空");
-        AssertUtil.assertNotEmpty(userInfoBean.getLoginName(), "用户姓名不可以为空");
-        AssertUtil.assertNotEmpty(userInfoBean.getUserName(), "用户姓名不可以为空");
-        AssertUtil.assertNotNull(userInfoBean.getEfctYmd(), "启用日期不可以为空");
-        AssertUtil.assertNotNull(userInfoBean.getUserType(), "用户类型不可以为空");
-        AssertUtil.assertNotNull(UserType.parse(userInfoBean.getUserType()),"用户类型不正确");
-        if (userInfoBean.getExprYmd() == null) {
-            userInfoBean.setExprYmd(DateUtil.parse("2049-12-31"));
-        }
-        AssertUtil.assertFalse(this.isLoginNameExist(userInfoBean.getLoginName()), "用户登录名已存在");
-
-        userInfoBean.setPassword(encryptPassWord(StringUtil.isEmpty(userInfoBean.getPassword()) ? "123456" : userInfoBean.getPassword()));//加密存储
-
-        String statement = UserInfoMapper.class.getName() + ".insertUserInfo";
-        int res = this.commonDao.insert(statement, userInfoBean);
-        return res > 0 ? userInfoBean.getUserId() : -1L;
+    public Long insertUserInfo(String loginName, String userName, String password, Long systemId, UserType userType, Long createPerson, String createPersonName, Long updatePerson, String updatePersonName) {
+        UserInfoBean userInfo = new UserInfoBean();
+        userInfo.setLoginName(loginName);
+        userInfo.setUserName(userName);
+        userInfo.setEfctYmd(new Date());
+        userInfo.setPassword(password);
+        userInfo.setOriginOsId(systemId);
+        userInfo.setUserType(userType.getValue());
+        userInfo.setCreatePerson(createPerson);
+        userInfo.setCreatePersonName(createPersonName);
+        userInfo.setUpdatePerson(updatePerson != null ? updatePerson : createPerson);
+        userInfo.setUpdatePersonName(StringUtil.emptyDefault(updatePersonName, createPersonName));
+        return insertUserInfo(userInfo);
     }
 
     /**
@@ -164,67 +128,37 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
     }
 
     /**
-     * 后台用户信息搜索（分页）
-     *
-     * @param param 查询参数
-     * @return 查询结果
-     */
-    @Override
-    public PageInfo<UserInfoBean> search(Map<String, Object> param) {
-        PageParam pageParam = PageParam.buildDefaultIns(param);
-
-        String state = UserInfoMapper.class.getName() + ".search";
-
-        return this.commonDao.selectPage(state, param, pageParam);
-    }
-
-    /**
-     * 根据后台用户ID获取后台用户信息
-     *
-     * @param userId 后台用户ID
-     * @return 后台用户信息
-     */
-    @Override
-    public UserInfoBean getUserInfoById(Long userId) {
-        AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
-
-        String state = UserInfoMapper.class.getName() + ".getUserInfoById";
-        return this.commonDao.selectOne(state, userId);
-    }
-
-    /**
      * 根据用户Id修改用户信息，为null则不更新
      *
-     * @param userName     用户姓名
-     * @param efctYmd      启用日期
-     * @param exprYmd      失效日期
-     * @param updatePerson 更新人
-     * @param userId       用户Id
-     * @return 更新成功条数
+     * @param userName         用户姓名
+     * @param efctYmd          启用日期
+     * @param exprYmd          失效日期
+     * @param updatePerson     更新人
+     * @param updatePersonName
+     * @param userId           用户Id  @return 更新成功条数
      */
     @Override
-    public int updateUserInfoById(String userName, Date efctYmd, Date exprYmd, String updatePerson, Long userId) {
+    public int updateUserInfoById(String userName, Date efctYmd, Date exprYmd, Long updatePerson, String updatePersonName, Long userId) {
         //参数有效性验证
         AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
-//        AssertUtil.assertNotEmpty(userName, "用户姓名不可以为空");
-//        AssertUtil.assertNotNull(efctYmd, "生效日期不可以为空");
-//        AssertUtil.assertNotNull(exprYmd, "失效日期不可以为空");
-        AssertUtil.assertNotEmpty(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotNull(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotEmpty(updatePersonName, "更新人不可以为空");
 
-        String state = UserInfoMapper.class.getName() + ".updateUserInfoById";
-        Map<String, Object> parameter = new HashMap<>();
-        if (StringUtil.isNotEmpty(userName)){
-            parameter.put("userName", userName);
+        UserInfoBean userInfoBean = new UserInfoBean();
+        userInfoBean.setUserId(userId);
+        userInfoBean.setUpdatePerson(updatePerson);
+        userInfoBean.setUpdatePersonName(updatePersonName);
+
+        if (StringUtil.isNotEmpty(userName)) {
+            userInfoBean.setUserName(userName);
         }
-        if (efctYmd!=null){
-            parameter.put("efctYmd", DateUtil.formatDate(efctYmd));
+        if (efctYmd != null) {
+            userInfoBean.setEfctYmd(efctYmd);
         }
-        if(exprYmd!=null){
-            parameter.put("exprYmd", DateUtil.formatDate(exprYmd));
+        if (exprYmd != null) {
+            userInfoBean.setExprYmd(exprYmd);
         }
-        parameter.put("userId", userId);
-        parameter.put("updatePerson", updatePerson);
-        return this.commonDao.update(state, parameter);
+        return this.update(userInfoBean);
     }
 
     /**
@@ -240,11 +174,11 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
      */
     @Override
     @Transactional
-    public int updateUserInfoByIdWithRole(String userName, Date efctYmd, Date exprYmd, String updatePerson, Long userId, String roleCode) {
+    public int updateUserInfoByIdWithRole(String userName, Date efctYmd, Date exprYmd, Long updatePerson,String updatePersonName, Long userId, String roleCode) {
         AssertUtil.assertNotEmpty(roleCode, "角色编码不可以为空");
 
         // 更新用户信息
-        int update1 = this.updateUserInfoById(userName, efctYmd, exprYmd, updatePerson, userId);
+        int update1 = this.updateUserInfoById(userName, efctYmd, exprYmd, updatePerson,updatePersonName, userId);
         // 删除已有角色信息
         roleInfoService.deleteUserRRole(userId);
         // 插入新的角色信息
@@ -257,12 +191,14 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
      *
      * @param userId       用户ID
      * @param updatePerson 更新人
+     * @param updatePersonName 更新人名称
      * @return 成功删除的条数
      */
     @Override
-    public int deleteUserInfoById(Long userId, String updatePerson) {
+    public int deleteUserInfoById(Long userId, Long updatePerson,String updatePersonName) {
         AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
-        AssertUtil.assertNotEmpty(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotNull(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotEmpty(updatePersonName, "更新人不可以为空");
 
         String state = UserInfoMapper.class.getName() + ".deleteUserInfoById";
         Map<String, Object> parameter = new HashMap<>();
@@ -280,9 +216,10 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
      * @return 成功修改的条数
      */
     @Override
-    public int changeEnable(Long userId, String isEnable, String updatePerson) {
+    public int changeEnable(Long userId, String isEnable, Long updatePerson,String updatePersonName) {
         AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
-        AssertUtil.assertNotEmpty(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotNull(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotEmpty(updatePersonName, "更新人不可以为空");
 
         if (!"N".equals(isEnable) && !"Y".equals(isEnable)) {
             isEnable = "N";
@@ -304,10 +241,11 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
      * @return 成功修改条数
      */
     @Override
-    public int resetPassword(Long userId, String password, String updatePerson) {
+    public int resetPassword(Long userId, String password, Long updatePerson,String updatePersonName) {
         AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
         AssertUtil.assertNotEmpty(password, "新密码不可以为空");
-        AssertUtil.assertNotEmpty(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotNull(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotEmpty(updatePersonName, "更新人不可以为空");
 
         String state = UserInfoMapper.class.getName() + ".resetPassword";
         Map<String, Object> parameter = new HashMap<>();
@@ -327,13 +265,14 @@ public class UserInfoServiceImpl extends CrudBaseServiceImpl<UserInfoBean, Long>
      * @return 成功更新条数
      */
     @Override
-    public int updatePassword(String oldPassword, String newPassword, Long userId, String updatePerson) {
+    public int updatePassword(String oldPassword, String newPassword, Long userId, Long updatePerson,String updatePersonName) {
         AssertUtil.assertTrue((userId != null && userId > 0), "用户ID参数错误");
         AssertUtil.assertNotEmpty(oldPassword, "旧密码不可以为空");
         AssertUtil.assertNotEmpty(newPassword, "新密码不可以为空");
-        AssertUtil.assertNotEmpty(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotNull(updatePerson, "更新人不可以为空");
+        AssertUtil.assertNotEmpty(updatePersonName, "更新人不可以为空");
 
-        String state = UserInfoMapper.class.getName() + ".updatePassword";
+        String state = this.mapper.getName() + ".updatePassword";
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("userId", userId);
         parameter.put("oldPassword", encryptPassWord(oldPassword));

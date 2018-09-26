@@ -21,7 +21,7 @@ import java.util.Map;
 public class UserServiceTest {
 
     @Autowired
-    UserInfoService userInfoService;
+    UserInfoService<UserInfoBean,UserPasswordBean> userInfoService;
 
     @Test
     public void getUserInfoByLoginName() throws Exception {
@@ -61,7 +61,7 @@ public class UserServiceTest {
         Assert.assertTrue(id > 0);
         System.out.println(userInfoService.getUserInfoByLoginName("faury"));
         // 清理数据
-        userInfoService.deleteUserInfoById(id, "junit-clear");
+        userInfoService.deleteUserInfoById(id, 0L,"junit-clear");
     }
 
     @Test
@@ -88,47 +88,47 @@ public class UserServiceTest {
 
     @Test
     public void getUserInfoById() throws Exception {
-        UserInfoBean userInfoBean = userInfoService.getUserInfoById(1L);
+        UserInfoBean userInfoBean = userInfoService.getBeanById(1L);
         Assert.assertNotNull(userInfoBean);
         Assert.assertTrue("super".equals(userInfoBean.getLoginName()));
     }
 
     @Test
     public void updateUserInfoById() throws Exception {
-        int updated = userInfoService.updateUserInfoById("faury-test", DateUtil.parse("2018-01-01 12:34:56"), DateUtil.parse("2018-01-01 12:34:57"), "junit-test", 10L);
+        int updated = userInfoService.updateUserInfoById("faury-test", DateUtil.parse("2018-01-01 12:34:56"), DateUtil.parse("2018-01-01 12:34:57"), 0L,"junit-test", 10L);
         Assert.assertTrue(updated == 1);
     }
 
     @Test
     public void updateUserInfoByIdWithRole() throws Exception {
-        int updated = userInfoService.updateUserInfoByIdWithRole("faury-test", DateUtil.parse("2018-01-02 12:34:56"), DateUtil.parse("2018-01-02 12:34:57"), "junit-test", 10L, "SYSTEM");
+        int updated = userInfoService.updateUserInfoByIdWithRole("faury-test", DateUtil.parse("2018-01-02 12:34:56"), DateUtil.parse("2018-01-02 12:34:57"), 0L,"junit-test", 10L, "SYSTEM");
         Assert.assertTrue(updated == 1);
     }
 
     @Test
     public void deleteUserInfoById() throws Exception {
-        int deleted = userInfoService.deleteUserInfoById(10L, "junit-deleter");
+        int deleted = userInfoService.deleteUserInfoById(10L, 0L,"junit-deleter");
         Assert.assertTrue(deleted == 1);
     }
 
     @Test
     public void changeEnable() throws Exception {
-        int changed = userInfoService.changeEnable(11L, "N", "junit-updater");
+        int changed = userInfoService.changeEnable(11L, "N", 0L,"junit-updater");
         Assert.assertTrue(changed == 1);
     }
 
     @Test
     public void resetPassword() throws Exception {
-        int reset = userInfoService.resetPassword(11L, "111111", "junit-updater");
+        int reset = userInfoService.resetPassword(11L, "111111", 0L,"junit-updater");
         Assert.assertTrue(reset == 1);
     }
 
     @Test
     public void updatePassword() throws Exception {
-        int updated = userInfoService.updatePassword("faury-password", "111111", 12L, "junit-updater");
+        int updated = userInfoService.updatePassword("faury-password", "111111", 12L, 0L,"junit-updater");
         Assert.assertTrue(updated == 1);
         // 还原
-        userInfoService.updatePassword("111111", "faury-password", 12L, "junit-updater");
+        userInfoService.updatePassword("111111", "faury-password", 12L, 0L,"junit-updater");
     }
 
 }

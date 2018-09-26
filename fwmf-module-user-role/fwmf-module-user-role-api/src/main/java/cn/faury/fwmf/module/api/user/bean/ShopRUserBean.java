@@ -64,12 +64,22 @@ public class ShopRUserBean implements Serializable {
     /**
      * 创建人姓名
      */
-    private String createPerson;
+    private Long createPerson;
 
     /**
      * 修改人姓名
      */
-    private String updatePerson;
+    private Long updatePerson;
+
+    /**
+     * 创建人姓名
+     */
+    private String createPersonName;
+
+    /**
+     * 修改人姓名
+     */
+    private String updatePersonName;
     /**
      * @return the shopUserId
      */
@@ -215,7 +225,7 @@ public class ShopRUserBean implements Serializable {
      *
      * @return createPerson
      */
-    public String getCreatePerson() {
+    public Long getCreatePerson() {
         return createPerson;
     }
 
@@ -224,7 +234,7 @@ public class ShopRUserBean implements Serializable {
      *
      * @param createPerson 值
      */
-    public void setCreatePerson(String createPerson) {
+    public void setCreatePerson(Long createPerson) {
         this.createPerson = createPerson;
     }
 
@@ -233,7 +243,7 @@ public class ShopRUserBean implements Serializable {
      *
      * @return updatePerson
      */
-    public String getUpdatePerson() {
+    public Long getUpdatePerson() {
         return updatePerson;
     }
 
@@ -242,15 +252,51 @@ public class ShopRUserBean implements Serializable {
      *
      * @param updatePerson 值
      */
-    public void setUpdatePerson(String updatePerson) {
+    public void setUpdatePerson(Long updatePerson) {
         this.updatePerson = updatePerson;
     }
 
+    /**
+     * 获取createPersonName
+     *
+     * @return createPersonName
+     */
+    public String getCreatePersonName() {
+        return createPersonName;
+    }
+
+    /**
+     * 设置createPersonName
+     *
+     * @param createPersonName 值
+     */
+    public void setCreatePersonName(String createPersonName) {
+        this.createPersonName = createPersonName;
+    }
+
+    /**
+     * 获取updatePersonName
+     *
+     * @return updatePersonName
+     */
+    public String getUpdatePersonName() {
+        return updatePersonName;
+    }
+
+    /**
+     * 设置updatePersonName
+     *
+     * @param updatePersonName 值
+     */
+    public void setUpdatePersonName(String updatePersonName) {
+        this.updatePersonName = updatePersonName;
+    }
+
     /*
-         * (non-Javadoc)
-         *
-         * @see java.lang.Object#toString()
-         */
+             * (non-Javadoc)
+             *
+             * @see java.lang.Object#toString()
+             */
     @Override
     public String toString() {
         return JsonUtil.objectToJson(this);

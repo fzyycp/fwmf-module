@@ -10,6 +10,7 @@ import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.user.bean.ShopRUserBean;
 import cn.faury.fwmf.module.api.user.bean.UserInfoBean;
+import cn.faury.fwmf.module.api.user.bean.UserPasswordBean;
 import cn.faury.fwmf.module.api.user.config.UserType;
 import cn.faury.fwmf.module.api.user.service.ShopRUserService;
 import cn.faury.fwmf.module.api.user.service.UserInfoService;
@@ -31,9 +32,9 @@ public class ShopRUserServiceImpl implements ShopRUserService {
      */
     protected CommonDao commonDao;
 
-    protected UserInfoService userInfoService;
+    protected UserInfoService<UserInfoBean,UserPasswordBean> userInfoService;
 
-    public ShopRUserServiceImpl(CommonDao commonDao, UserInfoService userInfoService) {
+    public ShopRUserServiceImpl(CommonDao commonDao, UserInfoService<UserInfoBean,UserPasswordBean> userInfoService) {
         this.commonDao = commonDao;
         this.userInfoService = userInfoService;
     }
@@ -163,7 +164,7 @@ public class ShopRUserServiceImpl implements ShopRUserService {
         AssertUtil.assertTrue(shopUserId != null && shopUserId > 0, "用户ID为空或不存在");
         String state = ShopRUserMapper.class.getName() + ".isShopUserR";
         List<Integer> list = this.commonDao.selectList(state, shopUserId);
-        StringBuffer message = new StringBuffer(128);
+        StringBuilder message = new StringBuilder(128);
         message.append("用户");
         Integer count = 0;
         if (list != null && list.size() > 0) {
@@ -203,7 +204,8 @@ public class ShopRUserServiceImpl implements ShopRUserService {
         AssertUtil.assertNotEmpty(bean.getShopUserLoginName(), "用户登录名为空或不存在！");
         AssertUtil.assertNotEmpty(bean.getShopUserName(), "用户姓名为空或不存在！");
         AssertUtil.assertNotEmpty(bean.getPassword(), "密码为空或不存在！");
-        AssertUtil.assertNotEmpty(bean.getCreatePerson(), "创建人为空或不存在！");
+        AssertUtil.assertNotNull(bean.getCreatePerson(), "创建人为空或不存在！");
+        AssertUtil.assertNotEmpty(bean.getCreatePersonName(), "创建人为空或不存在！");
         AssertUtil.assertTrue(bean.getSystemId() != null && bean.getSystemId() > 0, "系统ID为空或不存在");
 
         AssertUtil.assertTrue(bean.getShopId() != null && bean.getShopId() > 0, "商店ID为空或不存在");
@@ -217,9 +219,11 @@ public class ShopRUserServiceImpl implements ShopRUserService {
         userInfoBean.setEfctYmd(new Date());
         userInfoBean.setExprYmd(DateUtil.parse("2049-12-31"));
         userInfoBean.setOriginOsId(bean.getSystemId());
-        userInfoBean.setCreatePersonName(bean.getCreatePerson());
+        userInfoBean.setCreatePerson(bean.getCreatePerson());
+        userInfoBean.setCreatePersonName(bean.getCreatePersonName());
         userInfoBean.setUserType(UserType.SYSTEM.getValue());
-        userInfoBean.setUpdatePersonName(StringUtil.emptyDefault(bean.getUpdatePerson(), bean.getCreatePerson()));
+        userInfoBean.setUpdatePerson(bean.getUpdatePerson() != null ? bean.getUpdatePerson() : bean.getCreatePerson());
+        userInfoBean.setUpdatePersonName(StringUtil.emptyDefault(bean.getUpdatePersonName(), bean.getCreatePersonName()));
 
 
         Long userId = userInfoService.insertUserInfo(userInfoBean);
@@ -289,7 +293,7 @@ public class ShopRUserServiceImpl implements ShopRUserService {
         AssertUtil.assertNotEmpty(bean.getShopUserLoginName(), "用户登录名为空或不存在");
         AssertUtil.assertNotEmpty(bean.getShopUserName(), "用户姓名为空或不存在");
 
-        return userInfoService.updateUserInfoById(bean.getShopUserName(), null, null, bean.getUpdatePerson(),
+        return userInfoService.updateUserInfoById(bean.getShopUserName(), null, null, bean.getUpdatePerson(), bean.getUpdatePersonName(),
                 bean.getShopUserId());
     }
 }
