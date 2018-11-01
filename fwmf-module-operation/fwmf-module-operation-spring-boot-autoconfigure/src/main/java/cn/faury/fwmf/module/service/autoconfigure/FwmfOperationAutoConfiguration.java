@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * 区域服务服务自动装配器
+ * 操作日志记录服务自动装配器
  */
 @Configuration
 @AutoConfigureAfter(FdkMybatisAutoConfiguration.class)
