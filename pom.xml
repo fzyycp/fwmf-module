@@ -57,6 +57,11 @@
         <module>fwmf-module-push/fwmf-module-push-spring-boot-autoconfigure</module>
         <module>fwmf-module-push/fwmf-module-push-spring-boot-starter</module>
 
+        <module>fwmf-module-qa/fwmf-module-qa-api</module>
+        <module>fwmf-module-qa/fwmf-module-qa-service</module>
+        <module>fwmf-module-qa/fwmf-module-qa-spring-boot-autoconfigure</module>
+        <module>fwmf-module-qa/fwmf-module-qa-spring-boot-starter</module>
+
         <module>fwmf-module-school/fwmf-module-school-api</module>
         <module>fwmf-module-school/fwmf-module-school-service</module>
         <module>fwmf-module-school/fwmf-module-school-spring-boot-autoconfigure</module>

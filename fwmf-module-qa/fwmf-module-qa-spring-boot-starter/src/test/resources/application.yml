@@ -1,0 +1,8 @@
+logging:
+  level:
+    ROOT: error
+    cn.faury: debug
+
+spring:
+  profiles:
+    active: dev
