@@ -52,7 +52,7 @@ public class UserGroupsSQLProvider {
         if (parameter.containsKey("isSystemAvailable") && parameter.get("isSystemAvailable") != null) {
             Boolean isAvailable = (Boolean) parameter.get("isSystemAvailable");
             sql.append("                 AND IS_AVAILABLE = '");
-            sql.append(isAvailable.booleanValue() ? "'Y'" : "'N'");
+            sql.append(isAvailable.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         sql.append(" )");
@@ -134,7 +134,7 @@ public class UserGroupsSQLProvider {
         if (parameter.containsKey("isSystemAvailable") && parameter.get("isSystemAvailable") != null) {
             Boolean isAvailable = (Boolean) parameter.get("isSystemAvailable");
             sql.append("                 AND IS_AVAILABLE = '");
-            sql.append(isAvailable.booleanValue() ? "'Y'" : "'N'");
+            sql.append(isAvailable.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         sql.append(" )");
@@ -182,7 +182,7 @@ public class UserGroupsSQLProvider {
         if (parameter.containsKey("isSystemAvailable") && parameter.get("isSystemAvailable") != null) {
             Boolean isAvailable = (Boolean) parameter.get("isSystemAvailable");
             sql.append("                 AND TS.IS_AVAILABLE = '");
-            sql.append(isAvailable.booleanValue() ? "'Y'" : "'N'");
+            sql.append(isAvailable.booleanValue() ? "Y" : "N");
             sql.append("' ");
         }
         if (parameter.get("groupId") != null) {
@@ -318,7 +318,7 @@ public class UserGroupsSQLProvider {
             if (parameter.containsKey("isSystemAvailable") && parameter.get("isSystemAvailable") != null) {
                 Boolean isAvailable = (Boolean) parameter.get("isSystemAvailable");
                 sql.append("                 AND IS_AVAILABLE = '");
-                sql.append(isAvailable.booleanValue() ? "'Y'" : "'N'");
+                sql.append(isAvailable.booleanValue() ? "Y" : "N");
                 sql.append("' ");
             }
         } else {
@@ -328,7 +328,7 @@ public class UserGroupsSQLProvider {
             if (parameter.containsKey("isSystemAvailable") && parameter.get("isSystemAvailable") != null) {
                 Boolean isAvailable = (Boolean) parameter.get("isSystemAvailable");
                 sql.append("                 WHERE IS_AVAILABLE = '");
-                sql.append(isAvailable.booleanValue() ? "'Y'" : "'N'");
+                sql.append(isAvailable.booleanValue() ? "Y" : "N");
                 sql.append("' ");
             }
         }

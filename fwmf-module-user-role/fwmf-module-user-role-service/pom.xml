@@ -12,12 +12,12 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-user-role-service</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
 
     <properties>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
-        <fdk.module.user.role.api.version>0.0.2</fdk.module.user.role.api.version>
+        <fdk.module.user.role.api.version>0.0.3</fdk.module.user.role.api.version>
         <fwmf.module.common.service.version>0.0.1</fwmf.module.common.service.version>
     </properties>
 

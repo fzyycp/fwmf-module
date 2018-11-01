@@ -61,19 +61,19 @@ public class RoleRUserSQLProvider {
 		 */
 		// 【二选一】 Long roleId 角色ID / String roleCode 角色CODE编码
 		sql.append(" UO.ROLE_ID IN (");
-		sql.append(" SELECT R.ID FROM " + DBConstOfUserRole.TN_ROLE_INFO + " R");
+		sql.append(" SELECT R.ROLE_ID FROM " + DBConstOfUserRole.TN_ROLE_INFO + " R");
 		sql.append(" WHERE ");
 		if (parameters.containsKey("roleId")) {
-			sql.append(" R.ID = #{roleId,jdbcType=BIGINT} ");
+			sql.append(" R.ROLE_ID = #{roleId,jdbcType=BIGINT} ");
 		} else {
-			sql.append(" R.CODE = #{roleCode,jdbcType=VARCHAR} ");
+			sql.append(" R.ROLE_CODE = #{roleCode,jdbcType=VARCHAR} ");
 		}
 		// 【可选】isRoleAvailable 角色是否可用
 		// 【Boolean.TRUE：仅可用； Boolean.FALSE:仅不可用；null:都包含】
 		if (parameters.containsKey("isRoleAvailable") && parameters.get("isRoleAvailable") != null) {
 			Boolean isAvailable = (Boolean) parameters.get("isRoleAvailable");
 			sql.append(" AND R.IS_AVAILABLE = '");
-			sql.append(isAvailable ? "'Y'" : "'N'");
+			sql.append(isAvailable ? "Y" : "N");
 			sql.append("' ");
 		}
 		// 【二选一】Long systemId 业务系统ID / String systemCode 业务系统编码
@@ -89,7 +89,7 @@ public class RoleRUserSQLProvider {
 			if (parameters.containsKey("isSystemAvailable") && parameters.get("isSystemAvailable") != null) {
 				Boolean isAvailable = (Boolean) parameters.get("isSystemAvailable");
 				sql.append(" AND S.IS_AVAILABLE = '");
-				sql.append(isAvailable ? "'Y'" : "'N'");
+				sql.append(isAvailable ? "Y" : "N");
 				sql.append("' ");
 			}
 			sql.append(" ) ");
@@ -149,12 +149,12 @@ public class RoleRUserSQLProvider {
 		sql.append(" WHERE ");
 		// 【二选一】 Long roleId 角色ID / String roleCode 角色CODE编码
 		sql.append(" UO.ROLE_ID IN (");
-		sql.append(" SELECT R.ID FROM " + DBConstOfUserRole.TN_ROLE_INFO + " R");
+		sql.append(" SELECT R.ROLE_ID FROM " + DBConstOfUserRole.TN_ROLE_INFO + " R");
 		sql.append(" WHERE ");
 		if (parameters.containsKey("roleId")) {
-			sql.append(" R.ID = #{roleId,jdbcType=BIGINT} ");
+			sql.append(" R.ROLE_ID = #{roleId,jdbcType=BIGINT} ");
 		} else {
-			sql.append(" R.CODE = #{roleCode,jdbcType=VARCHAR} ");
+			sql.append(" R.ROLE_CODE = #{roleCode,jdbcType=VARCHAR} ");
 		}
 		// 【可选】isRoleAvailable 角色是否可用
 		// 【Boolean.TRUE：仅可用； Boolean.FALSE:仅不可用；null:都包含】
@@ -166,7 +166,7 @@ public class RoleRUserSQLProvider {
 		}
 		sql.append(" ) ) ");
 		// 【二选一】Long systemId 业务系统ID / String systemCode 业务系统编码
-		sql.append(" AND AU.ID IN (");
+		sql.append(" AND AU.USER_ID IN (");
 		sql.append(" SELECT RS.USER_ID FROM " + DBConstOfUserRole.TN_USER_R_SYSTEM + " RS");
 		sql.append(" WHERE");
 		sql.append(" RS.SYSTEM_ID = ( SELECT S.SYSTEM_ID FROM " + DBConstOfUserRole.TN_SYSTEM_INFO + " S");
@@ -237,7 +237,7 @@ public class RoleRUserSQLProvider {
 				",TS.SYSTEM_NAME systemName  ");
 		sql.append(" FROM " + DBConstOfUserRole.TN_USER_INFO + " AU," + DBConstOfUserRole.TN_SHOP_USER_INFO + " SU,"
 		        + DBConstOfUserRole.TN_SYSTEM_INFO + " TS");
-		sql.append(" WHERE  SU.SHOP_USER_ID = AU.ID AND TS.SYSTEM_ID=AU.ORIGIN_OS_ID ");
+		sql.append(" WHERE  SU.SHOP_USER_ID = AU.USER_ID AND TS.SYSTEM_ID=AU.ORIGIN_OS_ID ");
 		sql.append(" AND SU.SHOP_ID IN ( SELECT SHOP_ID FROM " + DBConstOfUserRole.TN_SHOP_R_SYSTEM);
 		sql.append(" WHERE SYSTEM_ID = (SELECT SYSTEM_ID FROM " + DBConstOfUserRole.TN_SYSTEM_INFO + " WHERE ");
 		// 【二选一】Long systemId 业务系统ID / String systemCode 业务系统编码
