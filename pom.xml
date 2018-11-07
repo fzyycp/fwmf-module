@@ -21,7 +21,7 @@
         <module>fwmf-module-area/fwmf-module-area-service</module>
         <module>fwmf-module-area/fwmf-module-area-spring-boot-autoconfigure</module>
         <module>fwmf-module-area/fwmf-module-area-spring-boot-starter</module>
-        <module>fwmf-module-area/fwmf-module-area-web</module>
+        <!--<module>fwmf-module-area/fwmf-module-area-web</module>-->
 
         <module>fwmf-module-category/fwmf-module-category-api</module>
         <module>fwmf-module-category/fwmf-module-category-service</module>
@@ -40,7 +40,7 @@
         <module>fwmf-module-menu/fwmf-module-menu-service</module>
         <module>fwmf-module-menu/fwmf-module-menu-spring-boot-autoconfigure</module>
         <module>fwmf-module-menu/fwmf-module-menu-spring-boot-starter</module>
-        <module>fwmf-module-menu/fwmf-module-menu-web</module>
+        <!--<module>fwmf-module-menu/fwmf-module-menu-web</module>-->
 
         <module>fwmf-module-operation/fwmf-module-operation-api</module>
         <module>fwmf-module-operation/fwmf-module-operation-service</module>
@@ -76,7 +76,7 @@
         <module>fwmf-module-shop/fwmf-module-shop-service</module>
         <module>fwmf-module-shop/fwmf-module-shop-spring-boot-autoconfigure</module>
         <module>fwmf-module-shop/fwmf-module-shop-spring-boot-starter</module>
-        <module>fwmf-module-shop/fwmf-module-shop-web</module>
+        <!--<module>fwmf-module-shop/fwmf-module-shop-web</module>-->
 
         <module>fwmf-module-sms/fwmf-module-sms-api</module>
         <module>fwmf-module-sms/fwmf-module-sms-service</module>
@@ -87,7 +87,7 @@
         <module>fwmf-module-system/fwmf-module-system-service</module>
         <module>fwmf-module-system/fwmf-module-system-spring-boot-autoconfigure</module>
         <module>fwmf-module-system/fwmf-module-system-spring-boot-starter</module>
-        <module>fwmf-module-system/fwmf-module-system-web</module>
+        <!--<module>fwmf-module-system/fwmf-module-system-web</module>-->
 
         <module>fwmf-module-systemconfig/fwmf-module-systemconfig-api</module>
         <module>fwmf-module-systemconfig/fwmf-module-systemconfig-service</module>
@@ -100,7 +100,7 @@
         <module>fwmf-module-user-role/fwmf-module-user-role-spring-boot-starter</module>
 
 
-        <module>mybatis-generator</module>
+        <!--<module>mybatis-generator</module>-->
     </modules>
 
     <parent>
@@ -118,6 +118,18 @@
 
     <!-- 设定除中央仓repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查找 -->
     <repositories>
+        <!-- 私服 -->
+        <repository>
+            <id>releases</id>
+            <name>253 Repository</name>
+            <url>http://mvn.fanyc.cn/nexus/content/repositories/releases/</url>
+        </repository>
+        <!--私服-->
+        <repository>
+            <id>rdc-releases</id>
+            <name>Ali Faury</name>
+            <url>https://repo.rdc.aliyun.com/repository/37793-release-UsV6cs</url>
+        </repository>
         <!-- fdk私服 -->
         <repository>
             <id>fdk</id>
@@ -209,10 +221,16 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>bintray-faury-fwmf</id>
-            <name>faury-fwmf</name>
-            <url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module/;publish=1</url>
+            <id>releases</id>
+            <url>http://128.0.9.253:8081/nexus/content/repositories/releases/</url>
         </repository>
     </distributionManagement>
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>bintray-faury-fwmf</id>-->
+            <!--<name>faury-fwmf</name>-->
+            <!--<url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module/;publish=1</url>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
 
 </project>

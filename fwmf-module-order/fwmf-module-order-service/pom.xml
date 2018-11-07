@@ -35,11 +35,11 @@
             <version>5.0.7.RELEASE</version>
         </dependency>
     </dependencies>
-    <distributionManagement>
-        <repository>
-            <id>bintray-faury-fwmf</id>
-            <name>faury-fwmf</name>
-            <url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-order-service/;publish=1</url>
-        </repository>
-    </distributionManagement>
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>bintray-faury-fwmf</id>-->
+            <!--<name>faury-fwmf</name>-->
+            <!--<url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-order-service/;publish=1</url>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
 </project>
