@@ -39,7 +39,7 @@ public class FwmfOperationAutoConfiguration {
      */
     @Bean
     @ConditionalOnClass({OperationRecordService.class, OperationRecordServiceImpl.class})
-    public OperationRecordService areaService(CommonDao commonDao) {
+    public OperationRecordService operationRecordService(CommonDao commonDao) {
         if (StringUtil.isNotEmpty(types)) {
             Operation.Type[] type = Arrays.stream(types.split(","))
                     .filter(StringUtil::isNotEmpty)
