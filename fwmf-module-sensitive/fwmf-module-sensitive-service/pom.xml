@@ -12,13 +12,13 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-sensitive-service</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
 
     <properties>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
-        <fwmf.module.sensitive.api.version>0.0.1</fwmf.module.sensitive.api.version>
-        <fwmf.module.common.service.version>0.0.1</fwmf.module.common.service.version>
+        <fwmf.module.sensitive.api.version>0.0.2</fwmf.module.sensitive.api.version>
+        <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
     </properties>
     <dependencies>
         <dependency>

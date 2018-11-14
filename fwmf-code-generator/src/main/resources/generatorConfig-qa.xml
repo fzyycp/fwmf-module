@@ -10,7 +10,7 @@
         <!--fwmf generator配置-->
         <fwmfGenerator targetPackage="cn.faury.fwmf.module"
                        targetProject=".\src\generator\java"
-                       modelName="sensitive"
+                       modelName="qa"
                        enableGeneratorModifiableMvc="true"
                        menuTableName="sys_t_menu_info"
         />
@@ -50,8 +50,11 @@
             <generatedKey column="AD_ID" sqlStatement="JDBC"/>
         </fwmfTable>
         -->
-        <fwmfTable tableName="sys_t_sensitive_info" modelKey="SensitiveInfo">
-            <generatedKey column="SENSITIVE_ID" sqlStatement="JDBC"/>
+        <fwmfTable tableName="sys_t_qa_info" modelKey="QaInfo">
+            <generatedKey column="QA_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="sys_t_qa_txt" modelKey="QaTxt">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
         </fwmfTable>
 
     </context>
