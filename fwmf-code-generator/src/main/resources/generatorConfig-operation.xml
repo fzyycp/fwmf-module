@@ -10,7 +10,7 @@
         <!--fwmf generator配置-->
         <fwmfGenerator targetPackage="cn.faury.fwmf.module"
                        targetProject=".\src\generator\java"
-                       modelName="code"
+                       modelName="operation"
                        enableGeneratorModifiableMvc="true"
                        menuTableName="sys_t_menu_info"
         />
@@ -50,11 +50,8 @@
             <generatedKey column="AD_ID" sqlStatement="JDBC"/>
         </fwmfTable>
         -->
-        <fwmfTable tableName="sys_t_code_group_info" modelKey="CodeGroupInfo">
-            <generatedKey column="CODE_GROUP_ID" sqlStatement="JDBC"/>
-        </fwmfTable>
-        <fwmfTable tableName="sys_t_code_info" modelKey="CodeInfo">
-            <generatedKey column="CODE_ID" sqlStatement="JDBC"/>
+        <fwmfTable tableName="sys_t_operation_record" modelKey="OperationRecord">
+            <generatedKey column="OPERATION_RECORD_ID" sqlStatement="JDBC"/>
         </fwmfTable>
 
     </context>

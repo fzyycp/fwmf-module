@@ -12,11 +12,11 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-code-service</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <properties>
-        <fwmf.module.user.code.api.version>0.0.3</fwmf.module.user.code.api.version>
-        <fwmf.module.common.service.version>0.0.1</fwmf.module.common.service.version>
+        <fwmf.module.user.code.api.version>0.0.4</fwmf.module.user.code.api.version>
+        <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
     </properties>
     <dependencies>

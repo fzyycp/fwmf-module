@@ -20,12 +20,22 @@ public class CodeGroupInfoBean extends CodeGroupInfoGenerateBean implements Prim
     private List<CodeInfoBean> codeInfos;
 
     /**
+     * 获取表主键字段名(自动生成代码)
+     *
+     * @return 主键字段名
+     */
+    @Override
+    public String getPrimaryKeyName() {
+        return "CODE_GROUP_ID";
+    }
+
+    /**
      * 获取表主键Key值(自动生成代码)
      *
      * @return 主键值
      */
     @Override
-    public Long getPrimaryKey() {
+    public Long getPrimaryKeyValue() {
         return this.getCodeGroupId();
     }
 
