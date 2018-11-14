@@ -1,15 +1,7 @@
 package cn.faury.fwmf.module.service.order.mapper;
 
-import cn.faury.fwmf.module.api.order.bean.WeixinCallbackRecordsBean;
-import cn.faury.fwmf.module.service.order.generate.mapper.WeixinCallbackRecordsGenerateMapper;
-import cn.faury.fwmf.module.service.order.sqlProvider.WeixinCallbackRecordsSqlProvider;
 import cn.faury.fdk.mybatis.AutoScannedMapper;
-import org.apache.ibatis.annotations.ResultType;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-import java.util.Map;
+import cn.faury.fwmf.module.service.order.generate.mapper.WeixinCallbackRecordsGenerateMapper;
 
 /**
  * Mybatis Mapper：微信支付回调记录

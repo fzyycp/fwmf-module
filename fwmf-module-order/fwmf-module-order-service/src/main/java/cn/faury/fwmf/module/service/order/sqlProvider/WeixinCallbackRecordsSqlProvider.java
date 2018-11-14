@@ -1,9 +1,6 @@
 package cn.faury.fwmf.module.service.order.sqlProvider;
 
-import cn.faury.fwmf.module.service.constant.DBConstOfOrder;
 import cn.faury.fwmf.module.service.order.generate.sqlProvider.WeixinCallbackRecordsGenerateSqlProvider;
-
-import java.util.Map;
 
 /**
  * SQL Provider：微信支付回调记录

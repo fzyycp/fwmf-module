@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="reflectTables" targetRuntime="MyBatis3">
+        <!--文件编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--fwmf generator配置-->
+        <fwmfGenerator targetPackage="cn.faury.fwmf.module"
+                       targetProject=".\src\generator\java"
+                       modelName="order"
+                       enableGeneratorModifiableMvc="true"
+                       menuTableName="sys_t_menu_info"
+        />
+        <!--gateway用Controller-->
+        <fwmfGeneratorSpringController enableGenerate="false"
+                                       targetPackage="cn.faury.fwmf.gateway.controller"
+        />
+        <!--web用Action-->
+        <fwmfGeneratorStruts2Action enableGenerate="false"
+                                    rootClass="cn.faury.fwmf.web.global.action.BaseJspAction"
+                                    targetPackage="cn.faury.fwmf.web"
+        />
+
+        <!--自定义插件，默认不用配置，如果特殊配置则需要把fwmfGenerator中enableGeneratorModifiableMvc设置为false-->
+        <!--<plugin type="cn.faury.fwmf.generator.plugins.ModifiableMvcPlugin">-->
+        <!--不配置时使用fwmfGenerator配置-->
+        <!--<property name="targetProject" value=".\src\generator\java"/>-->
+        <!--<property name="targetBasePackage" value="cn.wassk.customized.yob.module"/>-->
+        <!--<property name="modelKeyName" value="bussiness"/>-->
+        <!--</plugin>-->
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://128.0.9.252:3306/ftpl"
+                        userId="root" password="888888">
+            <property name="remarks" value="true"/>
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- 指定数据库表，对应的表生成的Controller、Service、Mapper、SQLProvider模块名,table的简化，与下面的配置等效 -->
+        <!--
+        <fwmfTable tableName="数据库表名" modelKey="Bean名称前缀" actionKey="对应的菜单，没有就不写">
+            <generatedKey column="数据库主键，仅支持一个主键的" sqlStatement="JDBC"/>
+        </fwmfTable>
+        -->
+
+        <fwmfTable tableName="order_t_goods_stock_info" modelKey="GoodsStockInfo">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_order_info" modelKey="OrderInfo">
+            <generatedKey column="ORDER_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_order_operate_info" modelKey="OrderOperateInfo">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_order_pay_info" modelKey="OrderPayInfo">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_order_r_goods" modelKey="OrderRGoods">
+            <generatedKey column="ORDER_R_GOODS_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_order_r_logistics" modelKey="OrderRLogistics">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_package_info" modelKey="PackageInfo">
+            <generatedKey column="PACKAGE_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_package_r_goods" modelKey="PackageRGoods">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_postage_info" modelKey="PostageInfo">
+            <generatedKey column="POSTAGE_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_postage_r_area" modelKey="PostageRArea">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="order_t_promotion_info" modelKey="PromotionInfo">
+            <generatedKey column="PROMOTION_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="payment_t_alipay_callback_records" modelKey="AlipayCallbackRecords">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="payment_t_alipay_records" modelKey="AlipayRecords">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="payment_t_weixin_callback_records" modelKey="WeixinCallbackRecords">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="payment_t_weixin_pay_records" modelKey="WeixinPayRecords">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+
+    </context>
+</generatorConfiguration>

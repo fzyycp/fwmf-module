@@ -12,12 +12,12 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-qa-spring-boot-starter</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
 
     <properties>
-        <fwmf.module.qa.spring.boot.autoconfigure.version>0.0.1</fwmf.module.qa.spring.boot.autoconfigure.version>
-        <fwmf.module.qa.service.version>0.0.1</fwmf.module.qa.service.version>
+        <fwmf.module.qa.spring.boot.autoconfigure.version>0.0.2</fwmf.module.qa.spring.boot.autoconfigure.version>
+        <fwmf.module.qa.service.version>0.0.2</fwmf.module.qa.service.version>
         <fdk.mybatis.spring.boot.starter.version>0.0.1</fdk.mybatis.spring.boot.starter.version>
     </properties>
 

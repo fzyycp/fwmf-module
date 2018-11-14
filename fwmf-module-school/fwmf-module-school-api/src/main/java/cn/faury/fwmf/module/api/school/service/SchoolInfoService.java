@@ -9,8 +9,13 @@ import cn.faury.fwmf.module.api.school.config.SchoolLevel;
 import java.util.List;
 
 /**
- * 通用增删改查基础服务接口，可以根据业务需要进一步扩展
- * 只需生成一次，后面不需要再生成
+ * 服务接口：学校信息表
+ * <p>
+ * <pre>
+ *     CrudBaseService为数据库通用增删改查操作，不可修改
+ *     当前服务接口继承自CrudBaseService，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
 public interface SchoolInfoService extends CrudBaseService<SchoolInfoBean, Long> {
 
@@ -57,7 +62,19 @@ public interface SchoolInfoService extends CrudBaseService<SchoolInfoBean, Long>
      * @param schoolRGradeInfoBeanList 年级信息
      * @param classCount               班级个数
      */
-    public void createSchoolWithGradeAndClass(SchoolInfoBean schoolInfoBean, List<SchoolRGradeInfoBean> schoolRGradeInfoBeanList, int classCount);
+    default public void createSchoolWithGradeAndClass(SchoolInfoBean schoolInfoBean, List<SchoolRGradeInfoBean> schoolRGradeInfoBeanList, int classCount) {
+        createSchoolWithGradeAndClass(schoolInfoBean, schoolRGradeInfoBeanList, classCount, false);
+    }
+
+    /**
+     * 创建学校信息，带年级班级信息
+     *
+     * @param schoolInfoBean           学校信息
+     * @param schoolRGradeInfoBeanList 年级信息
+     * @param classCount               班级个数
+     * @param isClassNameShort         是否班级名称简写
+     */
+    public void createSchoolWithGradeAndClass(SchoolInfoBean schoolInfoBean, List<SchoolRGradeInfoBean> schoolRGradeInfoBeanList, int classCount, boolean isClassNameShort);
 
     /**
      * 复制创建学校信息

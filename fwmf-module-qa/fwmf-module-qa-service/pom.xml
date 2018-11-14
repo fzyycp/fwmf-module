@@ -12,13 +12,13 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-qa-service</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
 
     <properties>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
-        <fdk.module.qa.api.version>0.0.1</fdk.module.qa.api.version>
-        <fwmf.module.common.service.version>0.0.1</fwmf.module.common.service.version>
+        <fdk.module.qa.api.version>0.0.2</fdk.module.qa.api.version>
+        <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
     </properties>
     <dependencies>
         <dependency>
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>4.3.14.RELEASE</version>
+            <version>5.0.7.RELEASE</version>
         </dependency>
     </dependencies>
     <!--<distributionManagement>-->

@@ -1,23 +1,37 @@
 package cn.faury.fwmf.module.service.order.service;
 
-import cn.faury.fwmf.module.api.order.bean.PackageInfoBean;
-import cn.faury.fwmf.module.api.order.service.PackageInfoService;
-import cn.faury.fwmf.module.api.order.service.PackageRGoodsService;
-import cn.faury.fwmf.module.service.order.mapper.PackageInfoMapper;
 import cn.faury.fdk.common.db.PageInfo;
 import cn.faury.fdk.common.db.PageParam;
 import cn.faury.fdk.mybatis.dao.CommonDao;
+import cn.faury.fwmf.module.api.order.bean.PackageInfoBean;
+import cn.faury.fwmf.module.api.order.service.PackageInfoService;
+import cn.faury.fwmf.module.api.order.service.PackageRGoodsService;
 import cn.faury.fwmf.module.service.common.service.CrudBaseServiceImpl;
+import cn.faury.fwmf.module.service.order.mapper.PackageInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 服务实现：套餐基本信息表
+ *
+ * <pre>
+ *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
+ *     当前服务实现了PackageInfoService服务接口，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
+ */
 public class PackageInfoServiceImpl extends CrudBaseServiceImpl<PackageInfoBean, Long> implements PackageInfoService {
 
     @Autowired(required = false)
     private PackageRGoodsService packageRGoodsService;
 
+    /**
+     * 构造函数(自动生成代码)
+     *
+     * @param commonDao 数据库操作器
+     */
     public PackageInfoServiceImpl(CommonDao commonDao) {
         super(commonDao, PackageInfoMapper.class);
     }

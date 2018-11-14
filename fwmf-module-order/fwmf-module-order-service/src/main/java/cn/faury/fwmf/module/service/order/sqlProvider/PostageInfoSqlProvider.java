@@ -6,24 +6,14 @@ import cn.faury.fwmf.module.service.order.generate.sqlProvider.OrderInfoGenerate
 import java.util.List;
 import java.util.Map;
 
+/**
+ * SQL Provider：邮费信息表
+ *
+ * <pre>
+ *     PostageInfoGenerateSqlProvider为数据库通用增删改查操作，不可修改
+ *     当前SQL Provider继承自PostageInfoGenerateSqlProvider，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
+ */
 public class PostageInfoSqlProvider extends OrderInfoGenerateSqlProvider {
-    public String search(Map<String, Object> params) {
-        return "SELECT * FROM " + DBConstOfOrder.ORDER_T_POSTAGE_INFO;
-    }
-
-    public String getBeanListByIds(Map<String, Object> params) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * FROM ").append(DBConstOfOrder.ORDER_T_POSTAGE_INFO);
-        sql.append(" WHERE POSTAGE_ID IN (");
-        List ids = (List) params.get("ids");
-        for (int i = 0; i < ids.size(); i++) {
-            if (i < ids.size() - 1) {
-                sql.append(" #{ids[").append(i).append("]}, ");
-            } else {
-                sql.append(" #{ids[").append(i).append("]} ");
-            }
-        }
-        sql.append(")");
-        return sql.toString();
-    }
 }

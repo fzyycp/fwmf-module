@@ -17,9 +17,9 @@ public class FwmfOrderAutoConfiguration {
      * 商品库存服务
      */
     @Bean
-    @ConditionalOnClass({GoodsStockService.class, GoodsStockServiceImpl.class})
-    public GoodsStockService goodsStockService(CommonDao commonDao) {
-        return new GoodsStockServiceImpl(commonDao);
+    @ConditionalOnClass({GoodsStockInfoService.class, GoodsStockInfoServiceImpl.class})
+    public GoodsStockInfoService goodsStockInfoService(CommonDao commonDao) {
+        return new GoodsStockInfoServiceImpl(commonDao);
     }
 
     /**

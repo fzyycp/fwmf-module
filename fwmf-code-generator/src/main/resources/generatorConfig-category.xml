@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="reflectTables" targetRuntime="MyBatis3">
+        <!--文件编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--fwmf generator配置-->
+        <fwmfGenerator targetPackage="cn.faury.fwmf.module"
+                       targetProject=".\src\generator\java"
+                       modelName="category"
+                       enableGeneratorModifiableMvc="false"
+                       menuTableName="sys_t_menu_info"
+        />
+        <!--gateway用Controller-->
+        <fwmfGeneratorSpringController enableGenerate="false"
+                                       targetPackage="cn.wassk.customized.umall.gateway.controller"
+        />
+        <!--web用Action-->
+        <fwmfGeneratorStruts2Action enableGenerate="false"
+                                    rootClass="cn.wassk.customized.umall.web.global.action.BaseJspAction"
+                                    targetPackage="cn.wassk.customized.umall.web"
+        />
+
+        <!--自定义插件，默认不用配置，如果特殊配置则需要把fwmfGenerator中enableGeneratorModifiableMvc设置为false-->
+        <!--<plugin type="cn.faury.fwmf.generator.plugins.ModifiableMvcPlugin">-->
+        <!--不配置时使用fwmfGenerator配置-->
+        <!--<property name="targetProject" value=".\src\generator\java"/>-->
+        <!--<property name="targetBasePackage" value="cn.wassk.customized.yob.module"/>-->
+        <!--<property name="modelKeyName" value="bussiness"/>-->
+        <!--</plugin>-->
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://128.0.9.252:3306/ftpl"
+                        userId="root" password="888888">
+            <property name="remarks" value="true"/>
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- 指定数据库表，对应的表生成的Controller、Service、Mapper、SQLProvider模块名,table的简化，与下面的配置等效 -->
+        <!--
+        <fwmfTable tableName="数据库表名" modelKey="Bean名称前缀" actionKey="对应的菜单，没有就不写">
+            <generatedKey column="数据库主键，仅支持一个主键的" sqlStatement="JDBC"/>
+        </fwmfTable>
+        例如：
+         <fwmfTable tableName="t_ad_info" modelKey="AdInfo" actionKey="/ad/info">
+            <generatedKey column="AD_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        -->
+        <fwmfTable tableName="product_t_category_info" modelKey="CategoryInfo">
+            <generatedKey column="PRODUCT_CATEGORY_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="product_t_category_r_system" modelKey="SystemRCategory">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="product_t_category_r_tag" modelKey="CategoryRTag">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="product_t_tag_info" modelKey="TagInfo">
+            <generatedKey column="TAG_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        <fwmfTable tableName="product_t_tag_r_system" modelKey="SystemRTag">
+            <generatedKey column="ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+
+    </context>
+</generatorConfiguration>

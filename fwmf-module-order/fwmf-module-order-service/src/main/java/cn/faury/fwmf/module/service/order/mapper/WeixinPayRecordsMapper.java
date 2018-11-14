@@ -1,15 +1,12 @@
 package cn.faury.fwmf.module.service.order.mapper;
 
+import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.order.bean.WeixinPayRecordsBean;
 import cn.faury.fwmf.module.service.constant.DBConstOfOrder;
 import cn.faury.fwmf.module.service.order.generate.mapper.WeixinPayRecordsGenerateMapper;
-import cn.faury.fwmf.module.service.order.sqlProvider.WeixinPayRecordsSqlProvider;
-import cn.faury.fdk.mybatis.AutoScannedMapper;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
 
-import java.util.List;
 import java.util.Map;
 
 /**

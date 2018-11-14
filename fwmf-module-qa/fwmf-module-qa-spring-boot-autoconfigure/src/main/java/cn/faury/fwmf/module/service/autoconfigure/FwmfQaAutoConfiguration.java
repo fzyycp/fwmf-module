@@ -21,8 +21,6 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(FdkMybatisAutoConfiguration.class)
 public class FwmfQaAutoConfiguration {
 
-    private Logger logger = LoggerFactory.getLogger(FwmfQaAutoConfiguration.class);
-
     /**
      * 问题服务
      */

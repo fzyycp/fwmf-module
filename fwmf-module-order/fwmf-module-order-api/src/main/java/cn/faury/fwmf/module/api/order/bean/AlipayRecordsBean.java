@@ -1,8 +1,8 @@
 package cn.faury.fwmf.module.api.order.bean;
 
-import cn.faury.fwmf.module.api.order.generate.bean.AlipayRecordsGenerateBean;
 import cn.faury.fdk.common.db.PrimaryKeyEnableBean;
 import cn.faury.fdk.common.utils.JsonUtil;
+import cn.faury.fwmf.module.api.order.generate.bean.AlipayRecordsGenerateBean;
 import java.io.Serializable;
 
 /**
@@ -17,12 +17,22 @@ import java.io.Serializable;
 public class AlipayRecordsBean extends AlipayRecordsGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
 
     /**
+     * 获取表主键字段名(自动生成代码)
+     *
+     * @return 主键字段名
+     */
+    @Override
+    public String getPrimaryKeyName() {
+        return "ID";
+    }
+
+    /**
      * 获取表主键Key值(自动生成代码)
      *
      * @return 主键值
      */
     @Override
-    public Long getPrimaryKey() {
+    public Long getPrimaryKeyValue() {
         return this.getId();
     }
 

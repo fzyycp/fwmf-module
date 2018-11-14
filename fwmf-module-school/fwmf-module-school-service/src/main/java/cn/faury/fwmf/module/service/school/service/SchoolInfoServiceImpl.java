@@ -21,6 +21,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+/**
+ * 服务实现：学校信息表
+ * <p>
+ * <pre>
+ *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
+ *     当前服务实现了SchoolInfoService服务接口，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
+ */
 public class SchoolInfoServiceImpl extends CrudBaseServiceImpl<SchoolInfoBean, Long> implements SchoolInfoService {
 
     @Autowired(required = false)
@@ -49,7 +58,7 @@ public class SchoolInfoServiceImpl extends CrudBaseServiceImpl<SchoolInfoBean, L
         }
         params.put(PageParam.KEY.KEY_PAGE_NO, 1);
         params.put(PageParam.KEY.KEY_PAGE_SIZE, Integer.MAX_VALUE);
-        return this.search(params).getList();
+        return this.query(params);
     }
 
     /**
@@ -94,15 +103,14 @@ public class SchoolInfoServiceImpl extends CrudBaseServiceImpl<SchoolInfoBean, L
         Map<String, Object> _params = new HashMap<>();
         _params.putAll(param);
         String _areaCode = (String) _params.get("areaCode");
-        if (StringUtil.isNotEmpty(_areaCode)) {
-            if ("000000".equals(_areaCode)) {
-                _areaCode = "______";
-            } else if (_areaCode.endsWith("0000")) {
-                _areaCode = _areaCode.substring(0, 2) + "____";
+        if (StringUtil.isNotEmpty(_areaCode) && "000000".equals(_areaCode)) {
+            if (_areaCode.endsWith("0000")) {
+                _params.put("areaCodeProvince", _areaCode);
             } else if (_areaCode.endsWith("00")) {
-                _areaCode = _areaCode.substring(0, 4) + "__";
+                _params.put("areaCodeCity", _areaCode);
+            } else {
+                _params.put("areaCodeCounty", _areaCode);
             }
-            _params.put("areaCode", _areaCode);
         }
         return super.search(_params);
     }
@@ -129,10 +137,11 @@ public class SchoolInfoServiceImpl extends CrudBaseServiceImpl<SchoolInfoBean, L
      * @param schoolInfoBean           学校信息
      * @param schoolRGradeInfoBeanList 年级信息
      * @param classCount               班级个数
+     * @param isClassNameShort         是否班级名称简写
      */
     @Transactional
     @Override
-    public void createSchoolWithGradeAndClass(SchoolInfoBean schoolInfoBean, List<SchoolRGradeInfoBean> schoolRGradeInfoBeanList, int classCount) {
+    public void createSchoolWithGradeAndClass(SchoolInfoBean schoolInfoBean, List<SchoolRGradeInfoBean> schoolRGradeInfoBeanList, int classCount,boolean isClassNameShort) {
         // 插入学校信息
         final Long schoolId = this.insert(schoolInfoBean);
         schoolRGradeInfoBeanList.forEach(gradeInfoBean -> {
@@ -141,17 +150,7 @@ public class SchoolInfoServiceImpl extends CrudBaseServiceImpl<SchoolInfoBean, L
             if (StringUtil.isEmpty(gradeInfoBean.getGradeAlias())) {
                 gradeInfoBean.setGradeAlias(gradeInfoBean.getGradeName());
             }
-            Long gradeId = schoolRGradeInfoService.insert(gradeInfoBean);
-            // 构造班级信息
-            for (int i = 1; i <= classCount; i++) {
-                SchoolRGradeRClassInfoBean classInfoBean = new SchoolRGradeRClassInfoBean();
-                classInfoBean.setSchoolId(schoolId);
-                classInfoBean.setGradeId(gradeId);
-                classInfoBean.setClassCode(gradeInfoBean.getGradeCode() + String.format("%02d", i));
-                classInfoBean.setClassName(gradeInfoBean.getGradeName() + i + "班");
-                classInfoBean.setClassAlias(classInfoBean.getClassName());
-                schoolRGradeRClassInfoService.insert(classInfoBean);
-            }
+            schoolRGradeInfoService.insert(gradeInfoBean,classCount,isClassNameShort);
         });
     }
 
@@ -161,6 +160,7 @@ public class SchoolInfoServiceImpl extends CrudBaseServiceImpl<SchoolInfoBean, L
      * @param schoolInfoBean 新的学校信息，schoolId作为被拷贝对象
      */
     @Override
+    @Transactional
     public Long copySchoolInfo(SchoolInfoBean schoolInfoBean) {
         Long copyId = schoolInfoBean.getSchoolId();
         SchoolInfoBean copyBean = this.getBeanById(copyId);

@@ -1,27 +1,39 @@
 package cn.faury.fwmf.module.service.order.service;
 
+import cn.faury.fdk.common.anotation.NonNull;
+import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.order.bean.OrderRGoodsBeanEnable;
 import cn.faury.fwmf.module.api.order.bean.PostageInfoBean;
 import cn.faury.fwmf.module.api.order.bean.PostageRAreaBean;
 import cn.faury.fwmf.module.api.order.generate.bean.PostageInfoGenerateBean;
-import cn.faury.fwmf.module.api.order.generate.bean.PostageRAreaGenerateBean;
 import cn.faury.fwmf.module.api.order.service.PostageInfoService;
 import cn.faury.fwmf.module.api.order.service.PostageRAreaService;
-import cn.faury.fwmf.module.service.order.mapper.PostageInfoMapper;
-import cn.faury.fdk.common.anotation.NonNull;
-import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.service.common.service.CrudBaseServiceImpl;
+import cn.faury.fwmf.module.service.order.mapper.PostageInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
+/**
+ * 服务实现：邮费信息表
+ *
+ * <pre>
+ *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
+ *     当前服务实现了PostageInfoService服务接口，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
+ */
 public class PostageInfoServiceImpl extends CrudBaseServiceImpl<PostageInfoBean, Long> implements PostageInfoService {
 
     @Autowired(required = false)
     private PostageRAreaService postageRAreaService;
 
+    /**
+     * 构造函数(自动生成代码)
+     *
+     * @param commonDao 数据库操作器
+     */
     public PostageInfoServiceImpl(CommonDao commonDao) {
         super(commonDao, PostageInfoMapper.class);
     }
@@ -63,18 +75,6 @@ public class PostageInfoServiceImpl extends CrudBaseServiceImpl<PostageInfoBean,
     }
 
     /**
-     * 根据邮费ID获取多个对象Bean
-     *
-     * @param ids 邮费ID列表
-     * @return 邮费对象
-     */
-    @Override
-    public List<PostageInfoBean> getBeanListByIds(Collection<Long> ids) {
-        String state = this.mapper.getName() + ".getBeanListByIds";
-        return this.commonDao.selectList(state, Collections.singletonMap("ids", new ArrayList<>(ids)));
-    }
-
-    /**
      * 计算商品总运费
      * <p>
      * <pre>
@@ -101,7 +101,7 @@ public class PostageInfoServiceImpl extends CrudBaseServiceImpl<PostageInfoBean,
             Map<Long, List<OrderRGoodsBeanEnable>> postageRGoods = new HashMap<>();
             goodsList.forEach(bean -> postageRGoods.computeIfAbsent(bean.getPostageId(), k -> new ArrayList<>()));
             if (postageRGoods.size() > 0) {
-                List<PostageInfoBean> postageInfoBeanList = this.getBeanListByIds(postageRGoods.keySet());
+                List<PostageInfoBean> postageInfoBeanList = this.getBeanByIdBatch(new ArrayList<>(postageRGoods.keySet()));
                 if (postageInfoBeanList != null && postageInfoBeanList.size() > 0) {// 存在邮费信息
                     postagePrice = BigDecimal.ZERO;
                     // 1，基础邮费=所有邮费ID中基础邮费最大的

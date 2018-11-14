@@ -12,10 +12,10 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-common-web</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <properties>
-        <fdk.common>0.0.9</fdk.common>
+        <fdk.common>0.1.1</fdk.common>
     </properties>
 
     <dependencies>

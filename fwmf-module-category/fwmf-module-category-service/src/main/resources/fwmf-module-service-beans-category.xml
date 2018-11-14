@@ -4,32 +4,23 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!--分类服务 -->
-    <bean id="categoryService" class="cn.faury.fwmf.module.service.category.service.CategoryServiceImpl">
+    <bean id="categoryInfoService" class="cn.faury.fwmf.module.service.category.service.CategoryInfoServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
-    <!--分类标签服务 -->
-    <bean id="categoryTagService" class="cn.faury.fwmf.module.service.category.service.CategoryTagServiceImpl">
-        <constructor-arg name="commonDao" ref="commonDao"/>
-        <constructor-arg name="categoryService" ref="categoryService"/>
-    </bean>
-    <!--优惠关联服务 -->
-    <bean id="discusRCategoryService" class="cn.faury.fwmf.module.service.category.service.DiscusRCategoryServiceImpl">
+    <!--分类关联标签服务 -->
+    <bean id="categoryRTagService" class="cn.faury.fwmf.module.service.category.service.CategoryRTagServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
-    <!--红包关联服务 -->
-    <bean id="redRCategoryService" class="cn.faury.fwmf.module.service.category.service.RedRCategoryServiceImpl">
+    <!--分类授权业务系统服务 -->
+    <bean id="systemRCategoryService" class="cn.faury.fwmf.module.service.category.service.SystemRCategoryServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
-    <!--系统分类授权服务 -->
-    <bean id="systemCategoryService" class="cn.faury.fwmf.module.service.category.service.SystemCategoryServiceImpl">
-        <constructor-arg name="commonDao" ref="commonDao"/>
-    </bean>
-    <!--系统标签授权服务 -->
-    <bean id="systemTagService" class="cn.faury.fwmf.module.service.category.service.SystemTagServiceImpl">
+    <!--标签授权系统服务 -->
+    <bean id="systemRTagService" class="cn.faury.fwmf.module.service.category.service.SystemRTagServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
     <!--标签服务 -->
-    <bean id="tagService" class="cn.faury.fwmf.module.service.category.service.TagServiceImpl">
+    <bean id="tagInfoService" class="cn.faury.fwmf.module.service.category.service.TagInfoServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
 </beans>

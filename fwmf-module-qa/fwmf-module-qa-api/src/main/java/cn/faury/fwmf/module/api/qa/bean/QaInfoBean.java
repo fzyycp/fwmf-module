@@ -23,12 +23,22 @@ public class QaInfoBean extends QaInfoGenerateBean implements PrimaryKeyEnableBe
     private QaTxtBean qaTxtBean;
 
     /**
+     * 获取表主键字段名(自动生成代码)
+     *
+     * @return 主键字段名
+     */
+    @Override
+    public String getPrimaryKeyName() {
+        return "QA_ID";
+    }
+
+    /**
      * 获取表主键Key值(自动生成代码)
      *
      * @return 主键值
      */
     @Override
-    public Long getPrimaryKey() {
+    public Long getPrimaryKeyValue() {
         return this.getQaId();
     }
 

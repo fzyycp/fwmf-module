@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--商品库存服务 -->
-    <bean id="goodsStockService" class="cn.faury.fwmf.module.service.order.service.GoodsStockServiceImpl">
+    <bean id="goodsStockInfoService" class="cn.faury.fwmf.module.service.order.service.GoodsStockInfoServiceImpl">
         <constructor-arg name="commonDao" ref="commonDao"/>
     </bean>
     <!--订单服务 -->

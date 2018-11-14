@@ -1,24 +1,33 @@
 package cn.faury.fwmf.module.service.order.service;
 
+import cn.faury.fdk.common.utils.AssertUtil;
+import cn.faury.fdk.common.utils.DateUtil;
+import cn.faury.fdk.common.utils.JsonUtil;
+import cn.faury.fdk.common.utils.KdniaoTrackUtil;
+import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.api.order.bean.OrderInfoBean;
 import cn.faury.fwmf.module.api.order.bean.OrderPayInfoBean;
 import cn.faury.fwmf.module.api.order.bean.OrderRLogisticsBean;
 import cn.faury.fwmf.module.api.order.service.OrderInfoService;
 import cn.faury.fwmf.module.api.order.service.OrderPayInfoService;
 import cn.faury.fwmf.module.api.order.service.OrderRLogisticsService;
-import cn.faury.fwmf.module.service.order.mapper.OrderRLogisticsMapper;
-import cn.faury.fdk.common.utils.AssertUtil;
-import cn.faury.fdk.common.utils.DateUtil;
-import cn.faury.fdk.common.utils.JsonUtil;
-import cn.faury.fdk.common.utils.KdniaoTrackUtil;
-import cn.faury.fdk.mybatis.dao.CommonDao;
 import cn.faury.fwmf.module.service.common.service.CrudBaseServiceImpl;
+import cn.faury.fwmf.module.service.order.mapper.OrderRLogisticsMapper;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
+/**
+ * 服务实现：订单物流信息表
+ *
+ * <pre>
+ *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
+ *     当前服务实现了OrderRLogisticsService服务接口，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
+ */
 public class OrderRLogisticsServiceImpl extends CrudBaseServiceImpl<OrderRLogisticsBean, Long> implements OrderRLogisticsService {
 
     @Autowired(required = false)
@@ -27,6 +36,11 @@ public class OrderRLogisticsServiceImpl extends CrudBaseServiceImpl<OrderRLogist
     @Autowired(required = false)
     private OrderInfoService orderInfoService;
 
+    /**
+     * 构造函数(自动生成代码)
+     *
+     * @param commonDao 数据库操作器
+     */
     public OrderRLogisticsServiceImpl(CommonDao commonDao) {
         super(commonDao, OrderRLogisticsMapper.class);
     }

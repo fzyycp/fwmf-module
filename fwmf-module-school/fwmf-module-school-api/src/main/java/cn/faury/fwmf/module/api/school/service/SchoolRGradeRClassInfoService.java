@@ -6,8 +6,13 @@ import cn.faury.fwmf.module.api.school.bean.SchoolRGradeRClassInfoBean;
 import java.util.List;
 
 /**
- * 通用增删改查基础服务接口，可以根据业务需要进一步扩展
- * 只需生成一次，后面不需要再生成
+ * 服务接口：学校年级班级信息表
+ * <p>
+ * <pre>
+ *     CrudBaseService为数据库通用增删改查操作，不可修改
+ *     当前服务接口继承自CrudBaseService，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
  */
 public interface SchoolRGradeRClassInfoService extends CrudBaseService<SchoolRGradeRClassInfoBean, Long> {
 
@@ -21,6 +26,7 @@ public interface SchoolRGradeRClassInfoService extends CrudBaseService<SchoolRGr
 
     /**
      * 根据年级ID删除所有的班级信息
+     *
      * @param gradeId 年级ID
      * @return 成功删除条数
      */

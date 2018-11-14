@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.faury.fwmf</groupId>
+    <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>mybatis-generator</artifactId>
     <version>1.0</version>
 

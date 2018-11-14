@@ -1,9 +1,9 @@
 package cn.faury.fwmf.module.service.order.mapper;
 
+import cn.faury.fdk.mybatis.AutoScannedMapper;
 import cn.faury.fwmf.module.api.order.bean.AlipayRecordsBean;
 import cn.faury.fwmf.module.service.constant.DBConstOfOrder;
 import cn.faury.fwmf.module.service.order.generate.mapper.AlipayRecordsGenerateMapper;
-import cn.faury.fdk.mybatis.AutoScannedMapper;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 

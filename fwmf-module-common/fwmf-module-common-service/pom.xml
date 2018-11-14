@@ -12,17 +12,34 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-common-service</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <properties>
+        <fdk.common.version>0.1.1</fdk.common.version>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>cn.faury.fdk</groupId>
+            <artifactId>fdk-common</artifactId>
+            <version>${fdk.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.faury.fdk</groupId>
             <artifactId>fdk-mybatis</artifactId>
             <version>${fdk.mybatis.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>cn.faury.fdk</groupId>
+                    <artifactId>fdk-common</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>5.0.7.RELEASE</version>
         </dependency>
     </dependencies>
     <!--<distributionManagement>-->

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="reflectTables" targetRuntime="MyBatis3">
+        <!--文件编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--fwmf generator配置-->
+        <fwmfGenerator targetPackage="cn.faury.fwmf.module"
+                       targetProject=".\src\generator\java"
+                       modelName="school"
+                       enableGeneratorModifiableMvc="true"
+                       menuTableName="sys_t_menu_info"
+        />
+        <!--gateway用Controller-->
+        <!--<fwmfGeneratorSpringController enableGenerate="false"/>-->
+        <!--web用Action-->
+        <!--<fwmfGeneratorStruts2Action rootClass="cn.wassk.customized.yob.web.global.action.BaseJspAction"-->
+                                    <!--enableGenerate="false"/>-->
+        <!--自定义插件-->
+        <plugin type="cn.faury.fwmf.generator.plugins.ModifiableMvcPlugin">
+            <property name="targetProject" value=".\src\generator\java"/>
+            <property name="targetBasePackage" value="cn.faury.fwmf.module"/>
+            <property name="modelKeyName" value="school"/>
+        </plugin>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://128.0.9.252:3306/yob"
+                        userId="root" password="888888">
+            <property name="remarks" value="true"/>
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <!-- 指定数据库表，对应的表生成的Controller、Service、Mapper、SQLProvider模块名,table的简化，与下面的配置等效 -->
+        <!--
+        <fwmfTable tableName="数据库表名" modelKey="Bean名称前缀" actionKey="对应的菜单，没有就不写">
+            <generatedKey column="数据库主键，仅支持一个主键的" sqlStatement="JDBC"/>
+        </fwmfTable>
+        例如：
+         <fwmfTable tableName="t_ad_info" modelKey="AdInfo" actionKey="/ad/info">
+            <generatedKey column="AD_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+        -->
+        <fwmfTable tableName="sys_t_school_info" modelKey="SchoolInfo">
+            <generatedKey column="SCHOOL_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+       <fwmfTable tableName="sys_t_school_r_grade" modelKey="SchoolRGradeInfo">
+            <generatedKey column="GRADE_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+       <fwmfTable tableName="sys_t_school_r_grade_r_class" modelKey="SchoolRGradeRClassInfo">
+            <generatedKey column="CLASS_ID" sqlStatement="JDBC"/>
+        </fwmfTable>
+
+    </context>
+</generatorConfiguration>

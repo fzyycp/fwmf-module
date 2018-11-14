@@ -20,62 +20,44 @@ public class FwmfCategoryAutoConfiguration {
      * 分类服务
      */
     @Bean
-    @ConditionalOnClass({CategoryService.class, CategoryServiceImpl.class})
-    public CategoryService categoryService(CommonDao commonDao) {
-        return new CategoryServiceImpl(commonDao);
+    @ConditionalOnClass({CategoryInfoService.class, CategoryInfoServiceImpl.class})
+    public CategoryInfoService categoryInfoService(CommonDao commonDao) {
+        return new CategoryInfoServiceImpl(commonDao);
     }
 
     /**
-     * 分类标签服务
+     * 分类授权业务系统服务
      */
     @Bean
-    @ConditionalOnClass({CategoryService.class, CategoryTagService.class, CategoryTagServiceImpl.class})
-    public CategoryTagService categoryTagService(CommonDao commonDao, CategoryService categoryService) {
-        return new CategoryTagServiceImpl(commonDao, categoryService);
+    @ConditionalOnClass({SystemRCategoryService.class, SystemRCategoryServiceImpl.class})
+    public SystemRCategoryService systemRCategoryService(CommonDao commonDao) {
+        return new SystemRCategoryServiceImpl(commonDao);
     }
 
     /**
-     * 优惠关联服务
+     * 分类关联标签服务
      */
     @Bean
-    @ConditionalOnClass({DiscusRCategoryService.class, DiscusRCategoryServiceImpl.class})
-    public DiscusRCategoryService discusRCategoryService(CommonDao commonDao) {
-        return new DiscusRCategoryServiceImpl(commonDao);
-    }
-
-    /**
-     * 红包关联服务
-     */
-    @Bean
-    @ConditionalOnClass({RedRCategoryService.class, RedRCategoryServiceImpl.class})
-    public RedRCategoryService redRCategoryService(CommonDao commonDao) {
-        return new RedRCategoryServiceImpl(commonDao);
-    }
-
-    /**
-     * 系统分类授权服务
-     */
-    @Bean
-    @ConditionalOnClass({SystemCategoryService.class, SystemCategoryServiceImpl.class})
-    public SystemCategoryService systemCategoryService(CommonDao commonDao) {
-        return new SystemCategoryServiceImpl(commonDao);
-    }
-
-    /**
-     * 系统标签授权服务
-     */
-    @Bean
-    @ConditionalOnClass({SystemTagService.class, SystemTagServiceImpl.class})
-    public SystemTagService systemTagService(CommonDao commonDao) {
-        return new SystemTagServiceImpl(commonDao);
+    @ConditionalOnClass({CategoryRTagService.class, CategoryRTagServiceImpl.class})
+    public CategoryRTagService categoryRTagService(CommonDao commonDao) {
+        return new CategoryRTagServiceImpl(commonDao);
     }
 
     /**
      * 标签服务
      */
     @Bean
-    @ConditionalOnClass({TagService.class, TagServiceImpl.class})
-    public TagService tagService(CommonDao commonDao) {
-        return new TagServiceImpl(commonDao);
+    @ConditionalOnClass({TagInfoService.class, TagInfoServiceImpl.class})
+    public TagInfoService tagInfoService(CommonDao commonDao) {
+        return new TagInfoServiceImpl(commonDao);
+    }
+
+    /**
+     * 标签授权系统服务
+     */
+    @Bean
+    @ConditionalOnClass({SystemRTagService.class, SystemRTagServiceImpl.class})
+    public SystemRTagService systemRTagService(CommonDao commonDao) {
+        return new SystemRTagServiceImpl(commonDao);
     }
 }

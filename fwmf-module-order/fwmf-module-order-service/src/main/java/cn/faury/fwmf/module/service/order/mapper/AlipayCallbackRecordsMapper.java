@@ -1,7 +1,7 @@
 package cn.faury.fwmf.module.service.order.mapper;
 
-import cn.faury.fwmf.module.service.order.generate.mapper.AlipayCallbackRecordsGenerateMapper;
 import cn.faury.fdk.mybatis.AutoScannedMapper;
+import cn.faury.fwmf.module.service.order.generate.mapper.AlipayCallbackRecordsGenerateMapper;
 
 /**
  * Mybatis Mapper：

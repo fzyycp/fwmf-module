@@ -1,14 +1,5 @@
 package cn.faury.fwmf.module.service.order.service;
 
-import cn.faury.fwmf.module.api.order.bean.*;
-import cn.faury.fwmf.module.api.order.service.*;
-import cn.faury.fwmf.module.api.order.bean.AlipayCallbackRecordsBean;
-import cn.faury.fwmf.module.api.order.bean.AlipayRecordsBean;
-import cn.faury.fwmf.module.api.order.bean.WeixinCallbackRecordsBean;
-import cn.faury.fwmf.module.api.order.bean.WeixinPayRecordsBean;
-import cn.faury.fwmf.module.api.order.service.AlipayRecordsService;
-import cn.faury.fwmf.module.api.order.service.WeixinPayRecordsService;
-import cn.faury.fwmf.module.service.order.mapper.OrderInfoMapper;
 import cn.faury.fdk.common.anotation.NonNull;
 import cn.faury.fdk.common.entry.RestResultCode;
 import cn.faury.fdk.common.exception.TipsException;
@@ -16,7 +7,10 @@ import cn.faury.fdk.common.utils.AssertUtil;
 import cn.faury.fdk.common.utils.DateUtil;
 import cn.faury.fdk.common.utils.StringUtil;
 import cn.faury.fdk.mybatis.dao.CommonDao;
+import cn.faury.fwmf.module.api.order.bean.*;
+import cn.faury.fwmf.module.api.order.service.*;
 import cn.faury.fwmf.module.service.common.service.CrudBaseServiceImpl;
+import cn.faury.fwmf.module.service.order.mapper.OrderInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 
+/**
+ * 服务实现：订单信息表
+ *
+ * <pre>
+ *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
+ *     当前服务实现了OrderInfoService服务接口，用于项目业务代码扩展添加
+ *     只需初始化生成一次，然后根据需要扩展，重新生成时注意合并自己添加的代码
+ * </pre>
+ */
 public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Long> implements OrderInfoService {
 
     // 记录日志
@@ -38,7 +41,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
     private OrderRGoodsService orderRGoodsService;
 
     @Autowired(required = false)
-    private GoodsStockService goodsStockService;
+    private GoodsStockInfoService goodsStockInfoService;
 
     @Autowired(required = false)
     private OrderOperateInfoService orderOperateInfoService;
@@ -55,6 +58,11 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
     @Autowired(required = false)
     private OrderRLogisticsService orderRLogisticsService;
 
+    /**
+     * 构造函数(自动生成代码)
+     *
+     * @param commonDao 数据库操作器
+     */
     public OrderInfoServiceImpl(CommonDao commonDao) {
         super(commonDao, OrderInfoMapper.class);
     }
@@ -126,7 +134,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         // 活动服务启用
         if (promotionInfoService != null && promotionRGoodsMap.size() > 0) {
             // 获取所有优惠活动对象
-            List<PromotionInfoBean> promotionInfoList = promotionInfoService.getBeanListByIds(promotionRGoodsMap.keySet());
+            List<PromotionInfoBean> promotionInfoList = promotionInfoService.getBeanByIdBatch(new ArrayList<>(promotionRGoodsMap.keySet()));
             // 存在活动
             if (promotionInfoList != null && promotionInfoList.size() > 0) {
                 // 计算每个活动中所有商品的优惠金额
@@ -236,7 +244,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         orderRGoodsBeans.forEach(orderRGoodsBean -> {
             orderRGoodsBean.setOrderId(orderId);
             orderRGoodsService.insert(orderRGoodsBean);
-            goodsStockService.updateSubStock(orderRGoodsBean.getGoodsId(), orderRGoodsBean.getGoodsCount());
+            goodsStockInfoService.updateSubStock(orderRGoodsBean.getGoodsId(), orderRGoodsBean.getGoodsCount());
         });
         return orderId;
     }
@@ -324,7 +332,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         this.createOrderOperateInfo(orderId, OrderOperateInfoBean.OperateType.CANCEL, true, "", updateUserId, updateUserName);
         // 恢复库存
         List<OrderRGoodsBean> orderRGoodsBeans = orderRGoodsService.getOrderRGoodsBeanByOrderId(orderId);
-        orderRGoodsBeans.forEach(orderRGoodsBean -> goodsStockService.updateAddStock(orderRGoodsBean.getGoodsId(), orderRGoodsBean.getGoodsCount()));
+        orderRGoodsBeans.forEach(orderRGoodsBean -> goodsStockInfoService.updateAddStock(orderRGoodsBean.getGoodsId(), orderRGoodsBean.getGoodsCount()));
         return cancel;
     }
 
