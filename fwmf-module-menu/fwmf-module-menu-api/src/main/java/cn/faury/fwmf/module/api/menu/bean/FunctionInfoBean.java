@@ -16,6 +16,15 @@ import java.io.Serializable;
  * </pre>
  */
 public class FunctionInfoBean extends FunctionInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "FUNCTION_ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getFunctionId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

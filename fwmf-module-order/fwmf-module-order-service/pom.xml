@@ -12,10 +12,10 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-order-service</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 
     <properties>
-        <fwmf.module.order.api.version>0.0.5</fwmf.module.order.api.version>
+        <fwmf.module.order.api.version>0.0.6</fwmf.module.order.api.version>
         <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
     </properties>
     <dependencies>

@@ -14,7 +14,6 @@
     <artifactId>fwmf-module-school-spring-boot-starter</artifactId>
     <version>0.0.2</version>
 
-
     <properties>
         <fwmf.module.school.spring.boot.autoconfigure.version>0.0.2</fwmf.module.school.spring.boot.autoconfigure.version>
         <fwmf.module.school.service.version>0.0.2</fwmf.module.school.service.version>
@@ -22,10 +21,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
         <dependency>
             <groupId>cn.faury.fwmf.module</groupId>
             <artifactId>fwmf-module-school-spring-boot-autoconfigure</artifactId>

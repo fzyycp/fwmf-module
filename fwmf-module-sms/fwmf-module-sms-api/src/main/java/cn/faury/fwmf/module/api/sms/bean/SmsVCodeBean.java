@@ -18,6 +18,16 @@ public class SmsVCodeBean extends SmsVCodeGenerateBean implements PrimaryKeyEnab
 
     private Template template = Template.VCODE;
 
+    @Override
+    public String getPrimaryKeyName() {
+        return "SMS_ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getSmsId();
+    }
+
     /**
      * 获取表主键Key值(自动生成代码)
      *

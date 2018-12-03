@@ -14,7 +14,6 @@
     <artifactId>fwmf-module-shop-spring-boot-starter</artifactId>
     <version>0.0.1</version>
 
-
     <properties>
         <fwmf.module.shop.spring.boot.autoconfigure.version>0.0.1</fwmf.module.shop.spring.boot.autoconfigure.version>
         <fwmf.module.shop.service.version>0.0.1</fwmf.module.shop.service.version>
@@ -22,10 +21,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
         <dependency>
             <groupId>cn.faury.fwmf.module</groupId>
             <artifactId>fwmf-module-shop-spring-boot-autoconfigure</artifactId>

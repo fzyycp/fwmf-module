@@ -38,9 +38,28 @@ public class TagInfoServiceImpl extends CrudBaseServiceImpl<TagInfoBean, Long> i
         Map<String, Object> _params = new HashMap<>();
         // 默认，可被覆盖
         _params.put("ORDER_BY", "DISPLAY_ORDER,ASC");
-        _params.put("IS_DELETE", StringUtil.WHETHER_NO);
+        _params.put("isDelete", StringUtil.WHETHER_NO);
         _params.putAll(param);
         return super.search(_params);
+    }
+
+    /**
+     * 根据ID获取标签信息，带父节点名称
+     *
+     * @param id 分类ID
+     * @return 分类对象
+     */
+    @Override
+    public TagInfoBean getBeanByIdWithParentName(Long id) {
+        TagInfoBean bean = this.getBeanById(id);
+        if (bean != null && bean.getParentId() != null && bean.getParentId() > 0) {
+            TagInfoBean parentBean = this.getBeanById(bean.getParentId());
+            if (parentBean != null) {
+                bean.setParentName(parentBean.getTagValue());
+            }
+        }
+
+        return bean;
     }
 
     /**
@@ -50,10 +69,10 @@ public class TagInfoServiceImpl extends CrudBaseServiceImpl<TagInfoBean, Long> i
      * @return 下级标签组
      */
     @Override
-    public List<TagInfoBean> getSubTagGroupsByParentId(String parentId) {
+    public List<TagInfoBean> getSubTagGroupsByParentId(Long parentId) {
         Map<String, Object> params = new HashMap<>();
-        params.put("TAG_TYPE", "01");
-        params.put("PARENT_ID", parentId);
+        params.put("tagType", "01");
+        params.put("parentId", parentId);
 
         return query(params);
     }
@@ -65,10 +84,10 @@ public class TagInfoServiceImpl extends CrudBaseServiceImpl<TagInfoBean, Long> i
      * @return 下级标签值
      */
     @Override
-    public List<TagInfoBean> getSubTagValuesByParentId(String parentId) {
+    public List<TagInfoBean> getSubTagValuesByParentId(Long parentId) {
         Map<String, Object> params = new HashMap<>();
-        params.put("TAG_TYPE", "02");
-        params.put("PARENT_ID", parentId);
+        params.put("tagType", "02");
+        params.put("parentId", parentId);
 
         return query(params);
     }
@@ -82,8 +101,8 @@ public class TagInfoServiceImpl extends CrudBaseServiceImpl<TagInfoBean, Long> i
     @Override
     public Optional<TagInfoBean> getTagGroupByCode(String tagCode) {
         Map<String, Object> params = new HashMap<>();
-        params.put("TAG_TYPE", "01");
-        params.put("TAG_CODE", tagCode);
+        params.put("tagType", "01");
+        params.put("tagCode", tagCode);
         List<TagInfoBean> tagInfoBeanList = this.query(params);
         return Optional.ofNullable(tagInfoBeanList != null && tagInfoBeanList.size() > 0 ? tagInfoBeanList.get(0) : null);
     }
@@ -97,8 +116,8 @@ public class TagInfoServiceImpl extends CrudBaseServiceImpl<TagInfoBean, Long> i
     @Override
     public Optional<TagInfoBean> getTagValueByCode(String tagCode) {
         Map<String, Object> params = new HashMap<>();
-        params.put("TAG_TYPE", "02");
-        params.put("TAG_CODE", tagCode);
+        params.put("tagType", "02");
+        params.put("tagCode", tagCode);
         List<TagInfoBean> tagInfoBeanList = this.query(params);
         return Optional.ofNullable(tagInfoBeanList != null && tagInfoBeanList.size() > 0 ? tagInfoBeanList.get(0) : null);
     }

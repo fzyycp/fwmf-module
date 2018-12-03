@@ -39,6 +39,14 @@ public class OperationRecordBean extends OperationRecordGenerateBean implements 
     }
 
     /**
+     * @deprecated
+     */
+    @Override
+    public Long getPrimaryKey() {
+        return this.getOperationRecordId();
+    }
+
+    /**
      * JSON序列化对象(自动生成代码)
      *
      * @return JSON化对象

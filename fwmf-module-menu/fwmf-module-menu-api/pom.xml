@@ -14,7 +14,7 @@
     <artifactId>fwmf-module-menu-api</artifactId>
     <version>0.0.3</version>
     <properties>
-        <fdk.common.version>0.1.0</fdk.common.version>
+        <fdk.common.version>0.1.2</fdk.common.version>
     </properties>
     <dependencies>
         <dependency>

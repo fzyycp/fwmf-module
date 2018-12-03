@@ -17,7 +17,7 @@
 
     <properties>
         <fwmf.module.school.api.version>0.0.2</fwmf.module.school.api.version>
-        <fwmf.module.common.service.version>0.0.1</fwmf.module.common.service.version>
+        <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
     </properties>
     <dependencies>
         <dependency>

@@ -15,6 +15,15 @@ import java.io.Serializable;
  * </pre>
  */
 public class SchoolInfoBean extends SchoolInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "SCHOOL_ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getSchoolId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

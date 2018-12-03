@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * POJO对象：APP版本信息表
- *
+ * <p>
  * <pre>
  *     AppVersionGenerateBean为数据库表自动生成POJO对象，不可修改
  *     当前POJO继承自AppVersionGenerateBean，用于项目业务代码扩展添加
@@ -18,6 +18,15 @@ import java.util.Optional;
  * </pre>
  */
 public class AppVersionBean extends AppVersionGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

@@ -10,18 +10,18 @@
         <!--fwmf generator配置-->
         <fwmfGenerator targetPackage="cn.faury.fwmf.module"
                        targetProject=".\src\generator\java"
-                       modelName="code"
-                       enableGeneratorModifiableMvc="true"
+                       modelName="order"
+                       enableGeneratorModifiableMvc="false"
                        menuTableName="sys_t_menu_info"
         />
         <!--gateway用Controller-->
         <fwmfGeneratorSpringController enableGenerate="false"
-                                       targetPackage="cn.wassk.customized.umall.gateway.controller"
+                                       targetPackage="cn.faury.fwmf.gateway.controller"
         />
         <!--web用Action-->
         <fwmfGeneratorStruts2Action enableGenerate="false"
-                                    rootClass="cn.wassk.customized.umall.web.global.action.BaseJspAction"
-                                    targetPackage="cn.wassk.customized.umall.web"
+                                    rootClass="cn.faury.fwmf.web.global.action.BaseJspAction"
+                                    targetPackage="cn.faury.fwmf.web"
         />
 
         <!--自定义插件，默认不用配置，如果特殊配置则需要把fwmfGenerator中enableGeneratorModifiableMvc设置为false-->
@@ -45,16 +45,10 @@
         <fwmfTable tableName="数据库表名" modelKey="Bean名称前缀" actionKey="对应的菜单，没有就不写">
             <generatedKey column="数据库主键，仅支持一个主键的" sqlStatement="JDBC"/>
         </fwmfTable>
-        例如：
-         <fwmfTable tableName="t_ad_info" modelKey="AdInfo" actionKey="/ad/info">
-            <generatedKey column="AD_ID" sqlStatement="JDBC"/>
-        </fwmfTable>
         -->
-        <fwmfTable tableName="sys_t_code_group_info" modelKey="CodeGroupInfo">
-            <generatedKey column="CODE_GROUP_ID" sqlStatement="JDBC"/>
-        </fwmfTable>
-        <fwmfTable tableName="sys_t_code_info" modelKey="CodeInfo">
-            <generatedKey column="CODE_ID" sqlStatement="JDBC"/>
+
+        <fwmfTable tableName="order_t_order_info" modelKey="OrderInfo">
+            <generatedKey column="ORDER_ID" sqlStatement="JDBC"/>
         </fwmfTable>
 
     </context>

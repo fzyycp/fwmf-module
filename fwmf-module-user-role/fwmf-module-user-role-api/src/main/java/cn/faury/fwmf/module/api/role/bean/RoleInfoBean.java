@@ -15,6 +15,15 @@ import java.io.Serializable;
  * </pre>
  */
 public class RoleInfoBean extends RoleInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "ROLE_ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getRoleId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

@@ -14,7 +14,6 @@
     <artifactId>fwmf-module-qa-spring-boot-autoconfigure</artifactId>
     <version>0.0.2</version>
 
-
     <properties>
         <fwmf.module.qa.service.version>0.0.2</fwmf.module.qa.service.version>
         <fdk.mybatis.spring.boot.autoconfigure.version>0.0.1</fdk.mybatis.spring.boot.autoconfigure.version>

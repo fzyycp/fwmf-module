@@ -17,6 +17,11 @@ import java.io.Serializable;
 public class CategoryInfoBean extends CategoryInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
 
     /**
+     * 父节点名称
+     */
+    private String parentName;
+
+    /**
      * 获取表主键字段名(自动生成代码)
      *
      * @return 主键字段名
@@ -44,5 +49,23 @@ public class CategoryInfoBean extends CategoryInfoGenerateBean implements Primar
     @Override
     public String toString() {
         return JsonUtil.objectToJson(this);
+    }
+
+    /**
+     * 获取parentName
+     *
+     * @return parentName
+     */
+    public String getParentName() {
+        return parentName;
+    }
+
+    /**
+     * 设置parentName
+     *
+     * @param parentName 值
+     */
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
     }
 }

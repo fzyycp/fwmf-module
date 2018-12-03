@@ -16,6 +16,15 @@ import java.io.Serializable;
  * </pre>
  */
 public class AppInfoBean extends AppInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "APP_ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getAppId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

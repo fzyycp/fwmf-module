@@ -12,13 +12,13 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-category-service</artifactId>
-    <version>0.0.4</version>
-
+    <version>0.0.9</version>
 
     <properties>
-        <fwmf.module.category.api.version>0.0.4</fwmf.module.category.api.version>
+        <fwmf.module.category.api.version>0.0.9</fwmf.module.category.api.version>
         <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>cn.faury.fwmf.module</groupId>
@@ -37,10 +37,10 @@
         </dependency>
     </dependencies>
     <!--<distributionManagement>-->
-        <!--<repository>-->
-            <!--<id>bintray-faury-fwmf</id>-->
-            <!--<name>faury-fwmf</name>-->
-            <!--<url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-category-service/;publish=1</url>-->
-        <!--</repository>-->
+    <!--<repository>-->
+    <!--<id>bintray-faury-fwmf</id>-->
+    <!--<name>faury-fwmf</name>-->
+    <!--<url>https://api.bintray.com/maven/faury/fwmf-module/fwmf-module-category-service/;publish=1</url>-->
+    <!--</repository>-->
     <!--</distributionManagement>-->
 </project>

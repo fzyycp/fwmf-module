@@ -15,6 +15,15 @@ import java.io.Serializable;
  * </pre>
  */
 public class UserInfoBean extends UserInfoGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "USER_ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getUserId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

@@ -20,6 +20,16 @@ public class MenuInfoBean extends MenuInfoGenerateBean implements PrimaryKeyEnab
 
     private List<FunctionInfoBean> functionInfoBeans;
 
+    @Override
+    public String getPrimaryKeyName() {
+        return "MENU_ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return getMenuId();
+    }
+
     /**
      * 获取表主键Key值(自动生成代码)
      *

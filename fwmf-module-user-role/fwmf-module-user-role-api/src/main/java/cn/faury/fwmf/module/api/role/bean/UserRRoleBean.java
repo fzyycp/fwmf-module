@@ -15,6 +15,15 @@ import java.io.Serializable;
  * </pre>
  */
 public class UserRRoleBean extends UserRRoleGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

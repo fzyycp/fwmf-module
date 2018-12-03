@@ -16,6 +16,15 @@ import java.io.Serializable;
  * </pre>
  */
 public class AppTesterBean extends AppTesterGenerateBean implements PrimaryKeyEnableBean<Long>, Serializable {
+    @Override
+    public String getPrimaryKeyName() {
+        return "ID";
+    }
+
+    @Override
+    public Long getPrimaryKeyValue() {
+        return this.getId();
+    }
 
     /**
      * 获取表主键Key值(自动生成代码)

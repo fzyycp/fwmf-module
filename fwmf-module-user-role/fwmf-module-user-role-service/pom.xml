@@ -18,7 +18,7 @@
     <properties>
         <fdk.mybatis.version>0.0.1</fdk.mybatis.version>
         <fdk.module.user.role.api.version>0.0.4</fdk.module.user.role.api.version>
-        <fwmf.module.common.service.version>0.0.1</fwmf.module.common.service.version>
+        <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
     </properties>
 
     <dependencies>

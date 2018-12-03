@@ -18,18 +18,25 @@ import java.util.Optional;
 public interface TagInfoService extends CrudBaseService<TagInfoBean, Long> {
 
     /**
+     * 根据ID获取标签信息，带父节点名称
+     * @param id 分类ID
+     * @return 分类对象
+     */
+    public TagInfoBean getBeanByIdWithParentName(Long id);
+
+    /**
      * 获取下级标签组
      * @param parentId 父节点ID
      * @return 下级标签组
      */
-    public List<TagInfoBean> getSubTagGroupsByParentId(String parentId);
+    public List<TagInfoBean> getSubTagGroupsByParentId(Long parentId);
 
     /**
      * 获取下级标签值
      * @param parentId 父节点ID
      * @return 下级标签值
      */
-    public List<TagInfoBean> getSubTagValuesByParentId(String parentId);
+    public List<TagInfoBean> getSubTagValuesByParentId(Long parentId);
 
     /**
      * 根据编码获取标签组
