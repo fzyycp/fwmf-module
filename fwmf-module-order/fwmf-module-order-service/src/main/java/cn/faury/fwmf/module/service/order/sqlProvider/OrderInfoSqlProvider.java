@@ -21,7 +21,7 @@ public class OrderInfoSqlProvider extends OrderInfoGenerateSqlProvider {
         SQL sql = new SQL();
         sql.UPDATE(DBConstOfOrder.ORDER_T_ORDER_INFO);
         sql.SET("ORDER_STATE=#{orderState}");
-        sql.SET("TRAD_STATE=#{tradeState}");
+        sql.SET("TRADE_STATE=#{tradeState}");
         sql.SET("PAY_STYLE=#{payStyle}");
         sql.SET("UPDATE_PERSON=#{updatePerson}");
         sql.SET("PAY_TIME=now()");
@@ -37,13 +37,13 @@ public class OrderInfoSqlProvider extends OrderInfoGenerateSqlProvider {
 
     public String statisticsState(Map<String, Object> params) {
         SQL sql = new SQL();
-        sql.SELECT("ORDER_STATE", "TRAD_STATE TRADE_STATE", "COUNT(*) COUNT");
+        sql.SELECT("ORDER_STATE", "TRADE_STATE", "COUNT(*) COUNT");
         sql.FROM(DBConstOfOrder.ORDER_T_ORDER_INFO);
         sql.WHERE("BUYER_ID=#{userId}");
         if (params != null && params.get("storeId") != null) {
             sql.WHERE("STORE_ID=#{storeId}");
         }
-        sql.GROUP_BY("ORDER_STATE", "TRAD_STATE");
+        sql.GROUP_BY("ORDER_STATE", "TRADE_STATE");
         return sql.toString();
     }
 }

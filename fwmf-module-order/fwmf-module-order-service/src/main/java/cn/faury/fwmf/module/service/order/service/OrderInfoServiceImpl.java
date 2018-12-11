@@ -369,7 +369,8 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         int result = 0;
         if (weixinPayRecordsBean != null) {
             OrderInfoBean orderInfoBean = this.getBeanById(weixinPayRecordsBean.getOrderId());
-            orderInfoBean.setUpdatePerson(orderInfoBean.getBuyerLogin());
+            orderInfoBean.setUpdatePerson(orderInfoBean.getBuyerId());
+            orderInfoBean.setUpdatePersonName(orderInfoBean.getBuyerLogin());
             OrderPayInfoBean orderPayInfoBean = orderPayInfoService.getBeanByOrderId(weixinPayRecordsBean.getOrderId());
             // a) 向订单日志信息表中插入一条订单支付的操作记录
             OrderOperateInfoBean ooi = this.createOrderOperateInfo(weixinPayRecordsBean.getOrderId(), OrderOperateInfoBean.OperateType.PAID, true, null, weixinPayRecordsBean.getUserId(), orderInfoBean.getBuyerLogin());
@@ -423,7 +424,8 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         int result = 0;
         if (alipayRecordsBean != null) {
             OrderInfoBean orderInfoBean = this.getBeanById(alipayRecordsBean.getOrderId());
-            orderInfoBean.setUpdatePerson(orderInfoBean.getBuyerLogin());
+            orderInfoBean.setUpdatePerson(orderInfoBean.getBuyerId());
+            orderInfoBean.setUpdatePersonName(orderInfoBean.getBuyerLogin());
             OrderPayInfoBean orderPayInfoBean = orderPayInfoService.getBeanByOrderId(alipayRecordsBean.getOrderId());
             // a) 向订单日志信息表中插入一条订单支付的操作记录
             OrderOperateInfoBean ooi = this.createOrderOperateInfo(alipayRecordsBean.getOrderId(), OrderOperateInfoBean.OperateType.PAID, true, null, alipayRecordsBean.getUserId(), orderInfoBean.getBuyerLogin());
@@ -608,7 +610,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         _orderInfoParam.setExpressFee(orderInfoBean.getExpressFee());
         _orderInfoParam.setTrackNumber(orderInfoBean.getTrackNumber());
         _orderInfoParam.setSendTime(DateUtil.getCurrentDate());
-        _orderInfoParam.setTradState(OrderInfoBean.TradeState.SHIPPED.getCode());
+        _orderInfoParam.setTradeState(OrderInfoBean.TradeState.SHIPPED.getCode());
         _orderInfoParam.setUpdatePerson(orderInfoBean.getUpdatePerson());
         _orderInfoParam.setUpdateTime(DateUtil.getCurrentDate());
         return this.update(_orderInfoParam);
@@ -632,7 +634,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         orderOperateInfoBean.setOperateTypeDesc(OrderOperateInfoBean.OperateType.FINISH.getDesc());
         orderOperateInfoBean.setOperateTime(DateUtil.getCurrentTimestamp());
         orderOperateInfoBean.setOperaterId(updatePersonId);
-        orderOperateInfoBean.setOperaterName(orderInfoBean.getUpdatePerson());
+        orderOperateInfoBean.setOperaterName(orderInfoBean.getUpdatePersonName());
         // 构造操作内容
         String tmp_content = String.format("[%s]执行[%s]！", orderOperateInfoBean.getOperaterName(), orderOperateInfoBean.getOperateTypeDesc());
         orderOperateInfoBean.setOperateContent(tmp_content);
@@ -641,7 +643,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         // 确认订单收货
         OrderInfoBean _orderInfoParam = new OrderInfoBean();
         _orderInfoParam.setOrderId(orderInfoBean.getOrderId());
-        _orderInfoParam.setTradState(OrderInfoBean.TradeState.CONFIRMED.getCode());
+        _orderInfoParam.setTradeState(OrderInfoBean.TradeState.CONFIRMED.getCode());
         _orderInfoParam.setConfirmTime(DateUtil.getCurrentDate());
         _orderInfoParam.setUpdatePerson(orderInfoBean.getUpdatePerson());
         _orderInfoParam.setUpdateTime(DateUtil.getCurrentDate());
@@ -660,7 +662,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         // 评价订单
         OrderInfoBean _orderInfoParam = new OrderInfoBean();
         _orderInfoParam.setOrderId(orderInfoBean.getOrderId());
-        _orderInfoParam.setTradState(OrderInfoBean.TradeState.EVALUATED.getCode());
+        _orderInfoParam.setTradeState(OrderInfoBean.TradeState.EVALUATED.getCode());
         _orderInfoParam.setUpdatePerson(orderInfoBean.getUpdatePerson());
         _orderInfoParam.setUpdateTime(DateUtil.getCurrentDate());
         return this.update(_orderInfoParam);
@@ -678,7 +680,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         // 订单修改记录
         this.createOrderOperateInfo(orderInfoBean.getOrderId(), OrderOperateInfoBean.OperateType.UPDATE
                 , false, String.format("%s修改订单价格为%s", orderInfoBean.getUpdatePerson(), orderInfoBean.getOrderPayPrice())
-                , null, orderInfoBean.getUpdatePerson());
+                , orderInfoBean.getUpdatePerson(), orderInfoBean.getUpdatePersonName());
         // 订单改价
         OrderInfoBean _orderInfoParam = new OrderInfoBean();
         _orderInfoParam.setOrderId(orderInfoBean.getOrderId());
