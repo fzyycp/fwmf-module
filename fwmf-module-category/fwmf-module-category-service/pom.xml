@@ -12,10 +12,10 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-category-service</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 
     <properties>
-        <fwmf.module.category.api.version>0.1.0</fwmf.module.category.api.version>
+        <fwmf.module.category.api.version>0.1.1</fwmf.module.category.api.version>
         <fwmf.module.common.service.version>0.0.2</fwmf.module.common.service.version>
     </properties>
 

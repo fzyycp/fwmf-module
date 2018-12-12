@@ -43,6 +43,7 @@ public class CategoryTreeNodeBean extends CategoryInfoBean {
             this.setProductCategoryName(categoryInfoBean.getProductCategoryName());
             this.setDisplayOrder(categoryInfoBean.getDisplayOrder());
             this.setParentId(categoryInfoBean.getParentId());
+            this.setIconPath(categoryInfoBean.getIconPath());
             this.setUsageCode(categoryInfoBean.getUsageCode());
             this.setIsDelete(categoryInfoBean.getIsDelete());
             this.setXpath(categoryInfoBean.getXpath());
