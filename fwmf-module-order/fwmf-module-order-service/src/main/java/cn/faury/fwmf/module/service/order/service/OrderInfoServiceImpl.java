@@ -21,7 +21,7 @@ import java.util.*;
 
 /**
  * 服务实现：订单信息表
- *
+ * <p>
  * <pre>
  *     CrudBaseServiceImpl为数据库通用增删改查操作实现，不可修改
  *     当前服务实现了OrderInfoService服务接口，用于项目业务代码扩展添加
@@ -503,6 +503,63 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         logger.debug("{}", "初始化订单物流信息End...");
 
         return 1;
+    }
+
+    /**
+     * 订单支付成功并自动发货
+     *
+     * @param weixinCallbackRecordsBean 支付回调参数
+     * @return 成功修改条数
+     */
+    @Override
+    @Transactional
+    public int payOrderWithShipped(WeixinCallbackRecordsBean weixinCallbackRecordsBean) {
+        int pay = this.payOrder(weixinCallbackRecordsBean);
+        if (pay > 0) {
+            // 获取微信支付记录
+            WeixinPayRecordsBean weixinPayRecordsBean = weixinPayRecordsService.getBeanByOutTradeNo(weixinCallbackRecordsBean.getOutTradeNo());
+            if (weixinPayRecordsBean != null) {
+                OrderInfoBean orderInfoBean = this.getBeanById(weixinPayRecordsBean.getOrderId());
+                this.shipOrder(orderInfoBean);
+            }
+        }
+        return pay;
+    }
+
+    /**
+     * 订单支付成功并自动发货
+     *
+     * @param alipayCallbackRecordsBean 支付回调参数
+     * @return 成功修改条数
+     */
+    @Override
+    @Transactional
+    public int payOrderWithShipped(AlipayCallbackRecordsBean alipayCallbackRecordsBean) {
+        int pay = this.payOrder(alipayCallbackRecordsBean);
+        if (pay > 0) {
+            // 获取支付宝支付记录
+            AlipayRecordsBean alipayRecordsBean = alipayRecordsService.getBeanByOutTradeNo(alipayCallbackRecordsBean.getOutTradeNo());
+            if (alipayRecordsBean != null) {
+                OrderInfoBean orderInfoBean = this.getBeanById(alipayRecordsBean.getOrderId());
+                this.shipOrder(orderInfoBean);
+            }
+        }
+        return pay;
+    }
+
+    /**
+     * 平台支付订单并自动发货
+     *
+     * @param orderInfoBean 订单信息
+     * @return 成功修改条数
+     */
+    @Override
+    public int payOrderByPlatformWithShipped(OrderInfoBean orderInfoBean) {
+        int pay = this.payOrderByPlatform(orderInfoBean);
+        if (pay > 0) {
+            this.shipOrder(orderInfoBean);
+        }
+        return pay;
     }
 
     // 创建操作记录

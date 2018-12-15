@@ -1,11 +1,7 @@
 package cn.faury.fwmf.module.api.order.service;
 
 
-import cn.faury.fwmf.module.api.order.bean.OrderInfoBean;
-import cn.faury.fwmf.module.api.order.bean.OrderRGoodsBeanEnable;
-import cn.faury.fwmf.module.api.order.bean.OrderStateStatistics;
-import cn.faury.fwmf.module.api.order.bean.AlipayCallbackRecordsBean;
-import cn.faury.fwmf.module.api.order.bean.WeixinCallbackRecordsBean;
+import cn.faury.fwmf.module.api.order.bean.*;
 import cn.faury.fdk.common.anotation.NonNull;
 import cn.faury.fdk.common.db.CrudBaseService;
 
@@ -83,6 +79,30 @@ public interface OrderInfoService extends CrudBaseService<OrderInfoBean, Long> {
      * @return 成功修改条数
      */
     public int payOrderByPlatform(final OrderInfoBean orderInfoBean);
+
+    /**
+     * 订单支付成功并自动发货
+     *
+     * @param weixinCallbackRecordsBean 支付回调参数
+     * @return 成功修改条数
+     */
+    public int payOrderWithShipped(final WeixinCallbackRecordsBean weixinCallbackRecordsBean);
+
+    /**
+     * 订单支付成功并自动发货
+     *
+     * @param alipayCallbackRecordsBean 支付回调参数
+     * @return 成功修改条数
+     */
+    public int payOrderWithShipped(final AlipayCallbackRecordsBean alipayCallbackRecordsBean);
+
+    /**
+     * 平台支付订单并自动发货
+     *
+     * @param orderInfoBean 订单信息
+     * @return 成功修改条数
+     */
+    public int payOrderByPlatformWithShipped(final OrderInfoBean orderInfoBean);
 
     /**
      * 订单发货

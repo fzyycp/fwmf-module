@@ -54,15 +54,14 @@ public class RoleRFuncSQLProvider {
 
 		// SQL拼装
 		StringBuffer sql = new StringBuffer(128);
-		sql.append("SELECT F.FUNCTION_ID FUNCID,F.FUNCTION_NAME FUNCNAME,F.FUNCTION_CODE FUNCCODE,F.MENU_ID MENUID" +
-				",F.SYSTEM_ID SYSTEMID,F.IS_AVAILABLE ISAVAILABLE ");
+		sql.append("SELECT F.FUNCTION_ID,F.FUNCTION_NAME,F.FUNCTION_CODE,F.MENU_ID,F.IS_AVAILABLE  ");
 		sql.append(" FROM " + DBConstOfMenu.TN_FUNCTION_INFO + " F");
-		sql.append(" LEFT JOIN " + DBConstOfMenu.TN_ROLE_R_FUNCTION + " RF ON F.FUNCTION_ID = RF.FUNCTION_ID");
-		sql.append(" LEFT JOIN " + DBConstOfMenu.TN_MENU_INFO + " M ON M.MENU_ID = F.MENU_ID");
+		sql.append(" JOIN " + DBConstOfMenu.TN_ROLE_R_FUNCTION + " RF ON F.FUNCTION_ID = RF.FUNCTION_ID");
+		sql.append(" JOIN " + DBConstOfMenu.TN_MENU_INFO + " M ON M.MENU_ID = F.MENU_ID");
 		sql.append(" WHERE ");
 
 		// 【二选一】Long systemId 业务系统ID / String systemCode 业务系统编码
-		sql.append(" F.SYSTEM_ID = (");
+		sql.append(" M.SYSTEM_ID = (");
 		sql.append(" SELECT S.SYSTEM_ID FROM " + DBConstOfMenu.TN_SYSTEM_INFO + " S");
 		sql.append(" WHERE ");
 		if (parameters.containsKey("systemId")) {
