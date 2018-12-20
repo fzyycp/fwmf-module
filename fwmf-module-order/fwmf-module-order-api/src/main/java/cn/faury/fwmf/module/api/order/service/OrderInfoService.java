@@ -116,10 +116,9 @@ public interface OrderInfoService extends CrudBaseService<OrderInfoBean, Long> {
      * 确认收货
      *
      * @param orderInfoBean  订单信息
-     * @param updatePersonId 修改用户ID
      * @return 修改订单条数
      */
-    public int confirmReceipt(final OrderInfoBean orderInfoBean, final Long updatePersonId);
+    public int confirmReceipt(final OrderInfoBean orderInfoBean);
 
     /**
      * 评价订单

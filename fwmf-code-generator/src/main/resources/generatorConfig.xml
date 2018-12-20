@@ -8,9 +8,9 @@
         <!--文件编码-->
         <property name="javaFileEncoding" value="UTF-8"/>
         <!--fwmf generator配置-->
-        <fwmfGenerator targetPackage="cn.faury.fwmf.module"
+        <fwmfGenerator targetPackage="com.fh.yzgd"
                        targetProject=".\src\generator\java"
-                       modelName="order"
+                       modelName="master"
                        enableGeneratorModifiableMvc="false"
                        menuTableName="sys_t_menu_info"
         />
@@ -47,9 +47,12 @@
         </fwmfTable>
         -->
 
-        <fwmfTable tableName="order_t_order_info" modelKey="OrderInfo">
-            <generatedKey column="ORDER_ID" sqlStatement="JDBC"/>
+        <fwmfTable tableName="t_enterprise_info" modelKey="EnterpriseInfo">
+            <generatedKey column="ENTERPRISE_ID" sqlStatement="JDBC"/>
         </fwmfTable>
+        <!--<fwmfTable tableName="order_t_order_info" modelKey="OrderInfo">-->
+            <!--<generatedKey column="ORDER_ID" sqlStatement="JDBC"/>-->
+        <!--</fwmfTable>-->
 
     </context>
 </generatorConfiguration>

@@ -31,10 +31,10 @@ import java.util.*;
 public class OrderRLogisticsServiceImpl extends CrudBaseServiceImpl<OrderRLogisticsBean, Long> implements OrderRLogisticsService {
 
     @Autowired(required = false)
-    private OrderPayInfoService orderPayInfoService;
+    protected OrderPayInfoService orderPayInfoService;
 
     @Autowired(required = false)
-    private OrderInfoService orderInfoService;
+    protected OrderInfoService orderInfoService;
 
     /**
      * 构造函数(自动生成代码)

@@ -27,7 +27,7 @@ import java.util.*;
 public class PostageInfoServiceImpl extends CrudBaseServiceImpl<PostageInfoBean, Long> implements PostageInfoService {
 
     @Autowired(required = false)
-    private PostageRAreaService postageRAreaService;
+    protected PostageRAreaService postageRAreaService;
 
     /**
      * 构造函数(自动生成代码)

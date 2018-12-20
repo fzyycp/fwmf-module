@@ -25,7 +25,7 @@ import java.util.List;
 public class PackageInfoServiceImpl extends CrudBaseServiceImpl<PackageInfoBean, Long> implements PackageInfoService {
 
     @Autowired(required = false)
-    private PackageRGoodsService packageRGoodsService;
+    protected PackageRGoodsService packageRGoodsService;
 
     /**
      * 构造函数(自动生成代码)

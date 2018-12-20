@@ -31,32 +31,32 @@ import java.util.*;
 public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Long> implements OrderInfoService {
 
     // 记录日志
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // 活动服务
     @Autowired(required = false)
-    private PromotionInfoService promotionInfoService;
+    protected PromotionInfoService promotionInfoService;
 
     @Autowired(required = false)
-    private OrderRGoodsService orderRGoodsService;
+    protected OrderRGoodsService orderRGoodsService;
 
     @Autowired(required = false)
-    private GoodsStockInfoService goodsStockInfoService;
+    protected GoodsStockInfoService goodsStockInfoService;
 
     @Autowired(required = false)
-    private OrderOperateInfoService orderOperateInfoService;
+    protected OrderOperateInfoService orderOperateInfoService;
 
     @Autowired(required = false)
-    private OrderPayInfoService orderPayInfoService;
+    protected OrderPayInfoService orderPayInfoService;
 
     @Autowired(required = false)
-    private WeixinPayRecordsService weixinPayRecordsService;
+    protected WeixinPayRecordsService weixinPayRecordsService;
 
     @Autowired(required = false)
-    private AlipayRecordsService alipayRecordsService;
+    protected AlipayRecordsService alipayRecordsService;
 
     @Autowired(required = false)
-    private OrderRLogisticsService orderRLogisticsService;
+    protected OrderRLogisticsService orderRLogisticsService;
 
     /**
      * 构造函数(自动生成代码)
@@ -682,7 +682,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
      */
     @Transactional
     @Override
-    public int confirmReceipt(OrderInfoBean orderInfoBean, final Long updatePersonId) {
+    public int confirmReceipt(OrderInfoBean orderInfoBean) {
         // 插入一条订单完成的操作日志
         OrderOperateInfoBean orderOperateInfoBean = new OrderOperateInfoBean();
         orderOperateInfoBean.setIsShopping(StringUtil.WHETHER_YES);
@@ -690,7 +690,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         orderOperateInfoBean.setOperateTypeId(OrderOperateInfoBean.OperateType.FINISH.getCode());
         orderOperateInfoBean.setOperateTypeDesc(OrderOperateInfoBean.OperateType.FINISH.getDesc());
         orderOperateInfoBean.setOperateTime(DateUtil.getCurrentTimestamp());
-        orderOperateInfoBean.setOperaterId(updatePersonId);
+        orderOperateInfoBean.setOperaterId(orderInfoBean.getUpdatePerson());
         orderOperateInfoBean.setOperaterName(orderInfoBean.getUpdatePersonName());
         // 构造操作内容
         String tmp_content = String.format("[%s]执行[%s]！", orderOperateInfoBean.getOperaterName(), orderOperateInfoBean.getOperateTypeDesc());
@@ -703,6 +703,7 @@ public class OrderInfoServiceImpl extends CrudBaseServiceImpl<OrderInfoBean, Lon
         _orderInfoParam.setTradeState(OrderInfoBean.TradeState.CONFIRMED.getCode());
         _orderInfoParam.setConfirmTime(DateUtil.getCurrentDate());
         _orderInfoParam.setUpdatePerson(orderInfoBean.getUpdatePerson());
+        _orderInfoParam.setUpdatePersonName(orderInfoBean.getUpdatePersonName());
         _orderInfoParam.setUpdateTime(DateUtil.getCurrentDate());
         return this.update(_orderInfoParam);
     }
