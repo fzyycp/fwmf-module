@@ -12,12 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class AllBeanInitTest {
 
-    @Test
-    public void checkInit() {
-        Assert.assertNotNull(systemConfigService);
-        System.out.println(systemConfigService.getAllSystemConfigInfo());
-    }
-
     @Autowired
     SystemConfigService systemConfigService;
 }

@@ -10,7 +10,7 @@
         <!--fwmf generator配置-->
         <fwmfGenerator targetPackage="cn.faury.fwmf.module"
                        targetProject=".\src\generator\java"
-                       modelName="systemconfig"
+                       modelName="operation"
                        enableGeneratorModifiableMvc="true"
                        menuTableName="sys_t_menu_info"
         />
