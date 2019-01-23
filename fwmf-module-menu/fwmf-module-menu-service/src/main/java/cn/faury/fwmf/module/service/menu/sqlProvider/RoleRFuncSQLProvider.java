@@ -10,6 +10,7 @@ import java.util.Map;
 /**
  * 角色关联功能按钮的SQL工厂
  */
+@Deprecated
 public class RoleRFuncSQLProvider {
 
 	/**

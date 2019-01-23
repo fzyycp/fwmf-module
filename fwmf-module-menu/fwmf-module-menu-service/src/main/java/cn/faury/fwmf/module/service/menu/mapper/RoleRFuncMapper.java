@@ -16,6 +16,7 @@ import java.util.Map;
  * 角色关联功能按钮服务Mapper
  */
 @AutoScannedMapper
+@Deprecated
 public interface RoleRFuncMapper {
 
 	/**

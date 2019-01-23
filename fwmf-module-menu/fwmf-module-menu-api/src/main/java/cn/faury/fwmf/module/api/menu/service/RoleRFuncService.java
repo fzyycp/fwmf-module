@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * 角色功能按钮服务协议
  */
+@Deprecated
 public interface RoleRFuncService {
 
 	/**

@@ -14,6 +14,7 @@ import java.util.Map;
 /**
  * 角色关联功能按钮服务提供者
  */
+@Deprecated
 public class RoleRFuncServiceImpl implements RoleRFuncService {
 
     /**
