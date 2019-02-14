@@ -49,6 +49,15 @@ public class FwmfMenuAutoConfiguration {
         return new RoleRFuncServiceImpl(commonDao);
     }
 
+
+    /**
+     * 角色关联功能按钮服务
+     */
+    @Bean
+    public RoleRFunctionService roleRFunctionService(CommonDao commonDao) {
+        return new RoleRFunctionServiceImpl(commonDao);
+    }
+
     /**
      * 角色关联菜单服务
      */

@@ -24,6 +24,11 @@
 		<constructor-arg name="commonDao" ref="commonDao"/>
 	</bean>
 
+	<!--角色关联功能按钮服务 -->
+	<bean id="roleRFunctionService" class="cn.faury.fwmf.module.service.menu.service.RoleRFunctionServiceImpl">
+		<constructor-arg name="commonDao" ref="commonDao"/>
+	</bean>
+
 	<!--角色关联菜单服务 -->
 	<bean id="roleRMenuService" class="cn.faury.fwmf.module.service.menu.service.RoleRMenuServiceImpl">
 		<constructor-arg name="commonDao" ref="commonDao"/>
