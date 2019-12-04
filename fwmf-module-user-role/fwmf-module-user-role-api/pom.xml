@@ -12,7 +12,7 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-user-role-api</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 
     <properties>
         <fdk.common.version>0.1.2</fdk.common.version>

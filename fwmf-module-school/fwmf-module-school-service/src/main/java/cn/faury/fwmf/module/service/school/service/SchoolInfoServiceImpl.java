@@ -103,7 +103,7 @@ public class SchoolInfoServiceImpl extends CrudBaseServiceImpl<SchoolInfoBean, L
         Map<String, Object> _params = new HashMap<>();
         _params.putAll(param);
         String _areaCode = (String) _params.get("areaCode");
-        if (StringUtil.isNotEmpty(_areaCode) && "000000".equals(_areaCode)) {
+        if (StringUtil.isNotEmpty(_areaCode) && !"000000".equals(_areaCode)) {
             if (_areaCode.endsWith("0000")) {
                 _params.put("areaCodeProvince", _areaCode);
             } else if (_areaCode.endsWith("00")) {

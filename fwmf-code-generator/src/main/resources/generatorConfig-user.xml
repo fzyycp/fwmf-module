@@ -11,7 +11,7 @@
         <fwmfGenerator targetPackage="cn.faury.fwmf.module"
                        targetProject=".\src\generator\java"
                        modelName="user"
-                       enableGeneratorModifiableMvc="true"
+                       enableGeneratorModifiableMvc="false"
         />
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"

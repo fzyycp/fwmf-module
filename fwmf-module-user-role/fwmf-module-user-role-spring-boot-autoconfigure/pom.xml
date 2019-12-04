@@ -12,10 +12,10 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-user-role-spring-boot-autoconfigure</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 
     <properties>
-        <fwmf.module.user.role.service.version>0.0.4</fwmf.module.user.role.service.version>
+        <fwmf.module.user.role.service.version>0.0.5</fwmf.module.user.role.service.version>
         <fdk.mybatis.spring.boot.autoconfigure.version>0.0.1</fdk.mybatis.spring.boot.autoconfigure.version>
     </properties>
 

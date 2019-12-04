@@ -12,11 +12,11 @@
 
     <groupId>cn.faury.fwmf.module</groupId>
     <artifactId>fwmf-module-school-spring-boot-starter</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
 
     <properties>
-        <fwmf.module.school.spring.boot.autoconfigure.version>0.0.2</fwmf.module.school.spring.boot.autoconfigure.version>
-        <fwmf.module.school.service.version>0.0.2</fwmf.module.school.service.version>
+        <fwmf.module.school.spring.boot.autoconfigure.version>0.0.3</fwmf.module.school.spring.boot.autoconfigure.version>
+        <fwmf.module.school.service.version>0.0.3</fwmf.module.school.service.version>
         <fdk.mybatis.spring.boot.starter.version>0.0.1</fdk.mybatis.spring.boot.starter.version>
     </properties>
 
